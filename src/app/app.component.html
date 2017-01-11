@@ -1,0 +1,59 @@
+<md-sidenav-container fullscreen>
+  <md-progress-bar color="accent" mode="determinate" value="90" ></md-progress-bar>
+  <md-sidenav #sidenav>
+    <md-list>
+       <md-list-item routerLink="/compte" routerActive="active">Mon compte</md-list-item>
+       <md-divider></md-divider>
+       <md-list-item routerLink="/etablissement" routerActive="active">Les établissements</md-list-item>
+       <md-divider></md-divider>
+       <md-list-item routerLink="/audit/liste" routerActive="active">Les audits en cours</md-list-item>
+       <md-divider></md-divider>
+       <md-list-item routerLink="/utilisateur/liste" routerActive="active">Les utilisateurs</md-list-item>
+       <md-divider></md-divider>
+       <md-list-item routerLink="/questionnaire/liste" routerActive="active">Le questionnaire</md-list-item>
+       <md-divider></md-divider>
+       <md-list-item routerLink="/deconnexion" routerActive="active">Déconnexion</md-list-item>
+    </md-list>
+  </md-sidenav>
+  <div fxLayout="column" style="height: 100%">
+    <div>
+      <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
+        <button md-button (click)="sidenav.toggle()" class="echos-menu-button">
+          <md-icon>menu</md-icon>
+        </button>
+        <div fxFlex class="echos-logo" routerLink="/"></div>
+      </div>
+    </div>
+    <div fxFlex fxFlexFill>
+      <div class="echos-main-container" fxLayout="row">
+        <div class="echos-menu">
+          <md-list>
+             <md-list-item routerLink="/compte" routerActive="active">Mon compte</md-list-item>
+             <md-divider></md-divider>
+             <md-list-item routerLink="/etablissement" routerActive="active">Les établissements</md-list-item>
+             <md-divider></md-divider>
+             <md-list-item routerLink="/audit/liste" routerActive="active">Les audits en cours</md-list-item>
+             <md-divider></md-divider>
+             <md-list-item routerLink="/utilisateur/liste" routerActive="active">Les utilisateurs</md-list-item>
+             <md-divider></md-divider>
+             <md-list-item routerLink="/questionnaire/liste" routerActive="active">Le questionnaire</md-list-item>
+             <md-divider></md-divider>
+             <md-list-item routerLink="/deconnexion" routerActive="active">Déconnexion</md-list-item>
+          </md-list>
+        </div>
+        <router-outlet fxFlexOffset="35px" fxFlexOffset.gt-sm="50px"></router-outlet>
+      </div>
+    </div>
+    <div>
+      <div class="echos-footer">
+        <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between">
+          <div fxFlexOffset.gt-sm="50px" fxFlexOffset="35px"> Copyright 2017 ECHO(S)</div>
+          <div class="copyright-caption">Pour une transition écologique Audit.Formation.Conseil</div>
+        </div>
+        <div class="croll-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="end end">
+          <div fxFlexOffset="35px" fxFlexOffset.gt-sm="50px">Réalisation: <a class="croll" href="http://www.croll.fr" title="CROLL" target="_blank">CROLL</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</md-sidenav-container>
