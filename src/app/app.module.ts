@@ -10,12 +10,16 @@ import { AppRoutingModule } from './app-routing.module'
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { LostPasswordComponent } from './lost-password/lost-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageHomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    LostPasswordComponent
   ],
   imports: [
     BrowserModule,
