@@ -6,6 +6,12 @@ $ecolocreche-app-warn:    md-palette($md-red);
 $ecolocreche-app-theme: md-light-theme($ecolocreche-app-primary, $ecolocreche-app-accent, $ecolocreche-app-warn);
 @include angular-material-theme($ecolocreche-app-theme);
 
+/* ngx-datatable */
+@import '~@swimlane/ngx-datatable/release/datatable.css';
+@import '~@swimlane/ngx-datatable/release/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+
 body {
   margin: 0;
   font-family: "Open Sans", sans-serif;
