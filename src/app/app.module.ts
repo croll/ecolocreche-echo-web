@@ -11,8 +11,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { LostPasswordComponent } from './lost-password/lost-password.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { LostPasswordComponent } from './components/user/lost-password/lost-password.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { LostPasswordComponent } from './lost-password/lost-password.component';
     PageHomeComponent,
     PageNotFoundComponent,
     LoginComponent,
-    LostPasswordComponent
+    LostPasswordComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
