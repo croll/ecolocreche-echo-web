@@ -8,11 +8,13 @@ import { PageNotFoundComponent }   from './not-found.component';
 import { PageHomeComponent }   from './home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { LostPasswordComponent } from './components/user/lost-password/lost-password.component';
+import { ListComponent } from './components/user/list/list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { LostPasswordComponent } from './components/user/lost-password/lost-pass
     PageNotFoundComponent,
     LoginComponent,
     LostPasswordComponent,
-    LoginComponent
+    LoginComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,7 @@ import { LostPasswordComponent } from './components/user/lost-password/lost-pass
 	  HttpModule,
     AppRoutingModule,
     NgxChartsModule,
+    NgxDatatableModule,
 	  MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
