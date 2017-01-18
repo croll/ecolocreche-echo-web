@@ -27,8 +27,12 @@ export class ListComponent implements OnInit {
   getList() {
     this.userService.getList()
                      .subscribe(
-                       users => this.rows = users,
-                       error =>  this.errorMessage = <any>error);
+                       users => {
+                         this.rows = users;
+                       },
+                       error => {
+                         this.errorMessage = <any>error;
+                       });
   }
 
 }
