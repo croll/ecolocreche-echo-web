@@ -12,9 +12,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/user/login/login.component';
-import { LostPasswordComponent } from './components/user/lost-password/lost-password.component';
-import { ListComponent } from './components/user/list/list.component';
+import { LoginComponent } from './user/components/login/login.component';
+import { LostPasswordComponent } from './user/components/lost-password/lost-password.component';
+import { ListComponent } from './user/components/list/list.component';
 
 @NgModule({
   declarations: [
