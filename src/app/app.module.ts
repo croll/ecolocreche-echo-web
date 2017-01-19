@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './user/components/login/login.component';
 import { LostPasswordComponent } from './user/components/lost-password/lost-password.component';
 import { ListComponent } from './user/components/list/list.component';
+import { EtablissementComponent } from './etablissement/etablissement.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ListComponent } from './user/components/list/list.component';
     LoginComponent,
     LostPasswordComponent,
     LoginComponent,
-    ListComponent
+    ListComponent,
+    EtablissementComponent
   ],
   imports: [
     BrowserModule,
