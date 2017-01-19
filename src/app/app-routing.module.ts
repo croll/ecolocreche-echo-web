@@ -5,7 +5,6 @@ import { LoginComponent } from './user/components/login/login.component';
 import { LostPasswordComponent } from './user/components/lost-password/lost-password.component';
 import { ListComponent } from './user/components/list/list.component';
 import { RouterModule, Routes }  from '@angular/router';
-import { AuthGuard } from './auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', component: PageHomeComponent },

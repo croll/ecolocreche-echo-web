@@ -15,7 +15,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './user/components/login/login.component';
 import { LostPasswordComponent } from './user/components/lost-password/lost-password.component';
 import { ListComponent } from './user/components/list/list.component';
-import { EtablissementComponent } from './etablissement/etablissement.component';
+import { EstablishmentModule } from './establishment/establishment.module';
+import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -26,19 +28,19 @@ import { EtablissementComponent } from './etablissement/etablissement.component'
     LostPasswordComponent,
     LoginComponent,
     ListComponent,
-    EtablissementComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
 	  HttpModule,
+    EstablishmentModule,
     AppRoutingModule,
     NgxChartsModule,
     NgxDatatableModule,
 	  MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
