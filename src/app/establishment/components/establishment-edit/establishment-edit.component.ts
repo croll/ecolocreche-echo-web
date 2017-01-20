@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
+import { EstablishmentService} from '../../services/establishment.service';
 
 @Component({
   selector: 'app-establishment-edit',
@@ -21,9 +22,13 @@ export class EstablishmentEditComponent implements OnInit {
   typeCtrl: FormControl;
   statusCtrl: FormControl;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private establishmentService: EstablishmentService) {
 
     this.current = new Establishment();
+
+    // Hack to be removed
+    this.current.status = 1;
+    this.current.type = 1;
 
     this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
     this.typeCtrl = fb.control(this.current.type);
@@ -53,6 +58,11 @@ export class EstablishmentEditComponent implements OnInit {
 
   save() {
     console.log(this.echosForm.value);
+    this.establishmentService.save(this.echosForm.value).subscribe((establishment) => {
+      this.router.navigate(['/etablissement', establishment.id]);
+    }, (err) => {
+      console.error(err);
+    });
   }
 
 }
