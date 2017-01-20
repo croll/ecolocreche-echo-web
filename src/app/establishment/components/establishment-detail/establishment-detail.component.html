@@ -1,3 +1,12 @@
-<p>
-  establishment-detail works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h1 fxFlex>
+    Liste des établissements
+    Fiche établissement de {{item.name}}
+  </h1>
+  <button md-raised-button color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon>Modifier</button>
+</div>
+
+<div *ngIf="item.address" fxLayout="row">
+  <label>Adresse:</label>
+  <div fxFlexOffset="10px">{{item.address}}</div>
+</div>

@@ -21,12 +21,10 @@ const establishmentRoutes: Routes = [
       {
         path: ':id',
         component: EstablishmentDetailComponent,
-        children: [
-          {
-              path: 'editer',
-              component: EstablishmentEditComponent
-          }
-        ]
+      },
+      {
+        path: ':id/editer',
+        component: EstablishmentEditComponent
       }
     ]
   }

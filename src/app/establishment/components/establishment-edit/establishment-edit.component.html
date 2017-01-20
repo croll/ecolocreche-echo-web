@@ -6,7 +6,7 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
     <md-input-container>
-      <input md-input formControlName="name" placeholder="Nom de l'établissement *">
+      <input md-input formControlName="name" placeholder="Nom de l'établissement *" [(ngModel)]="current.name">
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'établissement est requis</md-hint>
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</md-hint>
     </md-input-container>
@@ -23,29 +23,30 @@
   </div> -->
   <div>
     <md-input-container>
-      <input md-input formControlName="address" placeholder="Adresse">
+      <input md-input formControlName="address" placeholder="Adresse" [(ngModel)]="current.address">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="postalcode" placeholder="Code postal">
+      <input md-input formControlName="postalcode" placeholder="Code postal" [(ngModel)]="current.postalcode">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="city" placeholder="Ville">
+      <input md-input formControlName="city" placeholder="Ville" [(ngModel)]="current.city">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input type="tel" formControlName="phone" placeholder="Téléphone">
+      <input md-input type="tel" formControlName="phone" placeholder="Téléphone" [(ngModel)]="current.phone">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input type="email" formControlName="mail" placeholder="Adresse mail">
+      <input md-input type="email" formControlName="mail" placeholder="Adresse mail" [(ngModel)]="current.mail">
     </md-input-container>
   </div>
+  <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button routerLink="../">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>

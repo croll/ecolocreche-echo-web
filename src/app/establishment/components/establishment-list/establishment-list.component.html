@@ -6,3 +6,15 @@
 </div>
 
 <div *ngIf="!list.length">Aucun établissement n'a été trouvé.</div>
+
+<md-input-container fxLayout>
+  <input md-input type="search" placeholder="Chercher un établissement" fxFlex>
+</md-input-container>
+
+<md-list *ngFor="let item of list">
+  <md-list-item [routerLink]="['/etablissement', item.id]">
+    <h2 md-line>{{item.name}}</h2>
+    <p md-line>{{item.address}} - {{item.postalcode}} - {{item.city}}</p>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>

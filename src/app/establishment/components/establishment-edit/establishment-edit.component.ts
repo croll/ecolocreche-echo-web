@@ -7,12 +7,13 @@ import { EstablishmentService} from '../../services/establishment.service';
 @Component({
   selector: 'app-establishment-edit',
   templateUrl: './establishment-edit.component.html',
-  styleUrls: ['./establishment-edit.component.css']
+  styleUrls: ['./establishment-edit.component.scss']
 })
 export class EstablishmentEditComponent implements OnInit {
 
   echosForm: FormGroup;
   current: Establishment;
+  idCtrl: FormControl;
   nameCtrl: FormControl;
   addressCtrl: FormControl;
   postalcodeCtrl: FormControl;
@@ -22,6 +23,8 @@ export class EstablishmentEditComponent implements OnInit {
   typeCtrl: FormControl;
   statusCtrl: FormControl;
 
+  private id: number;
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private establishmentService: EstablishmentService) {
 
     this.current = new Establishment();
@@ -30,6 +33,7 @@ export class EstablishmentEditComponent implements OnInit {
     this.current.status = 1;
     this.current.type = 1;
 
+    this.idCtrl = fb.control(this.id);
     this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
     this.typeCtrl = fb.control(this.current.type);
     this.statusCtrl = fb.control(this.current.status);
@@ -40,6 +44,7 @@ export class EstablishmentEditComponent implements OnInit {
     this.mailCtrl = fb.control(this.current.mail);
 
     this.echosForm = fb.group({
+      id: this.idCtrl,
       name: this.nameCtrl,
       address: this.addressCtrl,
       postalcode: this.postalcodeCtrl,
@@ -53,11 +58,16 @@ export class EstablishmentEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.current.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['id'];
+    if (this.id) {
+      this.establishmentService.get(this.id).subscribe(item => {
+        this.current = item;
+      });
+    }
   }
 
   save() {
-    console.log(this.echosForm.value);
+    console.log("SAVEUH", this.echosForm.value);
     this.establishmentService.save(this.echosForm.value).subscribe((establishment) => {
       this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {

@@ -16,14 +16,27 @@ export class EstablishmentService {
                     .catch(this.handleError);
   }
 
+  public get(id: number): Observable<Establishment> {
+    return this.http.get(`rest/establishments/${id}`)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
   save(obj): Observable<Establishment> {
-    console.log("Saving establishment infos");
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options       = new RequestOptions({ headers: headers });
+    console.log('SAVE', obj);
 
-    return this.http.post('rest/establishments', JSON.stringify(obj), options)
-            .map(this.extractData)
-            .catch(this.handleError);
+    if (obj.id) {
+      return this.http.patch('rest/establishments', JSON.stringify(obj), options)
+              .map(this.extractData)
+              .catch(this.handleError);
+    } else {
+      return this.http.post('rest/establishments', JSON.stringify(obj), options)
+              .map(this.extractData)
+              .catch(this.handleError);
+    }
+
 
   }
 
