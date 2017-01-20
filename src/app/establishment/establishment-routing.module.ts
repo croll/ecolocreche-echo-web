@@ -1,24 +1,32 @@
 import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
-import { EstablishmentComponent } from './components/establishment/establishment.component'
-import { EstablishmentListComponent } from './components/establishment-list/establishment-list.component'
+import { EstablishmentListComponent } from './components/establishment-list/establishment-list.component';
+import { EstablishmentDetailComponent } from './components/establishment-detail/establishment-detail.component';
+import { EstablishmentEditComponent } from './components/establishment-edit/establishment-edit.component';
 import { AuthGuard } from '../auth-guard.service';
 
 const establishmentRoutes: Routes = [
   {
     path: 'etablissement',
     canActivate: [AuthGuard],
-    component: EstablishmentComponent,
     children: [
       {
-        canActivateChild: [AuthGuard],
         path: 'liste',
         component: EstablishmentListComponent
       },
       {
-        canActivateChild: [AuthGuard],
+        path: 'creer',
+        component: EstablishmentEditComponent
+      },
+      {
         path: ':id',
-        component: EstablishmentListComponent
+        component: EstablishmentDetailComponent,
+        children: [
+          {
+              path: 'editer',
+              component: EstablishmentEditComponent
+          }
+        ]
       }
     ]
   }

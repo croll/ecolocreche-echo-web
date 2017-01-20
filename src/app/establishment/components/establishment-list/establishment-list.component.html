@@ -1,3 +1,8 @@
-<h2>
-  Liste des établissements
-</h2>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h1 fxFlex>
+    Liste des établissements
+  </h1>
+  <button md-raised-button color="primary" routerLink="../creer"><md-icon>add</md-icon>Ajouter un établisement</button>
+</div>
+
+<div *ngIf="!list.length">Aucun établissement n'a été trouvé.</div>

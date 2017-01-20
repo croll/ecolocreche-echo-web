@@ -11,6 +11,12 @@ $ecolocreche-app-theme: md-light-theme($ecolocreche-app-primary, $ecolocreche-ap
 @import '~@swimlane/ngx-datatable/release/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
+/* Hack md-hint (en attendant que ce soit corrigé) */
+md-hint {
+  color: rgb(242, 74, 74);
+  top: 40px;
+  min-width: 500px;
+}
 
 body {
   margin: 0;
