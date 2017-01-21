@@ -5,8 +5,6 @@
   <button md-raised-button color="primary" routerLink="../creer"><md-icon>add</md-icon>Ajouter un établisement</button>
 </div>
 
-<div *ngIf="!list.length">Aucun établissement n'a été trouvé.</div>
-
 <md-input-container fxLayout>
   <input md-input #search type="search" placeholder="Chercher un établissement" fxFlex (keyup)="filterList(search.value)">
 </md-input-container>
@@ -18,3 +16,5 @@
   </md-list-item>
   <md-divider></md-divider>
 </md-list>
+
+<div *ngIf="!filteredList.length">Aucun établissement n'a été trouvé.</div>
