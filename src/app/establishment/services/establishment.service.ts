@@ -10,13 +10,13 @@ export class EstablishmentService {
 
   constructor(private http: Http) { }
 
-  public getList(): Observable<Establishment[]> {
+  getList(): Observable<Establishment[]> {
     return this.http.get('rest/establishments')
                     .map(this.extractData)
                     .catch(this.handleError);
   }
 
-  public get(id: number): Observable<Establishment> {
+  get(id: number): Observable<Establishment> {
     return this.http.get(`rest/establishments/${id}`)
                     .map(this.extractData)
                     .catch(this.handleError);

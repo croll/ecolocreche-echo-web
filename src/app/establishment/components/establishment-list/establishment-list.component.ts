@@ -9,6 +9,7 @@ import { Establishment } from '../../establishment';
 export class EstablishmentListComponent implements OnInit {
 
   list: Establishment[] = [];
+  filteredList: Establishment[] = [];
   errorMessage: string;
 
   constructor(private establishmentService: EstablishmentService) {
@@ -22,11 +23,15 @@ export class EstablishmentListComponent implements OnInit {
     this.establishmentService.getList().subscribe(
       establishments => {
        this.list = establishments;
-       console.log(this.list);
+       this.filteredList = this.list;
      },
      error => {
        this.errorMessage = <any>error;
      });
+  }
+
+  filterList(filter) {
+    this.filteredList = filter ? this.list.filter(item => item.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
   }
 
 }
