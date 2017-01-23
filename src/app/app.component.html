@@ -14,7 +14,7 @@
        <md-list-item routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
     </md-list>
   </md-sidenav>
-  <div fxLayout="column" style="height: 100%">
+  <div fxLayout="column" style="height: 100vh">
     <div>
       <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
         <button md-button (click)="sidenav.toggle()" class="echos-menu-button">
@@ -23,7 +23,7 @@
         <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
       </div>
     </div>
-    <div fxFlex fxFlexFill>
+    <div fxFlex>
       <div class="echos-main-container" fxLayout="row">
         <div class="echos-menu">
           <md-list>
@@ -43,7 +43,7 @@
         <router-outlet fxFlexOffset="35px" fxFlexOffset.gt-sm="50px"></router-outlet>
       </div>
     </div>
-    <div>
+    <div fxFlexWrap="none">
       <div class="echos-footer">
         <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between">
           <div fxFlexOffset.gt-sm="50px" fxFlexOffset="35px"> Copyright 2017 ECHO(S)</div>
