@@ -1,19 +1,22 @@
 <h1 i18n>Connexion</h1>
 
-<div fxLayout="column">
-  <md-input-container>
-    <input md-input placeholder="Nom d'utilisateur / adresse mail" value="">
-  </md-input-container>
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <div fxLayout="column">
+      <md-input-container>
+        <input md-input placeholder="Nom d'utilisateur / adresse mail" [(ngModel)]="model.name" name="name">
+      </md-input-container>
 
-  <md-input-container>
-    <input md-input type="password" placeholder="Mot de passe" value="">
-  </md-input-container>
+      <md-input-container>
+        <input md-input type="password" placeholder="Mot de passe" [(ngModel)]="model.password" name="password">
+      </md-input-container>
 
-  <md-checkbox>Se souvenir de moi</md-checkbox>
+      <md-checkbox>Se souvenir de moi</md-checkbox>
 
-  <md-toolbar>
-    <button md-raised-button><md-icon>person</md-icon> Connexion</button>
-    <button md-raised-button><md-icon>info</md-icon> Mot de passe oublié ?</button>
-  </md-toolbar>
+      <md-toolbar fxLayout="row">
+        <button md-raised-button><md-icon>info</md-icon> Mot de passe oublié ?</button>
+        <div fxFlex>&nbsp;</div>
+        <button md-raised-button type="submit" [disabled]="!loginForm.form.valid"><md-icon>person</md-icon> Connexion</button>
+      </md-toolbar>
 
-</div>
+  </div>
+</form>

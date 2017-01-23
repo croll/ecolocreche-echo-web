@@ -7,6 +7,7 @@ import { User } from '../user';
 @Injectable()
 export class UserService {
   private restUrl = 'rest/users';  // URL to web API
+  public loggedUser: User = null;
 
   constructor(private http: Http) { }
 
@@ -33,6 +34,38 @@ export class UserService {
     }
     console.error(errMsg);
     return Observable.throw(errMsg);
+  }
+
+  private handleLogin(user: any) {
+    this.loggedUser = user['user'];
+    return this.loggedUser;
+  }
+
+  private handleLogout() {
+    this.loggedUser = null;
+    return null;
+  }
+
+  login(username: string, password: string): Observable<User> {
+    return this.http.post('rest/login', {
+      username: username,
+      password: password,
+    })
+    .map(this.extractData)
+    .map(this.handleLogin)
+    .catch(this.handleError);
+  }
+
+  public logout(): Observable<User> {
+    return this.http.post('rest/logout', {
+    })
+    .map(this.extractData)
+    .map(this.handleLogout)
+    .catch(this.handleError);
+  }
+
+  public get isLogged() {
+    return this.loggedUser && this.loggedUser.id > 0;
   }
 
 }

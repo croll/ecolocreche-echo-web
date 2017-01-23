@@ -1,8 +1,14 @@
 <h1 i18n>Les utilisateurs</h1>
 
-<div>
+<div style="width: 100%">
   <ngx-datatable
     [rows]="rows"
-    [columns]="columns">
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="0"
+    [rowHeight]="50"
+    [scrollbarV]="true"
+    [scrollbarH]="false">
   </ngx-datatable>
 </div>
