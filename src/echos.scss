@@ -57,6 +57,39 @@ body {
   }
 }
 
+md-list-item.echos-list-item {
+  cursor: pointer;
+  border-bottom: 1px solid #d0d0d0;
+  &:last-child {
+    border-bottom: none;
+  }
+  &:hover {
+    border-bottom-color: #E95D0E;
+    background: #f0f0f0;
+  }
+  .md-list-item {
+    padding: 18px 0;
+    height: auto;
+  }
+  div[md-line] {
+    div:nth-child(2) {
+      div {
+        color: #777;
+        padding: 3px 0 3px 5px;
+        &:before {
+          content: '- ';
+        }
+        &:first-child {
+          padding-left: 0;
+          &:before {
+            content: '';
+          }
+        }
+      }
+    }
+  }
+}
+
 .echos-main-container > router-outlet + * {
   width: 100%;
   margin-right: 35px;

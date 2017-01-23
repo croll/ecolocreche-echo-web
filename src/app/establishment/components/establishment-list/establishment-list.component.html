@@ -2,7 +2,7 @@
   <h1 fxFlex>
     Liste des établissements
   </h1>
-  <button md-fab color="primary" routerLink="../creer" fxFlexOffset.xs="20px"><md-icon>add</md-icon></button>
+  <button md-fab color="primary" routerLink="../creer"><md-icon>add</md-icon></button>
 </div>
 
 <md-input-container fxLayout>
@@ -10,12 +10,17 @@
 </md-input-container>
 
 <md-list>
-  <md-list-item [routerLink]="['/etablissement', item.id]" *ngFor="let item of filteredList">
-    <h2 md-line>{{item.name}}</h2>
-    <div md-line fxLayout="row">
-        <div *ngIf="item.address">{{item.address}}</div>
-        <div *ngIf="item.postalcode">{{item.postalcode}}</div>
-        <div *ngIf="item.city">{{item.city}}</div>
+  <md-list-item class="echos-list-item" [routerLink]="['/etablissement', item.id]" *ngFor="let item of filteredList">
+    <div md-line fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex>
+        <div>{{item.name}}</div>
+        <div fxLayout="row">
+            <div *ngIf="item.address">{{item.address}}</div>
+            <div *ngIf="item.postalcode">{{item.postalcode}}</div>
+            <div *ngIf="item.city">{{item.city}}</div>
+        </div>
+      </div>
+      <md-icon color="primary">edit</md-icon>
     </div>
   </md-list-item>
 </md-list>
