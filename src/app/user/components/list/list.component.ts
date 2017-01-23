@@ -9,7 +9,9 @@ import { User } from '../../user';
 })
 export class ListComponent implements OnInit {
 
-  rows: User[];
+  filter_string: string = "";
+  rows: User[] = [];
+  filtered_rows: User[] = [];
   errorMessage: string;
 
   columns = [
@@ -27,11 +29,20 @@ export class ListComponent implements OnInit {
     this.userService.getList()
                      .subscribe(
                        users => {
-                         this.rows = users;
+                         this.rows = this.filtered_rows = users;
                        },
                        error => {
                          this.errorMessage = <any>error;
                        });
   }
+
+  updateFilter(searchstr) {
+    this.filtered_rows = this.rows.filter((row) => {
+      return !searchstr
+      || row.name.toLowerCase().indexOf(searchstr) !== -1
+      || row.email.toLowerCase().indexOf(searchstr) !== -1;
+    })
+  }
+
 
 }
