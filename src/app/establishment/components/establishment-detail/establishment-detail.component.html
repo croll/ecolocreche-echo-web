@@ -1,9 +1,14 @@
-<div fxLayout="row" fxLayoutAlign="center center">
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des établissements</div>
+  <div fxFlexAlign="start">Fiche établissement</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Liste des établissements
-    Fiche établissement de {{item.name}}
+    Fiche établissement #{{item.id}}
   </h1>
-  <button md-raised-button color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon>Modifier</button>
+  <button md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
 <div *ngIf="item.address" fxLayout="row">

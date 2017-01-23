@@ -35,13 +35,6 @@ body {
   margin-top: 20px;
 }
 
-.echos-main-container {
-  margin-top: 30px;
-  .echos-menu {
-    display: none;
-  }
-}
-
 .echos-menu, md-sidenav {
   md-list-item {
     padding-left: 30px;
@@ -87,6 +80,51 @@ md-list-item.echos-list-item {
         }
       }
     }
+  }
+}
+
+.echos-breadcrumb {
+  div {
+    color: #333;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: -5px;
+    &:after {
+      padding: 0 5px;
+      content: '/';
+    }
+    &:first-child {
+      md-icon {
+        font-size: 18px;
+        fill: #333;
+        display: block;
+      }
+      &:after {
+        padding: 0;
+        content: '';
+      }
+    }
+    &:nth-child(2) {
+      &:before {
+        padding: 0 5px 0 0;
+        content: '/';
+      }
+    }
+    &:last-child {
+      color: #888;
+      pointer-events: none;
+      display: flex;
+      &:after {
+        content: '';
+      }
+    }
+  }
+}
+
+.echos-main-container {
+  margin-top: 30px;
+  .echos-menu {
+    display: none;
   }
 }
 

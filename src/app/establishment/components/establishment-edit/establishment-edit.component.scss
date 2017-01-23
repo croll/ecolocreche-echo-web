@@ -3,9 +3,12 @@ form {
 }
 
 md-input-container {
-  min-width: 400px;
+  min-width: 80vw;
+  @media screen and (min-width: 435px) {
+    min-width: 400px;
+  }
 }
 
 .buttons-container {
-  margin-top: 20px;
+  margin: 20px 0 50px 0;
 }
