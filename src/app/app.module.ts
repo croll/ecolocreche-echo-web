@@ -40,7 +40,11 @@ import { AuthService } from './auth.service';
 	  MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [
+    AuthGuard,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

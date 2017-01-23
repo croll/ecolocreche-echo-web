@@ -1,3 +1,23 @@
-<h2>
-  Liste des établissements
-</h2>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <h1 fxFlex>
+    Liste des établissements
+  </h1>
+  <button md-fab color="primary" routerLink="../creer" fxHide.gt-md><md-icon>add</md-icon></button>
+</div>
+
+<md-input-container fxLayout>
+  <input md-input #search type="search" placeholder="Chercher un établissement" fxFlex (keyup)="filterList(search.value)">
+</md-input-container>
+
+<md-list>
+  <md-list-item [routerLink]="['/etablissement', item.id]" *ngFor="let item of filteredList">
+    <h2 md-line>{{item.name}}</h2>
+    <div md-line fxLayout="row">
+        <div *ngIf="item.address">{{item.address}}</div>
+        <div *ngIf="item.postalcode">{{item.postalcode}}</div>
+        <div *ngIf="item.city">{{item.city}}</div>
+    </div>
+  </md-list-item>
+</md-list>
+
+<div *ngIf="!filteredList.length">Aucun établissement n'a été trouvé.</div>
