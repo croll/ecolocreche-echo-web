@@ -92,6 +92,7 @@ md-list-item.echos-list-item {
 
 .echos-main-container > router-outlet + * {
   width: 100%;
+  margin-left: 35px;
   margin-right: 35px;
 }
 
