@@ -4,30 +4,22 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss'],
   providers: [ UserService ],
 })
-export class LoginComponent implements OnInit {
-
-  model = {
-    name: "",
-    password: ""
-  }
+export class LogoutComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-  }
-
-  onSubmit() {
-    console.log("login: ", this.model);
-    this.userService.login(this.model.name, this.model.password)
+    this.userService.logout()
     .subscribe(user => {
       console.log("user: ", user);
-      this.router.navigate(["/"]);
+      this.router.navigate(["/connexion"]);
     }, err => {
       console.log("err: ", err);
+      this.router.navigate(["/"]);
     })
   }
 

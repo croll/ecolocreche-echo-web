@@ -12,9 +12,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './user/components/login/login.component';
-import { LostPasswordComponent } from './user/components/lost-password/lost-password.component';
-import { ListComponent } from './user/components/list/list.component';
+import { LoginComponent as UserLoginComponent} from './user/components/login/login.component';
+import { LogoutComponent as UserLogoutComponent} from './user/components/logout/logout.component';
+import { LostPasswordComponent as UserLostPasswordComponent} from './user/components/lost-password/lost-password.component';
+import { ListComponent as UserListComponent} from './user/components/list/list.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -24,10 +25,10 @@ import { AuthService } from './auth.service';
     AppComponent,
     PageHomeComponent,
     PageNotFoundComponent,
-    LoginComponent,
-    LostPasswordComponent,
-    LoginComponent,
-    ListComponent,
+    UserLoginComponent,
+    UserLostPasswordComponent,
+    UserLogoutComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
