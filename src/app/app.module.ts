@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { PageNotFoundComponent }   from './not-found.component';
 import { PageHomeComponent }   from './home.component';
@@ -16,6 +17,7 @@ import { LoginComponent as UserLoginComponent} from './user/components/login/log
 import { LogoutComponent as UserLogoutComponent} from './user/components/logout/logout.component';
 import { LostPasswordComponent as UserLostPasswordComponent} from './user/components/lost-password/lost-password.component';
 import { ListComponent as UserListComponent} from './user/components/list/list.component';
+import { EditComponent as UserEditComponent} from './user/components/edit/edit.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -29,6 +31,7 @@ import { AuthService } from './auth.service';
     UserLostPasswordComponent,
     UserLogoutComponent,
     UserListComponent,
+    UserEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { AuthService } from './auth.service';
 	  HttpModule,
     EstablishmentModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     NgxChartsModule,
     NgxDatatableModule,
 	  MaterialModule.forRoot(),

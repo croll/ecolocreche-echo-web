@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
 import { User } from '../user';
 
 @Injectable()
-export class UserService {
+export class RestService {
   private restUrl = 'rest/users';  // URL to web API
   public loggedUser: User = null;
 
@@ -16,6 +16,41 @@ export class UserService {
                     .map(this.extractData)
                     .catch(this.handleError);
   }
+
+  get(id: number): Observable<User> {
+    return this.http.get(`rest/users/${id}`)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  save(obj): Observable<User> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options       = new RequestOptions({ headers: headers });
+
+    if (obj.id) {
+      return this.http.put(`rest/users/${obj.id}`, JSON.stringify(obj), options)
+              .map(this.extractData)
+              .catch(this.handleError);
+    } else {
+      return this.http.post('rest/users', JSON.stringify(obj), options)
+              .map(this.extractData)
+              .catch(this.handleError);
+    }
+  }
+
+  delete(id): Observable<boolean> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options       = new RequestOptions({ headers: headers });
+
+    if (!id) {
+      return;
+    }
+
+    return this.http.delete(`rest/users/${id}`, options)
+      .catch(this.handleError);
+
+  }
+
 
   private extractData(res: Response) {
     let body = res.json();

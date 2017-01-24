@@ -1,0 +1,47 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/utilisateurs/liste" fxFlexAlign="start">Les utilisateurs</div>
+  <div *ngIf="!current.id" fxFlexAlign="start">Ajouter un utilisateur</div>
+  <div *ngIf="current.id" fxFlexAlign="start">Modifier un utilisateur</div>
+</div>
+
+<h1 *ngIf="!current.id">Ajouter un utilisateur</h1>
+<h1 *ngIf="current.id">Modifier un utilisateur</h1>
+
+<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+<form (ngSubmit)="save()" [formGroup]="echosForm">
+
+  <div>
+    <md-input-container>
+      <input md-input formControlName="name" placeholder="Nom de l'utilisateur *" [(ngModel)]="current.name">
+      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'utilisateur est requis</md-hint>
+      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'utilisateur doit contenir 3 caractères minimum</md-hint>
+    </md-input-container>
+  </div>
+
+  <div>
+    <md-input-container>
+      <input md-input formControlName="name" placeholder="Nom" [(ngModel)]="current.name">
+    </md-input-container>
+  </div>
+
+  <div>
+    <md-input-container>
+      <input md-input type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
+    </md-input-container>
+  </div>
+
+  <div>
+    <md-slide-toggle formControlName="account_type" [(ngModel)]="current.account_type">Administrateur</md-slide-toggle>
+  </div>
+
+  <div>
+    <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
+    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+      <button md-raised-button routerLink="../">Annuler</button>
+      <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    </div>
+  </div>
+
+</form>

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { RestService } from '../../services/rest.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [ UserService ],
+  providers: [ RestService ],
 })
 export class LoginComponent implements OnInit {
 
@@ -15,14 +15,14 @@ export class LoginComponent implements OnInit {
     password: ""
   }
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private restService: RestService, private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
     console.log("login: ", this.model);
-    this.userService.login(this.model.name, this.model.password)
+    this.restService.login(this.model.name, this.model.password)
     .subscribe(user => {
       console.log("user: ", user);
       this.router.navigate(["/"]);
