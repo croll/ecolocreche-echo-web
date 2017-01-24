@@ -1,14 +1,14 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { EstablishmentService } from '../../services/establishment.service';
+import { RestService } from '../../services/rest.service';
 import { Establishment } from '../../establishment';
 // import { slideInDownAnimation } from '../../../animations';
 
 @Component({
-  templateUrl: './establishment-list.component.html',
-  styleUrls: ['./establishment-list.component.scss'],
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss'],
   // animations: [ slideInDownAnimation ]
 })
-export class EstablishmentListComponent implements OnInit {
+export class ListComponent implements OnInit {
 
   list: Establishment[] = [];
   filteredList: Establishment[] = [];
@@ -18,7 +18,7 @@ export class EstablishmentListComponent implements OnInit {
   //@HostBinding('style.display')   display = 'block';
   // @HostBinding('style.position')  position = 'absolute';
 
-  constructor(private establishmentService: EstablishmentService) {
+  constructor(private restService: RestService) {
   }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class EstablishmentListComponent implements OnInit {
   }
 
   getList() {
-    this.establishmentService.getList().subscribe(
+    this.restService.getList().subscribe(
       establishments => {
        this.list = establishments;
        this.filteredList = this.list;

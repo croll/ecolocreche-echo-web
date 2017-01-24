@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
-import { EstablishmentService} from '../../services/establishment.service';
+import { RestService} from '../../services/rest.service';
 
 @Component({
-  selector: 'app-establishment-edit',
-  templateUrl: './establishment-edit.component.html',
-  styleUrls: ['./establishment-edit.component.scss']
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
 })
-export class EstablishmentEditComponent implements OnInit {
+export class EditComponent implements OnInit {
 
   echosForm: FormGroup;
   current: Establishment;
@@ -25,7 +24,7 @@ export class EstablishmentEditComponent implements OnInit {
 
   private id: number;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private establishmentService: EstablishmentService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService) {
 
     this.current = new Establishment();
 
@@ -56,14 +55,14 @@ export class EstablishmentEditComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     if (this.id) {
-      this.establishmentService.get(this.id).subscribe(item => {
+      this.restService.get(this.id).subscribe(item => {
         Object.assign(this.current, item);
       });
     }
   }
 
   save() {
-    this.establishmentService.save(this.echosForm.value).subscribe((establishment) => {
+    this.restService.save(this.echosForm.value).subscribe((establishment) => {
       this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {
       console.error(err);
@@ -71,7 +70,7 @@ export class EstablishmentEditComponent implements OnInit {
   }
 
   delete(id) {
-    this.establishmentService.delete(id).subscribe((response) => {
+    this.restService.delete(id).subscribe((response) => {
       this.router.navigate(['/etablissement/liste']);
     }, (err) => {
       console.error(err);
