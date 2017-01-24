@@ -11,7 +11,35 @@
   <button md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div *ngIf="item.address" fxLayout="row">
-  <label>Adresse:</label>
-  <div fxFlexOffset="10px">{{item.address}}</div>
+<div class="echos-title">{{item.type}} ({{item.status}}): {{item.name}}</div>
+
+<div class="echos-infos">
+  <div *ngIf="item.address" fxLayout="row">
+    <label>Adresse:</label>
+    <div fxFlexOffset="10px">{{item.address}}</div>
+  </div>
+
+  <div *ngIf="item.address" fxLayout="row">
+    <label>Code postal:</label>
+    <div fxFlexOffset="10px">{{item.postalcode}}</div>
+  </div>
+
+  <div *ngIf="item.city" fxLayout="row">
+    <label>Ville:</label>
+    <div fxFlexOffset="10px">{{item.city}}</div>
+  </div>
+
+  <div *ngIf="item.phone" fxLayout="row">
+    <label>Numéro de téléphone:</label>
+    <div fxFlexOffset="10px">{{item.phone}}</div>
+  </div>
+
+  <div *ngIf="item.mail" fxLayout="row">
+    <label>Adresse mail:</label>
+    <div fxFlexOffset="10px"><a href="mailto:{{item.mail}}" title="email">{{item.mail}}</a></div>
+  </div>
 </div>
+
+<div class="echos-title" style="margin-top: 80px">Liste des audits</div>
+
+<div class="echos-warning">Aucun audit trouvé.</div>
