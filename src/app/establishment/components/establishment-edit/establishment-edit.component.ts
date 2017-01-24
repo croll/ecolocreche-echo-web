@@ -29,10 +29,6 @@ export class EstablishmentEditComponent implements OnInit {
 
     this.current = new Establishment();
 
-    // Hack to be removed
-    this.current.status = 1;
-    this.current.type = 1;
-
     this.idCtrl = fb.control(this.id);
     this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
     this.typeCtrl = fb.control(this.current.type);
@@ -61,15 +57,22 @@ export class EstablishmentEditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     if (this.id) {
       this.establishmentService.get(this.id).subscribe(item => {
-        this.current = item;
+        Object.assign(this.current, item);
       });
     }
   }
 
   save() {
-    console.log("SAVEUH", this.echosForm.value);
     this.establishmentService.save(this.echosForm.value).subscribe((establishment) => {
       this.router.navigate(['/etablissement', establishment.id]);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  delete(id) {
+    this.establishmentService.delete(id).subscribe((response) => {
+      this.router.navigate(['/etablissement/liste']);
     }, (err) => {
       console.error(err);
     });

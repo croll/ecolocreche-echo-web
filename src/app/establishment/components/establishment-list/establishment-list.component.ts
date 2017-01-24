@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { EstablishmentService } from '../../services/establishment.service';
 import { Establishment } from '../../establishment';
+// import { slideInDownAnimation } from '../../../animations';
 
 @Component({
   templateUrl: './establishment-list.component.html',
-  styleUrls: ['./establishment-list.component.scss']
+  styleUrls: ['./establishment-list.component.scss'],
+  // animations: [ slideInDownAnimation ]
 })
 export class EstablishmentListComponent implements OnInit {
 
   list: Establishment[] = [];
   filteredList: Establishment[] = [];
   errorMessage: string;
+
+  // @HostBinding('@routeAnimation') routeAnimation = true;
+  //@HostBinding('style.display')   display = 'block';
+  // @HostBinding('style.position')  position = 'absolute';
 
   constructor(private establishmentService: EstablishmentService) {
   }

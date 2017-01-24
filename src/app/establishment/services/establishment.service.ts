@@ -25,10 +25,9 @@ export class EstablishmentService {
   save(obj): Observable<Establishment> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options       = new RequestOptions({ headers: headers });
-    console.log('SAVE', obj);
 
     if (obj.id) {
-      return this.http.patch('rest/establishments', JSON.stringify(obj), options)
+      return this.http.put(`rest/establishments/${obj.id}`, JSON.stringify(obj), options)
               .map(this.extractData)
               .catch(this.handleError);
     } else {
@@ -37,6 +36,19 @@ export class EstablishmentService {
               .catch(this.handleError);
     }
 
+
+  }
+
+  delete(id): Observable<boolean> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options       = new RequestOptions({ headers: headers });
+
+    if (!id) {
+      return;
+    }
+
+    return this.http.delete(`rest/establishments/${id}`, options)
+      .catch(this.handleError);
 
   }
 
