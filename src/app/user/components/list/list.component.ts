@@ -4,7 +4,7 @@ import { User } from '../../user';
 
 @Component({
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css'],
+  styleUrls: ['./list.component.scss'],
   providers: [ UserService ],
 })
 export class ListComponent implements OnInit {
