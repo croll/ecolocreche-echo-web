@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EstablishmentRoutingModule } from './establishment-routing.module';
-import { EstablishmentListComponent } from './components/establishment-list/establishment-list.component';
-import { EstablishmentService } from './services/establishment.service';
-import { EstablishmentDetailComponent } from './components/establishment-detail/establishment-detail.component';
-import { EstablishmentEditComponent } from './components/establishment-edit/establishment-edit.component';
+import { RoutingModule } from './routing.module';
+import { ListComponent } from './components/list/list.component';
+import { RestService } from './services/rest.service';
+import { DetailComponent } from './components/detail/detail.component';
+import { EditComponent } from './components/edit/edit.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
-    EstablishmentRoutingModule,
+    RoutingModule,
     ReactiveFormsModule,
 	  MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
   declarations: [
-    EstablishmentListComponent,
-    EstablishmentDetailComponent,
-    EstablishmentEditComponent
+    ListComponent,
+    DetailComponent,
+    EditComponent
   ],
   providers: [
-    EstablishmentService
+    RestService
   ]
 })
 
