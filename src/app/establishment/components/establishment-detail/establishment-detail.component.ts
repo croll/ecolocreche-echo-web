@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
 import { EstablishmentService} from '../../services/establishment.service';
 
 @Component({
-  selector: 'app-establishment-detail',
   templateUrl: './establishment-detail.component.html',
-  styleUrls: ['./establishment-detail.component.scss']
+  styleUrls: ['./establishment-detail.component.scss'],
 })
 export class EstablishmentDetailComponent implements OnInit {
 

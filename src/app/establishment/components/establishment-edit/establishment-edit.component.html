@@ -18,16 +18,16 @@
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</md-hint>
     </md-input-container>
   </div>
-  <!-- <div>
-    <md-select placeholder="Type *" formControlName="type">
-      <md-option *ngFor="let t of current.getTypes()" [value]="t.id">{{t.label}}</md-option>
+  <div style="padding: 8px 0 15px">
+    <md-select placeholder="Type *" formControlName="type" [(ngModel)]="current.type">
+      <md-option *ngFor="let t of current.typeList" [value]="t.id">{{t.label}}</md-option>
     </md-select>
-  </div> -->
-  <!-- <div>
-    <md-select placeholder="Status *" formControlName="status">
-      <md-option *ngFor="let s of current.getStatus()" [value]="s.id">{{s.label}}</md-option>
+  </div>
+  <div style="padding: 8px 0 8px">
+    <md-select placeholder="Status *" formControlName="status" [(ngModel)]="current.status">
+      <md-option *ngFor="let s of current.statusList" [value]="s.id">{{s.label}}</md-option>
     </md-select>
-  </div> -->
+  </div>
   <div>
     <md-input-container>
       <input md-input formControlName="address" placeholder="Adresse" [(ngModel)]="current.address">
@@ -57,5 +57,6 @@
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button routerLink="../">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="current.id" (click)="delete(current.id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
   </div>
 </form>
