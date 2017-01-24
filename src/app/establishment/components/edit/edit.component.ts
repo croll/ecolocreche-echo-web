@@ -30,8 +30,8 @@ export class EditComponent implements OnInit {
 
     this.idCtrl = fb.control(this.id);
     this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
-    this.typeCtrl = fb.control(this.current.type);
-    this.statusCtrl = fb.control(this.current.status);
+    this.typeCtrl = fb.control(this.current.type, [Validators.required]);
+    this.statusCtrl = fb.control(this.current.status, [Validators.required]);
     this.addressCtrl = fb.control(this.current.address);
     this.postalcodeCtrl = fb.control(this.current.postalcode);
     this.cityCtrl = fb.control(this.current.city);
