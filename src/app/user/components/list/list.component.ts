@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { RestService } from '../../services/rest.service';
 import { User } from '../../user';
 
 @Component({
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  providers: [ UserService ],
+  providers: [ RestService ],
 })
 export class ListComponent implements OnInit {
 
@@ -19,14 +19,14 @@ export class ListComponent implements OnInit {
     { prop: 'email', name: "email" },
   ];
 
-  constructor(private userService: UserService) { }
+  constructor(private restService: RestService) { }
 
   ngOnInit() {
     this.getList();
   }
 
   getList() {
-    this.userService.getList()
+    this.restService.getList()
                      .subscribe(
                        users => {
                          this.rows = this.filtered_rows = users;

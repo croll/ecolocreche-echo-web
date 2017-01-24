@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { RestService } from '../../services/rest.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss'],
-  providers: [ UserService ],
+  providers: [ RestService ],
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private restService: RestService, private router: Router) { }
 
   ngOnInit() {
-    this.userService.logout()
+    this.restService.logout()
     .subscribe(user => {
       console.log("user: ", user);
       this.router.navigate(["/connexion"]);
