@@ -12,27 +12,28 @@ export class RestService {
 
   getList(): Observable<Establishment[]> {
     return this.http.get('rest/establishments')
-                    .map(this.extractData)
+                    .map(this.extractList)
                     .catch(this.handleError);
   }
 
   get(id: number): Observable<Establishment> {
     return this.http.get(`rest/establishments/${id}`)
-                    .map(this.extractData)
+                    .map(this.extractOne)
                     .catch(this.handleError);
   }
 
-  save(obj): Observable<Establishment> {
+  save(obj: Establishment): Observable<Establishment> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options       = new RequestOptions({ headers: headers });
 
+    console.log("sabe: ", obj);
     if (obj.id) {
       return this.http.put(`rest/establishments/${obj.id}`, JSON.stringify(obj), options)
-              .map(this.extractData)
+              .map(this.extractOne)
               .catch(this.handleError);
     } else {
       return this.http.post('rest/establishments', JSON.stringify(obj), options)
-              .map(this.extractData)
+              .map(this.extractOne)
               .catch(this.handleError);
     }
 
@@ -52,9 +53,22 @@ export class RestService {
 
   }
 
-  private extractData(res: Response) {
+  private extractOne(res: Response) {
     let body = res.json();
-    return body || { };
+    let obj = new Establishment();
+    Object.assign(obj, body);
+    return obj;
+  }
+
+  private extractList(res: Response) {
+    let body = res.json();
+    let list: Establishment[] = [];
+    for(let elem of body) {
+      let obj = new Establishment();
+      Object.assign(obj, elem);
+      list.push(obj);
+    }
+    return list;
   }
 
   private handleError (error: Response | any) {

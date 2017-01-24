@@ -9,6 +9,7 @@ export class Establishment {
   public mail: string
   public type: number
   public status: number
+
   public typeList: {}[] = [
       {id: 'creche', label: 'Crèche'},
       {id: 'halte-garderie', label: 'Halte-garderie'},

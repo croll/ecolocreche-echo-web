@@ -62,7 +62,7 @@ export class EditComponent implements OnInit {
   get() {
       this.restService.get(this.id).subscribe(item => {
         this.echosForm.patchValue(item);
-        Object.assign(this.current, item);
+        this.current = item;
       }, (err) => {
         console.error(err);
       });
