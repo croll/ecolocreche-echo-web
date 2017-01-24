@@ -13,47 +13,47 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
     <md-input-container>
-      <input md-input formControlName="name" placeholder="Nom de l'établissement *" [(ngModel)]="current.name">
+      <input md-input formControlName="name" placeholder="Nom de l'établissement *">
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'établissement est requis</md-hint>
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</md-hint>
     </md-input-container>
   </div>
   <div style="padding: 8px 0 15px">
-    <md-select placeholder="Type *" formControlName="type" [(ngModel)]="current.type">
+    <md-select placeholder="Type *" formControlName="type">
       <md-option *ngFor="let t of current.typeList" [value]="t.id">{{t.label}}</md-option>
     </md-select>
   </div>
   <div style="padding: 8px 0 8px">
-    <md-select placeholder="Status *" formControlName="status" [(ngModel)]="current.status">
+    <md-select placeholder="Status *" formControlName="status">
       <md-option *ngFor="let s of current.statusList" [value]="s.id">{{s.label}}</md-option>
     </md-select>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="address" placeholder="Adresse" [(ngModel)]="current.address">
+      <input md-input formControlName="address" placeholder="Adresse">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="postalcode" placeholder="Code postal" [(ngModel)]="current.postalcode">
+      <input md-input formControlName="postalcode" placeholder="Code postal">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="city" placeholder="Ville" [(ngModel)]="current.city">
+      <input md-input formControlName="city" placeholder="Ville">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input type="tel" formControlName="phone" placeholder="Téléphone" [(ngModel)]="current.phone">
+      <input md-input type="tel" formControlName="phone" placeholder="Téléphone">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input type="email" formControlName="mail" placeholder="Adresse mail" [(ngModel)]="current.mail">
+      <input md-input type="email" formControlName="mail" placeholder="Adresse mail">
     </md-input-container>
   </div>
-  <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
+  <input *ngIf="id" type="hidden" formControlName="id">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button routerLink="../">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>

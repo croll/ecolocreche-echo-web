@@ -56,6 +56,7 @@ export class EditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     if (this.id) {
       this.restService.get(this.id).subscribe(item => {
+        this.echosForm.patchValue(item);
         Object.assign(this.current, item);
       });
     }
