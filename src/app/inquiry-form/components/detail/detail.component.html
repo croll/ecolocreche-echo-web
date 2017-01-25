@@ -1,0 +1,22 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des questionnaires</div>
+  <div fxFlexAlign="start">Fiche questionnaire</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Fiche questionnaire #{{item.id}}
+  </h1>
+  <button md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
+</div>
+
+<div class="echos-title">{{item.name}}</div>
+
+<div *ngIf="item.description" class="echos-caption">
+  {{item.description}}
+</div>
+
+<div class="echos-title" style="margin-top: 80px">Liste des audits utilisant ce questionnaire</div>
+
+<div class="echos-warning">Aucun audit trouvé.</div>

@@ -1,0 +1,32 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des établissements</div>
+  <div *ngIf="!id" fxFlexAlign="start">Ajouter un questionnaire</div>
+  <div *ngIf="id" fxFlexAlign="start">Modifier un modifier</div>
+</div>
+
+<h1 *ngIf="!id">Ajouter un questionnaire</h1>
+<h1 *ngIf="id">Modifier un questionnaire</h1>
+
+<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+<form (ngSubmit)="save()" [formGroup]="echosForm">
+  <div>
+    <md-input-container>
+      <input md-input formControlName="name" placeholder="Nom du questionnaire *">
+      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom du questionnaire est requis</md-hint>
+      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom du questionnaire doit contenir 3 caractères minimum</md-hint>
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container>
+      <textarea md-input formControlName="description" placeholder="Description"></textarea>
+    </md-input-container>
+  </div>
+  <input *ngIf="id" type="hidden" formControlName="id">
+  <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <button md-raised-button routerLink="../">Annuler</button>
+    <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" (click)="delete(id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+  </div>
+</form>
