@@ -7,7 +7,7 @@ import { RestService } from '../../services/rest.service';
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
-  providers: [ RestService ],
+  //providers: [ RestService ],
 })
 export class EditComponent implements OnInit {
 

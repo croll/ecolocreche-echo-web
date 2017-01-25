@@ -6,7 +6,7 @@ import { User } from './user/user';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [ UserRestService ],
+  //providers: [ UserRestService ],
 })
 export class AppComponent{
   processProgressPercent = 0;
