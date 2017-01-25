@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AuthService } from '../../auth.service';
 
 import { User } from '../user';
 
@@ -9,14 +9,7 @@ import { User } from '../user';
 export class RestService {
   private restUrl = 'rest/users';  // URL to web API
 
-  public loggedUser: User = null;
-
-  public loggedUserObs = new BehaviorSubject(null);
-
-  constructor(private http: Http) {
-    console.log("constructed user service");
-    this.whoami().subscribe((user) => {
-    });
+  constructor(private http: Http, private authService: AuthService) {
   }
 
   getList (): Observable<User[]> {
@@ -80,20 +73,18 @@ export class RestService {
   }
 
   private handleLogin(user: any) {
-    this.loggedUser = user['user'];
-    console.log("fire event login : ", user['user'], this.loggedUserObs);
-    this.loggedUserObs.next(user['user']);
-    return this.loggedUser;
+    let luser = new User();
+    Object.assign(luser, user['user']);
+    this.authService.setUser(luser);
+    return luser;
   }
 
   private handleLogout() {
-    this.loggedUser = null;
-    console.log("fire event logout : ", null, this.loggedUserObs);
-    this.loggedUserObs.next(null);
+    this.authService.setUser(null);
     return null;
   }
 
-  private whoami() {
+  public whoami() {
     return this.http.get('rest/whoami')
     .map(this.extractData)
     .map((user) => { return this.handleLogin(user); })
@@ -116,10 +107,6 @@ export class RestService {
     .map(this.extractData)
     .map(() => { return this.handleLogout(); })
     .catch(this.handleError);
-  }
-
-  public get isLogged() {
-    return this.loggedUser && this.loggedUser.id > 0;
   }
 
 }

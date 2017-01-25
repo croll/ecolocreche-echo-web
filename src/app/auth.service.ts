@@ -1,22 +1,30 @@
 import { Injectable } from '@angular/core';
 
+import { User } from 'app/user/user';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
 
+
 @Injectable()
 export class AuthService {
-  isLoggedIn: boolean = true;
+
+  public loggedUser: User;
+  public loggedUserObs = new BehaviorSubject<User>(null);
 
   // store the URL so we can redirect after logging in
   redirectUrl: string;
 
-  login(): Observable<boolean> {
-    return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+  public setUser(user: User) {
+    this.loggedUser=user;
+    this.loggedUserObs.next(user);
   }
 
-  logout(): void {
-    this.isLoggedIn = false;
+  public get isLoggedIn(): boolean {
+    return this.loggedUser != null;
   }
+
 }
