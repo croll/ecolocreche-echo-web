@@ -14,8 +14,9 @@ export class RestService {
   public loggedUserObs = new BehaviorSubject(null);
 
   constructor(private http: Http) {
-    console.log("loggedUserObs", this.loggedUserObs);
-    this.loggedUserObs.next(null);
+    console.log("constructed user service");
+    this.whoami().subscribe((user) => {
+    });
   }
 
   getList (): Observable<User[]> {
@@ -79,17 +80,24 @@ export class RestService {
   }
 
   private handleLogin(user: any) {
-    console.log("this", this);
     this.loggedUser = user['user'];
-    console.log("this.loggedUserObs", this.loggedUserObs);
+    console.log("fire event login : ", user['user'], this.loggedUserObs);
     this.loggedUserObs.next(user['user']);
     return this.loggedUser;
   }
 
   private handleLogout() {
     this.loggedUser = null;
+    console.log("fire event logout : ", null, this.loggedUserObs);
     this.loggedUserObs.next(null);
     return null;
+  }
+
+  private whoami() {
+    return this.http.get('rest/whoami')
+    .map(this.extractData)
+    .map((user) => { return this.handleLogin(user); })
+    .catch(this.handleError);
   }
 
   login(username: string, password: string): Observable<User> {
@@ -98,7 +106,7 @@ export class RestService {
       password: password,
     })
     .map(this.extractData)
-    .map(this.handleLogin)
+    .map((user) => { return this.handleLogin(user); })
     .catch(this.handleError);
   }
 
@@ -106,7 +114,7 @@ export class RestService {
     return this.http.post('rest/logout', {
     })
     .map(this.extractData)
-    .map(this.handleLogout)
+    .map(() => { return this.handleLogout(); })
     .catch(this.handleError);
   }
 
