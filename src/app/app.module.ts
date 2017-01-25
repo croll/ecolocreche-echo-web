@@ -19,6 +19,7 @@ import { LostPasswordComponent as UserLostPasswordComponent} from './user/compon
 import { ListComponent as UserListComponent} from './user/components/list/list.component';
 import { EditComponent as UserEditComponent} from './user/components/edit/edit.component';
 import { EstablishmentModule } from './establishment/establishment.module';
+import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 
@@ -38,6 +39,7 @@ import { AuthService } from './auth.service';
     FormsModule,
 	  HttpModule,
     EstablishmentModule,
+    InquiryFormModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgxChartsModule,
