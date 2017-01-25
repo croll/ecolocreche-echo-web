@@ -37,7 +37,7 @@ export class ListComponent implements OnInit {
   }
 
   filterList(filter) {
-    this.filteredList = filter ? this.list.filter(item => item.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
+    this.filteredList = filter ? this.list.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
   }
 
 }
