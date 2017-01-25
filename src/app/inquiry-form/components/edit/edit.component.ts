@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../inquiry-form';
 import { RestService} from '../../services/rest.service';
@@ -19,7 +20,7 @@ export class EditComponent implements OnInit {
 
   private id: number;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new InquiryForm();
 
@@ -67,6 +68,11 @@ export class EditComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
+  }
+
+  goBack(): boolean {
+    this.location.back();
+    return false;
   }
 
 }
