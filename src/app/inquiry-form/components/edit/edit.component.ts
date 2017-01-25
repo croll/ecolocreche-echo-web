@@ -14,7 +14,7 @@ export class EditComponent implements OnInit {
   echosForm: FormGroup;
   current: InquiryForm;
   idCtrl: FormControl;
-  nameCtrl: FormControl;
+  titleCtrl: FormControl;
   descriptionCtrl: FormControl;
   positionCtrl: FormControl;
 
@@ -25,13 +25,13 @@ export class EditComponent implements OnInit {
     this.current = new InquiryForm();
 
     this.idCtrl = fb.control(this.id);
-    this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
-    this.descriptionCtrl = fb.control(this.current.position);
-    this.positionCtrl = fb.control(this.current.description);
+    this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
+    this.descriptionCtrl = fb.control(this.current.description);
+    this.positionCtrl = fb.control(this.current.position);
 
     this.echosForm = fb.group({
       id: this.idCtrl,
-      name: this.nameCtrl,
+      title: this.titleCtrl,
       description: this.descriptionCtrl,
       position: this.positionCtrl,
     });

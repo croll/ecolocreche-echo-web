@@ -18,9 +18,9 @@
   <md-list-item class="echos-list-item" [routerLink]="['/questionnaire', item.id]" *ngFor="let item of filteredList">
     <div md-line fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex>
-        <div>{{item.name}}</div>
+        <div>{{item.title}}</div>
         <div fxLayout="row">
-            <div *ngIf="item.address">{{item.description}}</div>
+            <div *ngIf="item.description">{{item.description}}</div>
         </div>
       </div>
       <md-icon color="primary">chevron_right</md-icon>
