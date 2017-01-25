@@ -26,7 +26,7 @@
     <div fxFlex>
       <div class="echos-main-container" fxLayout="row">
         <div class="echos-menu">
-          <md-list>
+          <md-list *ngIf="loggedUser != null">
              <md-list-item routerLink="/compte" routerLinkActive="active">Mon compte</md-list-item>
              <md-divider></md-divider>
              <md-list-item routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
@@ -38,6 +38,9 @@
              <md-list-item routerLink="/questionnaire/liste" routerLinkActive="active">Le questionnaire</md-list-item>
              <md-divider></md-divider>
              <md-list-item routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
+          </md-list>
+          <md-list *ngIf="loggedUser == null">
+             <md-list-item routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
           </md-list>
         </div>
         <router-outlet></router-outlet>

@@ -1,25 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { User } from '../user';
 
 @Injectable()
 export class RestService {
   private restUrl = 'rest/users';  // URL to web API
+
   public loggedUser: User = null;
 
-  constructor(private http: Http) { }
+  public loggedUserObs = new BehaviorSubject(null);
+
+  constructor(private http: Http) {
+    console.log("loggedUserObs", this.loggedUserObs);
+    this.loggedUserObs.next(null);
+  }
 
   getList (): Observable<User[]> {
     return this.http.get(this.restUrl)
-                    .map(this.extractData)
+                    .map((res: Response) => { return this.extractData(res) })
                     .catch(this.handleError);
   }
 
   get(id: number): Observable<User> {
     return this.http.get(`rest/users/${id}`)
-                    .map(this.extractData)
+                    .map((res: Response) => { return this.extractData(res) })
                     .catch(this.handleError);
   }
 
@@ -29,11 +36,11 @@ export class RestService {
 
     if (obj.id) {
       return this.http.put(`rest/users/${obj.id}`, JSON.stringify(obj), options)
-              .map(this.extractData)
+              .map((res: Response) => { return this.extractData(res) })
               .catch(this.handleError);
     } else {
       return this.http.post('rest/users', JSON.stringify(obj), options)
-              .map(this.extractData)
+              .map((res: Response) => { return this.extractData(res) })
               .catch(this.handleError);
     }
   }
@@ -72,12 +79,16 @@ export class RestService {
   }
 
   private handleLogin(user: any) {
+    console.log("this", this);
     this.loggedUser = user['user'];
+    console.log("this.loggedUserObs", this.loggedUserObs);
+    this.loggedUserObs.next(user['user']);
     return this.loggedUser;
   }
 
   private handleLogout() {
     this.loggedUser = null;
+    this.loggedUserObs.next(null);
     return null;
   }
 
