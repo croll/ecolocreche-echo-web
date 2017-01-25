@@ -21,7 +21,7 @@ import { EditComponent as UserEditComponent} from './user/components/edit/edit.c
 import { EstablishmentModule } from './establishment/establishment.module';
 import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
-import { AuthService } from './auth.service';
+import { RestService as UserRestService } from './user/services/rest.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { AuthService } from './auth.service';
   ],
   providers: [
     AuthGuard,
-    AuthService
+    UserRestService
   ],
   bootstrap: [AppComponent]
 })

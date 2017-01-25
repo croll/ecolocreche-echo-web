@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss'],
-  providers: [ RestService ],
+  //providers: [ RestService ],
 })
 export class LogoutComponent implements OnInit {
 
