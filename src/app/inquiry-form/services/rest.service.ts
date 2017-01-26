@@ -15,7 +15,7 @@ export class RestService {
                     .catch(this.handleError);
   }
 
-  get(id: number, type: string, params?: any), params?: any: Observable<any> {
+  get(id: number, type: string, params?: any): Observable<any> {
     return this.http.get(`rest/${type}/${id}`, {search: this.setParams(params)})
                     .map(this.extractOne)
                     .catch(this.handleError);
