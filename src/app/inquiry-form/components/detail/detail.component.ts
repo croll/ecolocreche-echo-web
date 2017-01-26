@@ -11,6 +11,10 @@ export class DetailComponent implements OnInit {
 
   private id: number;
   item: InquiryForm;
+  inquiryFormThemeList: any[];
+  filteredInquiryFormThemeList: any[];
+  themeList: any[];
+  filteredThemeList: any[];
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
@@ -18,9 +22,17 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restService.get(this.id).subscribe(item => {
+    this.restService.get(this.id, 'inquiryforms').subscribe(item => {
       this.item = item;
     });
+    this.restService.getList('directories').subscribe(items => {
+      console.log(items);
+      this.themeList = items;
+    });
+  }
+
+  filterList(filter) {
+    this.filteredThemeList = filter ? this.themeList.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.themeList;
   }
 
 }

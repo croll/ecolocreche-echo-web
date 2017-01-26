@@ -56,6 +56,11 @@ a:hover {
   border-bottom: 1px solid #d0d0d0;
 }
 
+.echos-help {
+  color: $echos-grey;
+  font-size: 0.9rem;
+}
+
 .echos-menu, md-sidenav {
   md-list-item {
     padding-left: 30px;

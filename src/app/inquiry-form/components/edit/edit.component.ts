@@ -46,7 +46,7 @@ export class EditComponent implements OnInit {
   }
 
   get() {
-      this.restService.get(this.id).subscribe(item => {
+      this.restService.get(this.id, 'inquiryforms').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = item;
       }, (err) => {
@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value).subscribe((InquiryForm) => {
+    this.restService.save(this.echosForm.value, 'inquiryforms').subscribe((InquiryForm) => {
       this.router.navigate(['/questionnaire', InquiryForm.id]);
     }, (err) => {
       console.error(err);
@@ -63,7 +63,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id).subscribe((response) => {
+    this.restService.delete(id, 'inquiryforms').subscribe((response) => {
       this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);

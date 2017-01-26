@@ -10,42 +10,43 @@ export class RestService {
 
   constructor(private http: Http) { }
 
-  getList(): Observable<InquiryForm[]> {
-    return this.http.get('rest/inquiryforms')
+  getList(type: string): Observable<any[]> {
+    return this.http.get(`rest/${type}`)
                     .map(this.extractList)
                     .catch(this.handleError);
   }
 
-  get(id: number): Observable<InquiryForm> {
-    return this.http.get(`rest/inquiryforms/${id}`)
+  get(id: number, type: string): Observable<any> {
+    return this.http.get(`rest/${type}/${id}`)
                     .map(this.extractOne)
                     .catch(this.handleError);
   }
 
-  save(obj: InquiryForm): Observable<InquiryForm> {
+  //save(obj: InquiryForm, t: string): Observable<InquiryForm> {
+  save(obj: any, type: string): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options       = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers });
 
     if (obj.id) {
-      return this.http.put(`rest/inquiryforms/${obj.id}`, JSON.stringify(obj), options)
+      return this.http.put(`rest/${type}/${obj.id}`, JSON.stringify(obj), options)
               .map(this.extractOne)
               .catch(this.handleError);
     } else {
-      return this.http.post('rest/inquiryforms', JSON.stringify(obj), options)
+      return this.http.post(`rest/${type}`, JSON.stringify(obj), options)
               .map(this.extractOne)
               .catch(this.handleError);
     }
   }
 
-  delete(id): Observable<boolean> {
+  delete(id: number, type: string): Observable<boolean> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options       = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers });
 
     if (!id) {
       return;
     }
 
-    return this.http.delete(`rest/inquiryforms/${id}`, options)
+    return this.http.delete(`rest/${type}/${id}`, options)
       .catch(this.handleError);
 
   }
