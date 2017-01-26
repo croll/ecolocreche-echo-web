@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import { InquiryForm } from '../inquiry-form';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -53,16 +52,16 @@ export class RestService {
 
   private extractOne(res: Response) {
     let body = res.json();
-    let obj = new InquiryForm();
+    let obj = {};
     Object.assign(obj, body);
     return obj;
   }
 
   private extractList(res: Response) {
     let body = res.json();
-    let list: InquiryForm[] = [];
+    let list: any[] = [];
     for(let elem of body) {
-      let obj = new InquiryForm();
+      let obj = {};
       Object.assign(obj, elem);
       list.push(obj);
     }
