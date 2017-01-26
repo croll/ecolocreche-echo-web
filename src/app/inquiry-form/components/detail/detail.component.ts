@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../inquiry-form';
 import { RestService } from '../../services/rest.service';
+import * as moment from 'moment'
 
 @Component({
   templateUrl: './detail.component.html',
@@ -25,9 +26,9 @@ export class DetailComponent implements OnInit {
     this.restService.get(this.id, 'inquiryforms').subscribe(item => {
       this.item = item;
     });
-    this.restService.getList('directories').subscribe(items => {
-      console.log(items);
-      this.themeList = items;
+    this.restService.getList('directories', {d: moment()}).subscribe(items => {
+       console.log(items);
+       this.themeList = items;
     });
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,8 +9,8 @@ export class RestService {
 
   constructor(private http: Http) { }
 
-  getList(type: string): Observable<any[]> {
-    return this.http.get(`rest/${type}`)
+  getList(type: string, params?: any): Observable<any[]> {
+    return this.http.get(`rest/${type}`, {search: this.setParams(params)})
                     .map(this.extractList)
                     .catch(this.handleError);
   }
@@ -48,6 +48,15 @@ export class RestService {
     return this.http.delete(`rest/${type}/${id}`, options)
       .catch(this.handleError);
 
+  }
+
+  private setParams(params: any): URLSearchParams {
+   if (!params || typeof(params) != 'object') return;
+   let p = new URLSearchParams()
+   for (let key of Object.keys(params)) {
+     p.set(key, params[key]);
+   }
+   return p;
   }
 
   private extractOne(res: Response) {
