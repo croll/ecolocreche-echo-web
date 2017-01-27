@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
 import { ListComponent } from './components/list/list.component';
-import { RestService } from './services/rest.service';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
@@ -22,9 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DetailComponent,
     EditComponent
   ],
-  providers: [
-    RestService
-  ]
+  providers: []
 })
 
 export class EstablishmentModule { }

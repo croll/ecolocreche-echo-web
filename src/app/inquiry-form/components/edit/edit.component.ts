@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../inquiry-form';
-import { RestService} from '../../services/rest.service';
+import { RestService } from '../../../rest.service';
 
 @Component({
   templateUrl: './edit.component.html',

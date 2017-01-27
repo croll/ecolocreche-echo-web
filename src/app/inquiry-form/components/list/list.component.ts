@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { RestService } from '../../services/rest.service';
+import { RestService } from '../../../rest.service';
 import { InquiryForm } from '../../inquiry-form';
 // import { slideInDownAnimation } from '../../../animations';
 

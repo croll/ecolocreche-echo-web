@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../inquiry-form';
-import { RestService } from '../../services/rest.service';
+import { RestService } from '../../../rest.service';
 import * as moment from 'moment'
 
 @Component({

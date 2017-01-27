@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
-import { RestService} from '../../services/rest.service';
+import { RestService} from '../../../rest.service';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -61,7 +61,7 @@ export class EditComponent implements OnInit {
   }
 
   get() {
-      this.restService.get(this.id).subscribe(item => {
+      this.restService.get(this.id, 'establishment').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = item;
       }, (err) => {
@@ -70,7 +70,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value).subscribe((establishment) => {
+    this.restService.save(this.echosForm.value, 'establishment').subscribe((establishment) => {
       this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {
       console.error(err);
@@ -78,7 +78,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id).subscribe((response) => {
+    this.restService.delete(id, 'establishment').subscribe((response) => {
       this.router.navigate(['/etablissement/liste']);
     }, (err) => {
       console.error(err);

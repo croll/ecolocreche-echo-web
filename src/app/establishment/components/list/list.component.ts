@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { RestService } from '../../services/rest.service';
+import { RestService } from '../../../rest.service';
 import { Establishment } from '../../establishment';
 // import { slideInDownAnimation } from '../../../animations';
 
@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList().subscribe(
+    this.restService.getList('establishment').subscribe(
       establishments => {
        this.list = establishments;
        this.filteredList = this.list;

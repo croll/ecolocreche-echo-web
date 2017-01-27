@@ -23,6 +23,7 @@ import { QuestionModule } from './question/question.module';
 import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
+import { RestService } from './rest.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AuthService } from './auth.service';
   ],
   providers: [
     AuthGuard,
-    AuthService
+    AuthService,
+    RestService
   ],
   bootstrap: [AppComponent]
 })
