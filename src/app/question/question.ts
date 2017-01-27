@@ -1,3 +1,5 @@
+import { Choice } from './choice';
+
 export class Question {
 
   public id: number
@@ -9,4 +11,5 @@ export class Question {
   public position: number
   public color: string
 
+  public choices: Choice[]
 }

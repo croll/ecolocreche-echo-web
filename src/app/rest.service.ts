@@ -46,6 +46,7 @@ export class RestService {
     let options = new RequestOptions({ headers: headers });
 
     if (!id) {
+      console.error("call delete without id ?");
       return;
     }
 

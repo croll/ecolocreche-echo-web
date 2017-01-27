@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Réponses possible :
+  </h1>
+  <button md-fab color="primary" (click)="addChoice()"><md-icon>add</md-icon></button>
+</div>
+
+<md-list>
+  <md-list-item class="echos-list-item" *ngFor="let item of choices">
+    <div md-line fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex>
+        <div fxLayout="row">
+            <div class="echos-color-box" style="background-color: {{item.color}};"></div>
+            <div fxLayout="column">
+              <input fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
+              <input fxFlex [(ngModel)]="item.commentaire" placeholder="Commentaire"/>
+            </div>
+            <div>
+              <md-select placeholder="Impact *">
+                <md-option *ngFor="let t of impactList" [value]="t.id">{{t.label}}</md-option>
+              </md-select>
+            </div>
+        </div>
+        <div>{{item.description}}</div>
+      </div>
+    </div>
+  </md-list-item>
+</md-list>

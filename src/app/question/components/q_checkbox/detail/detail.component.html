@@ -1,0 +1,18 @@
+
+<p>Réponses possible :</p>
+
+<md-list>
+  <md-list-item class="echos-list-item" [routerLink]="['/choice', item.id]" *ngFor="let item of filteredList">
+    <div md-line fxLayout="row" fxLayoutAlign="center center">
+      <div fxFlex>
+        <div>{{item.name}}</div>
+        <div fxLayout="row">
+            <div class="echos-color-box" style="background-color: {{item.color}};"></div>
+            <div>{{item.title}}</div>
+            <div>{{item.description}}</div>
+        </div>
+      </div>
+      <md-icon color="primary">chevron_right</md-icon>
+    </div>
+  </md-list-item>
+</md-list>

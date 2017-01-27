@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Question } from '../../question';
+import { Choice } from '../../choice';
 import { RestService} from '../../../rest.service';
 
 @Component({
@@ -30,6 +31,7 @@ export class EditComponent implements OnInit {
 
   echosForm: FormGroup;
   current: Question;
+  choices : Choice[] = [];
 
   idCtrl: FormControl;
   titleCtrl: FormControl;
@@ -68,7 +70,7 @@ export class EditComponent implements OnInit {
   get() {
       this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
         this.echosForm.patchValue(item);
-        this.current = item;
+        this.current = Object.assign(this.current, item);
       }, (err) => {
         console.error(err);
       });
@@ -76,8 +78,9 @@ export class EditComponent implements OnInit {
 
   save() {
     let path = this.id_node ? 'hist/nodes' : 'hist/nodes/'+this.id_node_parent;
-    console.log("values: ", this.echosForm.value);
-    this.restService.save(this.echosForm.value, path).subscribe((node_hist) => {
+    this.current = Object.assign(this.current, this.echosForm.value);
+    this.current.choices = this.choices;
+    this.restService.save(this.current, path).subscribe((node_hist) => {
       this.router.navigate(['/question', node_hist.id_node]);
     }, (err) => {
       console.error(err);
