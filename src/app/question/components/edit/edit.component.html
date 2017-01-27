@@ -1,0 +1,43 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/questionnaire/id_theme" fxFlexAlign="start">Nom Theme</div>
+  <div routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">Nom Rubrique</div>
+  <div *ngIf="!id" fxFlexAlign="start">Ajouter une question</div>
+  <div *ngIf="id" fxFlexAlign="start">Modifier la question</div>
+</div>
+
+<h1 *ngIf="!id">Ajouter une question</h1>
+<h1 *ngIf="id">Modifier la question</h1>
+
+<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+<form (ngSubmit)="save()" [formGroup]="echosForm">
+
+  <div>
+    <md-input-container>
+      <input md-input formControlName="title" placeholder="Intitulé *">
+      <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">L'intitulé est requis</md-hint>
+      <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">L'intitulé doit contenir 3 caractères minimum</md-hint>
+    </md-input-container>
+  </div>
+
+  <div style="padding: 8px 0 15px">
+    <md-select placeholder="Type de question *" formControlName="type">
+      <md-option *ngFor="let t of typeList" [value]="t.id">{{t.label}}</md-option>
+    </md-select>
+  </div>
+
+  <div>
+    <md-input-container>
+      <input md-input formControlName="description" placeholder="Commentaire">
+    </md-input-container>
+  </div>
+
+  <input *ngIf="id" type="hidden" formControlName="id">
+
+  <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <button md-raised-button (click)="goBack()">Annuler</button>
+    <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" (click)="delete(id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+  </div>
+</form>

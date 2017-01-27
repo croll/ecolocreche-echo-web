@@ -1,0 +1,15 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/questionnaire/id_theme" fxFlexAlign="start">Nom Theme</div>
+  <div routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">Nom Rubrique</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Question: #{{item.title}}
+  </h1>
+  <button md-fab color="primary" [routerLink]="['/questionnaire/', item.id, 'editer']"><md-icon>edit</md-icon></button>
+</div>
+
+<div class="echos-title">{{item.title}} ({{item.type}})</div>
+<div class="echos-description">{{item.description}}</div>
