@@ -71,6 +71,14 @@ export class EditComponent implements OnInit {
       this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = Object.assign(this.current, item);
+        this.choices = [];
+        if ('choices' in item) {
+          item.choices.forEach((jschoice) => {
+            let choice = new Choice();
+            Object.assign(choice, jschoice);
+            this.choices.push(choice);
+          })
+        }
       }, (err) => {
         console.error(err);
       });
@@ -81,7 +89,7 @@ export class EditComponent implements OnInit {
     this.current = Object.assign(this.current, this.echosForm.value);
     this.current.choices = this.choices;
     this.restService.save(this.current, path).subscribe((node_hist) => {
-      this.router.navigate(['/question', node_hist.id_node]);
+      this.router.navigate(['/question/'+node_hist.id_node+'/editer']);
     }, (err) => {
       console.error(err);
     });
