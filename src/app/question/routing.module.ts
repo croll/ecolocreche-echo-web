@@ -6,8 +6,8 @@ import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
   {
-    path: 'questionnaire/:id_theme/:id_rubrique/',
-    canActivate: [AuthGuard],
+    path: 'questionnairetest',
+    //canActivate: [AuthGuard],
     children: [
       {
         path: 'creer',

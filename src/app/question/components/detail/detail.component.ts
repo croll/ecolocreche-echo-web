@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Question } from '../../question';
-import { RestService } from '../../services/rest.service';
+import { RestService } from '../../../rest.service';
 
 @Component({
   templateUrl: './detail.component.html',
@@ -18,7 +18,7 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restService.get(this.id).subscribe(item => {
+    this.restService.get(this.id, 'question').subscribe(item => {
       this.item = item;
     });
   }
