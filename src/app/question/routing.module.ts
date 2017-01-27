@@ -14,11 +14,11 @@ const routes: Routes = [
         component: EditComponent
       },
       {
-        path: ':id',
+        path: ':id_node',
         component: DetailComponent,
       },
       {
-        path: ':id/editer',
+        path: ':id_node/editer',
         component: EditComponent
       }
     ]

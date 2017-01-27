@@ -36,20 +36,20 @@ export class EditComponent implements OnInit {
   descriptionCtrl: FormControl;
   typeCtrl: FormControl;
 
-  private id: number;
+  private id_node: number;
   private id_node_parent: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new Question();
 
-    this.idCtrl = fb.control(this.id);
+    this.idCtrl = fb.control(this.id_node);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
     this.typeCtrl = fb.control(this.current.type, [Validators.required]);
 
     this.echosForm = fb.group({
-      id: this.idCtrl,
+      id_node: this.idCtrl,
       title: this.titleCtrl,
       description: this.descriptionCtrl,
       type: this.typeCtrl,
@@ -59,14 +59,14 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.id_node_parent = this.route.snapshot.params['id_node_parent'];
-    this.id = this.route.snapshot.params['id'];
-    if (this.id) {
+    this.id_node = this.route.snapshot.params['id_node'];
+    if (this.id_node) {
       this.get();
     }
   }
 
   get() {
-      this.restService.get(this.id, 'hist/nodes').subscribe(item => {
+      this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = item;
       }, (err) => {
@@ -75,9 +75,10 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    let path = this.id ? 'hist/nodes' : 'hist/nodes/'+this.id_node_parent;
-    this.restService.save(this.echosForm.value, path).subscribe((establishment) => {
-      this.router.navigate(['/questionnaire', establishment.id]);
+    let path = this.id_node ? 'hist/nodes' : 'hist/nodes/'+this.id_node_parent;
+    console.log("values: ", this.echosForm.value);
+    this.restService.save(this.echosForm.value, path).subscribe((node_hist) => {
+      this.router.navigate(['/question', node_hist.id_node]);
     }, (err) => {
       console.error(err);
     });

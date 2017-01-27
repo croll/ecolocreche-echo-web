@@ -2,12 +2,12 @@
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
   <div routerLink="/questionnaire/id_theme" fxFlexAlign="start">Nom Theme</div>
   <div routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">Nom Rubrique</div>
-  <div *ngIf="!id" fxFlexAlign="start">Ajouter une question</div>
-  <div *ngIf="id" fxFlexAlign="start">Modifier la question</div>
+  <div *ngIf="!id_node" fxFlexAlign="start">Ajouter une question</div>
+  <div *ngIf="id_node" fxFlexAlign="start">Modifier la question</div>
 </div>
 
-<h1 *ngIf="!id">Ajouter une question</h1>
-<h1 *ngIf="id">Modifier la question</h1>
+<h1 *ngIf="!id_node">Ajouter une question</h1>
+<h1 *ngIf="id_node">Modifier la question</h1>
 
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
@@ -33,11 +33,11 @@
     </md-input-container>
   </div>
 
-  <input *ngIf="id" type="hidden" formControlName="id">
+  <input *ngIf="id_node" type="hidden" formControlName="id_node">
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-    <button *ngIf="id" (click)="delete(id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+    <button *ngIf="id_node" (click)="delete()" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
   </div>
 </form>
