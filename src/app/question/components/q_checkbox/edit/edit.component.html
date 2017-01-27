@@ -16,7 +16,7 @@
               <input fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"/>
             </div>
             <div>
-              <md-select placeholder="Impact *">
+              <md-select [(ngModel)]="item.impact" placeholder="Impact *">
                 <md-option *ngFor="let t of impactList" [value]="t.id">{{t.label}}</md-option>
               </md-select>
             </div>
