@@ -6,11 +6,11 @@ import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
   {
-    path: 'questionnairetest',
+    path: 'question',
     //canActivate: [AuthGuard],
     children: [
       {
-        path: 'creer',
+        path: 'creer/:id_node_parent',
         component: EditComponent
       },
       {

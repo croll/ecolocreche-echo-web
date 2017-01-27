@@ -37,6 +37,7 @@ export class EditComponent implements OnInit {
   typeCtrl: FormControl;
 
   private id: number;
+  private id_node_parent: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
@@ -57,6 +58,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.id_node_parent = this.route.snapshot.params['id_node_parent'];
     this.id = this.route.snapshot.params['id'];
     if (this.id) {
       this.get();
@@ -64,7 +66,7 @@ export class EditComponent implements OnInit {
   }
 
   get() {
-      this.restService.get(this.id, 'question').subscribe(item => {
+      this.restService.get(this.id, 'hist/nodes').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = item;
       }, (err) => {
@@ -73,7 +75,8 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value, 'question').subscribe((establishment) => {
+    let path = this.id ? 'hist/nodes' : 'hist/nodes/'+this.id_node_parent;
+    this.restService.save(this.echosForm.value, path).subscribe((establishment) => {
       this.router.navigate(['/questionnaire', establishment.id]);
     }, (err) => {
       console.error(err);
@@ -81,7 +84,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'question').subscribe((response) => {
+    this.restService.delete(id, 'hist/nodes').subscribe((response) => {
       this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);
