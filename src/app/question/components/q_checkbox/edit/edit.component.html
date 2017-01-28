@@ -8,14 +8,14 @@
     <div md-line fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex>
         <div fxLayout="row">
-            <div class="echos-color-box" [style]="getImpactColorStyle(item.impact)"></div>
+            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
             <div fxLayout="column">
               <input fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
               <input fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"/>
             </div>
             <div>
               <md-select [(ngModel)]="item.impact" placeholder="Impact *">
-                <md-option *ngFor="let t of impactList" [value]="t.id">{{t.label}}</md-option>
+                <md-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</md-option>
               </md-select>
             </div>
         </div>

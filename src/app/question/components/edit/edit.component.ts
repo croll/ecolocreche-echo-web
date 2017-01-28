@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Question } from '../../question';
 import { Choice } from '../../choice';
+import { QTypes } from '../abstracts/qtypes';
 import { RestService} from '../../../rest.service';
 
 @Component({
@@ -12,22 +13,7 @@ import { RestService} from '../../../rest.service';
 })
 export class EditComponent implements OnInit {
 
-  typeList = [{
-    id: 'q_radio',
-    label: "Question fermée à choix unique",
-  },{
-    id: 'q_checkbox',
-    label: "Question fermée à choix multiple",
-  },{
-    id: 'q_percents',
-    label: "Question fermée à choix multiple pondéré",
-  },{
-    id: 'q_text',
-    label: "Question ouverte",
-  },{
-    id: 'q_numeric',
-    label: "Question ouverte numérique",
-  }];
+  qtypes = QTypes.getInstance();
 
   echosForm: FormGroup;
   current: Question;

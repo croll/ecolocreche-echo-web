@@ -10,13 +10,16 @@ import { Choice } from '../../../choice';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent extends Impact implements OnInit {
+export class DetailComponent implements OnInit {
 
   @Input()
   choices: Choice[];
 
+  impact: Impact;
+
+
   constructor(private router: Router, private route: ActivatedRoute, public sanitizer: DomSanitizer) {
-    super(sanitizer);
+    this.impact = Impact.getInstance(sanitizer);
   }
 
   ngOnInit() {

@@ -1,7 +1,15 @@
-import { ReflectiveInjector } from '@angular/core';
+//import { ReflectiveInjector } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-export abstract class Impact {
+
+export class Impact {
+
+  private static instance;
+  public static getInstance(sanitizer: DomSanitizer) {
+    if (!Impact.instance)
+      Impact.instance = new Impact(sanitizer);
+    return Impact.instance;
+  }
 
   constructor(public sanitizer: DomSanitizer) {
   }

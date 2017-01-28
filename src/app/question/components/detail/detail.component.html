@@ -12,7 +12,7 @@
   <button md-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{item.title}} ({{item.type}})</div>
+<div class="echos-title">{{item.title}} ({{qtypes.getQuestionType(item.type).label}})</div>
 <div class="echos-description">{{item.description}}</div>
 
 <q-checkbox-detail [choices]="item.choices"></q-checkbox-detail>

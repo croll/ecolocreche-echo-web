@@ -10,13 +10,15 @@ import { Choice } from '../../../choice';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
 })
-export class EditComponent extends Impact implements OnInit {
+export class EditComponent implements OnInit {
 
   @Input()
   choices: Choice[];
 
+  impact: Impact;
+
   constructor(private fb: FormBuilder, public sanitizer: DomSanitizer) {
-    super(null);
+    this.impact = Impact.getInstance(sanitizer);
   }
 
   ngOnInit() {
