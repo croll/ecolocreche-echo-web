@@ -56,6 +56,12 @@ a:hover {
   border-bottom: 1px solid #d0d0d0;
 }
 
+.echos-color {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #d0d0d0;
+}
+
 .echos-help {
   color: $echos-grey;
   font-size: 0.9rem;
@@ -113,6 +119,9 @@ md-list-item.echos-list-item {
           }
         }
       }
+    }
+    p {
+      font-size: 0.9em;
     }
   }
 }
