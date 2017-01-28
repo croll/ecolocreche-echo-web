@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList('establishment').subscribe(
+    this.restService.getList('establishments').subscribe(
       establishments => {
        this.list = establishments;
        this.filteredList = this.list;

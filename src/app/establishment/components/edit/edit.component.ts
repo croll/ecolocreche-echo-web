@@ -61,7 +61,7 @@ export class EditComponent implements OnInit {
   }
 
   get() {
-      this.restService.get(this.id, 'establishment').subscribe(item => {
+      this.restService.get(this.id, 'establishments').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = item;
       }, (err) => {
@@ -70,7 +70,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value, 'establishment').subscribe((establishment) => {
+    this.restService.save(this.echosForm.value, 'establishments').subscribe((establishment) => {
       this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {
       console.error(err);
@@ -78,7 +78,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'establishment').subscribe((response) => {
+    this.restService.delete(id, 'establishments').subscribe((response) => {
       this.router.navigate(['/etablissement/liste']);
     }, (err) => {
       console.error(err);
