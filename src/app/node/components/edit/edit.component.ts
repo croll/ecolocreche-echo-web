@@ -86,7 +86,7 @@ export class EditComponent implements OnInit {
 
   delete(id) {
     this.restService.delete(id, 'directories').subscribe((response) => {
-      this.goBack();
+      this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);
     });

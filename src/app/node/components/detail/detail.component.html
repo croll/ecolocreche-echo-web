@@ -54,7 +54,7 @@
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des questions</div>
-    <button md-raised-button [routerLink]="['/question', 'creer', item.id_node_parent]">Ajouter une question<md-icon>add</md-icon></button>
+    <button md-raised-button [routerLink]="['/question', 'creer', item.id_node]">Ajouter une question<md-icon>add</md-icon></button>
   </div>
 
   <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
