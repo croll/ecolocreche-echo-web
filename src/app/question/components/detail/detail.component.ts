@@ -9,16 +9,15 @@ import { RestService } from '../../../rest.service';
 })
 export class DetailComponent implements OnInit {
 
-  private id: number;
-  item: Question;
+  private id_node: number;
+  item: Question = new Question();
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    this.id = parseInt(this.route.snapshot.params['id']);
-    this.item = new Question();
+    this.id_node = parseInt(this.route.snapshot.params['id_node']);
   }
 
   ngOnInit() {
-    this.restService.get(this.id, 'hist/node').subscribe(item => {
+    this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
       this.item = item;
     });
   }

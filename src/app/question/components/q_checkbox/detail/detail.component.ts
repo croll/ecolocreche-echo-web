@@ -1,26 +1,25 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Impact } from '../../abstracts/impacts';
 import { Question } from '../../../question';
-import { RestService } from '../../../../rest.service';
+import { Choice } from '../../../choice';
 
 @Component({
+  selector: 'q-checkbox-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent extends Impact implements OnInit {
 
-  private id: number;
-  item: Question;
+  @Input()
+  choices: Choice[];
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    this.id = parseInt(this.route.snapshot.params['id']);
-    this.item = new Question();
+  constructor(private router: Router, private route: ActivatedRoute, public sanitizer: DomSanitizer) {
+    super(sanitizer);
   }
 
   ngOnInit() {
-    this.restService.get(this.id, 'hist/node').subscribe(item => {
-      this.item = item;
-    });
   }
 
 }
