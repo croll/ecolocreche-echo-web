@@ -22,9 +22,9 @@ export class RestService {
   }
 
   //save(obj: InquiryForm, t: string): Observable<InquiryForm> {
-  save(obj: any, type: string): Observable<any> {
+  save(obj: any, type: string, params?: any): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers, search: this.setParams(params) });
 
     if (type.indexOf('hist/') === 0 && obj.id_node) {
       return this.http.put(`rest/${type}/${obj.id_node}`, JSON.stringify(obj), options)
