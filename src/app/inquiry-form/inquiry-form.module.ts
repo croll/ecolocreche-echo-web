@@ -5,7 +5,6 @@ import { RoutingModule } from './routing.module';
 import { ListComponent } from './components/list/list.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
-import { DirectoryEditComponent } from './components/directory-edit/directory-edit.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -21,7 +20,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ListComponent,
     DetailComponent,
     EditComponent,
-    DirectoryEditComponent
   ]
 })
 

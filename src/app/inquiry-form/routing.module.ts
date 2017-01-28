@@ -3,7 +3,6 @@ import { RouterModule, Routes }  from '@angular/router';
 import { ListComponent } from './components/list/list.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
-import { DirectoryEditComponent } from './components/directory-edit/directory-edit.component';
 import { AuthGuard } from '../auth-guard.service';
 
 const routes: Routes = [
@@ -26,19 +25,6 @@ const routes: Routes = [
       {
         path: ':id/editer',
         component: EditComponent
-      }
-    ]
-  }, {
-    path: 'theme',
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'creer',
-        component: DirectoryEditComponent
-      },
-      {
-        path: ':id/editer',
-        component: DirectoryEditComponent
       }
     ]
   }
