@@ -81,12 +81,13 @@ export class EditComponent implements OnInit {
     });
   }
 
-  delete(id) {
-    this.restService.delete(id, 'hist/nodes').subscribe((response) => {
+  delete() {
+    this.restService.delete(this.id_node, 'hist/nodes').subscribe((response) => {
       this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);
     });
+    return false;
   }
 
   goBack(): boolean {
