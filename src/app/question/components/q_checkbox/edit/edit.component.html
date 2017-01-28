@@ -10,7 +10,7 @@
     <div md-line fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex>
         <div fxLayout="row">
-            <div class="echos-color-box" style="background-color: {{item.color}};"></div>
+            <div class="echos-color-box" [style]="getImpactColorStyle(item.impact)"></div>
             <div fxLayout="column">
               <input fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
               <input fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"/>
