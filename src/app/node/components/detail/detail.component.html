@@ -1,0 +1,76 @@
+<div *ngIf="type == 'theme'">
+  <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="/theme/liste" fxFlexAlign="start">Thème {{item.title}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h1 fxFlex>
+      Fiche du thème #{{item.id_node}}
+    </h1>
+    <button md-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+  </div>
+
+  <div class="echos-title">{{item.title}}</div>
+  <div class="echos-description">{{item.description}}</div>
+
+  <div class="echos-title" fxLayout="row" style="margin-top: 70px">
+    <div fxFlex>Liste des rubriques</div>
+    <button md-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<md-icon>add</md-icon></button>
+  </div>
+
+  <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
+
+  <md-list>
+    <md-list-item class="echos-list-item" [routerLink]="['/theme', item.id_node, 'rubrique', category.id_node]" *ngFor="let category of filteredChildList">
+      <div md-line fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex fxFlexOffset="20px">
+          <div>{{category.title}}</div>
+          <div fxLayout="row">
+              <div *ngIf="item.description">{{category.description}}</div>
+          </div>
+        </div>
+        <md-icon color="primary">chevron_right</md-icon>
+      </div>
+    </md-list-item>
+  </md-list>
+</div>
+
+<div *ngIf="type == 'category'">
+  <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="['/theme', id_theme, 'rubrique', id_category" fxFlexAlign="start">Rubrique {{item.title}}</div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h1 fxFlex>
+      Fiche de la rubrique #{{item.id_node}}
+    </h1>
+    <button md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+  </div>
+
+  <div class="echos-title">{{item.title}}</div>
+  <div class="echos-description">{{item.description}}</div>
+
+  <div class="echos-title" fxLayout="row" style="margin-top: 70px">
+    <div fxFlex>Liste des questions</div>
+    <button md-raised-button [routerLink]="['/question', 'creer', item.id_node_parent]">Ajouter une question<md-icon>add</md-icon></button>
+  </div>
+
+  <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
+
+  <md-list>
+    <md-list-item class="echos-list-item" [routerLink]="['/theme', item.id_node, 'rubrique', category.id_node]" *ngFor="let question of filteredChildList">
+      <div md-line fxLayout="row" fxLayoutAlign="center center">
+        <div fxFlex fxFlexOffset="20px">
+          <div>{{question.title}}</div>
+          <div fxLayout="row">
+              <div *ngIf="item.description">{{question.description}}</div>
+          </div>
+        </div>
+        <md-icon color="primary">chevron_right</md-icon>
+      </div>
+    </md-list-item>
+  </md-list>
+
+</div>

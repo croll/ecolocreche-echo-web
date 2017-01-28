@@ -1,0 +1,75 @@
+<div *ngIf="type == 'theme'">
+  <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="/questionnaire/theme" fxFlexAlign="start">Liste des thèmes</div>
+    <div *ngIf="!id_node" fxFlexAlign="start">Ajouter un thème</div>
+    <div *ngIf="id_node" fxFlexAlign="start">Modifier un thème</div>
+  </div>
+
+  <h1 *ngIf="!id_node">Ajouter un thème</h1>
+  <h1 *ngIf="id_node">Modifier un thème</h1>
+
+  <p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+  <form (ngSubmit)="save()" [formGroup]="echosForm">
+    <div>
+      <md-input-container>
+        <input md-input formControlName="title" placeholder="Nom du thème *">
+        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du thème est requis</md-hint>
+        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du thème doit contenir 3 caractères minimum</md-hint>
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <textarea md-input formControlName="description" placeholder="Description"></textarea>
+      </md-input-container>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="left center">
+      <md-input-container>
+        <input md-input #bgColor formControlName="color" placeholder="Couleur">
+      </md-input-container>
+      <div fxFlexOffset="10px" class="echos-color" [ngStyle]="{'background-color': '#'+bgColor.value}"></div>
+    </div>
+    <input *ngIf="id_node" type="hidden" formControlName="id_node">
+    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+      <button md-raised-button (click)="goBack()">Annuler</button>
+      <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="type == 'category'">
+  <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="['/questionnaire/theme', id_theme]" fxFlexAlign="start">Liste des rubriques</div>
+    <div *ngIf="!id_node" fxFlexAlign="start">Ajouter une rubrique</div>
+    <div *ngIf="id_node" fxFlexAlign="start">Modifier une rubrique</div>
+  </div>
+
+  <h1 *ngIf="!id_node">Ajouter une rubrique</h1>
+  <h1 *ngIf="id_node">Modifier une rubrique</h1>
+
+  <p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+  <form (ngSubmit)="save()" [formGroup]="echosForm">
+    <div>
+      <md-input-container>
+        <input md-input formControlName="title" placeholder="Nom de la rubrique *">
+        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom de la rubrique est requis</md-hint>
+        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom de la rubrique doit contenir 3 caractères minimum</md-hint>
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <textarea md-input formControlName="description" placeholder="Description"></textarea>
+      </md-input-container>
+    </div>
+    <input *ngIf="id_node" type="hidden" formControlName="id_node">
+    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+      <button md-raised-button (click)="goBack()">Annuler</button>
+      <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+    </div>
+  </form>
+</div>

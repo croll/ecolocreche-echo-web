@@ -20,6 +20,7 @@ import { ListComponent as UserListComponent} from './user/components/list/list.c
 import { EditComponent as UserEditComponent} from './user/components/edit/edit.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
+import { NodeModule } from './node/node.module';
 import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -42,6 +43,7 @@ import { RestService } from './rest.service';
 	  HttpModule,
     EstablishmentModule,
     QuestionModule,
+    NodeModule,
     InquiryFormModule,
     AppRoutingModule,
     ReactiveFormsModule,

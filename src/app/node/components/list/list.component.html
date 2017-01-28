@@ -1,0 +1,30 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div fxFlexAlign="start">Liste des thèmes</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Liste des thèmes
+  </h1>
+  <button md-fab color="primary" routerLink="../creer"><md-icon>add</md-icon></button>
+</div>
+
+<md-input-container fxLayout>
+  <input md-input #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
+</md-input-container>
+
+<md-list>
+  <md-list-item class="echos-list-item" [routerLink]="['/theme', item.id_node]" *ngFor="let item of filteredList">
+    <div md-line fxLayout="row" fxLayoutAlign="center center">
+      <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
+      <div fxFlex fxFlexOffset="20px">
+        <div>{{item.title}}</div>
+        <p *ngIf="item.description">{{item.description}}</p>
+      </div>
+      <md-icon color="primary">chevron_right</md-icon>
+    </div>
+  </md-list-item>
+</md-list>
+
+<div *ngIf="!filteredList.length">Aucun thème n'a été trouvé.</div>
