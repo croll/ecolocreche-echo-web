@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class Impact {
 
+  // singleton
   private static instance;
   public static getInstance(sanitizer: DomSanitizer) {
     if (!Impact.instance)
