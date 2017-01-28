@@ -1,7 +1,8 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-  <div routerLink="/questionnaire/id_theme" fxFlexAlign="start">Nom Theme</div>
-  <div routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">Nom Rubrique</div>
+  <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/questionnaire/id_theme" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
+  <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
+  <div *ngIf="item && item.nodepath && item.nodepath[2]" fxFlexAlign="start">{{item.nodepath[2].title}}</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center">

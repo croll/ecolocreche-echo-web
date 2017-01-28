@@ -19,6 +19,7 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
     this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
       this.item = item;
+      console.log("item: ", item);
     });
   }
 

@@ -1,7 +1,8 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-  <div routerLink="/questionnaire/id_theme" fxFlexAlign="start">Nom Theme</div>
-  <div routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">Nom Rubrique</div>
+  <div *ngIf="current && current.nodepath && current.nodepath[0]" routerLink="/questionnaire/id_theme" fxFlexAlign="start">{{current.nodepath[0].title}}</div>
+  <div *ngIf="current && current.nodepath && current.nodepath[1]" routerLink="/questionnaire/id_theme/id_rubrique" fxFlexAlign="start">{{current.nodepath[1].title}}</div>
+  <div *ngIf="current && current.nodepath && current.nodepath[2]" fxFlexAlign="start">{{current.nodepath[2].title}}</div>
   <div *ngIf="!id_node" fxFlexAlign="start">Ajouter une question</div>
   <div *ngIf="id_node" fxFlexAlign="start">Modifier la question</div>
 </div>
