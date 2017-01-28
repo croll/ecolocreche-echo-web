@@ -31,4 +31,9 @@ export class EditComponent implements OnInit {
     return false;
   }
 
+  deleteChoice(choice_to_delete) {
+    var index = this.choices.indexOf(choice_to_delete);
+    if (index >= 0) this.choices.splice(index, 1);
+  }
+
 }
