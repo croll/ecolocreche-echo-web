@@ -11,38 +11,13 @@
   <button md-fab color="primary" [routerLink]="['/questionnaire', item.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{item.name}}</div>
+<div class="echos-title">{{item.title}}</div>
 
 <div *ngIf="item.description" class="echos-caption">
   {{item.description}}
 </div>
 
-<div class="echos-title" style="margin: 80px 0 20px 0">Liste des thèmes utilisés par ce questionnaire</div>
-
 <div *ngIf="!themeList" class="echos-warning">Aucun thème trouvé.</div>
-
-<div *ngIf="themeList">
-
-  <md-input-container fxLayout>
-    <input md-input #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
-  </md-input-container>
-
-  <div class="echos-help">Cliquez sur un thème pour avoir le détail.</div>
-
-  <md-list>
-    <md-list-item class="echos-list-item" [routerLink]="['/theme', theme.id, 'editer']" *ngFor="let theme of inquiryFormThemeList">
-      <div md-line fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex>
-          <div>{{item.title}}</div>
-          <div fxLayout="row">
-              <div *ngIf="item.description">{{item.description}}</div>
-          </div>
-        </div>
-        <md-icon color="primary">chevron_right</md-icon>
-      </div>
-    </md-list-item>
-  </md-list>
-</div>
 
 <div class="echos-title" fxLayout="row" fxLayoutAlign="start center" style="margin: 80px 0 20px 0">
   <div fxFlex>Liste des thèmes disponibles</div>
@@ -53,9 +28,9 @@
   <md-list-item class="echos-list-item" [routerLink]="['/theme', theme.id, 'editer']" *ngFor="let theme of themeList">
     <div md-line fxLayout="row" fxLayoutAlign="center center">
       <div fxFlex>
-        <div>{{item.title}}</div>
+        <div>{{theme.title}}</div>
         <div fxLayout="row">
-            <div *ngIf="item.description">{{item.description}}</div>
+            <div *ngIf="item.description">{{theme.description}}</div>
         </div>
       </div>
       <md-icon color="primary">chevron_right</md-icon>

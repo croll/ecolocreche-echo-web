@@ -12,8 +12,6 @@ export class DetailComponent implements OnInit {
 
   private id: number;
   item: InquiryForm;
-  inquiryFormThemeList: any[];
-  filteredInquiryFormThemeList: any[];
   themeList: any[];
   filteredThemeList: any[];
 
@@ -26,8 +24,7 @@ export class DetailComponent implements OnInit {
     this.restService.get(this.id, 'inquiryforms').subscribe(item => {
       this.item = item;
     });
-    this.restService.getList('directories', {d: moment()}).subscribe(items => {
-       console.log(items);
+    this.restService.getList('hist/nodes').subscribe(items => {
        this.themeList = items;
     });
   }
