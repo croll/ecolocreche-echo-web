@@ -17,23 +17,33 @@
   {{item.description}}
 </div>
 
-<div *ngIf="!themeList" class="echos-warning">Aucun thème trouvé.</div>
-
 <div class="echos-title" fxLayout="row" fxLayoutAlign="start center" style="margin: 80px 0 20px 0">
-  <div fxFlex>Liste des thèmes disponibles</div>
-  <button md-raised-button [routerLink]="['/theme', 'creer']"><md-icon>add</md-icon>Créer un thème</button>
+  <div fxFlex>Liste des thèmes</div>
+  <!-- <button md-fab color="primary" [routerLink]="['/theme', 'creer']"><md-icon>add</md-icon></button> -->
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+  <md-input-container fxFlex>
+    <input md-input #search type="search" placeholder="Recherche" fxFlex (keyup)="filterList(search.value)">
+  </md-input-container>
+  <button md-button color="accent" *ngIf="!hideUnselected" (click)="hideUnselected = !hideUnselected">N'afficher que les éléments sélectionnés</button>
+  <button md-button color="accent" *ngIf="hideUnselected" (click)="hideUnselected = !hideUnselected">Afficher tous les éléments</button>
 </div>
 
 <md-list>
-  <md-list-item class="echos-list-item" [routerLink]="['/theme', theme.id, 'editer']" *ngFor="let theme of themeList">
+  <md-list-item class="echos-list-item" *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
     <div md-line fxLayout="row" fxLayoutAlign="center center">
-      <div fxFlex>
-        <div>{{theme.title}}</div>
-        <div fxLayout="row">
-            <div *ngIf="item.description">{{theme.description}}</div>
-        </div>
+      <md-slide-toggle color="primary" (click)="select(childItem)"></md-slide-toggle>
+      <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
+      <div fxFlex fxFlexOffset="20px">
+        <div>{{childItem.title}}</div>
+        <p *ngIf="item.description">{{childItem.description}}</p>
       </div>
-      <md-icon color="primary">chevron_right</md-icon>
+      <button md-button *ngIf="childItem.selected" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>
     </div>
   </md-list-item>
 </md-list>
+
+<div class="fxLayout" fxLayoutAlign="end center">
+  <button *ngIf="level != 0" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
+</div>
