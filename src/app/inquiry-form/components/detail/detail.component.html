@@ -1,6 +1,6 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-  <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des questionnaires</div>
+  <div routerLink="/questionnaire/liste" fxFlexAlign="start">Liste des questionnaires</div>
   <div fxFlexAlign="start">Fiche questionnaire</div>
 </div>
 
@@ -48,7 +48,7 @@
         <div>{{childItem.title}}</div>
         <p *ngIf="item.description">{{childItem.description}}</p>
       </div>
-      <button md-button *ngIf="childItem.selected && (!node || (node && node.type == 'directory'))" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>
+      <button md-button *ngIf="childItem.selected && (!node || (node && !node.id_node_parent))" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>
     </div>
   </md-list-item>
 </md-list>
