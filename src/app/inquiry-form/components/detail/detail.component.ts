@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit {
   childList: any[];
   filteredChildList: any[];
   hideUnselected: boolean;
-  level: number = 0;
+  level: number = -1;
   node: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
@@ -31,11 +31,10 @@ export class DetailComponent implements OnInit {
   }
 
   getChilds(id?: number) {
-    this.level++;
     let params = null;
     if (id) {
       params = {id_node_parent: id}
-      this.getNode(id);
+      this.getParent(id);
     }
     this.restService.getList('hist/nodes', params).subscribe(items => {
       this.childList = items;
@@ -43,14 +42,14 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  getNode(id) {
+  getParent(id) {
     this.restService.get(id, 'hist/nodes').subscribe(item => {
       this.node = item;
     });
   }
 
   goToParent(id) {
-    this.level--;
+    this.node = null;
     this.getChilds(id);
   }
 

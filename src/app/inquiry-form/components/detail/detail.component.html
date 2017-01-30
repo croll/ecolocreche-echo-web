@@ -17,9 +17,18 @@
   {{item.description}}
 </div>
 
-<div class="echos-title" fxLayout="row" fxLayoutAlign="start center" style="margin: 80px 0 20px 0">
-  <div fxFlex>Liste des thèmes</div>
-  <!-- <button md-fab color="primary" [routerLink]="['/theme', 'creer']"><md-icon>add</md-icon></button> -->
+<div class="echos-title" style="margin: 80px 0 20px 0">
+  <div *ngIf="!node">
+    <div fxFlex>Liste des thèmes</div>
+  </div>
+  <div *ngIf="node" fxLayout="row" fxLayoutAlign="start center">
+    <div>Liste des thèmes</div>
+    <div *ngFor="let np of node.nodepath" class="itemOfPath">{{np.title}}</div>
+  </div>
+</div>
+
+<div class="fxLayout" fxLayoutAlign="end center">
+  <button *ngIf="node" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="center center">
@@ -39,11 +48,11 @@
         <div>{{childItem.title}}</div>
         <p *ngIf="item.description">{{childItem.description}}</p>
       </div>
-      <button md-button *ngIf="childItem.selected" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>
+      <button md-button *ngIf="childItem.selected && (!node || (node && node.type == 'directory'))" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>
     </div>
   </md-list-item>
 </md-list>
 
 <div class="fxLayout" fxLayoutAlign="end center">
-  <button *ngIf="level != 0" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
+  <button *ngIf="node" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
 </div>
