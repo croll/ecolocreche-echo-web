@@ -8,11 +8,11 @@
 <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
   <div fxLayout="column">
       <md-input-container>
-        <input md-input placeholder="Nom d'utilisateur / adresse mail" [(ngModel)]="model.name" name="name">
+        <input mdInput placeholder="Nom d'utilisateur / adresse mail" [(ngModel)]="model.name" name="name">
       </md-input-container>
 
       <md-input-container>
-        <input md-input type="password" placeholder="Mot de passe" [(ngModel)]="model.password" name="password">
+        <input mdInput type="password" placeholder="Mot de passe" [(ngModel)]="model.password" name="password">
       </md-input-container>
 
       <md-checkbox>Se souvenir de moi</md-checkbox>

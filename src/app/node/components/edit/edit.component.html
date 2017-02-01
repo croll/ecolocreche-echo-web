@@ -14,19 +14,19 @@
   <form (ngSubmit)="save()" [formGroup]="echosForm">
     <div>
       <md-input-container>
-        <input md-input formControlName="title" placeholder="Nom du thème *">
+        <input mdInput formControlName="title" placeholder="Nom du thème *">
         <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du thème est requis</md-hint>
         <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du thème doit contenir 3 caractères minimum</md-hint>
       </md-input-container>
     </div>
     <div>
       <md-input-container>
-        <textarea md-input formControlName="description" placeholder="Description"></textarea>
+        <textarea mdInput formControlName="description" placeholder="Description"></textarea>
       </md-input-container>
     </div>
     <div fxLayout="row" fxLayoutAlign="left center">
       <md-input-container>
-        <input md-input #bgColor formControlName="color" placeholder="Couleur">
+        <input mdInput #bgColor formControlName="color" placeholder="Couleur">
       </md-input-container>
       <div fxFlexOffset="10px" class="echos-color" [ngStyle]="{'background-color': '#'+bgColor.value}"></div>
     </div>
@@ -55,14 +55,14 @@
   <form (ngSubmit)="save()" [formGroup]="echosForm">
     <div>
       <md-input-container>
-        <input md-input formControlName="title" placeholder="Nom de la rubrique *">
+        <input mdInput formControlName="title" placeholder="Nom de la rubrique *">
         <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom de la rubrique est requis</md-hint>
         <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom de la rubrique doit contenir 3 caractères minimum</md-hint>
       </md-input-container>
     </div>
     <div>
       <md-input-container>
-        <textarea md-input formControlName="description" placeholder="Description"></textarea>
+        <textarea mdInput formControlName="description" placeholder="Description"></textarea>
       </md-input-container>
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">

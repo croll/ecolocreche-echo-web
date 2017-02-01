@@ -13,7 +13,7 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
     <md-input-container>
-      <input md-input formControlName="name" placeholder="Nom de l'établissement *">
+      <input mdInput formControlName="name" placeholder="Nom de l'établissement *">
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'établissement est requis</md-hint>
       <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</md-hint>
     </md-input-container>
@@ -30,27 +30,27 @@
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="address" placeholder="Adresse">
+      <input mdInput formControlName="address" placeholder="Adresse">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="postalcode" placeholder="Code postal">
+      <input mdInput formControlName="postalcode" placeholder="Code postal">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input formControlName="city" placeholder="Ville">
+      <input mdInput formControlName="city" placeholder="Ville">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input type="tel" formControlName="phone" placeholder="Téléphone">
+      <input mdInput type="tel" formControlName="phone" placeholder="Téléphone">
     </md-input-container>
   </div>
   <div>
     <md-input-container>
-      <input md-input type="email" formControlName="mail" placeholder="Adresse mail">
+      <input mdInput type="email" formControlName="mail" placeholder="Adresse mail">
     </md-input-container>
   </div>
   <input *ngIf="id" type="hidden" formControlName="id">
