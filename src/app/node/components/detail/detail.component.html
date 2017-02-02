@@ -60,7 +60,7 @@
   <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
 
   <md-list>
-    <md-list-item class="echos-list-item" [routerLink]="['/theme', item.id_node, 'rubrique', question.id_node]" *ngFor="let question of filteredChildList">
+    <md-list-item class="echos-list-item" [routerLink]="['/question', question.id_node]" *ngFor="let question of filteredChildList">
       <div md-line fxLayout="row" fxLayoutAlign="center center">
         <div fxFlex fxFlexOffset="20px">
           <div>{{question.title}}</div>
