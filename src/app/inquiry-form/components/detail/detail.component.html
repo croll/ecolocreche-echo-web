@@ -6,15 +6,15 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Fiche questionnaire #{{item.id}}
+    Fiche questionnaire #{{inquiryform.id}}
   </h1>
-  <button md-fab color="primary" [routerLink]="['/questionnaire', item.id, 'editer']"><md-icon>edit</md-icon></button>
+  <button md-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{item.title}}</div>
+<div class="echos-title">{{inquiryform.title}}</div>
 
-<div *ngIf="item.description" class="echos-caption">
-  {{item.description}}
+<div *ngIf="inquiryform.description" class="echos-caption">
+  {{inquiryform.description}}
 </div>
 
 <div class="echos-title" style="margin: 80px 0 20px 0">
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="start center" class=".search-container">
+<div fxLayout="row" fxLayoutAlign="start center" class="search-container">
   <md-input-container fxFlex>
     <input mdInput #search type="search" placeholder="Recherche" fxFlex (keyup)="filterList(search.value)">
   </md-input-container>
@@ -44,12 +44,14 @@
 
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
-    <div md-line fxLayout="row" fxLayoutAlign="center center">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
       <md-slide-toggle color="primary" (change)="toggleItem(childItem)" [checked]="childItem.selected"></md-slide-toggle>
       <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
       <div fxFlex fxFlexOffset="20px" (click)="toggleItem(childItem)">
-        <div>{{childItem.title}}</div>
-        <p *ngIf="item.description">{{childItem.description}}</p>
+        <div fxLayout="column" fxLayoutAlign="start center">
+          <div fxFlex>{{childItem.title}}</div>
+          <p *ngIf="childItem.description">{{childItem.description}}</p>
+        </div>
       </div>
       <button md-button *ngIf="childItem.selected && (!node || (node && !node.id_node_parent))" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>
     </div>

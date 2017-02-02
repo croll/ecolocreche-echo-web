@@ -13,7 +13,7 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
     <md-input-container>
-      <input md-input formControlName="title" placeholder="Nom du questionnaire *">
+      <input mdInput formControlName="title" placeholder="Nom du questionnaire *">
       <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du questionnaire est requis</md-hint>
       <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du questionnaire doit contenir 3 caractères minimum</md-hint>
     </md-input-container>
@@ -23,7 +23,7 @@
       <textarea mdInput formControlName="description" placeholder="Description"></textarea>
     </md-input-container>
   </div>
-  <input *ngIf="id" type="hidden" formControlName="id">
+  <input *ngIf="id_inquiryform" type="hidden" formControlName="id_inquiryform">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>

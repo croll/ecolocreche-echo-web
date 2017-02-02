@@ -13,24 +13,24 @@ export class EditComponent implements OnInit {
 
   echosForm: FormGroup;
   current: InquiryForm;
-  idCtrl: FormControl;
+  idInquiryFormCtrl: FormControl;
   titleCtrl: FormControl;
   descriptionCtrl: FormControl;
   positionCtrl: FormControl;
 
-  private id: number;
+  private id_inquiryform: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new InquiryForm();
 
-    this.idCtrl = fb.control(this.id);
+    this.idInquiryFormCtrl = fb.control(this.id_inquiryform);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
     this.positionCtrl = fb.control(this.current.position);
 
     this.echosForm = fb.group({
-      id: this.idCtrl,
+      id_inquiryform: this.idInquiryFormCtrl,
       title: this.titleCtrl,
       description: this.descriptionCtrl,
       position: this.positionCtrl,
@@ -39,14 +39,14 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    if (this.id) {
+    this.id_inquiryform = this.route.snapshot.params['id'];
+    if (this.id_inquiryform) {
       this.get();
     }
   }
 
   get() {
-      this.restService.get(this.id, 'inquiryforms').subscribe(item => {
+      this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(item => {
         this.echosForm.patchValue(item);
         this.current = item;
       }, (err) => {
@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value, 'inquiryforms').subscribe((InquiryForm) => {
+    this.restService.save(this.echosForm.value, 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
       this.router.navigate(['/questionnaire', InquiryForm.id]);
     }, (err) => {
       console.error(err);
@@ -63,7 +63,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'inquiryforms').subscribe((response) => {
+    this.restService.delete(id, 'hist/inquiryforms').subscribe((response) => {
       this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);

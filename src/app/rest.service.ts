@@ -26,6 +26,9 @@ export class RestService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, search: this.setParams(params) });
 
+    console.log(obj);
+    console.log(keyname);
+
     if (keyname in obj && obj[keyname]) {
       return this.http.put(`rest/${type}/${obj[keyname]}`, JSON.stringify(obj), options)
               .map(this.extractOne)

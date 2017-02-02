@@ -26,10 +26,11 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList('inquiryforms').subscribe(
-      InquiryForms => {
-       this.list = InquiryForms;
-       this.filteredList = this.list;
+    this.restService.getList('hist/inquiryforms').subscribe(
+      info => {
+       this.list = info;
+       this.filteredList = info;
+       console.log(this.list);
      },
      error => {
        this.errorMessage = <any>error;

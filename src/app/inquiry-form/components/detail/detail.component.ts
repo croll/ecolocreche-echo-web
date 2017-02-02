@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm, InquiryFormExt } from '../../inquiry-form';
+import { Node } from '../../../node/node';
 import { RestService } from '../../../rest.service';
 import * as moment from 'moment'
 
@@ -11,23 +12,22 @@ import * as moment from 'moment'
 export class DetailComponent implements OnInit {
 
   private id: number;
-  item: InquiryForm;
+  inquiryform: InquiryForm;
   childList: InquiryFormExt[];
   filteredChildList: InquiryFormExt[];
   hideUnselected: boolean;
   level: number = -1;
   node: any;
   toggle: boolean = false;
+  userSelection: Node[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
-    this.item = new InquiryForm();
+    this.inquiryform = new InquiryForm();
   }
 
   ngOnInit() {
-    this.restService.get(this.id, 'inquiryforms').subscribe(item => {
-      this.item = item;
-    });
+    this.restService.get(this.id, 'inquiryforms').subscribe(info => this.inquiryform = info);
     this.getChilds();
   }
 
@@ -62,17 +62,31 @@ export class DetailComponent implements OnInit {
 
   toggleItem(item) {
     item.selected = !item.selected;
+    this.addOrRemove(item);
     this.checkSliders();
   }
 
   toggleAll() {
     this.toggle = !this.toggle
-    this.childList.forEach(item => item.selected = this.toggle)
+    this.childList.forEach(item => {
+      item.selected = this.toggle
+      this.addOrRemove(item);
+    })
   }
 
   checkSliders() {
     if (!this.childList) return;
-    this.toggle = this.childList.every(listItem => listItem.selected)
+    this.toggle = this.childList.every(item => item.selected);
+  }
+
+  addOrRemove(item) {
+    if (item.selected) {
+      this.userSelection.push(item.id_node);
+    } else {
+      let pos = this.userSelection.indexOf(item.id_node);
+      this.userSelection.splice(pos, 1);
+    }
+    console.log(this.userSelection);
   }
 
 }
