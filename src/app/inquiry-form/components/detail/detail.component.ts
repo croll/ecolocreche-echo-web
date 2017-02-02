@@ -40,8 +40,9 @@ export class DetailComponent implements OnInit {
     this.restService.getList('hist/nodes', params).subscribe(items => {
       this.childList = items;
       this.filteredChildList = items;
+      this.toggle = false;
+      this.checkSliders();
     });
-    this.checkSliders();
   }
 
   getParent(id) {
