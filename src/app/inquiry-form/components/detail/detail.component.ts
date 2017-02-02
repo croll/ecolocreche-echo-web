@@ -11,7 +11,7 @@ import * as moment from 'moment'
 })
 export class DetailComponent implements OnInit {
 
-  private id: number;
+  private id_inquiryform: number;
   inquiryform: InquiryForm;
   childList: InquiryFormExt[];
   filteredChildList: InquiryFormExt[];
@@ -22,12 +22,12 @@ export class DetailComponent implements OnInit {
   userSelection: Node[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    this.id = parseInt(this.route.snapshot.params['id']);
+    this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
     this.inquiryform = new InquiryForm();
   }
 
   ngOnInit() {
-    this.restService.get(this.id, 'inquiryforms').subscribe(info => this.inquiryform = info);
+    this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(info => this.inquiryform = info);
     this.getChilds();
   }
 
