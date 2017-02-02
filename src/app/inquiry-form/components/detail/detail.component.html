@@ -33,7 +33,7 @@
 
 <div fxLayout="row" fxLayoutAlign="center center">
   <md-input-container fxFlex>
-    <input md-input #search type="search" placeholder="Recherche" fxFlex (keyup)="filterList(search.value)">
+    <input mdInput #search type="search" placeholder="Recherche" fxFlex (keyup)="filterList(search.value)">
   </md-input-container>
   <button md-button color="accent" *ngIf="!hideUnselected" (click)="hideUnselected = !hideUnselected">N'afficher que les éléments sélectionnés</button>
   <button md-button color="accent" *ngIf="hideUnselected" (click)="hideUnselected = !hideUnselected">Afficher tous les éléments</button>
