@@ -27,19 +27,20 @@
   </div>
 </div>
 
-<div class="fxLayout" fxLayoutAlign="end center">
-  <button *ngIf="node" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
-</div>
-
-<div fxLayout="row" fxLayoutAlign="center center">
+<div fxLayout="row" fxLayoutAlign="start center" class=".search-container">
   <md-input-container fxFlex>
     <input mdInput #search type="search" placeholder="Recherche" fxFlex (keyup)="filterList(search.value)">
   </md-input-container>
-  <button md-button color="accent" *ngIf="!hideUnselected" (click)="hideUnselected = !hideUnselected">N'afficher que les éléments sélectionnés</button>
-  <button md-button color="accent" *ngIf="hideUnselected" (click)="hideUnselected = !hideUnselected">Afficher tous les éléments</button>
 </div>
 
-<md-slide-toggle color="primary" (change)="toggleAll()" [checked]="toggle">Tous</md-slide-toggle>
+<md-toolbar fxLayout="row" fxLayoutAlign="left center">
+  <md-slide-toggle color="primary" (change)="toggleAll()" [checked]="toggle">Tout sélectionner</md-slide-toggle>
+  <div fxFlex fxFlexOffset="50px">
+    <button md-button color="accent" *ngIf="!hideUnselected" (click)="hideUnselected = !hideUnselected">N'afficher que les éléments sélectionnés</button>
+    <button md-button color="accent" *ngIf="hideUnselected" (click)="hideUnselected = !hideUnselected">Afficher tous les éléments</button>
+  </div>
+  <button fxFlexOffset="45px" *ngIf="node" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
+</md-toolbar>
 
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
@@ -55,6 +56,11 @@
   </md-list-item>
 </md-list>
 
-<div class="fxLayout" fxLayoutAlign="end center">
-  <button *ngIf="node" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
-</div>
+<md-toolbar fxLayout="row" fxLayoutAlign="start center">
+  <md-slide-toggle color="primary" (change)="toggleAll()" [checked]="toggle">Tout sélectionner</md-slide-toggle>
+  <div fxFlex fxFlexOffset="50px">
+    <button md-button color="accent" *ngIf="!hideUnselected" (click)="hideUnselected = !hideUnselected">N'afficher que les éléments sélectionnés</button>
+    <button md-button color="accent" *ngIf="hideUnselected" (click)="hideUnselected = !hideUnselected">Afficher tous les éléments</button>
+  </div>
+  <button fxFlexOffset="45px" *ngIf="node" md-button (click)="goToParent(node.id_node_parent)">Remonter d'un niveau</button>
+</md-toolbar>
