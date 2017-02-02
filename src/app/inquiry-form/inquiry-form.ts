@@ -4,3 +4,7 @@ export class InquiryForm {
   public description: string = ''
   public position: number = 0
 }
+
+export class InquiryFormExt extends InquiryForm {
+  public selected: boolean;
+}

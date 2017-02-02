@@ -39,12 +39,14 @@
   <button md-button color="accent" *ngIf="hideUnselected" (click)="hideUnselected = !hideUnselected">Afficher tous les éléments</button>
 </div>
 
+<md-slide-toggle color="primary" (change)="toggleAll()" [checked]="toggle">Tous</md-slide-toggle>
+
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
     <div md-line fxLayout="row" fxLayoutAlign="center center">
-      <md-slide-toggle color="primary" (click)="select(childItem)"></md-slide-toggle>
+      <md-slide-toggle color="primary" (change)="toggleItem(childItem)" [checked]="childItem.selected"></md-slide-toggle>
       <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
-      <div fxFlex fxFlexOffset="20px">
+      <div fxFlex fxFlexOffset="20px" (click)="toggleItem(childItem)">
         <div>{{childItem.title}}</div>
         <p *ngIf="item.description">{{childItem.description}}</p>
       </div>

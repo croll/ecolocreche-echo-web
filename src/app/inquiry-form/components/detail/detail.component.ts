@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InquiryForm } from '../../inquiry-form';
+import { InquiryForm, InquiryFormExt } from '../../inquiry-form';
 import { RestService } from '../../../rest.service';
 import * as moment from 'moment'
 
@@ -12,11 +12,12 @@ export class DetailComponent implements OnInit {
 
   private id: number;
   item: InquiryForm;
-  childList: any[];
-  filteredChildList: any[];
+  childList: InquiryFormExt[];
+  filteredChildList: InquiryFormExt[];
   hideUnselected: boolean;
   level: number = -1;
   node: any;
+  toggle: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
@@ -40,6 +41,7 @@ export class DetailComponent implements OnInit {
       this.childList = items;
       this.filteredChildList = items;
     });
+    this.checkSliders();
   }
 
   getParent(id) {
@@ -57,8 +59,19 @@ export class DetailComponent implements OnInit {
     this.filteredChildList = filter ? this.childList.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.childList;
   }
 
-  select(node) {
-    node.selected = true;
+  toggleItem(item) {
+    item.selected = !item.selected;
+    this.checkSliders();
+  }
+
+  toggleAll() {
+    this.toggle = !this.toggle
+    this.childList.forEach(item => item.selected = this.toggle)
+  }
+
+  checkSliders() {
+    if (!this.childList) return;
+    this.toggle = this.childList.every(listItem => listItem.selected)
   }
 
 }
