@@ -74,7 +74,7 @@ export class EditComponent implements OnInit {
     let params = this.id_node ? {} : { id_node_parent: this.id_node_parent };
     this.current = Object.assign(this.current, this.echosForm.value);
     this.current.choices = this.choices;
-    this.restService.save(this.current, 'hist/nodes', params).subscribe((node_hist) => {
+    this.restService.save(this.current, 'hist/nodes', params, 'id_node').subscribe((node_hist) => {
       this.router.navigate(['/question', node_hist.id_node]);
     }, (err) => {
       console.error(err);
