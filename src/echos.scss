@@ -80,6 +80,7 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
     padding-right: 30px;
     color: #333;
     min-width: 180px;
+    white-space: nowrap;
     &:hover {
       background: #f0f0f0;
       cursor: pointer;
