@@ -36,6 +36,13 @@ a:hover {
   text-decoration: underline;
 }
 
+app-root > md-sidenav-container, app-root > md-progress-bar {
+  max-width: 1400px;
+  margin: 0 auto;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+}
+
 .echos-logo {
   background: url(assets/images/logo-echos.jpg) no-repeat;
   height: 83px;
