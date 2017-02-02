@@ -26,7 +26,15 @@ export class RestService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, search: this.setParams(params) });
 
-    if (type.indexOf('hist/') === 0 && obj.id_node) {
+    if (type.indexOf('hist/') === 0 && obj.id_inquiryform) {
+      return this.http.put(`rest/${type}/${obj.id_inquiryform}`, JSON.stringify(obj), options)
+              .map(this.extractOne)
+              .catch(this.handleError);
+    } else if (type.indexOf('hist/') === 0 && obj.id_choice) {
+      return this.http.put(`rest/${type}/${obj.id_choice}`, JSON.stringify(obj), options)
+              .map(this.extractOne)
+              .catch(this.handleError);
+    } else if (type.indexOf('hist/') === 0 && obj.id_node) {
       return this.http.put(`rest/${type}/${obj.id_node}`, JSON.stringify(obj), options)
               .map(this.extractOne)
               .catch(this.handleError);
