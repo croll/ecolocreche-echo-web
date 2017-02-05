@@ -22,24 +22,21 @@
 
   <div>
     <md-input-container>
-      <input mdInput formControlName="name" placeholder="Nom" [(ngModel)]="current.name">
-    </md-input-container>
-  </div>
-
-  <div>
-    <md-input-container>
       <input mdInput type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
     </md-input-container>
   </div>
 
-  <div>
-    <md-slide-toggle formControlName="account_type" [(ngModel)]="current.account_type">Administrateur</md-slide-toggle>
+  <div style="padding: 8px 0 8px">
+    <md-select placeholder="Type de compte *" formControlName="account_type">
+      <md-option *ngFor="let s of typeList" [value]="s.id">{{s.label}}</md-option>
+  </md-select>
   </div>
 
   <div>
     <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
       <button md-raised-button (click)="goBack()">Annuler</button>
+      <button *ngIf="id" (click)="del(id)" fxFlexOffset="20px" md-raised-button color="warn">Supprimer</button>
       <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </div>

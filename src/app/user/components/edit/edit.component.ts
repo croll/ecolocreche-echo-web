@@ -12,6 +12,21 @@ import { RestService } from '../../services/rest.service';
 })
 export class EditComponent implements OnInit {
 
+  typeList = [
+      {
+          label: "Administrateur",
+          id: "admin",
+      },
+      {
+          label: "Super Agent",
+          id: "superagent",
+      },
+      {
+          label: "Agent",
+          id: "agent",
+      },
+  ];
+
   echosForm: FormGroup;
   current: User;
   idCtrl: FormControl;
@@ -57,12 +72,13 @@ export class EditComponent implements OnInit {
     });
   }
 
-  delete(id) {
+  del(id) {
     this.restService.delete(id).subscribe((response) => {
-      this.router.navigate(['/utilisateurs/liste']);
+      this.router.navigate(['/utilisateur/liste']);
     }, (err) => {
       console.error(err);
     });
+    return false;
   }
 
   goBack(): boolean {
