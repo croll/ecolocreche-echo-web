@@ -29,9 +29,7 @@
 <md-list>
   <md-list-item class="echos-list-item" [routerLink]="['/utilisateur', item.id]" *ngFor="let item of filtered_rows">
     <h2 md-line>{{item.name}}</h2>
-    <div md-line fxLayout="row">
-        <div *ngIf="item.email">{{item.email}}</div>
-    </div>
+    <div *ngIf="item.email" class="have-childs">{{item.email}}</div>
     <md-icon color="primary">chevron_right</md-icon>
   </md-list-item>
 </md-list>
