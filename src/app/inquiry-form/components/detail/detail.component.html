@@ -33,7 +33,7 @@
   </md-input-container>
 </div>
 
-<md-toolbar fxLayout="row" fxLayoutAlign="left center">
+<md-toolbar fxLayout="row" fxLayoutAlign="start center">
   <md-slide-toggle color="primary" (change)="toggleAll()" [checked]="toggle">Tout sélectionner</md-slide-toggle>
   <div fxFlex fxFlexOffset="50px">
     <button md-button color="accent" *ngIf="!hideUnselected" (click)="hideUnselected = !hideUnselected">N'afficher que les éléments sélectionnés</button>
@@ -48,9 +48,9 @@
       <md-slide-toggle color="primary" (change)="toggleItem(childItem)" [checked]="childItem.selected"></md-slide-toggle>
       <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
       <div fxFlex fxFlexOffset="20px" (click)="toggleItem(childItem)">
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <div fxFlex>{{childItem.title}}</div>
-          <p *ngIf="childItem.description">{{childItem.description}}</p>
+        <div fxLayout="column" fxLayoutAlign="start center" class="have-childs">
+          <div fxFlex fxFlexAlign="start">{{childItem.title}}</div>
+          <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
         </div>
       </div>
       <button md-button *ngIf="childItem.selected && (!node || (node && !node.id_node_parent))" color="primary" (click)="getChilds(childItem.id_node)">Affiner le choix</button>

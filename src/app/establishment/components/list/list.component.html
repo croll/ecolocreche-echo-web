@@ -16,13 +16,15 @@
 
 <md-list>
   <md-list-item class="echos-list-item" [routerLink]="['/etablissement', item.id]" *ngFor="let item of filteredList">
-    <div md-line fxLayout="row" fxLayoutAlign="center center">
-      <div fxFlex>
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex class="have-childs">
         <div>{{item.name}}</div>
-        <div fxLayout="row">
+        <div>
+          <div fxLayout="row">
             <div *ngIf="item.address">{{item.address}}</div>
             <div *ngIf="item.postalcode">{{item.postalcode}}</div>
             <div *ngIf="item.city">{{item.city}}</div>
+          </div>
         </div>
       </div>
       <md-icon color="primary">chevron_right</md-icon>
