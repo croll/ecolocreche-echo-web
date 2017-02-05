@@ -5,15 +5,19 @@
 
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let item of choices">
-    <div md-line fxLayout="row" fxLayoutAlign="center center">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
-        <div fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign="start center">
             <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
-            <div fxLayout="column">
-              <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
-              <input mdInput fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"/>
+            <div fxLayout="column" fxFlex="70">
+              <md-input-container>
+                <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
+              </md-input-container>
+              <md-input-container>
+                <textarea mdInput fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"></textarea>
+              </md-input-container>
             </div>
-            <div>
+            <div fxFlexOffset="40px">
               <md-select [(ngModel)]="item.impact" placeholder="Impact *">
                 <md-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</md-option>
               </md-select>
@@ -21,7 +25,7 @@
         </div>
         <div>{{item.description}}</div>
       </div>
-      <button md-raised-button (click)="deleteChoice(item)"><md-icon>delete</md-icon>Supprimer ce choix</button>
+      <button md-mini-fab (click)="deleteChoice(item)" color="warn" style="margin-right:12px"><md-icon>delete</md-icon></button>
     </div>
   </md-list-item>
 </md-list>

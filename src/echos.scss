@@ -60,7 +60,7 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
   font-size: 1.8em;
   padding-bottom: 5px;
   margin: 12px 0;
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid md-color($primary);
 }
 
 .echos-color {
@@ -78,7 +78,7 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
   md-list-item {
     padding-left: 30px;
     padding-right: 30px;
-    color: #333;
+    color: $echos-dark-grey;
     min-width: 180px;
     white-space: nowrap;
     &:hover {
@@ -100,7 +100,7 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
 
 md-list-item.echos-list-item {
   cursor: pointer;
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid #a5a5a5;
   &:last-child {
     border-bottom: none;
   }
