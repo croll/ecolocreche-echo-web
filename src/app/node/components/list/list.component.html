@@ -16,11 +16,11 @@
 
 <md-list>
   <md-list-item class="echos-list-item" [routerLink]="['/theme', item.id_node]" *ngFor="let item of filteredList">
-    <div md-line fxLayout="row" fxLayoutAlign="center center">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
-      <div fxFlex fxFlexOffset="20px">
+      <div fxFlex fxFlexOffset="20px" class="have-childs">
         <div>{{item.title}}</div>
-        <p *ngIf="item.description">{{item.description}}</p>
+        <div *ngIf="item.description">{{item.description}}</div>
       </div>
       <md-icon color="primary">chevron_right</md-icon>
     </div>

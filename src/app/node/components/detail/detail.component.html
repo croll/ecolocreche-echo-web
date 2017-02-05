@@ -23,12 +23,10 @@
 
   <md-list>
     <md-list-item class="echos-list-item" [routerLink]="['/theme', item.id_node, 'rubrique', category.id_node]" *ngFor="let category of filteredChildList">
-      <div md-line fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex fxFlexOffset="20px">
+      <div md-line fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex fxFlexOffset="20px" class="have-childs">
           <div>{{category.title}}</div>
-          <div fxLayout="row">
-              <div *ngIf="item.description">{{category.description}}</div>
-          </div>
+          <div *ngIf="category.description">{{category.description}}</div>
         </div>
         <md-icon color="primary">chevron_right</md-icon>
       </div>
@@ -61,12 +59,10 @@
 
   <md-list>
     <md-list-item class="echos-list-item" [routerLink]="['/question', question.id_node]" *ngFor="let question of filteredChildList">
-      <div md-line fxLayout="row" fxLayoutAlign="center center">
-        <div fxFlex fxFlexOffset="20px">
+      <div md-line fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex fxFlexOffset="20px" class="have-childs">
           <div>{{question.title}}</div>
-          <div fxLayout="row">
-              <div *ngIf="item.description">{{question.description}}</div>
-          </div>
+          <div *ngIf="question.description">{{question.description}}</div>
         </div>
         <md-icon color="primary">chevron_right</md-icon>
       </div>

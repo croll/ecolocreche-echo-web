@@ -23,7 +23,7 @@
   </div>
 
   <div style="padding: 8px 0 15px">
-    <md-select placeholder="Type de question *" formControlName="type">
+    <md-select placeholder="Type de question *" formControlName="type" style="min-width: 200px">
       <md-option *ngFor="let t of qtypes.typeList" [value]="t.id">{{t.label}}</md-option>
     </md-select>
   </div>
