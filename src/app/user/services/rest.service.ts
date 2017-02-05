@@ -73,8 +73,11 @@ export class RestService {
   }
 
   private handleLogin(user: any) {
-    let luser = new User();
-    Object.assign(luser, user['user']);
+    let luser: User = null;
+    if (user && user.user && user.user.id) {
+        luser = new User();
+        Object.assign(luser, user['user']);
+    }
     this.authService.setUser(luser);
     return luser;
   }
