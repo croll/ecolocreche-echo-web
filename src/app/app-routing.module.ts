@@ -6,6 +6,7 @@ import { LogoutComponent as UserLogoutComponent} from './user/components/logout/
 import { LostPasswordComponent as UserLostPasswordComponent} from './user/components/lost-password/lost-password.component';
 import { ListComponent as UserListComponent} from './user/components/list/list.component';
 import { EditComponent as UserEditComponent} from './user/components/edit/edit.component';
+import { DetailComponent as UserDetailComponent} from './user/components/detail/detail.component';
 import { RouterModule, Routes }  from '@angular/router';
 
 const appRoutes: Routes = [
@@ -15,8 +16,8 @@ const appRoutes: Routes = [
   { path: 'motdepasse', component: UserLostPasswordComponent },
   { path: 'utilisateur/liste', component: UserListComponent },
   { path: 'utilisateur/creer', component: UserEditComponent },
-  { path: 'utilisateur/:id', component: UserEditComponent },
-  { path: 'utilisateur/:id/edit', component: UserEditComponent },
+  { path: 'utilisateur/:id', component: UserDetailComponent },
+  { path: 'utilisateur/:id/editer', component: UserEditComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 @NgModule({

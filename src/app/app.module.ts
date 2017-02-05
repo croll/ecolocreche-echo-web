@@ -18,6 +18,7 @@ import { LogoutComponent as UserLogoutComponent} from './user/components/logout/
 import { LostPasswordComponent as UserLostPasswordComponent} from './user/components/lost-password/lost-password.component';
 import { ListComponent as UserListComponent} from './user/components/list/list.component';
 import { EditComponent as UserEditComponent} from './user/components/edit/edit.component';
+import { DetailComponent as UserDetailComponent} from './user/components/detail/detail.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
 import { NodeModule } from './node/node.module';
@@ -36,11 +37,12 @@ import { RestService } from './rest.service';
     UserLogoutComponent,
     UserListComponent,
     UserEditComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-	  HttpModule,
+	HttpModule,
     EstablishmentModule,
     QuestionModule,
     NodeModule,
@@ -49,7 +51,7 @@ import { RestService } from './rest.service';
     ReactiveFormsModule,
     NgxChartsModule,
     NgxDatatableModule,
-	  MaterialModule.forRoot(),
+    MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],
   providers: [

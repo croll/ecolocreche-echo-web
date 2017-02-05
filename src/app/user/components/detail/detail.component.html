@@ -1,0 +1,32 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/utilisateur/liste" fxFlexAlign="start">Liste des utilisateurs</div>
+  <div fxFlexAlign="start">Fiche utilisateur</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Utilisateur
+  </h1>
+  <button md-fab color="primary" [routerLink]="['/utilisateur', item.id, 'editer']"><md-icon>edit</md-icon></button>
+</div>
+
+<div class="echos-title">{{item.name}}</div>
+
+<div class="echos-infos">
+  <div *ngIf="item.name" fxLayout="row">
+    <label>Nom :</label>
+    <div fxFlexOffset="10px">{{item.name}}</div>
+  </div>
+
+  <div *ngIf="item.email" fxLayout="row">
+    <label>Adresse E-Mail:</label>
+    <div fxFlexOffset="10px"><a href="mailto:{{item.email}}" title="email">{{item.email}}</a></div>
+  </div>
+
+  <div *ngIf="item.account_type" fxLayout="row">
+    <label>Type de compte :</label>
+    <div fxFlexOffset="10px">{{getAccountType(item.account_type).label}}</div>
+  </div>
+
+</div>
