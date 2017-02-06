@@ -9,6 +9,8 @@ import { EditComponent as EditComponent_q_checkbox } from './components/q_checkb
 import { DetailComponent as DetailComponent_q_checkbox } from './components/q_checkbox/detail/detail.component';
 import { EditComponent as EditComponent_q_radio } from './components/q_radio/edit/edit.component';
 import { DetailComponent as DetailComponent_q_radio } from './components/q_radio/detail/detail.component';
+import { EditComponent as EditComponent_q_percents } from './components/q_percents/edit/edit.component';
+import { DetailComponent as DetailComponent_q_percents } from './components/q_percents/detail/detail.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -28,6 +30,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DetailComponent_q_checkbox,
     EditComponent_q_radio,
     DetailComponent_q_radio,
+    EditComponent_q_percents,
+    DetailComponent_q_percents,
   ],
   providers: [
   ]

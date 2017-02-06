@@ -38,6 +38,7 @@
 
   <q-checkbox-edit *ngIf="item.type == 'q_checkbox'" [choices]="choices"></q-checkbox-edit>
   <q-radio-edit *ngIf="item.type == 'q_radio'" [choices]="choices"></q-radio-edit>
+  <q-percents-edit *ngIf="item.type == 'q_percents'" [choices]="choices"></q-percents-edit>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
