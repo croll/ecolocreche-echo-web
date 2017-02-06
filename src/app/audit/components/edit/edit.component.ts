@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Audit } from '../../audit';
 import { RestService} from '../../../rest.service';
 import { InquiryForm } from '../../../inquiry-form/inquiry-form';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -19,6 +20,7 @@ export class EditComponent implements OnInit {
   idInquiryFormCtrl: FormControl;
   synthesisCtrl: FormControl;
   activeCtrl: FormControl;
+  keyCtrl: FormControl;
 
   private id: number;
   private id_establishment: number;
@@ -27,13 +29,13 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new Audit();
-    this.current.active = 1;
 
     this.idCtrl = fb.control(this.id);
-    this.idEstablishmentCtrl = fb.control(this.id);
-    this.idInquiryFormCtrl = fb.control({value: this.current.id_inquiryform, disabled: this.id});
-    this.synthesisCtrl = fb.control(this.current.synthesis);
-    this.activeCtrl = fb.control({value: this.current.active, disabled: !this.id}, [Validators.required]);
+    this.idEstablishmentCtrl = fb.control(this.id_establishment, [Validators.required]);
+    this.idInquiryFormCtrl = fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
+    this.synthesisCtrl = fb.control(this.current.synthesis || '');
+    this.activeCtrl = fb.control(this.current.active || 1, [Validators.required]);
+    this.keyCtrl = fb.control(this.current.key || this._generateKey(), [Validators.required]);
 
     this.echosForm = fb.group({
       id: this.idCtrl,
@@ -41,6 +43,7 @@ export class EditComponent implements OnInit {
       id_inquiryform: this.idInquiryFormCtrl,
       synthesis: this.synthesisCtrl,
       active: this.activeCtrl,
+      key: this.keyCtrl
     });
 
   }
@@ -48,23 +51,40 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.id_establishment = this.route.snapshot.params['id_establishment'];
+    this._getFormList();
+    console.log(new Date().getTime()+''+Math.random());
     if (this.id) {
       this.get();
+    } else {
+      this.echosForm.patchValue({id_establishment: this.id_establishment, active: 1});
     }
   }
 
   get() {
       this.restService.get(this.id, 'audits').subscribe(item => {
         this.echosForm.patchValue(item);
-        this.current = item;
+        this.current = Object.assign(this.current, item);
       }, (err) => {
         console.error(err);
       });
   }
 
+  private _getFormList() {
+      this.restService.getList('hist/inquiryforms').subscribe(forms => {
+        this.inquiryFormList = forms;
+      }, (err) => {
+        console.error(err);
+      });
+  }
+
+  private _generateKey() {
+    return Md5.hashStr(new Date().getTime()+''+Math.random());
+  }
+
   save() {
+    console.log(this.echosForm.value);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
-      this.router.navigate(['/etablissement', establishment.id]);
+      this.router.navigate(['/etablissement', this.id_establishment]);
     }, (err) => {
       console.error(err);
     });

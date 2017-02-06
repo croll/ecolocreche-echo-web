@@ -56,4 +56,22 @@
   <button md-raised-button [routerLink]="['/audit/creer', item.id]">Démarrer un audit<md-icon>add</md-icon></button>
 </div>
 
-<div class="echos-warning">Aucun audit trouvé.</div>
+<div *ngIf="!auditList || !auditList.length" class="echos-warning">Aucun audit trouvé.</div>
+
+<md-list>
+  <md-list-item class="echos-list-item" [routerLink]="['/audit', item.id]" *ngFor="let item of auditList">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex class="have-childs">
+        <div>
+          <div fxLayout="row">
+            <div>Le {{item.createdAt | date:'dd/MM/yyyy à :hh:mm'}}</div>
+          </div>
+        </div>
+        <div *ngIf="!item.active">Finalisé</div>
+        <div *ngIf="item.active" style="color: rgb(96, 190, 64)">En cours</div>
+      </div>
+      <div class="percent">{{item.cached_percent_complete}} %</div>
+      <md-icon color="primary">chevron_right</md-icon>
+    </div>
+  </md-list-item>
+</md-list>
