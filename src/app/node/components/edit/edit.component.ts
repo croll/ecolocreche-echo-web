@@ -54,7 +54,7 @@ export class EditComponent implements OnInit {
     this.id_theme = this.route.snapshot.params['id_theme'];
     this.id_category = this.route.snapshot.params['id_category'];
     this.id_node_parent = this.route.snapshot.params['id_node_parent'] || null;
-    if (this.route.snapshot.url.length == 3 && this.route.snapshot.url[1].path == 'rubrique') {
+    if (this.route.snapshot.url.length == 4 && this.route.snapshot.url[1].path == 'rubrique') {
       this.id_node = this.id_category;
       this.type = 'category';
       this.id_node_parent = this.id_theme
