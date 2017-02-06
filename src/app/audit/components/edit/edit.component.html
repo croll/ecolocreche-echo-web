@@ -1,7 +1,7 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
   <div routerLink="/etablissement/liste" fxFlexAlign="start">Fiche établissement</div>
-  <div *ngIf="!id" fxFlexAlign="start">Créer un audit</div>
+  <div *ngIf="!id" fxFlexAlign="start">Démarrer un audit</div>
   <div *ngIf="id" fxFlexAlign="start">Modifier un audit</div>
 </div>
 
@@ -11,19 +11,21 @@
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
-  {{inquiryFormList|json}}
   <div>
     <md-select placeholder="Formulaire *" formControlName="id_inquiryform">
       <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id">{{ifl.title}}</md-option>
     </md-select>
   </div>
   <div>
-    <md-input-container>
+    <md-input-container style="margin-top: 18px">
       <textarea mdInput formControlName="synthesis" placeholder="Synthese"></textarea>
     </md-input-container>
   </div>
-  <div>
-    <md-slide-toggle formControlName="active"></md-slide-toggle>
+  <div *ngIf="id">
+    <md-select placeholder="Status *" formControlName="active" style="margin: 8px 0 18px 0">
+      <md-option value="1">En cours</md-option>
+      <md-option value="0">Terminé</md-option>
+    </md-select>
   </div>
   <input *ngIf="id" type="hidden" formControlName="id">
   <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">

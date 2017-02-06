@@ -27,12 +27,13 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new Audit();
+    this.current.active = 1;
 
     this.idCtrl = fb.control(this.id);
     this.idEstablishmentCtrl = fb.control(this.id);
     this.idInquiryFormCtrl = fb.control({value: this.current.id_inquiryform, disabled: this.id});
     this.synthesisCtrl = fb.control(this.current.synthesis);
-    this.activeCtrl = fb.control(this.current.active, [Validators.required]);
+    this.activeCtrl = fb.control({value: this.current.active, disabled: !this.id}, [Validators.required]);
 
     this.echosForm = fb.group({
       id: this.idCtrl,
