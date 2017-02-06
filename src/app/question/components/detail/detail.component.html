@@ -15,4 +15,5 @@
 <div class="echos-title">{{qtypes.getQuestionType(item.type).label}}</div>
 <div class="echos-description">{{item.description}}</div>
 
-<q-checkbox-detail [choices]="item.choices"></q-checkbox-detail>
+<q-checkbox-detail *ngIf="item.type == 'q_checkbox'" [choices]="item.choices"></q-checkbox-detail>
+<q-radio-detail *ngIf="item.type == 'q_radio'" [choices]="item.choices"></q-radio-detail>

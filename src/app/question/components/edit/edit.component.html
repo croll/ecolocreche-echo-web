@@ -36,7 +36,8 @@
 
   <input *ngIf="id_node" type="hidden" formControlName="id_node">
 
-  <q-checkbox-edit [choices]="choices"></q-checkbox-edit>
+  <q-checkbox-edit *ngIf="item.type == 'q_checkbox'" [choices]="choices"></q-checkbox-edit>
+  <q-radio-edit *ngIf="item.type == 'q_radio'" [choices]="choices"></q-radio-edit>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
