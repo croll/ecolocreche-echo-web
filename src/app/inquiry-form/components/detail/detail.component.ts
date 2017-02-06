@@ -13,13 +13,15 @@ export class DetailComponent implements OnInit {
 
   private id_inquiryform: number;
   inquiryform: InquiryForm;
-  childList: InquiryFormExt[];
-  filteredChildList: InquiryFormExt[];
+  inquiryformTree: Node[];
+  parentNodes: any[] = [];
+  filteredChildList: any[];
   hideUnselected: boolean;
-  level: number = -1;
   node: any;
   toggle: boolean = false;
-  userSelection: Node[] = [];
+  searchTerm:string = '';
+  showSaveButton: boolean;
+  initialSelection: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
@@ -27,66 +29,94 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(info => this.inquiryform = info);
-    this.getChilds();
+    this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(info => {
+      this.inquiryform = info;
+      if (!this.inquiryform.nodeslist) {
+        this.inquiryform.nodeslist = [];
+      }
+      this.initialSelection = JSON.stringify(this.inquiryform.nodeslist);
+      this.node = new Node();
+      this.node.childs = this.route.snapshot.data['inquiryFormTree']
+      this.node.childs.forEach((node) => {
+        if (this.inquiryform.nodeslist.indexOf(node.id_node) !== -1) {
+          node.selected = true;
+        }
+      });
+      this.filteredChildList = this.node.childs;
+    });
   }
 
-  getChilds(id?: number) {
-    let params = null;
-    if (id) {
-      params = {id_node_parent: id}
-      this.getParent(id);
+  goToParent() {
+    this.node = this.parentNodes.pop();
+    this.filterList();
+    this._checkSliders();
+  }
+
+  goToChild(id) {
+    this.parentNodes.push(this.node);
+    this._goToNode(id);
+    this._checkSliders();
+  }
+
+  private _goToNode(id) {
+    let selection;
+    this.node.childs.forEach(child => {
+      if (child.id_node == id) {
+        this.node = child;
+        this.filterList();
+        return;
+      }
+    });
+  }
+
+  filterList(filter?) {
+    if (!filter) {
+      this.searchTerm = '';
     }
-    this.restService.getList('hist/nodes', params).subscribe(items => {
-      this.childList = items;
-      this.filteredChildList = items;
-      this.toggle = false;
-      this.checkSliders();
-    });
-  }
-
-  getParent(id) {
-    this.restService.get(id, 'hist/nodes').subscribe(item => {
-      this.node = item;
-    });
-  }
-
-  goToParent(id) {
-    this.node = null;
-    this.getChilds(id);
-  }
-
-  filterList(filter) {
-    this.filteredChildList = filter ? this.childList.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.childList;
+    this.filteredChildList = filter ? this.node.childs.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.node.childs;
   }
 
   toggleItem(item) {
     item.selected = !item.selected;
-    this.addOrRemove(item);
-    this.checkSliders();
+    this._addOrRemove(item);
+    this._checkSliders();
+    this._checkDifference();
   }
 
   toggleAll() {
     this.toggle = !this.toggle
-    this.childList.forEach(item => {
+    this.node.childs.forEach(item => {
       item.selected = this.toggle
-      this.addOrRemove(item);
+      this._addOrRemove(item);
     })
+    this._checkDifference();
   }
 
-  checkSliders() {
-    if (!this.childList) return;
-    this.toggle = this.childList.every(item => item.selected);
+  private _checkSliders() {
+    if (!this.node.childs) return;
+    this.toggle = this.node.childs.every(item => item.selected);
   }
 
-  addOrRemove(item) {
+  private _addOrRemove(item) {
     if (item.selected) {
-      this.userSelection.push(item.id_node);
+      this.inquiryform.nodeslist.push(item.id_node);
     } else {
-      let pos = this.userSelection.indexOf(item.id_node);
-      this.userSelection.splice(pos, 1);
+      let pos = this.inquiryform.nodeslist.indexOf(item.id_node);
+      this.inquiryform.nodeslist.splice(pos, 1);
     }
-    console.log(this.userSelection);
+  }
+
+  private _checkDifference() {
+    console.log(JSON.stringify(this.inquiryform.nodeslist));
+    this.showSaveButton = (JSON.stringify(this.inquiryform.nodeslist) != this.initialSelection);
+  }
+
+  save() {
+    this.restService.save(this.inquiryform, 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
+      this.router.navigate(['/questionnaire', InquiryForm.id_inquiryform]);
+    }, (err) => {
+      console.error(err);
+    });
   }
 
 }

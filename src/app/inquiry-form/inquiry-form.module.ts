@@ -7,6 +7,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { InquiryFormResolver } from './inquiry-form.resolver';
 
 @NgModule({
   imports: [
@@ -20,6 +21,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ListComponent,
     DetailComponent,
     EditComponent,
+  ],
+  providers: [
+    InquiryFormResolver
   ]
 })
 
