@@ -1,7 +1,9 @@
 <div *ngIf="type == 'theme'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
     <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-    <div routerLink="/questionnaire/theme" fxFlexAlign="start">Liste des thèmes</div>
+    <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
+    <div *ngIf="current && current.nodepath && current.nodepath[0]" routerLink="/theme/{{current.nodepath[0].id_node}}" fxFlexAlign="start">{{current.nodepath[0].title}}</div>
+    <div *ngIf="current && current.nodepath && current.nodepath[1]" routerLink="/theme/{{current.nodepath[0].id_node}}/rubrique/{{current.nodepath[1].id_node}}" fxFlexAlign="start">{{current.nodepath[1].title}}</div>
     <div *ngIf="!id_node" fxFlexAlign="start">Ajouter un thème</div>
     <div *ngIf="id_node" fxFlexAlign="start">Modifier un thème</div>
   </div>
@@ -42,7 +44,9 @@
 <div *ngIf="type == 'category'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
     <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-    <div routerLink="['/questionnaire/theme', id_theme]" fxFlexAlign="start">Liste des rubriques</div>
+    <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
+    <div *ngIf="current && current.nodepath && current.nodepath[0]" routerLink="/theme/{{current.nodepath[0].id_node}}" fxFlexAlign="start">{{current.nodepath[0].title}}</div>
+    <div *ngIf="current && current.nodepath && current.nodepath[1]" routerLink="/theme/{{current.nodepath[0].id_node}}/rubrique/{{current.nodepath[1].id_node}}" fxFlexAlign="start">{{current.nodepath[1].title}}</div>
     <div *ngIf="!id_node" fxFlexAlign="start">Ajouter une rubrique</div>
     <div *ngIf="id_node" fxFlexAlign="start">Modifier une rubrique</div>
   </div>
