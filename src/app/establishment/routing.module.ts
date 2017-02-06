@@ -8,7 +8,7 @@ import { AuthGuard } from '../auth-guard.service';
 const routes: Routes = [
   {
     path: 'etablissement',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: 'liste',

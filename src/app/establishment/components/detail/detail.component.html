@@ -6,14 +6,25 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Fiche établissement #{{item.id}}
+    Fiche établissement
   </h1>
   <button md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{item.type}} ({{item.status}}): {{item.name}}</div>
+<div class="echos-title">{{item.name}}</div>
 
 <div class="echos-infos">
+
+  <div fxLayout="row">
+    <label>Type:</label>
+    <div fxFlexOffset="10px">{{getTypeLabel()}}</div>
+  </div>
+
+  <div fxLayout="row">
+    <label>Status:</label>
+    <div fxFlexOffset="10px">{{getStatusLabel()}}</div>
+  </div>
+
   <div *ngIf="item.address" fxLayout="row">
     <label>Adresse:</label>
     <div fxFlexOffset="10px">{{item.address}}</div>
@@ -40,6 +51,9 @@
   </div>
 </div>
 
-<div class="echos-title" style="margin-top: 80px">Liste des audits</div>
+<div class="echos-title" fxLayout="row" style="margin-top: 80px">
+  <div fxFlex>Liste des audits</div>
+  <button md-raised-button [routerLink]="['/audit/creer', item.id]">Démarrer un audit<md-icon>add</md-icon></button>
+</div>
 
 <div class="echos-warning">Aucun audit trouvé.</div>

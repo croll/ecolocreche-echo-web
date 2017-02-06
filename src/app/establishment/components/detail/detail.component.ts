@@ -19,8 +19,29 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.restService.get(this.id, 'establishments').subscribe(item => {
-      this.item = item;
+      this.item = Object.assign(this.item, item);
     });
+  }
+
+  getStatusLabel(id) {
+    if (!this.item || !this.item.status) return;
+    return this._getLabel(this.item.statusList, this.item.status);
+  }
+
+  getTypeLabel(id) {
+    if (!this.item || !this.item.type) return;
+    return this._getLabel(this.item.typeList, this.item.type);
+  }
+
+  private _getLabel(list, id) {
+    let match = null;
+    list.forEach(function(s:any) {
+      if (s.id == id) {
+        match = s.label;
+        return;
+      }
+    });
+    return match;
   }
 
 }
