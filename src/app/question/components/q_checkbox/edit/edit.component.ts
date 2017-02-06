@@ -36,4 +36,11 @@ export class EditComponent implements OnInit {
     if (index >= 0) this.choices.splice(index, 1);
   }
 
+  swap(num1, num2) {
+    console.log("SWAP");
+    let tmp = this.choices[num1];
+    this.choices[num2] = this.choices[num1];
+    this.choices[num1] = tmp;
+  }
+
 }

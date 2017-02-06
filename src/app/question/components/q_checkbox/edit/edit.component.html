@@ -4,28 +4,32 @@
 </div>
 
 <md-list>
-  <md-list-item class="echos-list-item" *ngFor="let item of choices">
+  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div fxLayout="row" fxLayoutAlign="start center">
-            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
-            <div fxLayout="column" fxFlex="70">
-              <md-input-container>
-                <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
-              </md-input-container>
-              <md-input-container>
-                <textarea mdInput fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"></textarea>
-              </md-input-container>
-            </div>
-            <div fxFlexOffset="40px">
-              <md-select [(ngModel)]="item.impact" placeholder="Impact *">
-                <md-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</md-option>
-              </md-select>
-            </div>
+          <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+          <div fxLayout="column" fxFlex="70">
+            <md-input-container>
+              <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
+            </md-input-container>
+            <md-input-container>
+              <textarea mdInput fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"></textarea>
+            </md-input-container>
+          </div>
+          <div fxFlexOffset="40px">
+            <md-select [(ngModel)]="item.impact" placeholder="Impact *">
+              <md-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</md-option>
+            </md-select>
+          </div>
+          <div fxLayout="column" fxFlexOffset="40px">
+            <button md-button *ngIf="!firstItem" (click)="swap(item, choices[i-1])"><md-icon>arrow_drop_up_circle</md-icon></button>
+            <button md-button *ngIf="!lastItem" (click)="swap(item, choices[i+1])"><md-icon>arrow_drop_down</md-icon></button>
+          </div>
         </div>
         <div>{{item.description}}</div>
       </div>
-      <button md-mini-fab (click)="deleteChoice(item)" color="warn" style="margin-right:12px"><md-icon>delete</md-icon></button>
+      <button fxFlexOffset="40px" md-mini-fab (click)="deleteChoice(item)" color="warn" style="margin-right:12px"><md-icon>delete</md-icon></button>
     </div>
   </md-list-item>
 </md-list>
