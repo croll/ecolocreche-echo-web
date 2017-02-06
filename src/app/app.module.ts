@@ -21,6 +21,7 @@ import { EditComponent as UserEditComponent} from './user/components/edit/edit.c
 import { DetailComponent as UserDetailComponent} from './user/components/detail/detail.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
+import { AuditModule } from './audit/audit.module';
 import { NodeModule } from './node/node.module';
 import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
@@ -47,6 +48,7 @@ import { RestService } from './rest.service';
     QuestionModule,
     NodeModule,
     InquiryFormModule,
+    AuditModule,
     AppRoutingModule,
     ReactiveFormsModule,
     NgxChartsModule,
