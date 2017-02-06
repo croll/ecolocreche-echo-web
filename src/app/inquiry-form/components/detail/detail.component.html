@@ -27,8 +27,8 @@
   </div>
 </div>
 
-<div *ngIf="showSave" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-  <button md-raised-button color="primary">Enregistrer le questionnaire</button>
+<div *ngIf="showSaveButton" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <button md-raised-button color="primary" (click)="save()">Enregistrer le questionnaire</button>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center" class="search-container">
@@ -72,5 +72,5 @@
 </md-toolbar>
 
 <div *ngIf="showSaveButton" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-  <button md-raised-button color="primary">Enregistrer le questionnaire</button>
+  <button md-raised-button color="primary" (click)="save()">Enregistrer le questionnaire</button>
 </div>

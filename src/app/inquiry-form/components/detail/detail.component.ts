@@ -22,6 +22,7 @@ export class DetailComponent implements OnInit {
   searchTerm:string = '';
   showSaveButton: boolean;
   initialSelection: string;
+  userSelection: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
@@ -31,18 +32,12 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
     this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(info => {
       this.inquiryform = info;
-      if (!this.inquiryform.nodeslist) {
-        this.inquiryform.nodeslist = [];
-      }
-      this.initialSelection = JSON.stringify(this.inquiryform.nodeslist);
       this.node = new Node();
       this.node.childs = this.route.snapshot.data['inquiryFormTree']
-      this.node.childs.forEach((node) => {
-        if (this.inquiryform.nodeslist.indexOf(node.id_node) !== -1) {
-          node.selected = true;
-        }
-      });
       this.filteredChildList = this.node.childs;
+      this.initialSelection = this.inquiryform.nodeslist;
+      this.userSelection = (this.inquiryform.nodeslist) ? JSON.parse(this.inquiryform.nodeslist) : [];
+      this._checkSelection();
     });
   }
 
@@ -56,6 +51,7 @@ export class DetailComponent implements OnInit {
     this.parentNodes.push(this.node);
     this._goToNode(id);
     this._checkSliders();
+    this._checkSelection();
   }
 
   private _goToNode(id) {
@@ -99,21 +95,56 @@ export class DetailComponent implements OnInit {
 
   private _addOrRemove(item) {
     if (item.selected) {
-      this.inquiryform.nodeslist.push(item.id_node);
+      if (this.userSelection.indexOf(item.id_node) === -1) {
+        this.userSelection.push(item.id_node);
+        this._toggleAllChilds(item, 'on');
+      }
     } else {
-      let pos = this.inquiryform.nodeslist.indexOf(item.id_node);
-      this.inquiryform.nodeslist.splice(pos, 1);
+      let pos = this.userSelection.indexOf(item.id_node);
+      this.userSelection.splice(pos, 1);
+      this._toggleAllChilds(item, 'off');
+    }
+  }
+
+  private _checkSelection() {
+    if (this.userSelection.length) {
+      this.node.childs.forEach((node) => {
+        if (this.userSelection.indexOf(node.id_node) !== -1) {
+          node.selected = true;
+        }
+      });
     }
   }
 
   private _checkDifference() {
-    console.log(JSON.stringify(this.inquiryform.nodeslist));
     this.showSaveButton = (JSON.stringify(this.inquiryform.nodeslist) != this.initialSelection);
   }
 
+  private _toggleAllChilds(node, status) {
+    if (!node.childs || node.childs.length == 0) return;
+    node.childs.forEach(child => {
+      if (child.childs) {
+        this._toggleAllChilds(child, status);
+      }
+      if (status == 'on') {
+        if (this.userSelection.indexOf(child.id_node) === -1) {
+          child.selected = true;
+          this.userSelection.push(child.id_node);
+        }
+      } else {
+        if (this.userSelection.indexOf(child.id_node) !== -1) {
+          child.selected = false;
+          let pos = this.userSelection.indexOf(child.id_node);
+          this.userSelection.splice(pos, 1);
+        }
+      }
+    });
+  }
+
   save() {
+    this.inquiryform.nodeslist = JSON.stringify(this.userSelection);
     this.restService.save(this.inquiryform, 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
-      this.router.navigate(['/questionnaire', InquiryForm.id_inquiryform]);
+      this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);
     });
