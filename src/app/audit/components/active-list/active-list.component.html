@@ -17,13 +17,15 @@
   <md-list-item class="echos-list-item" [routerLink]="['/audit', item.id]" *ngFor="let item of filteredList">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
-        <div>{{item.name}}</div>
         <div>
           <div fxLayout="row">
-            <div *ngIf="item.address">{{item.address}}</div>
+            <div>Le {{item.createdAt | date:'dd/MM/yyyy à :hh:mm'}}</div>
           </div>
         </div>
+        <div *ngIf="!item.active">Finalisé</div>
+        <div *ngIf="item.active" style="color: rgb(96, 190, 64)">En cours</div>
       </div>
+      <div class="percent">{{item.cached_percent_complete}} %</div>
       <md-icon color="primary">chevron_right</md-icon>
     </div>
   </md-list-item>

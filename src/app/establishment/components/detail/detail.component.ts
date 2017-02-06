@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
 import { RestService } from '../../../rest.service';
+import { Audit } from '../../../audit/audit';
 
 @Component({
   templateUrl: './detail.component.html',
@@ -11,6 +12,7 @@ export class DetailComponent implements OnInit {
 
   private id: number;
   item: Establishment;
+  auditList: Audit[];
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
@@ -21,6 +23,7 @@ export class DetailComponent implements OnInit {
     this.restService.get(this.id, 'establishments').subscribe(item => {
       this.item = Object.assign(this.item, item);
     });
+    this._getAudits();
   }
 
   getStatusLabel(id) {
@@ -42,6 +45,10 @@ export class DetailComponent implements OnInit {
       }
     });
     return match;
+  }
+
+  private _getAudits() {
+    this.restService.getList('audits', {id_establishment: this.id}).subscribe(audits => this.auditList = audits);
   }
 
 }

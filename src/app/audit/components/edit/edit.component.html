@@ -12,16 +12,16 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
-    <md-select placeholder="Formulaire *" formControlName="id_inquiryform">
+    <md-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
       <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id">{{ifl.title}}</md-option>
     </md-select>
   </div>
   <div>
     <md-input-container style="margin-top: 18px">
-      <textarea mdInput formControlName="synthesis" placeholder="Synthese"></textarea>
+      <textarea mdInput formControlName="synthesis" placeholder="Synthèse"></textarea>
     </md-input-container>
   </div>
-  <div *ngIf="id">
+  <div>
     <md-select placeholder="Status *" formControlName="active" style="margin: 8px 0 18px 0">
       <md-option value="1">En cours</md-option>
       <md-option value="0">Terminé</md-option>
@@ -29,6 +29,7 @@
   </div>
   <input *ngIf="id" type="hidden" formControlName="id">
   <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">
+  <input *ngIf="key" type="hidden" formControlName="key">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
