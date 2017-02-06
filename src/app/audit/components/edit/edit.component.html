@@ -1,0 +1,35 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/etablissement/liste" fxFlexAlign="start">Fiche établissement</div>
+  <div *ngIf="!id" fxFlexAlign="start">Créer un audit</div>
+  <div *ngIf="id" fxFlexAlign="start">Modifier un audit</div>
+</div>
+
+<h1 *ngIf="!id">Créer un audit</h1>
+<h1 *ngIf="id">Modifier un audit de l'établissement</h1>
+
+<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+<form (ngSubmit)="save()" [formGroup]="echosForm">
+  {{inquiryFormList|json}}
+  <div>
+    <md-select placeholder="Formulaire *" formControlName="id_inquiryform">
+      <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id">{{ifl.title}}</md-option>
+    </md-select>
+  </div>
+  <div>
+    <md-input-container>
+      <textarea mdInput formControlName="synthesis" placeholder="Synthese"></textarea>
+    </md-input-container>
+  </div>
+  <div>
+    <md-slide-toggle formControlName="active"></md-slide-toggle>
+  </div>
+  <input *ngIf="id" type="hidden" formControlName="id">
+  <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">
+  <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <button md-raised-button (click)="goBack()">Annuler</button>
+    <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" (click)="delete(id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+  </div>
+</form>

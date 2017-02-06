@@ -1,0 +1,32 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div fxFlexAlign="start">Liste des audits en cours</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Liste des audits en cours
+  </h1>
+</div>
+
+<md-input-container fxLayout>
+  <input mdInput #search type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(search.value)">
+</md-input-container>
+
+<md-list>
+  <md-list-item class="echos-list-item" [routerLink]="['/audit', item.id]" *ngFor="let item of filteredList">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex class="have-childs">
+        <div>{{item.name}}</div>
+        <div>
+          <div fxLayout="row">
+            <div *ngIf="item.address">{{item.address}}</div>
+          </div>
+        </div>
+      </div>
+      <md-icon color="primary">chevron_right</md-icon>
+    </div>
+  </md-list-item>
+</md-list>
+
+<div *ngIf="!filteredList.length">Aucun audit n'a été trouvé.</div>
