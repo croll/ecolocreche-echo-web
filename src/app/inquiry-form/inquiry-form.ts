@@ -4,6 +4,7 @@ export class InquiryForm {
   public title: string
   public description: string = ''
   public position: number = 0
+  public nodeslist: string;
 }
 
 export class InquiryFormExt extends InquiryForm {

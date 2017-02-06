@@ -4,6 +4,7 @@ import { ListComponent } from './components/list/list.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AuthGuard } from '../auth-guard.service';
+import { InquiryFormResolver } from './inquiry-form.resolver';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
         component: EditComponent
       },
       {
+        resolve: {
+          inquiryFormTree: InquiryFormResolver
+        },
         path: ':id',
         component: DetailComponent,
       },
