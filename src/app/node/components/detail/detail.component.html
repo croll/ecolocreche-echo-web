@@ -1,7 +1,10 @@
 <div *ngIf="type == 'theme'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
     <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-    <div routerLink="/theme/liste" fxFlexAlign="start">Thème {{item.title}}</div>
+    <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
+    <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
+    <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
+    <div *ngIf="item && item.nodepath && item.nodepath[2]" fxFlexAlign="start">{{item.nodepath[2].title}}</div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="start center">
@@ -42,7 +45,10 @@
 <div *ngIf="type == 'category'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
     <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-    <div routerLink="['/theme', id_theme, 'rubrique', id_category" fxFlexAlign="start">Rubrique {{item.title}}</div>
+    <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
+    <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
+    <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
+    <div *ngIf="item && item.nodepath && item.nodepath[2]" fxFlexAlign="start">{{item.nodepath[2].title}}</div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="start center">
