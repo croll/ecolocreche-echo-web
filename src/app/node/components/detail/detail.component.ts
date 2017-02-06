@@ -60,4 +60,8 @@ export class DetailComponent implements OnInit {
     return false;
   }
 
+  swap(item1, item2) {
+    console.log(item1, item2);
+  }
+
 }
