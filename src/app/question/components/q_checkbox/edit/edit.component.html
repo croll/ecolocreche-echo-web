@@ -23,8 +23,8 @@
             </md-select>
           </div>
           <div fxLayout="column" fxFlexOffset="40px">
-            <button md-button *ngIf="!firstItem" (click)="swap(item, choices[i-1])"><md-icon>arrow_drop_up_circle</md-icon></button>
-            <button md-button *ngIf="!lastItem" (click)="swap(item, choices[i+1])"><md-icon>arrow_drop_down</md-icon></button>
+            <button md-button *ngIf="!firstItem" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
+            <button md-button *ngIf="!lastItem" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
           </div>
         </div>
         <div>{{item.description}}</div>

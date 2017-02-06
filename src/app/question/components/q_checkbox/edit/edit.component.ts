@@ -37,10 +37,10 @@ export class EditComponent implements OnInit {
   }
 
   swap(num1, num2) {
-    console.log("SWAP");
-    let tmp = this.choices[num1];
+    let tmp = this.choices[num2];
     this.choices[num2] = this.choices[num1];
     this.choices[num1] = tmp;
+    return false;
   }
 
 }
