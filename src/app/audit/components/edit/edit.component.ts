@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Audit } from '../../audit';
 import { RestService} from '../../../rest.service';
 import { InquiryForm } from '../../../inquiry-form/inquiry-form';
-import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -78,7 +77,13 @@ export class EditComponent implements OnInit {
   }
 
   private _generateKey() {
-    return Md5.hashStr(new Date().getTime()+''+Math.random());
+    let s4 = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+    };
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
   }
 
   save() {
