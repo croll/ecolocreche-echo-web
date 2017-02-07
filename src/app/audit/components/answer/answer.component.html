@@ -1,14 +1,12 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-  <div routerLink="/questionnaire/liste" fxFlexAlign="start">Liste des questionnaires</div>
-  <div fxFlexAlign="start">Fiche questionnaire</div>
+  <div fxFlexAlign="start">Compléter un audit</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Fiche questionnaire #{{inquiryform.id}}
+    Compléter un aidit
   </h1>
-  <button md-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
 <div class="echos-title">{{inquiryform.title}}</div>
