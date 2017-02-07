@@ -9,7 +9,7 @@
 
   <div fxLayout="row" fxLayoutAlign="start center">
     <h1 fxFlex>
-      Fiche du thème #{{item.id_node}}
+      Thème
     </h1>
     <button md-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
@@ -24,7 +24,7 @@
 
   <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
 
-  <md-list>
+  <md-list *ngIf="filteredChildList">
     <md-list-item class="echos-list-item" *ngFor="let category of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
       <div md-line fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="column">
@@ -57,7 +57,7 @@
 
   <div fxLayout="row" fxLayoutAlign="start center">
     <h1 fxFlex>
-      Fiche de la rubrique #{{item.id_node}}
+      Rubrique
     </h1>
     <button md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
@@ -72,7 +72,7 @@
 
   <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
 
-  <md-list>
+  <md-list *ngIf="filteredChildList">
     <md-list-item class="echos-list-item" *ngFor="let question of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
       <div md-line fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="column">

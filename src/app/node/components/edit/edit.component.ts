@@ -77,7 +77,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value, `hist/nodes`, {id_node_parent: this.id_node_parent}).subscribe((form) => {
+    this.restService.save(this.echosForm.value, 'hist/nodes', {id_node_parent: this.id_node_parent}, 'id_node').subscribe((form) => {
       this.goBack();
     }, (err) => {
       console.error(err);
@@ -85,7 +85,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'directories').subscribe((response) => {
+    this.restService.delete(id, 'hist/nodes').subscribe((response) => {
       this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);
