@@ -20,11 +20,11 @@ const routes: Routes = [
         component: EditComponent
       },
       {
+        path: ':id',
+        component: DetailComponent,
         resolve: {
           inquiryFormTree: InquiryFormResolver
         },
-        path: ':id',
-        component: DetailComponent,
       },
       {
         path: ':id/editer',

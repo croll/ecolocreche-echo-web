@@ -2,7 +2,9 @@ import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { ActiveListComponent } from './components/active-list/active-list.component';
 import { EditComponent } from './components/edit/edit.component';
+import { AnswerComponent } from './components/answer/answer.component';
 import { AuthGuard } from '../auth-guard.service';
+import { InquiryFormResolver } from '../inquiry-form/inquiry-form.resolver';
 
 const routes: Routes = [
   {
@@ -18,8 +20,15 @@ const routes: Routes = [
         component: EditComponent
       },
       {
-        path: ':id',
+        path: 'edit/:id',
         component: EditComponent
+      },
+      {
+        path: ':key',
+        resolve: {
+          inquiryFormTree: InquiryFormResolver
+        },
+        component: AnswerComponent
       }
     ]
   }
