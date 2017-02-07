@@ -13,5 +13,5 @@ export class Question {
   public color: string
 
   public choices: Choice[]
-  public answer: Answer
+  public answer: Answer = new Answer()
 }

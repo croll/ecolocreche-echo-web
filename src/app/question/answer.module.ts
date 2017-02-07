@@ -7,7 +7,8 @@ import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // import our software
-import { EditComponent as AnswerEditComponent} from './components/answer-edit/edit.component';
+import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
+import { AnswerEditComponent as CheckboxAnswerEditComponent } from './components/q_checkbox/answer-edit/answer-edit.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { EditComponent as AnswerEditComponent} from './components/answer-edit/ed
   ],
   declarations: [
     AnswerEditComponent,
+    CheckboxAnswerEditComponent,
   ],
   providers: [
   ]

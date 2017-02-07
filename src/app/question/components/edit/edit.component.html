@@ -37,9 +37,13 @@
 
   <input *ngIf="id_node" type="hidden" formControlName="id_node">
 
+<!--
   <q-checkbox-edit *ngIf="echosForm.controls.type.value == 'q_checkbox'" [choices]="choices"></q-checkbox-edit>
   <q-radio-edit *ngIf="echosForm.controls.type.value == 'q_radio'" [choices]="choices"></q-radio-edit>
   <q-percents-edit *ngIf="echosForm.controls.type.value == 'q_percents'" [choices]="choices"></q-percents-edit>
+-->
+
+  <answer-edit [id_audit]="1" [id_node]="id_node"></answer-edit>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
