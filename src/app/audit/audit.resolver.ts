@@ -36,11 +36,5 @@ export class AuditResolver implements Resolve<any> {
                           observer.complete();
                        });
                     })
-                    // .map(res => res.json())
-                    // .subscribe(audit => {
-                    //   console.log(audit);
-                    //   this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: audit.id_establishment});
-                    //
-                    // });
   }
 }

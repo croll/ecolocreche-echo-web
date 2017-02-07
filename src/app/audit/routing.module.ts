@@ -26,7 +26,7 @@ const routes: Routes = [
       {
         path: ':key',
         resolve: {
-          audit: AuditResolver
+          infos: AuditResolver
         },
         component: AnswerComponent
       }
