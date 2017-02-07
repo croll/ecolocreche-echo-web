@@ -41,7 +41,7 @@ export class DetailComponent implements OnInit {
   }
 
   getChildList() {
-    this.restService.getList(`hist/nodes`, {id_node_parent: this.id_node}).subscribe(
+    this.restService.getList(`hist/nodes?recurse=1`, {id_node_parent: this.id_node}).subscribe(
      nodes => {
        this.childList = nodes;
        this.filteredChildList = this.childList;

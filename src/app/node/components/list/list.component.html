@@ -20,14 +20,19 @@
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column">
+        <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(item, filteredChildList[i-1])"><md-icon>arrow_drop_up_circle</md-icon></button>
+        <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(item, filteredChildList[i+1])"><md-icon>arrow_drop_down</md-icon></button>
+      </div>
       <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
       <div fxFlex fxFlexOffset="20px" class="have-childs">
         <div>{{item.title}}</div>
         <div *ngIf="item.description">{{item.description}}</div>
-      </div>
-      <div fxLayout="column">
-        <button md-button *ngIf="!firstItem" (click)="swap(item, filteredList[i-1])"><md-icon>arrow_drop_up_circle</md-icon></button>
-        <button md-button *ngIf="!lastItem" (click)="swap(item, filteredList[i+1])"><md-icon>arrow_drop_down</md-icon></button>
+        <div fxFlexAlign="start" *ngIf="item.type == 'directory' && item.childs" fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap="wrap" class="small-list">
+          <div *ngFor="let child of item.childs">
+            {{child.title}}
+          </div>
+        </div>
       </div>
       <div style="width: 50px"></div>
       <button md-button [routerLink]="['/theme', item.id_node]"><md-icon color="primary">chevron_right</md-icon></button>

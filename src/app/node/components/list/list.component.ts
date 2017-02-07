@@ -25,10 +25,9 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList('hist/nodes').subscribe(
+    this.restService.getList('hist/nodes?recurse=1').subscribe(
      nodes => {
        this.list = nodes;
-       console.log(nodes);
        this.filteredList = this.list;
      },
      error => {
