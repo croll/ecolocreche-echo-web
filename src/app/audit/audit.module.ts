@@ -8,12 +8,14 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from './audit.resolver';
+import { AnswerModule } from '../question/answer.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RoutingModule,
     ReactiveFormsModule,
+    AnswerModule,
 	  MaterialModule.forRoot(),
     FlexLayoutModule.forRoot()
   ],

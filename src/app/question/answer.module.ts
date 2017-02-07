@@ -23,6 +23,9 @@ import { AnswerEditComponent as CheckboxAnswerEditComponent } from './components
     CheckboxAnswerEditComponent,
   ],
   providers: [
+  ],
+  exports: [
+    AnswerEditComponent,
   ]
 })
 
