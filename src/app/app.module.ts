@@ -21,6 +21,7 @@ import { EditComponent as UserEditComponent} from './user/components/edit/edit.c
 import { DetailComponent as UserDetailComponent} from './user/components/detail/detail.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
+import { AnswerModule } from './question/answer.module';
 import { AuditModule } from './audit/audit.module';
 import { NodeModule } from './node/node.module';
 import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
@@ -43,7 +44,7 @@ import { RestService } from './rest.service';
   imports: [
     BrowserModule,
     FormsModule,
-	HttpModule,
+	  HttpModule,
     EstablishmentModule,
     QuestionModule,
     NodeModule,
