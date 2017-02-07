@@ -1,4 +1,5 @@
 import { Choice } from './choice';
+import { Answer } from './answer';
 
 export class Question {
 
@@ -12,4 +13,5 @@ export class Question {
   public color: string
 
   public choices: Choice[]
+  public answer: Answer
 }
