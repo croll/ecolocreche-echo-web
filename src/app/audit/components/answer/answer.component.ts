@@ -23,8 +23,12 @@ export class AnswerComponent implements OnInit {
   showSaveButton: boolean;
   initialSelection: string;
   userSelection: any;
+  infos: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
+    this.node = new Node();
+    this.infos = this.route.snapshot.data['audit']
+    console.log(this.infos);
     this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
     this.inquiryform = new InquiryForm();
   }
