@@ -26,8 +26,6 @@ export class EditComponent implements OnInit {
   positionCtrl: FormControl;
   colorCtrl: FormControl;
 
-  private id: number;
-
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new Node();
@@ -86,7 +84,7 @@ export class EditComponent implements OnInit {
 
   delete(id) {
     this.restService.delete(id, 'hist/nodes').subscribe((response) => {
-      this.router.navigate(['/questionnaire/liste']);
+       this.router.navigate(['theme/liste']);
     }, (err) => {
       console.error(err);
     });

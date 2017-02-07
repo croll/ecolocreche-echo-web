@@ -17,12 +17,16 @@
   <input mdInput #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
 </md-input-container>
 
+<div *ngIf="showSaveButton" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+</div>
+
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="column">
-        <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(item, filteredChildList[i-1])"><md-icon>arrow_drop_up_circle</md-icon></button>
-        <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(item, filteredChildList[i+1])"><md-icon>arrow_drop_down</md-icon></button>
+        <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
+        <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
       </div>
       <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
       <div fxFlex fxFlexOffset="20px" class="have-childs">
@@ -39,5 +43,9 @@
     </div>
   </md-list-item>
 </md-list>
+
+<div *ngIf="showSaveButton" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+</div>
 
 <div *ngIf="!filteredList.length">Aucun thème n'a été trouvé.</div>

@@ -12,6 +12,7 @@ export class ListComponent implements OnInit {
   list: Node[] = [];
   filteredList: Node[] = [];
   errorMessage: string;
+  showSaveButton: boolean;
 
   // @HostBinding('@routeAnimation') routeAnimation = true;
   //@HostBinding('style.display')   display = 'block';
@@ -39,8 +40,18 @@ export class ListComponent implements OnInit {
     this.filteredList = filter ? this.list.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
   }
 
-  swap(item1, item2) {
-    console.log(item1, item2);
+  swap(num1, num2) {
+    let tmp = this.list[num2];
+    this.list[num2] = this.list[num1];
+    this.list[num1] = tmp;
+    this.showSaveButton = true;
+    return false;
+  }
+
+  save() {
+    for (var i in this.list)
+      this.list[i].position = parseInt(i);
+    console.log(this.list);
   }
 
 }

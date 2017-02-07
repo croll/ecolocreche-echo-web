@@ -18,6 +18,7 @@ export class DetailComponent implements OnInit {
   type: string;
   childList: Node[] = [];
   filteredChildList: Node[] = [];
+  showSaveButton: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
     this.id_theme = parseInt(this.route.snapshot.params['id_theme']);
@@ -60,8 +61,18 @@ export class DetailComponent implements OnInit {
     return false;
   }
 
-  swap(item1, item2) {
-    console.log(item1, item2);
+  swap(num1, num2) {
+    let tmp = this.childList[num2];
+    this.childList[num2] = this.childList[num1];
+    this.childList[num1] = tmp;
+    this.showSaveButton = true;
+    return false;
+  }
+
+  save() {
+    for (var i in this.childList)
+        this.childList[i].position = parseInt(i);
+    console.log(this.childList);
   }
 
 }
