@@ -88,6 +88,7 @@ export class EditComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
+    return false;
   }
 
   goBack(): boolean {
