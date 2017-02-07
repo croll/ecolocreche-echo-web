@@ -26,9 +26,9 @@
   <button fxFlexOffset="45px" md-button (click)="goToParent()">Remonter d'un niveau</button>
 </md-toolbar>
 
-<md-list *ngIf="!node.type || !node.id_node_parent">
+<md-list>
   <md-list-item class="echos-list-item" *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+    <div *ngIf="!node.type || !node.id_node_parent" md-line fxLayout="row" fxLayoutAlign="start center">
       <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
       <div fxFlex fxFlexOffset="20px">
         <div fxLayout="column" fxLayoutAlign="start center" class="have-childs">
@@ -38,14 +38,17 @@
       </div>
       <button md-button color="primary" (click)="goToChild(childItem.id_node)"><md-icon>chevron_right</md-icon></button>
     </div>
+    <div *ngIf="node.type && node.id_node_parent" md-line fxLayout="row" fxLayoutAlign="start center">
+      <answer-edit [id_node]="node.id" [id_audit]="infos.audit.id"></answer-edit>
+    </div>
   </md-list-item>
 </md-list>
 
-<div *ngIf="node.type && node.id_node_parent">
+<!-- <div *ngIf="node.type && node.id_node_parent">
   <h1>À toi Nico !</h1>
 
   {{this.node | json}}
-</div>
+</div> -->
 
 <md-toolbar fxLayout="row" fxLayoutAlign="end center">
   <button fxFlexOffset="45px" *ngIf="parentNodes.length" md-button (click)="goToParent()">Remonter d'un niveau</button>
