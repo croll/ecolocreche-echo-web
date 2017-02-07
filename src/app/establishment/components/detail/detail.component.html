@@ -59,7 +59,7 @@
 <div *ngIf="!auditList || !auditList.length" class="echos-warning">Aucun audit trouvé.</div>
 
 <md-list>
-  <md-list-item class="echos-list-item" [routerLink]="['/audit', item.id]" *ngFor="let item of auditList">
+  <md-list-item class="echos-list-item" [routerLink]="['/audit', item.key]" *ngFor="let item of auditList">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
         <div>
