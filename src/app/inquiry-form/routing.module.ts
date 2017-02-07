@@ -9,7 +9,7 @@ import { InquiryFormResolver } from './inquiry-form.resolver';
 const routes: Routes = [
   {
     path: 'questionnaire',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: 'liste',
@@ -24,7 +24,7 @@ const routes: Routes = [
         component: DetailComponent,
         resolve: {
           inquiryFormTree: InquiryFormResolver
-        },
+        }
       },
       {
         path: ':id/editer',

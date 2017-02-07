@@ -4,12 +4,12 @@ import { ActiveListComponent } from './components/active-list/active-list.compon
 import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { AuthGuard } from '../auth-guard.service';
-import { InquiryFormResolver } from '../inquiry-form/inquiry-form.resolver';
+import { AuditResolver } from './audit.resolver';
 
 const routes: Routes = [
   {
     path: 'audit',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     children: [
       {
         path: 'liste/actifs',
@@ -26,7 +26,7 @@ const routes: Routes = [
       {
         path: ':key',
         resolve: {
-          inquiryFormTree: InquiryFormResolver
+          audit: AuditResolver
         },
         component: AnswerComponent
       }

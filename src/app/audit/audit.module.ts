@@ -7,7 +7,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { InquiryFormResolver } from '../inquiry-form/inquiry-form.resolver';
+import { AuditResolver } from './audit.resolver';
 
 @NgModule({
   imports: [
@@ -23,7 +23,7 @@ import { InquiryFormResolver } from '../inquiry-form/inquiry-form.resolver';
     AnswerComponent
   ],
   providers: [
-    InquiryFormResolver
+    AuditResolver
   ]
 })
 
