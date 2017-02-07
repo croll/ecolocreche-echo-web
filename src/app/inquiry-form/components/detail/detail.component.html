@@ -55,6 +55,11 @@
         <div fxLayout="column" fxLayoutAlign="start center" class="have-childs">
           <div fxFlex fxFlexAlign="start">{{childItem.title}}</div>
           <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
+          <div fxFlexAlign="start" *ngIf="childItem.id_node_parent && childItem.type == 'directory' && childItem.childs" fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap="wrap" class="small-list">
+            <div *ngFor="let child of childItem.childs">
+              {{child.title}}
+            </div>
+          </div>
         </div>
       </div>
       <button md-button *ngIf="childItem.selected && (!node || (node && !node.id_node_parent))" color="primary" (click)="goToChild(childItem.id_node)">Affiner le choix</button>

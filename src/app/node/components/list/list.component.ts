@@ -28,6 +28,7 @@ export class ListComponent implements OnInit {
     this.restService.getList('hist/nodes').subscribe(
      nodes => {
        this.list = nodes;
+       console.log(nodes);
        this.filteredList = this.list;
      },
      error => {
