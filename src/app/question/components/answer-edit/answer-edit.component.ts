@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Question } from '../../question';
 import { Choice } from '../../choice';
+import { Answer } from '../../answer';
 import { QTypes } from '../abstracts/qtypes';
 import { RestService} from '../../../rest.service';
 
@@ -55,6 +56,9 @@ export class AnswerEditComponent implements OnInit {
         console.log("item: ", item);
         this.echosForm.patchValue(item);
         this.current = Object.assign(this.current, item);
+        if (! this.current.answer) {
+          this.current.answer = new Answer();
+        }
         this.choices = [];
         if ('choices' in item) {
           item.choices.forEach((jschoice) => {
@@ -70,6 +74,7 @@ export class AnswerEditComponent implements OnInit {
 
   save() {
       console.log("save answer to do !");
+      this.current.answer.ignored = this.ignoredCtrl.value;
       this.isAnswered = true;
       return false;
   }

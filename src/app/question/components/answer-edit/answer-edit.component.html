@@ -7,7 +7,7 @@
         <md-checkbox formControlName="ignored">Ignorer cette question</md-checkbox>
     </div>
 
-    <div [hidden]="!(isAnswered && current.answer.ignored)">
+    <div [hidden]="!isAnswered || !current.answer.ignored">
         Question ignorée
     </div>
 
