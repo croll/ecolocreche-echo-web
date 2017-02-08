@@ -53,7 +53,30 @@ export class DetailComponent implements OnInit {
   }
 
   filterList(filter) {
-    this.filteredChildList = filter ? this.childList.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.childList;
+    if (!filter) {
+      this.filteredChildList = this.childList;
+      return;
+    }
+    this.filteredChildList = [];
+    if (this.type == 'theme') {
+      let matchedIds = [];
+      this.childList.forEach(child => {
+        if (child.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) {
+          this.filteredChildList = this.filteredChildList.concat(child);
+        } else {
+          if (!child.childs || !child.childs.length) return;
+          let matchs = child.childs.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1);
+          if (matchs.length) {
+            if (matchedIds.indexOf(child.id_node) === -1) {
+              this.filteredChildList = this.filteredChildList.concat(child);
+              matchedIds.push(child.id_node);
+            }
+          }
+        }
+      });
+    } else {
+      this.filteredChildList = this.childList.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1);
+    }
   }
 
   goBack(): boolean {

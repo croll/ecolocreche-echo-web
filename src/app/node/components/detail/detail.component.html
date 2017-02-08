@@ -22,6 +22,10 @@
     <button md-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<md-icon>add</md-icon></button>
   </div>
 
+  <md-input-container fxLayout>
+    <input mdInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
+  </md-input-container>
+
   <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
 
   <md-list *ngIf="filteredChildList">
