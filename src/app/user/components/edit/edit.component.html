@@ -1,6 +1,6 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
-  <div routerLink="/utilisateurs/liste" fxFlexAlign="start">Les utilisateurs</div>
+  <div routerLink="/utilisateur/liste" fxFlexAlign="start">Les utilisateurs</div>
   <div *ngIf="!current.id" fxFlexAlign="start">Ajouter un utilisateur</div>
   <div *ngIf="current.id" fxFlexAlign="start">Modifier un utilisateur</div>
 </div>
@@ -23,6 +23,12 @@
   <div>
     <md-input-container>
       <input mdInput type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
+    </md-input-container>
+  </div>
+
+  <div>
+    <md-input-container>
+      <input mdInput type="password" formControlName="password" placeholder="Mot de passe">
     </md-input-container>
   </div>
 

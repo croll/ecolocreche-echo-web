@@ -32,36 +32,45 @@ export class EditComponent implements OnInit {
   idCtrl: FormControl;
   nameCtrl: FormControl;
   emailCtrl: FormControl;
+  passwordCtrl: FormControl;
   typeCtrl: FormControl;
 
   private id: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
-    this.current = new User();
-
-    this.idCtrl = fb.control(this.id);
-    this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
-    this.typeCtrl = fb.control(this.current.account_type);
-    this.emailCtrl = fb.control(this.current.email);
-
-    this.echosForm = fb.group({
-      id: this.idCtrl,
-      name: this.nameCtrl,
-      email: this.emailCtrl,
-      account_type: this.typeCtrl,
-    });
-
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    if (this.id) {
-      this.restService.get(this.id).subscribe(item => {
-        this.echosForm.patchValue(item);
-        this.current = item;
+      this.id = this.route.snapshot.params['id'];
+
+      this.current = new User();
+
+      this.idCtrl = this.fb.control(this.id);
+      this.nameCtrl = this.fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
+      this.typeCtrl = this.fb.control(this.current.account_type);
+      this.emailCtrl = this.fb.control(this.current.email);
+      if (this.id) {
+          this.passwordCtrl = this.fb.control(this.current.password, [Validators.minLength(6)]);          
+      } else {
+          this.passwordCtrl = this.fb.control(this.current.password, [Validators.required, Validators.minLength(6)]);
+      }
+
+      this.echosForm = this.fb.group({
+        id: this.idCtrl,
+        name: this.nameCtrl,
+        email: this.emailCtrl,
+        account_type: this.typeCtrl,
+        password: this.passwordCtrl,
       });
-    }
+
+
+      if (this.id) {
+        this.restService.get(this.id).subscribe(item => {
+          this.echosForm.patchValue(item);
+          this.current = item;
+        });
+      }
   }
 
   save() {
