@@ -14,11 +14,6 @@ import { DetailComponent as DetailComponent_q_percents } from './components/q_pe
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// import a retirer, TESTS
-//import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
-//import { AnswerEditComponent as CheckboxAnswerEditComponent } from './components/q_checkbox/answer-edit/answer-edit.component';
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -29,8 +24,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule.forRoot()
   ],
   declarations: [
-    //AnswerEditComponent, // a retirer, TESTS
-    //CheckboxAnswerEditComponent, // a retirer, TESTS
     DetailComponent,
     EditComponent,
     EditComponent_q_checkbox,
