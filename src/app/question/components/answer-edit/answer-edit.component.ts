@@ -71,10 +71,12 @@ export class AnswerEditComponent implements OnInit {
   save() {
       console.log("save answer to do !");
       this.isAnswered = true;
+      return false;
   }
 
   modify() {
       this.isAnswered = false;
+      return false;
   }
 
 }
