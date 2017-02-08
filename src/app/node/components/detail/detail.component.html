@@ -28,6 +28,10 @@
 
   <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
 
+  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+  </md-toolbar>
+
   <md-list *ngIf="filteredChildList">
     <md-list-item class="echos-list-item" *ngFor="let category of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
       <div md-line fxLayout="row" fxLayoutAlign="start center">
@@ -48,6 +52,11 @@
       </div>
     </md-list-item>
   </md-list>
+
+  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+  </md-toolbar>
+
 </div>
 
 <div *ngIf="type == 'category'">
@@ -66,7 +75,7 @@
     <button md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
 
-  <div class="echos-title">{{item.title}}</div>
+  <div *ngIf="item && item.nodepath && item.nodepath[0]" class="echos-title">{{item.nodepath[0].title}} > {{item.title}}</div>
   <div class="echos-description">{{item.description}}</div>
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
@@ -75,6 +84,10 @@
   </div>
 
   <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
+
+  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+  </md-toolbar>
 
   <md-list *ngIf="filteredChildList">
     <md-list-item class="echos-list-item" *ngFor="let question of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
@@ -92,5 +105,9 @@
       </div>
     </md-list-item>
   </md-list>
+
+  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+  </md-toolbar>
 
 </div>

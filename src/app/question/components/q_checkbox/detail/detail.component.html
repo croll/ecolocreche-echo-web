@@ -1,6 +1,10 @@
 <h2 *ngIf="choices && choices.length" style="margin: 50px 0 20px 0">Choix possibles</h2>
 <h2 *ngIf="!choices || !choices.length" style="margin: 50px 0 20px 0">Aucun choix n'est défini. Veuillez configurer la question.</h2>
 
+<md-toolbar fxLayout="row" fxLayoutAlign="end center">
+  <button md-button (click)="goBack()">Remonter d'un niveau</button>
+</md-toolbar>
+
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let item of choices">
     <div md-line fxLayout="row" fxLayoutAlign="left center">
