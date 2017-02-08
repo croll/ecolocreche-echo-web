@@ -17,33 +17,19 @@ export class AnswerEditComponent implements OnInit {
   choices: Choice[];
   @Input()
   answer: Answer;
+  @Input()
+  echosForm: FormGroup;
 
   impact: Impact;
+
+  answerValue: any;
 
   constructor(private fb: FormBuilder, public sanitizer: DomSanitizer) {
     this.impact = Impact.getInstance(sanitizer);
   }
 
   ngOnInit() {
-  }
-
-  addChoice() {
-    if (!this.choices)
-      this.choices = [];
-    this.choices.push(new Choice());
-    return false;
-  }
-
-  deleteChoice(choice_to_delete) {
-    var index = this.choices.indexOf(choice_to_delete);
-    if (index >= 0) this.choices.splice(index, 1);
-  }
-
-  swap(num1, num2) {
-    let tmp = this.choices[num2];
-    this.choices[num2] = this.choices[num1];
-    this.choices[num1] = tmp;
-    return false;
+    //this.echosForm.addControl("answerValue", this.fb.control(this.answerValue));
   }
 
 }
