@@ -2,14 +2,11 @@
   <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
-        <div fxLayout="row" fxLayoutAlign="start center">
-          <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
-          <div fxLayout="column" fxFlex="70">
-            <md-checkbox>
-              <div>{{item.title}}</div>
-              <div>{{item.description}}</div>
-            </md-checkbox>
-          </div>
+        <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
+          <md-checkbox>
+            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+            <span>{{item.title}}</span>
+          </md-checkbox>
         </div>
         <div>{{item.description}}</div>
       </div>
