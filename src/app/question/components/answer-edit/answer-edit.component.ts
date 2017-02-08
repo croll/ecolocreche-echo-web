@@ -32,6 +32,7 @@ export class AnswerEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
+
     this.idCtrl = fb.control(this.id_node);
     this.ignoredCtrl = fb.control(this.current.answer.ignored);
 
@@ -43,6 +44,7 @@ export class AnswerEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("id_node: ", this.id_node);
       this.get();
   }
 
@@ -50,6 +52,7 @@ export class AnswerEditComponent implements OnInit {
       this.restService.get(this.id_node, 'hist/nodes', {
           id_audit: this.id_audit,
       }).subscribe(item => {
+        console.log("item: ", item);
         this.echosForm.patchValue(item);
         this.current = Object.assign(this.current, item);
         this.choices = [];
