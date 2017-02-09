@@ -20,6 +20,7 @@ export class AnswerEditComponent implements OnInit {
   @Input() choices: Choice[];
   @Input() answer: Answer;
   @Input('value') _value = "";
+  @Input() readonly: boolean;
 
   propagateChange:any = () => {};
   validateFn:any = () => {};
@@ -39,7 +40,12 @@ export class AnswerEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.echosForm.addControl("answerValue", this.fb.control(this.answerValue));
+      this.value=this._value;
+  }
+
+  updatevalue() {
+      console.log("updatevalue")
+      this.propagateChange(this.value);
   }
 
   get value() {
@@ -61,7 +67,8 @@ export class AnswerEditComponent implements OnInit {
               if (choice) choice['selected'] = value > 0 ? true : false;
           }
       }
-    this.propagateChange(val);
+      //this.propagateChange(val);
+      this.propagateChange(this.value);
   }
 
   ngOnChanges(inputs) {

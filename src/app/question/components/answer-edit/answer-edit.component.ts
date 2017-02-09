@@ -55,11 +55,19 @@ export class AnswerEditComponent implements OnInit {
       this.restService.get(this.id_node, 'hist/nodes', {
           id_audit: this.id_audit,
       }).subscribe(item => {
-        console.log("item: ", item);
-        this.echosForm.patchValue(item);
+        //console.log("item: ", item);
+
+        this.idCtrl.setValue(item.id_node);
+        this.ignoredCtrl.setValue(item.answer ? item.answer.ignored : false);
+        this.valueCtrl.setValue(item.answer ? item.answer.value : "");
+
         this.current = Object.assign(this.current, item);
         if (! this.current.answer) {
           this.current.answer = new Answer();
+          this.current.answer.ignored = false;
+          this.isAnswered = false;
+        } else {
+            this.isAnswered = true;
         }
         this.choices = [];
         if ('choices' in item) {
@@ -75,9 +83,14 @@ export class AnswerEditComponent implements OnInit {
   }
 
   save() {
-      console.log("save answer to do !");
-      this.current.answer.ignored = this.ignoredCtrl.value;
-      this.isAnswered = true;
+      this.current.answer.ignored = this.ignoredCtrl.value ? this.ignoredCtrl.value : false;
+      this.current.answer.value = this.valueCtrl.value ? this.valueCtrl.value : "{}";
+      this.restService.save(this.current.answer, 'answers/'+this.id_audit+'/'+this.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE").subscribe((res) => {
+          //console.log("res :", res);
+          this.isAnswered = true;
+          this.ignoredCtrl.setValue(res.ignored);
+          this.valueCtrl.setValue(res.value);
+      });
       return false;
   }
 
