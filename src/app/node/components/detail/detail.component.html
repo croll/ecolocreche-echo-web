@@ -9,13 +9,15 @@
 
   <div fxLayout="row" fxLayoutAlign="start center">
     <h1 fxFlex>
-      Thème
+      Thème<span class="titleItem">{{item.title}}</span>
     </h1>
     <button md-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
 
-  <div class="echos-title">{{item.title}}</div>
-  <div class="echos-description">{{item.description}}</div>
+  <div *ngIf="item && item.description">
+    <div class="echos-title">Informations</div>
+    <div class="echos-description">{{item.description}}</div>
+  </div>
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des rubriques</div>
@@ -70,13 +72,26 @@
 
   <div fxLayout="row" fxLayoutAlign="start center">
     <h1 fxFlex>
-      Rubrique
+      Rubrique<span class="titleItem">{{item.title}}</span>
     </h1>
     <button md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
 
-  <div *ngIf="item && item.nodepath && item.nodepath[0]" class="echos-title">{{item.nodepath[0].title}} > {{item.title}}</div>
-  <div class="echos-description">{{item.description}}</div>
+  <div class="echos-title">Informations</div>
+
+  <div class="echos-infos">
+    <div fxLayout="row">
+      <label>Chemin :</label>
+      <div style="margin-left: 5px">
+        <div *ngIf="item && item.nodepath && item.nodepath[0]">{{item.nodepath[0].title}} > {{item.title}}</div>
+      </div>
+    </div>
+
+    <div *ngIf="item.description" fxLayout="row">
+      <label>description :</label>
+      <div fxFlexOffset="10px">{{item.description}}</div>
+    </div>
+  </div>
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des questions</div>

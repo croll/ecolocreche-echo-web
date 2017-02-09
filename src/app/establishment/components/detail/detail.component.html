@@ -6,12 +6,12 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Fiche établissement
+    Fiche établissement<span class="titleItem">{{item.name}}</span>
   </h1>
   <button md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{item.name}}</div>
+<div class="echos-title">Informations</div>
 
 <div class="echos-infos">
 

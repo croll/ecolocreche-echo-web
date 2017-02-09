@@ -8,13 +8,24 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Question: {{item.title}}
+    Question<span class="titleItem">{{item.title}}</span>
   </h1>
   <button md-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{qtypes.getQuestionType(item.type).label}}</div>
-<div class="echos-description">{{item.description}}</div>
+<div class="echos-title">Informations</div>
+
+<div class="echos-infos">
+  <div fxLayout="row">
+    <label>Type :</label>
+    <div fxFlexOffset="10px">{{qtypes.getQuestionType(item.type).label}}</div>
+  </div>
+
+  <div *ngIf="item.description" fxLayout="row">
+    <label>description :</label>
+    <div fxFlexOffset="10px">{{item.description}}</div>
+  </div>
+</div>
 
 <q-checkbox-detail *ngIf="item.type == 'q_checkbox'" [choices]="item.choices"></q-checkbox-detail>
 <q-radio-detail *ngIf="item.type == 'q_radio'" [choices]="item.choices"></q-radio-detail>
