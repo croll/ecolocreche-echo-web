@@ -94,8 +94,10 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
 .echos-color-box {
   display:inline-block;
   width: 24px;
+  min-width: 24px;
   height: 24px;
-  border: solid 1px grey;
+  min-height: 24px;
+  border: 1px solid #d0d0d0;
   vertical-align: middle;
   margin: 0 8px;
 }

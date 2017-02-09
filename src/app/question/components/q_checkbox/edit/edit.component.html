@@ -8,8 +8,12 @@
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column">
+            <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up</md-icon></button>
+            <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
+          </div>
           <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
-          <div fxLayout="column" fxFlex="70">
+          <div fxLayout="column" fxFlexOffset="30px" fxFlex>
             <md-input-container>
               <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
             </md-input-container>
@@ -21,10 +25,6 @@
             <md-select [(ngModel)]="item.impact" placeholder="Impact *">
               <md-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</md-option>
             </md-select>
-          </div>
-          <div fxLayout="column" fxFlexOffset="40px">
-            <button md-button *ngIf="!firstItem" (click)="swap(i, i-1)"><md-icon>arrow_drop_up</md-icon></button>
-            <button md-button *ngIf="!lastItem" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
           </div>
         </div>
         <div>{{item.description}}</div>
