@@ -30,22 +30,24 @@ export class AnswerEditComponent implements OnInit {
 
   idCtrl: FormControl;
   ignoredCtrl: FormControl;
+  valueCtrl: FormControl;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
 
     this.idCtrl = fb.control(this.id_node);
     this.ignoredCtrl = fb.control(this.current.answer.ignored);
+    this.valueCtrl = fb.control(this.current.answer.value);
 
     this.echosForm = fb.group({
       id_node: this.idCtrl,
       ignored: this.ignoredCtrl,
+      value: this.valueCtrl,
     });
 
   }
 
   ngOnInit() {
-    console.log("id_node: ", this.id_node);
       this.get();
   }
 

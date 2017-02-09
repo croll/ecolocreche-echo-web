@@ -3,13 +3,7 @@
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
-          <!--
-          <md-checkbox formControlName="answerValue">
-            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
-            <span>{{item.title}}</span>
-          </md-checkbox>
-        -->
-          <md-checkbox>
+          <md-checkbox [(ngModel)]="item.selected">
             <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
             <span>{{item.title}}</span>
           </md-checkbox>
