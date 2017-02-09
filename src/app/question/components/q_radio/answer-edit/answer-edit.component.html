@@ -1,0 +1,17 @@
+<md-radio-group [(ngModel)]="radios" [disabled]="readonly ? true : false" (change)="updatevalue()">
+<md-list>
+  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex>
+        <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
+          <md-radio-button [value]="item.id_choice" [checked]="item.id_choice == radios">
+            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+            <span>{{item.title}}</span>
+          </md-radio-button>
+        </div>
+        <div>{{item.description}}</div>
+      </div>
+    </div>
+  </md-list-item>
+</md-list>
+</md-radio-group>

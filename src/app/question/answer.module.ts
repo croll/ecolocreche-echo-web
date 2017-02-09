@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // import our software
 import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
 import { AnswerEditComponent as CheckboxAnswerEditComponent } from './components/q_checkbox/answer-edit/answer-edit.component';
+import { AnswerEditComponent as RadioAnswerEditComponent } from './components/q_radio/answer-edit/answer-edit.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { AnswerEditComponent as CheckboxAnswerEditComponent } from './components
   declarations: [
     AnswerEditComponent,
     CheckboxAnswerEditComponent,
+    RadioAnswerEditComponent,
   ],
   providers: [
   ],

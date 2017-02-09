@@ -13,8 +13,8 @@
 
     <div [hidden]="echosForm.controls.ignored.value">
         <q-checkbox-answer-edit *ngIf="current.type == 'q_checkbox'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-checkbox-answer-edit>
+        <q-radio-answer-edit *ngIf="current.type == 'q_radio'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-radio-answer-edit>
         <!--
-        <q-radio-answer-edit *ngIf="current.type.value == 'q_radio'" [choices]="choices" [answer]="current.answer"></q-radio-answer-edit>
         <q-percents-answer-edit *ngIf="current.type.value == 'q_percents'" [choices]="choices" [answer]="current.answer"></q-percents-answer-edit>
     -->
     </div>
