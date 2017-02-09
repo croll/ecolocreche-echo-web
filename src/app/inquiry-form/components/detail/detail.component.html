@@ -6,14 +6,14 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Fiche questionnaire #{{inquiryform.id}}
+    Fiche questionnaire<span class="titleItem">{{inquiryform.title}}</span>
   </h1>
   <button md-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div class="echos-title">{{inquiryform.title}}</div>
+<div class="echos-title" *ngIf="inquiryform.description">Informations</div>
 
-<div *ngIf="inquiryform.description" class="echos-caption">
+<div class="echos-caption">
   {{inquiryform.description}}
 </div>
 
