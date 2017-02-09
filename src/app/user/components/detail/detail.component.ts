@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../../user';
 import { RestService } from '../../../rest.service';
+import { AuthService } from '../../../auth.service';
 
 @Component({
   templateUrl: './detail.component.html',
@@ -27,9 +28,14 @@ export class DetailComponent implements OnInit {
   private id: number;
   item: User;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    this.id = parseInt(this.route.snapshot.params['id']);
-    this.item = new User();
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private authService: AuthService) {
+      if (this.route.snapshot.params['id'] == "moi") {
+          this.id = authService.loggedUser.id;
+      } else {
+          this.id = parseInt(this.route.snapshot.params['id']);
+
+      }
+      this.item = new User();
   }
 
   ngOnInit() {

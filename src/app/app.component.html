@@ -1,7 +1,7 @@
 <md-sidenav-container fullscreen>
   <md-sidenav #sidenav>
     <md-list>
-       <md-list-item routerLink="/compte" routerLinkActive="active">Mon compte</md-list-item>
+       <md-list-item routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
        <md-divider></md-divider>
        <md-list-item routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
        <md-divider></md-divider>
@@ -29,7 +29,7 @@
       <div class="echos-main-container" fxLayout="row">
         <div class="echos-menu">
           <md-list *ngIf="loggedUser != null">
-             <md-list-item routerLink="/compte" routerLinkActive="active">Mon compte</md-list-item>
+             <md-list-item routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
              <md-divider></md-divider>
              <md-list-item routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
              <md-divider></md-divider>
