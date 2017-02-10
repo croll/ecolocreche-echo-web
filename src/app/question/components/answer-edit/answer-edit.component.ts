@@ -84,7 +84,6 @@ export class AnswerEditComponent implements OnInit {
   }
 
   ignoreset(ignored: boolean) {
-      console.log("ignoreset", ignored);
       if (ignored && this.echosForm.contains('value')) {
           this.echosForm.removeControl('value');
       } else if (!ignored && !this.echosForm.contains('value')){

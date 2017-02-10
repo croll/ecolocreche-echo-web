@@ -44,7 +44,6 @@ export class AnswerEditComponent implements OnInit {
   }
 
   updatevalue() {
-      console.log("updatevalue")
       this.propagateChange(this.value);
   }
 
@@ -58,7 +57,6 @@ export class AnswerEditComponent implements OnInit {
   }
 
   set value(val) {
-      console.log("parse: ", val);
       if (val) {
           let ar=JSON.parse(val);
           for (let id_choice in ar) {

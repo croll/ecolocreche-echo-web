@@ -43,11 +43,9 @@ export class AnswerEditComponent implements OnInit {
 
   ngOnInit() {
       this.value=this._value;
-      console.log("choices: ", this.choices);
   }
 
   updatevalue() {
-      console.log("updatevalue")
       this.propagateChange(this.value);
   }
 
@@ -60,7 +58,6 @@ export class AnswerEditComponent implements OnInit {
   }
 
   set value(val) {
-      console.log("parse: ", val);
       if (val) {
           let ar=JSON.parse(val);
           for (let id_choice in ar) {
@@ -68,7 +65,6 @@ export class AnswerEditComponent implements OnInit {
               let value = parseInt(ar[id_choice]);
               if (choice && value > 0) {
                   this.radios=id_choice;
-                  console.log("this.radios = ", this.radios);
               }
           }
       }
