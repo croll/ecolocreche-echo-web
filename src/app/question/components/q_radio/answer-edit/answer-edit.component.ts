@@ -102,7 +102,6 @@ export function createEmptyValidator() {
                 given: c.value,
             }
         };
-
-        return (c.value == null || c.value == undefined) ? err : null;
+        return (c.value == null || c.value == undefined || c.value=="" || c.value=="{}") ? err : null;
     }
 }
