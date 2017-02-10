@@ -11,6 +11,7 @@ import { AnswerEditComponent } from './components/answer-edit/answer-edit.compon
 import { AnswerEditComponent as CheckboxAnswerEditComponent } from './components/q_checkbox/answer-edit/answer-edit.component';
 import { AnswerEditComponent as RadioAnswerEditComponent } from './components/q_radio/answer-edit/answer-edit.component';
 import { AnswerEditComponent as PercentsAnswerEditComponent } from './components/q_percents/answer-edit/answer-edit.component';
+import { AnswerEditComponent as TextAnswerEditComponent } from './components/q_text/answer-edit/answer-edit.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { AnswerEditComponent as PercentsAnswerEditComponent } from './components
     CheckboxAnswerEditComponent,
     RadioAnswerEditComponent,
     PercentsAnswerEditComponent,
+    TextAnswerEditComponent,
   ],
   providers: [
   ],

@@ -15,6 +15,7 @@
         <q-checkbox-answer-edit *ngIf="current.type == 'q_checkbox'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-checkbox-answer-edit>
         <q-radio-answer-edit *ngIf="current.type == 'q_radio'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-radio-answer-edit>
         <q-percents-answer-edit *ngIf="current.type == 'q_percents'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-percents-answer-edit>
+        <q-text-answer-edit *ngIf="current.type == 'q_text'" formControlName="value" [readonly]="isAnswered" [answer]="current.answer" [value]="current.answer.value"></q-text-answer-edit>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
