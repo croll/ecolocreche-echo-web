@@ -35,19 +35,19 @@ export class AnswerEditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
 
-    this.idCtrl = fb.control(this.id_node);
-    this.ignoredCtrl = fb.control(this.current.answer.ignored);
-    this.valueCtrl = fb.control(this.current.answer.value);
-
-    this.echosForm = fb.group({
-      id_node: this.idCtrl,
-      ignored: this.ignoredCtrl,
-      value: this.valueCtrl,
-    });
-
   }
 
   ngOnInit() {
+      this.idCtrl = this.fb.control(this.id_node);
+      this.ignoredCtrl = this.fb.control(this.current.answer.ignored);
+      this.valueCtrl = this.fb.control(this.current.answer.value);
+
+      this.echosForm = this.fb.group({
+        id_node: this.idCtrl,
+        ignored: this.ignoredCtrl,
+        value: this.valueCtrl,
+      });
+
       this.get();
   }
 
@@ -69,6 +69,7 @@ export class AnswerEditComponent implements OnInit {
         } else {
             this.isAnswered = true;
         }
+        this.ignoreset(this.current.answer.ignored);
         this.choices = [];
         if ('choices' in item) {
           item.choices.forEach((jschoice) => {
@@ -80,6 +81,15 @@ export class AnswerEditComponent implements OnInit {
       }, (err) => {
         console.error(err);
       });
+  }
+
+  ignoreset(ignored: boolean) {
+      console.log("ignoreset", ignored);
+      if (ignored && this.echosForm.contains('value')) {
+          this.echosForm.removeControl('value');
+      } else if (!ignored && !this.echosForm.contains('value')){
+          this.echosForm.addControl('value', this.valueCtrl);
+      }
   }
 
   save() {

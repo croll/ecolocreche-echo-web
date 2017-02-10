@@ -23,6 +23,7 @@ export class AnswerEditComponent implements OnInit {
   @Input() readonly: boolean;
 
   radios: string;
+  validateFn: any = () => {};
 
   propagateChange:any = () => {};
 
@@ -51,10 +52,11 @@ export class AnswerEditComponent implements OnInit {
   }
 
   get value() {
-      let res={};
-      if (this.radios)
-        res[this.radios]=100;
-      return JSON.stringify(res);
+      if (this.radios) {
+          let res={};
+          res[this.radios]=100;
+          return JSON.stringify(res);
+      } else return null;
   }
 
   set value(val) {
@@ -75,12 +77,8 @@ export class AnswerEditComponent implements OnInit {
   }
 
   ngOnChanges(inputs) {
-      /*
-    if (inputs.counterRangeMax || inputs.counterRangeMin) {
-      this.validateFn = createCounterRangeValidator(this.counterRangeMax, this.counterRangeMin);
-      this.propagateChange(this.counterValue);
-    }
-    */
+      this.validateFn = createEmptyValidator();
+      this.propagateChange(this.value);
   }
 
   writeValue(value) {
@@ -96,8 +94,19 @@ export class AnswerEditComponent implements OnInit {
   registerOnTouched() {}
 
   validate(c: FormControl) {
-      console.log("validate...", parseInt(this.radios) > 0);
-      return parseInt(this.radios) > 0;
+      return this.validateFn(c);
   }
 
+}
+
+export function createEmptyValidator() {
+    return (c: FormControl) => {
+        let err = {
+            emptyError: {
+                given: c.value,
+            }
+        };
+
+        return (c.value == null || c.value == undefined) ? err : null;
+    }
 }

@@ -4,14 +4,14 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
     <div [hidden]="isAnswered">
-        <md-checkbox formControlName="ignored">Ignorer cette question</md-checkbox>
+        <md-checkbox formControlName="ignored" (change)="ignoreset(echosForm.controls.ignored.value)">Ignorer cette question</md-checkbox>
     </div>
 
     <div [hidden]="!isAnswered || !current.answer.ignored">
         Question ignorée
     </div>
 
-    <div [hidden]="echosForm.controls.ignored.value">
+    <div *ngIf="!echosForm.controls.ignored.value">
         <q-checkbox-answer-edit *ngIf="current.type == 'q_checkbox'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-checkbox-answer-edit>
         <q-radio-answer-edit *ngIf="current.type == 'q_radio'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-radio-answer-edit>
         <!--
