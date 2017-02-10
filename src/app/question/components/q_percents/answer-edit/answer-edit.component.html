@@ -1,0 +1,18 @@
+<md-list>
+  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
+    <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex>
+        <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
+            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+            <span>{{item.title}}</span>
+            &nbsp;
+            <md-select [(ngModel)]="item.value" (change)="updatevalue()" [disabled]="readonly ? true : lastItem">
+                <md-option *ngFor="let val of vals" [value]="val">{{val}} %</md-option>
+            </md-select>
+        </div>
+        <div>{{item.description}}</div>
+      </div>
+    </div>
+  </md-list-item>
+</md-list>
+<div *ngIf="nothundred" class="error">Le total doit faire 100%</div>
