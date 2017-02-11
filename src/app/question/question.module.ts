@@ -11,8 +11,8 @@ import { EditComponent as EditComponent_q_radio } from './components/q_radio/edi
 import { DetailComponent as DetailComponent_q_radio } from './components/q_radio/detail/detail.component';
 import { EditComponent as EditComponent_q_percents } from './components/q_percents/edit/edit.component';
 import { DetailComponent as DetailComponent_q_percents } from './components/q_percents/detail/detail.component';
-import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule, MdIconRegistry } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -20,8 +20,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     RoutingModule,
     FormsModule,
     ReactiveFormsModule,
-	  MaterialModule.forRoot(),
-    FlexLayoutModule.forRoot()
+    FlexLayoutModule,
+	  MaterialModule.forRoot()
   ],
   declarations: [
     DetailComponent,

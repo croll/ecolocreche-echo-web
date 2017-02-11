@@ -20,7 +20,7 @@ import { AnswerEditComponent as NumericAnswerEditComponent } from './components/
     FormsModule,
     ReactiveFormsModule,
 	  MaterialModule.forRoot(),
-    FlexLayoutModule.forRoot()
+    FlexLayoutModule
   ],
   declarations: [
     AnswerEditComponent,

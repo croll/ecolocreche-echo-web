@@ -56,7 +56,7 @@ import { RestService } from './rest.service';
     NgxChartsModule,
     NgxDatatableModule,
     MaterialModule.forRoot(),
-    FlexLayoutModule.forRoot()
+    FlexLayoutModule
   ],
   providers: [
     AuthGuard,

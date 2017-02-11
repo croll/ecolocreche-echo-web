@@ -17,7 +17,7 @@ import { AnswerModule } from '../question/answer.module';
     ReactiveFormsModule,
     AnswerModule,
 	  MaterialModule.forRoot(),
-    FlexLayoutModule.forRoot()
+    FlexLayoutModule
   ],
   declarations: [
     ActiveListComponent,
