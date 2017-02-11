@@ -39,7 +39,6 @@
     "@types/jasmine": "2.5.38",
     "@types/moment": "^2.13.0",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.24",
     "codelyzer": "~2.0.0-beta.1",
     "install": "^0.8.4",
     "jasmine-core": "2.5.2",
