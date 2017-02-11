@@ -4,11 +4,11 @@
       <div fxFlex>
         <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
           <md-checkbox [(ngModel)]="item.selected" (change)="updatevalue()" [disabled]="readonly ? true : false">
-            <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+            <!-- <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div> -->
             <span>{{item.title}}</span>
           </md-checkbox>
         </div>
-        <div>{{item.description}}</div>
+        <div>{{item.comment}}</div>
       </div>
     </div>
   </md-list-item>
