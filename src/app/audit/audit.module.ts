@@ -9,6 +9,7 @@ import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from './audit.resolver';
 import { AnswerModule } from '../question/answer.module';
+import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { AnswerModule } from '../question/answer.module';
   declarations: [
     ActiveListComponent,
     EditComponent,
-    AnswerComponent
+    AnswerComponent,
+    AuditOldPathRedirectComponent
   ],
   providers: [
     AuditResolver

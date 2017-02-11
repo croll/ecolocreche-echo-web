@@ -5,6 +5,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { AuthGuard } from '../auth-guard.service';
 import { AuditResolver } from './audit.resolver';
+import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: EditComponent
+      },
+      {
+        path: 'accueil/:unknown/:key',
+        component: AuditOldPathRedirectComponent
       },
       {
         path: ':key',
