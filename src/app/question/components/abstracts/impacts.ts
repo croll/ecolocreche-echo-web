@@ -18,7 +18,7 @@ export class Impact {
   impactList= [
     {
       id: 1,
-      label: "Trés faible",
+      label: "Très faible",
       color: "#008000",
     },
     {
@@ -38,7 +38,7 @@ export class Impact {
     },
     {
       id: 5,
-      label: "Trés fort",
+      label: "Très fort",
       color: "#ff0000",
     },
     {
