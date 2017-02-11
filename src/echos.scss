@@ -16,10 +16,14 @@ $echos-light-grey: #777;
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 /* Hack md-hint (en attendant que ce soit corrigé) */
-md-hint {
+md-hint, mat-hint {
   color: rgb(242, 74, 74);
   top: 40px;
   min-width: 500px;
+}
+
+.mat-slider-horizontal .mat-slider-thumb-label {
+  z-index: 1000;
 }
 
 body {
@@ -36,6 +40,7 @@ a:hover {
   text-decoration: underline;
 }
 
+app-root > mat-sidenav-container, app-root > mat-progress-bar,
 app-root > md-sidenav-container, app-root > md-progress-bar {
   max-width: 1400px;
   margin: 0 auto;
@@ -74,8 +79,9 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
   font-size: 0.9rem;
 }
 
-.echos-menu, md-sidenav {
-  md-list-item {
+.echos-menu, md-sidenav,
+.echos-menu, mat-sidenav {
+  md-list-item, mat-list-item {
     padding-left: 30px;
     padding-right: 30px;
     color: $echos-dark-grey;
@@ -102,9 +108,10 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
   margin: 0 8px;
 }
 
-md-list-item.echos-list-item {
+md-list-item.echos-list-item, mat-list-item.echos-list-item {
   cursor: pointer;
   border-bottom: 1px solid #a5a5a5;
+  padding: 15px 0;
   &:last-child {
     border-bottom: none;
   }
@@ -112,11 +119,11 @@ md-list-item.echos-list-item {
     border-bottom: 1px solid mat-color($accent);
     background: #f0f0f0;
   }
-  .md-list-item {
-    padding: 22px 8px;
-    height: auto;
+  .md-list-item, .mat-list-item, .mat-list-item-content {
+    padding: 22px 0px;
+    height: auto!important;
   }
-  div[md-line] {
+  div[md-line], div[mat-line] {
     .have-childs {
       & > div:nth-child(2):not(.small-list) {
         color: $echos-light-grey;
@@ -164,7 +171,7 @@ md-list-item.echos-list-item {
       content: '/';
     }
     &:first-child {
-      md-icon {
+      md-icon, mat-icon {
         font-size: 18px;
         fill: $echos-dark-grey;
         display: block;
