@@ -55,7 +55,7 @@ export class AnswerEditComponent implements OnInit {
       this.restService.get(this.id_node, 'hist/nodes', {
           id_audit: this.id_audit,
       }).subscribe(item => {
-        //console.log("item: ", item);
+        console.log("item: ", item);
 
         this.idCtrl.setValue(item.id_node);
         this.ignoredCtrl.setValue(item.answer ? item.answer.ignored : false);
@@ -91,6 +91,18 @@ export class AnswerEditComponent implements OnInit {
       }
   }
 
+  ignore() {
+      this.current.answer.ignored = true;
+      this.echosForm.patchValue(this.current.answer);
+      this.save();
+  }
+
+  unignore() {
+    this.current.answer.ignored = false;
+    this.echosForm.patchValue(this.current.answer);
+    this.ignoreset(false);
+  }
+
   save() {
       this.current.answer.ignored = this.ignoredCtrl.value ? this.ignoredCtrl.value : false;
       this.current.answer.value = this.valueCtrl.value ? this.valueCtrl.value : "{}";
@@ -104,8 +116,11 @@ export class AnswerEditComponent implements OnInit {
   }
 
   modify() {
-      this.isAnswered = false;
-      return false;
+    // Proposition beve
+    this.unignore();
+    // Fin proposition beve
+    this.isAnswered = false;
+    return false;
   }
 
 }

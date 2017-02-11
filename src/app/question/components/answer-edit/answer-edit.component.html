@@ -3,9 +3,9 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
-    <div [hidden]="isAnswered">
+    <!-- <div [hidden]="isAnswered">
         <md-checkbox formControlName="ignored" (change)="ignoreset(echosForm.controls.ignored.value)">Ignorer cette question</md-checkbox>
-    </div>
+    </div> -->
 
     <div [hidden]="!isAnswered || !current.answer.ignored">
         Question ignorée
@@ -19,9 +19,14 @@
         <q-numeric-answer-edit *ngIf="current.type == 'q_numeric'" formControlName="value" [readonly]="isAnswered" [answer]="current.answer" [value]="current.answer.value"></q-numeric-answer-edit>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <!-- <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
       <button *ngIf="!isAnswered" fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
       <button *ngIf="isAnswered" (click)="modify()" fxFlexOffset="20px" md-raised-button color="warn">Modifier cette réponse</button>
-    </div>
+    </div> -->
 
+    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+      <button *ngIf="!isAnswered" fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
+      <button *ngIf="isAnswered || this.answer?.ignored" (click)="modify()" fxFlexOffset="20px" md-raised-button>Modifier cette réponse</button>
+      <button *ngIf="!isAnswered" (click)="ignore()" fxFlexOffset="20px" md-raised-button color="warn">Ignorer cette question</button>
+    </div>
 </form>
