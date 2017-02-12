@@ -29,19 +29,25 @@ export class DetailComponent implements OnInit {
   item: User;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private authService: AuthService) {
-      if (this.route.snapshot.params['id'] == "moi") {
-          this.id = authService.loggedUser.id;
-      } else {
-          this.id = parseInt(this.route.snapshot.params['id']);
-
-      }
       this.item = new User();
   }
 
   ngOnInit() {
-    this.restService.get(this.id, 'users').subscribe(item => {
-      this.item = item;
-    });
+    if (this.route.snapshot.params['id'] == "moi") {
+        this.authService.loggedUserObs.subscribe(user => {
+          if (user) {
+            this.id = user.id;
+            this.restService.get(this.id, 'users').subscribe(item => {
+              this.item = item;
+            });
+          }
+        });
+    } else {
+        this.id = parseInt(this.route.snapshot.params['id']);
+        this.restService.get(this.id, 'users').subscribe(item => {
+          this.item = item;
+        });
+    }
   }
 
   getAccountType(id_type): any {
