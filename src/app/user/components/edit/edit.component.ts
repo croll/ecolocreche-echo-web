@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
       this.typeCtrl = this.fb.control(this.current.account_type);
       this.emailCtrl = this.fb.control(this.current.email);
       if (this.id) {
-          this.passwordCtrl = this.fb.control(this.current.password, [Validators.minLength(6)]);          
+          this.passwordCtrl = this.fb.control(this.current.password, [Validators.minLength(6)]);
       } else {
           this.passwordCtrl = this.fb.control(this.current.password, [Validators.required, Validators.minLength(6)]);
       }
@@ -82,11 +82,13 @@ export class EditComponent implements OnInit {
   }
 
   del(id) {
-    this.restService.delete(id).subscribe((response) => {
-      this.router.navigate(['/utilisateur/liste']);
-    }, (err) => {
-      console.error(err);
-    });
+    if (confirm("Souhaitez vous vraiment supprimer cet utilisateur ?")) {
+      this.restService.delete(id).subscribe((response) => {
+        this.router.navigate(['/utilisateur/liste']);
+      }, (err) => {
+        console.error(err);
+      });
+    }
     return false;
   }
 
