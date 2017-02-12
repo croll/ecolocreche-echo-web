@@ -27,4 +27,25 @@ export class AuthService {
     return this.loggedUser != null;
   }
 
+  isAdmin() {
+    return this.loggedUser != null && this.loggedUser.account_type == 'admin';
+  }
+
+  isSuperAgent() {
+    return this.loggedUser != null
+      && (this.loggedUser.account_type == 'admin'
+      || this.loggedUser.account_type == 'superagent');
+  }
+
+  isAgent() {
+    return this.loggedUser != null
+      && (this.loggedUser.account_type == 'admin'
+      || this.loggedUser.account_type == 'superagent'
+      || this.loggedUser.account_type == 'agent');
+  }
+
+  isNotLogged() {
+    return this.loggedUser == null;
+  }
+
 }
