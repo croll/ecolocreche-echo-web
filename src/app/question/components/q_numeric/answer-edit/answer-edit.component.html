@@ -1,4 +1,4 @@
-<md-input-container>
-  <input mdInput type="numeric" [(ngModel)]="value" placeholder="Réponse..." [disabled]="readonly ? true : false">
+<md-input-container class="echos-question-input-container" fxFlex>
+  <textarea mdInput [(ngModel)]="value" placeholder="Réponse..." [disabled]="readonly ? true : false"></textarea>
 </md-input-container>
-<div *ngIf="notnumber" class="error">Veuillez entrer un nombre</div>
+<div *ngIf="notnumber" class="echos-error">Veuillez entrer un nombre</div>

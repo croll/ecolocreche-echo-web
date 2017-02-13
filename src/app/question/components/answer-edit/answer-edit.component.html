@@ -1,5 +1,5 @@
-<div class="echos-title">{{current.title}}</div>
-<div class="echos-description">{{current.description}}</div>
+<md-toolbar color="primary" fxFlex>{{current.title}}</md-toolbar>
+<div *ngIf="current.description" class="echos-description">{{current.description}}</div>
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
@@ -7,11 +7,11 @@
         <md-checkbox formControlName="ignored" (change)="ignoreset(echosForm.controls.ignored.value)">Ignorer cette question</md-checkbox>
     </div> -->
 
-    <div [hidden]="!isAnswered || !current.answer.ignored">
+    <div class="echos-question-ignored-label" [hidden]="!isAnswered || !current.answer.ignored">
         Question ignorée
     </div>
 
-    <div *ngIf="!echosForm.controls.ignored.value">
+    <div [ngClass]="{'echos-question-list-item-disabled': isAnswered}" *ngIf="!echosForm.controls.ignored.value">
         <q-checkbox-answer-edit *ngIf="current.type == 'q_checkbox'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-checkbox-answer-edit>
         <q-radio-answer-edit *ngIf="current.type == 'q_radio'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-radio-answer-edit>
         <q-percents-answer-edit *ngIf="current.type == 'q_percents'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-percents-answer-edit>
@@ -24,7 +24,7 @@
       <button *ngIf="isAnswered" (click)="modify()" fxFlexOffset="20px" md-raised-button color="warn">Modifier cette réponse</button>
     </div> -->
 
-    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <div fxLayout="row" fxLayoutAlign="start center" class="echos-buttons-container">
       <button *ngIf="!isAnswered" fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
       <button *ngIf="isAnswered || this.answer?.ignored" (click)="modify()" fxFlexOffset="20px" md-raised-button>Modifier cette réponse</button>
       <button *ngIf="!isAnswered" (click)="ignore()" fxFlexOffset="20px" md-raised-button color="warn">Ignorer cette question</button>
