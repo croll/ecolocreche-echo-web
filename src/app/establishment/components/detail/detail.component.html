@@ -70,7 +70,7 @@
         <div *ngIf="!item.active">Finalisé</div>
         <div *ngIf="item.active" style="color: rgb(96, 190, 64)">En cours</div>
       </div>
-      <div class="percent">{{item.cached_percent_complete}} %</div>
+      <div class="percent">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
       <md-icon color="primary">chevron_right</md-icon>
     </div>
   </md-list-item>
