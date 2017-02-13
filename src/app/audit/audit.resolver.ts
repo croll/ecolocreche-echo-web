@@ -15,7 +15,7 @@ export class AuditResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    let obj = {audit: null, establishment: null, nodes: null}
+    let obj = {audit: null, establishment: null, nodes: null, inquiryform: null}
     let key = route.params['key'];
     return this.http.get(`rest/audits?key=${key}`)
                     .map((res: Response) => {
@@ -23,7 +23,11 @@ export class AuditResolver implements Resolve<any> {
                     })
                     .flatMap(audit => {
                       obj.audit = audit[0];
-                      return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: audit.id_establishment})
+                      return this.restService.get(audit[0].id_inquiryform, 'hist/inquiryforms');
+                    })
+                    .flatMap(inquiryform => {
+                      obj.inquiryform = inquiryform;
+                      return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: obj.audit.id_inquiryform, date: obj.audit.createdAt})
                     })
                     .flatMap(nodes => {
                       obj.nodes = nodes;
