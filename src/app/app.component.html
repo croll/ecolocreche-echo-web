@@ -1,19 +1,20 @@
 <md-sidenav-container fullscreen>
   <md-sidenav #sidenav>
     <md-list>
-       <md-list-item routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
        <md-divider></md-divider>
-       <md-list-item routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
        <md-divider></md-divider>
-       <md-list-item routerLink="/audit/liste/actifs" routerLinkActive="active">Les audits en cours</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active">Les audits en cours</md-list-item>
        <md-divider></md-divider>
-       <md-list-item routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
+       <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
        <md-divider></md-divider>
-       <md-list-item routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
+       <md-list-item *ngIf="isAdmin()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
        <md-divider></md-divider>
-       <md-list-item routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
+       <md-list-item *ngIf="isAdmin()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
        <md-divider></md-divider>
-       <md-list-item routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
+       <md-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
+       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Déconnexion</md-list-item>
     </md-list>
   </md-sidenav>
   <div fxLayout="column" style="height: 100vh">
@@ -28,23 +29,21 @@
     <div fxFlex>
       <div class="echos-main-container" fxLayout="row">
         <div class="echos-menu">
-          <md-list *ngIf="loggedUser != null">
-             <md-list-item routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
+          <md-list>
+             <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
              <md-divider></md-divider>
-             <md-list-item routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
+             <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
              <md-divider></md-divider>
-             <md-list-item routerLink="/audit/liste/actifs" routerLinkActive="active">Les audits en cours</md-list-item>
+             <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active">Les audits en cours</md-list-item>
              <md-divider></md-divider>
-             <md-list-item routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
+             <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
              <md-divider></md-divider>
-             <md-list-item routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
+             <md-list-item *ngIf="isAdmin()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
              <md-divider></md-divider>
-             <md-list-item routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
+             <md-list-item *ngIf="isAdmin()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
              <md-divider></md-divider>
-             <md-list-item routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
-          </md-list>
-          <md-list *ngIf="loggedUser == null">
-             <md-list-item routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
+             <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
+             <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
           </md-list>
         </div>
         <router-outlet></router-outlet>
