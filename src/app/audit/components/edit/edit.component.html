@@ -6,7 +6,7 @@
 </div>
 
 <h1 *ngIf="!id">Créer un audit</h1>
-<h1 *ngIf="id">Modifier un audit de l'établissement</h1>
+<h1 *ngIf="id">Modifier l'audit de l'établissement "{{current.establishment?.name}}"</h1>
 
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
@@ -15,6 +15,7 @@
     <md-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
       <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id">{{ifl.title}}</md-option>
     </md-select>
+    <div *ngIf="id" class="echos-error">Le type d'audit n'est pas modifiable</div>
   </div>
   <div>
     <md-input-container style="margin-top: 18px">

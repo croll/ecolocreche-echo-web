@@ -62,7 +62,6 @@ export class EditComponent implements OnInit {
 
   get() {
       this.restService.get(this.id, 'audits').subscribe(item => {
-        console.log("ICI >>", item);
         this.echosForm.patchValue(item);
         this.current = Object.assign(this.current, item);
       }, (err) => {
@@ -91,7 +90,7 @@ export class EditComponent implements OnInit {
   save() {
     console.log(this.echosForm.value);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
-      this.router.navigate(['/etablissement', this.id_establishment]);
+      this.goBack();
     }, (err) => {
       console.error(err);
     });
