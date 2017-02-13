@@ -49,6 +49,7 @@ export class AnswerEditComponent implements OnInit {
       this.propagateChange(this.value);
   }
 
+/* //version same format than checkboxes
   get value() {
       if (this.radios) {
           let res={};
@@ -67,6 +68,24 @@ export class AnswerEditComponent implements OnInit {
                   this.radios=id_choice;
               }
           }
+      }
+      //this.propagateChange(val);
+      this.propagateChange(this.value);
+  }
+*/
+
+  // version simple format
+  get value() {
+      if (this.radios) {
+          return JSON.stringify(this.radios);
+      } else return null;
+  }
+
+  set value(val) {
+      if (val) {
+          let id_choice=JSON.parse(val);
+          let choice = this.findChoiceById(id_choice);
+          this.radios=id_choice;
       }
       //this.propagateChange(val);
       this.propagateChange(this.value);
