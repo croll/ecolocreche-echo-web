@@ -64,6 +64,10 @@ export class AnswerEditComponent implements OnInit {
       this.propagateChange(this.value);
   }
 
+  onInput(val, item) {
+    item.liveValue = val;
+  }
+
   get value() {
       let res={};
       for (let choice of this.choices) {
@@ -104,7 +108,8 @@ export class AnswerEditComponent implements OnInit {
     this.propagateChange = fn;
   }
 
-  registerOnTouched() {}
+  registerOnTouched() {
+  }
 
   validate(c: FormControl) {
       let err = {

@@ -1,17 +1,18 @@
-<div class="echos-answer-container">
-  <div class="echos-list-item" *ngFor="let item of choices; let i = index; let lastItem = last">
-    <div fxLayout="row" fxLayoutAlign="start center">
+<md-list class="echos-answer-container">
+  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let lastItem = last" fxLayout="column">
+    <div>
       <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
           <!-- <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div> -->
-          <div>{{item.title}}</div>
+          <div class="echos-slider-title">{{item.title}}</div>
           <!-- <md-select [(ngModel)]="item.value" (change)="updatevalue()" [disabled]="readonly ? true : lastItem">
               <md-option *ngFor="let val of vals" [value]="val">{{val}} %</md-option>
           </md-select> -->
-          <md-slider [(ngModel)]="item.value" min="0" max="100" step="5" tickInterval="1" thumbLabel="true" [value]="item.value" (change)="updatevalue()" [disabled]="readonly ? true : lastItem"></md-slider>
-          <div class="show-value">{{item.value}} %</div>
+          <md-slider [(ngModel)]="item.value" min="0" max="100" step="5" tickInterval="1" (onTouched)="onTouched()" thumbLabel="false" [value]="item.value" (input)="onInput($event.value, item)" (change)="updatevalue()" [disabled]="readonly ? true : lastItem"></md-slider>
+          <div *ngIf="!item.liveValue && item.value" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : lastItem}">{{item.value}} %</div>
+          <div *ngIf="item.liveValue" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : lastItem}">{{item.liveValue}} %</div>
       </div>
-      <div>{{item.comment}}</div>
+      <div class="echos-choice-description">{{item.comment}}</div>
     </div>
-  </div>
-</div>
-<div *ngIf="nothundred" class="error">Le total doit faire 100%</div>
+  </md-list-item>
+</md-list>
+<div *ngIf="nothundred" class="echos-error">Le total doit faire 100%</div>
