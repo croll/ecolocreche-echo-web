@@ -42,7 +42,7 @@ a:hover {
 
 app-root > mat-sidenav-container, app-root > mat-progress-bar,
 app-root > md-sidenav-container, app-root > md-progress-bar {
-  max-width: 1400px;
+  max-width: 1450px;
   margin: 0 auto;
   border-left: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
@@ -127,7 +127,7 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
     .have-childs {
       & > div:first-child {
         padding-top: 4px;
-        font-size: 1.5em;
+        font-size: 1.4em;
         color: #333;
       }
       & > div:nth-child(2):not(.small-list) {
