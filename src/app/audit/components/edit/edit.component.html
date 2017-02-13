@@ -23,8 +23,8 @@
   </div>
   <div>
     <md-select placeholder="Status *" formControlName="active" style="margin: 8px 0 18px 0">
-      <md-option value="1">En cours</md-option>
-      <md-option value="0">Terminé</md-option>
+      <md-option [value]="1">En cours</md-option>
+      <md-option [value]="0">Terminé</md-option>
     </md-select>
   </div>
   <input *ngIf="id" type="hidden" formControlName="id">

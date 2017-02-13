@@ -29,11 +29,13 @@ export class EditComponent implements OnInit {
 
     this.current = new Audit();
 
+    this.id = this.route.snapshot.params['id'];
+
     this.idCtrl = fb.control(this.id);
     this.idEstablishmentCtrl = fb.control(this.id_establishment, [Validators.required]);
     this.idInquiryFormCtrl = fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
     this.synthesisCtrl = fb.control(this.current.synthesis || '');
-    this.activeCtrl = fb.control(this.current.active || 1, [Validators.required]);
+    this.activeCtrl = fb.control(this.current.active, [Validators.required]);
     this.keyCtrl = fb.control(this.current.key || this._generateKey(), [Validators.required]);
 
     this.echosForm = fb.group({
@@ -51,7 +53,6 @@ export class EditComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.id_establishment = this.route.snapshot.params['id_establishment'];
     this._getFormList();
-    console.log(new Date().getTime()+''+Math.random());
     if (this.id) {
       this.get();
     } else {
@@ -61,6 +62,7 @@ export class EditComponent implements OnInit {
 
   get() {
       this.restService.get(this.id, 'audits').subscribe(item => {
+        console.log("ICI >>", item);
         this.echosForm.patchValue(item);
         this.current = Object.assign(this.current, item);
       }, (err) => {
