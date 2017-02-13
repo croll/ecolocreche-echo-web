@@ -22,6 +22,7 @@ export class ActiveListComponent implements OnInit {
   getList() {
     this.restService.getList('audits', {active: true, sort: '-createdAt'}).subscribe(
       audits => {
+        console.log(audits);
        this.list = audits;
        this.filteredList = this.list;
      },
