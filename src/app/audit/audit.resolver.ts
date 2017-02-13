@@ -27,7 +27,7 @@ export class AuditResolver implements Resolve<any> {
                     })
                     .flatMap(inquiryform => {
                       obj.inquiryform = inquiryform;
-                      return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: obj.audit.id_inquiryform, date: obj.audit.createdAt})
+                      return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: obj.audit.id_inquiryform, date: obj.audit.createdAt, id_audit: obj.audit.id})
                     })
                     .flatMap(nodes => {
                       obj.nodes = nodes;
