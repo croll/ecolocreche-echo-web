@@ -8,8 +8,8 @@ import { Audit } from '../../audit';
 })
 export class ActiveListComponent implements OnInit {
 
-  list: Audit[] = [];
-  filteredList: Audit[] = [];
+  list: any[] = [];
+  filteredList: any[] = [];
   errorMessage: string;
 
   constructor(private restService: RestService) {
@@ -20,9 +20,8 @@ export class ActiveListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList('audits', {active: true, sort: '-createdAt'}).subscribe(
+    this.restService.getList('audits', {active: 1, sort: '-createdAt'}).subscribe(
       audits => {
-        console.log(audits);
        this.list = audits;
        this.filteredList = this.list;
      },
@@ -32,7 +31,7 @@ export class ActiveListComponent implements OnInit {
   }
 
   filterList(filter) {
-    // this.filteredList = filter ? this.list.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
+    this.filteredList = filter ? this.list.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
   }
 
 }
