@@ -12,8 +12,6 @@ import * as moment from 'moment'
 export class AnswerComponent implements OnInit {
 
   private id_inquiryform: number;
-  inquiryform: InquiryForm;
-  inquiryformTree: Node[];
   parentNodes: any[] = [];
   filteredChildList: any[];
   hideUnselected: boolean;
@@ -26,16 +24,12 @@ export class AnswerComponent implements OnInit {
   infos: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    this.node = new Node();
     this.infos = this.route.snapshot.data['infos']
     this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
-    this.inquiryform = new InquiryForm();
   }
 
   ngOnInit() {
-    this.node = new Node();
-    this.node.nodepath;
-    this.node.childs = this.infos.nodes;
+    this.node = this.infos.nodes;
     this.filteredChildList = this.node.childs;
   }
 

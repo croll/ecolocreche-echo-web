@@ -7,5 +7,9 @@ export class Node {
   public position: number
   public description: string
   public color: string
-  public childs: any
+  public childs: any[]
+
+  constructor() {
+    this.childs = [];
+  }
 }

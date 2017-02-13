@@ -30,7 +30,10 @@ export class AuditResolver implements Resolve<any> {
                       return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: obj.audit.id_inquiryform, date: obj.audit.createdAt, id_audit: obj.audit.id})
                     })
                     .flatMap(nodes => {
-                      obj.nodes = nodes;
+                      var node = new Node();
+                      node.childs = nodes;
+                      console.log(JSON.parse(obj.inquiryform.nodeslist));
+                      obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist), new Node());
                       return this.restService.get(obj.audit.id_establishment, 'establishments')
                     })
                     .flatMap(establishment => {
@@ -41,4 +44,22 @@ export class AuditResolver implements Resolve<any> {
                        });
                     })
   }
+
+  private _filterSelectedNodes(nodes, list, copy) {
+    if (nodes.childs && nodes.childs.length) {
+      if (!copy.childs) {
+        copy.childs = [];
+      }
+      nodes.childs.forEach(node => {
+        if (node.childs && node.childs.length){
+          this._filterSelectedNodes(node, list, copy.childs);
+        }
+        if (list.indexOf(node.id_node) !== -1) {
+          copy.childs.push(node);
+        }
+      });
+    }
+    return copy;
+  }
+
 }
