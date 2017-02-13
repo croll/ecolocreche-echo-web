@@ -47,7 +47,7 @@
 <div *ngIf="node.type && node.id_node_parent" class="echos-question-list">
   <div *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
     <div class="echos-question-list-item">
-      <answer-edit [id_node]="childItem.id_node" [id_audit]="infos.audit.id"></answer-edit>
+      <answer-edit [node]="childItem" [audit]="infos.audit"></answer-edit>
     </div>
   </div>
 </div>

@@ -16,9 +16,9 @@ import { RestService} from '../../../rest.service';
 export class AnswerEditComponent implements OnInit {
 
   @Input()
-  id_node: number;
+  node: any;
   @Input()
-  id_audit: number;
+  audit: any;
 
   qtypes = QTypes.getInstance();
 
@@ -38,7 +38,7 @@ export class AnswerEditComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.idCtrl = this.fb.control(this.id_node);
+      this.idCtrl = this.fb.control(this.node['id_node']);
       this.ignoredCtrl = this.fb.control(this.current.answer.ignored);
       this.valueCtrl = this.fb.control(this.current.answer.value);
 
@@ -52,8 +52,9 @@ export class AnswerEditComponent implements OnInit {
   }
 
   get() {
-      this.restService.get(this.id_node, 'hist/nodes', {
-          id_audit: this.id_audit,
+      this.restService.get(this.node['id_node'], 'hist/nodes', {
+          id_audit: this.audit['id'],
+          date: this.audit['createdAt'],
       }).subscribe(item => {
         console.log("item: ", item);
 
@@ -106,7 +107,7 @@ export class AnswerEditComponent implements OnInit {
   save() {
       this.current.answer.ignored = this.ignoredCtrl.value ? this.ignoredCtrl.value : false;
       this.current.answer.value = this.valueCtrl.value ? this.valueCtrl.value : "{}";
-      this.restService.save(this.current.answer, 'answers/'+this.id_audit+'/'+this.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE").subscribe((res) => {
+      this.restService.save(this.current.answer, 'answers/'+this.audit['id']+'/'+this.node['id_node'], {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE").subscribe((res) => {
           //console.log("res :", res);
           this.isAnswered = true;
           this.ignoredCtrl.setValue(res.ignored);
