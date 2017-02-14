@@ -61,8 +61,4 @@ export class AnswerComponent implements OnInit {
     this.filteredChildList = filter ? this.node.childs.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.node.childs;
   }
 
-  save() {
-    console.log("TODO: SAVE !");
-  }
-
 }

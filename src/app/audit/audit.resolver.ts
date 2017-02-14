@@ -23,7 +23,7 @@ export class AuditResolver implements Resolve<any> {
                     })
                     .flatMap(audit => {
                       obj.audit = audit[0];
-                      return this.restService.get(audit[0].id_inquiryform, 'hist/inquiryforms');
+                      return this.restService.get(obj.audit.id_inquiryform, 'hist/inquiryforms', {date: obj.audit.createdAt});
                     })
                     .flatMap(inquiryform => {
                       obj.inquiryform = inquiryform;
@@ -32,7 +32,9 @@ export class AuditResolver implements Resolve<any> {
                     .flatMap(nodes => {
                       var node = new Node();
                       node.childs = nodes;
-                      obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist), new Node());
+                      // obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist), new Node());
+                      obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
+                      console.log(obj.nodes);
                       return this.restService.get(obj.audit.id_establishment, 'establishments')
                     })
                     .flatMap(establishment => {
@@ -45,22 +47,15 @@ export class AuditResolver implements Resolve<any> {
                     })
   }
 
-  private _filterSelectedNodes(nodes, list, copy) {
-    if (nodes.childs && nodes.childs.length) {
-      if (!copy.childs) {
-        copy.childs = [];
+  private _filterSelectedNodes(nodes, list) {
+    for (let i = nodes.childs.length - 1; i >= 0; i -= 1) {
+      if (list.indexOf(nodes.childs[i].id_node) == -1) {
+        nodes.childs.splice(i, 1);
+      } else if (nodes.childs[i].childs && nodes.childs[i].childs.length) {
+        this._filterSelectedNodes(nodes.childs[i], list);
       }
-      copy.childs.childs = [];
-      nodes.childs.forEach(node => {
-        if (node.childs && node.childs.length){
-          copy.childs = this._filterSelectedNodes(node, list, copy.childs);
-        }
-        if (list.indexOf(node.id_node) !== -1) {
-          copy.childs.push(node);
-        }
-      });
     }
-    return copy;
+    return nodes;
   }
 
 }
