@@ -52,36 +52,29 @@ export class AnswerEditComponent implements OnInit {
   }
 
   get() {
-      this.restService.get(this.node['id_node'], 'hist/nodes', {
-          id_audit: this.audit['id'],
-          date: this.audit['createdAt'],
-      }).subscribe(item => {
-        console.log("item: ", item);
+      console.log("item: ", this.node);
 
-        this.idCtrl.setValue(item.id_node);
-        this.ignoredCtrl.setValue(item.answer ? item.answer.ignored : false);
-        this.valueCtrl.setValue(item.answer ? item.answer.value : "");
+      this.idCtrl.setValue(this.node.id_node);
+      this.ignoredCtrl.setValue(this.node.answer ? this.node.answer.ignored : false);
+      this.valueCtrl.setValue(this.node.answer ? this.node.answer.value : "");
 
-        this.current = Object.assign(this.current, item);
-        if (! this.current.answer) {
-          this.current.answer = new Answer();
-          this.current.answer.ignored = false;
-          this.isAnswered = false;
-        } else {
-            this.isAnswered = true;
-        }
-        this.ignoreset(this.current.answer.ignored);
-        this.choices = [];
-        if ('choices' in item) {
-          item.choices.forEach((jschoice) => {
-            let choice = new Choice();
-            Object.assign(choice, jschoice);
-            this.choices.push(choice);
-          })
-        }
-      }, (err) => {
-        console.error(err);
-      });
+      this.current = Object.assign(this.current, this.node);
+      if (! this.current.answer) {
+        this.current.answer = new Answer();
+        this.current.answer.ignored = false;
+        this.isAnswered = false;
+      } else {
+          this.isAnswered = true;
+      }
+      this.ignoreset(this.current.answer.ignored);
+      this.choices = [];
+      if ('choices' in this.node) {
+        this.node.choices.forEach((jschoice) => {
+          let choice = new Choice();
+          Object.assign(choice, jschoice);
+          this.choices.push(choice);
+        })
+      }
   }
 
   ignoreset(ignored: boolean) {
@@ -108,10 +101,10 @@ export class AnswerEditComponent implements OnInit {
       this.current.answer.ignored = this.ignoredCtrl.value ? this.ignoredCtrl.value : false;
       this.current.answer.value = this.valueCtrl.value ? this.valueCtrl.value : "{}";
       this.restService.save(this.current.answer, 'answers/'+this.audit['id']+'/'+this.node['id_node'], {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE").subscribe((res) => {
-          //console.log("res :", res);
           this.isAnswered = true;
           this.ignoredCtrl.setValue(res.ignored);
           this.valueCtrl.setValue(res.value);
+          this.node.answer = res;
       });
       return false;
   }
