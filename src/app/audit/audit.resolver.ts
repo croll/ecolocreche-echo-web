@@ -32,14 +32,11 @@ export class AuditResolver implements Resolve<any> {
                     .flatMap(nodes => {
                       var node = new Node();
                       node.childs = nodes;
-                      // obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist), new Node());
                       obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
-                      console.log(obj.nodes);
                       return this.restService.get(obj.audit.id_establishment, 'establishments')
                     })
                     .flatMap(establishment => {
                        obj.establishment = establishment
-                       console.log(obj);
                        return Observable.create(observer => {
                           observer.next(obj);
                           observer.complete();

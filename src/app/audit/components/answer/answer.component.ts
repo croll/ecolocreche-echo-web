@@ -31,11 +31,13 @@ export class AnswerComponent implements OnInit {
   ngOnInit() {
     this.node = this.infos.nodes;
     this.filteredChildList = this.node.childs;
+    this._getProgress(this.node);
   }
 
   goToParent() {
     this.node = this.parentNodes.pop();
     this.filterList();
+    this._getProgress(this.node);
   }
 
   goToChild(id) {
@@ -49,9 +51,23 @@ export class AnswerComponent implements OnInit {
       if (child.id_node == id) {
         this.node = child;
         this.filterList();
+        this._getProgress(this.node);
         return;
       }
     });
+  }
+
+  private _getProgress(node, parents = []) {
+    if (node.childs && node.childs.length) {
+      node.childs.forEach(child => {
+        if (child.childs && child.childs.length) {
+          this._getProgress(child, parents);
+          // No child, it's a question
+        } else {
+          console.log(child.title)
+        }
+      });
+    }
   }
 
   filterList(filter?) {
