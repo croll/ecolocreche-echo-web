@@ -52,7 +52,7 @@ export class AnswerEditComponent implements OnInit {
   }
 
   get() {
-      console.log("item: ", this.node);
+      // console.log("item: ", this.node);
 
       this.idCtrl.setValue(this.node.id_node);
       this.ignoredCtrl.setValue(this.node.answer ? this.node.answer.ignored : false);
