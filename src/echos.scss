@@ -292,13 +292,14 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
   display: none;
 }
 
-.percent {
-  margin-right: 20px;
-  border: 1px solid #c0c0c0;
-  border-radius: 8px;
-  padding: 3px 5px;
-  font-weight: bold;
+.echos-percent {
   font-size: 0.9em;
+  padding: 3px 5px 1px 5px;
+  border-radius: 5px;
+  color: #333;
+  border: 1px solid $echos-light-grey;
+  opacity: 0.8;
+  font-weight: bold;
 }
 
 .arrow-disabled {

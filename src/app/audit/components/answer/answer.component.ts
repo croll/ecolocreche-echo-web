@@ -51,20 +51,57 @@ export class AnswerComponent implements OnInit {
       if (child.id_node == id) {
         this.node = child;
         this.filterList();
-        this._getProgress(this.node);
+        if (this.node.type == 'directory') {
+          this._getProgress(this.node);
+        }
         return;
       }
     });
   }
-
-  private _getProgress(node, parents = []) {
+  private _getProgress(node, root?) {
     if (node.childs && node.childs.length) {
       node.childs.forEach(child => {
         if (child.childs && child.childs.length) {
-          this._getProgress(child, parents);
-          // No child, it's a question
+          this._getProgress(child, root || child);
+        } else if (root) {
+          root.numQuestions = (root.numQuestions) ? (root.numQuestions + 1) : 1;
+          if (!root.numAnswers) root.numAnswers = 0;
+          if (child.answer) {
+            root.numAnswers++;
+          }
+          root.progress = Math.round(root.numAnswers * 100 / root.numQuestions);
+        }
+      });
+    }
+  }
+
+  // private _getProgress(node, directParent = null, parents = []) {
+  //   if (node.childs && node.childs.length) {
+  //     node.childs.forEach(child => {
+  //       if (child.childs && child.childs.length) {
+  //         if (directParent) {
+  //           parents.push(parents);
+  //         }
+  //         this._getProgress(child, node, parents);
+  //       } else {
+  //         // No child, it's a question
+  //         console.log(child.title);
+  //         console.log(parents);
+  //         console.log('----');
+  //       }
+  //     });
+  //   }
+  // }
+
+  private _getProgress2(node, id_node_grandParent = null) {
+    if (node.childs && node.childs.length) {
+      node.childs.forEach(child => {
+        if (child.childs && child.childs.length) {
+          this._getProgress2(child, child.id_node_parent);
         } else {
-          console.log(child.title)
+          // No child, it's a question
+          console.log(child.title, child.id_node_parent, id_node_grandParent)
+          console.log(child);
         }
       });
     }

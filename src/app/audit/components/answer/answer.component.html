@@ -40,6 +40,7 @@
           <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
         </div>
       </div>
+      <div class="echos-percent">{{childItem.progress}} %</div>
       <button md-button color="primary" (click)="goToChild(childItem.id_node)"><md-icon>chevron_right</md-icon></button>
     </div>
   </md-list-item>

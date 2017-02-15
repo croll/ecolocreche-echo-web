@@ -20,8 +20,8 @@
         <div>{{item.establishment.name}}</div>
         <div>Le {{item.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
       </div>
-      <div class="percent">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
-      <md-icon color="primary">chevron_right</md-icon>
+      <div class="echos-percent">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
+      <md-icon color="primary" fxFlexOffset="25px">chevron_right</md-icon>
     </div>
   </md-list-item>
 </md-list>
