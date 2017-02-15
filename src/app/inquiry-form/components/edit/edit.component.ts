@@ -55,7 +55,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value, 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
+    this.restService.save(Object.assign(this.current, this.echosForm.value), 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
       this.router.navigate(['/questionnaire', InquiryForm.id_inquiryform]);
     }, (err) => {
       console.error(err);
