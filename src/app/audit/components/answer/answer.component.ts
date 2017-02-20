@@ -5,13 +5,13 @@ import { Node } from '../../../node/node';
 import { RestService } from '../../../rest.service';
 import * as moment from 'moment'
 
+
 @Component({
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.scss'],
 })
 export class AnswerComponent implements OnInit {
 
-  private id_inquiryform: number;
   parentNodes: any[] = [];
   filteredChildList: any[];
   hideUnselected: boolean;
@@ -25,7 +25,6 @@ export class AnswerComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.infos = this.route.snapshot.data['infos']
-    this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
   }
 
   ngOnInit() {

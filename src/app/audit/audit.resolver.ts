@@ -17,7 +17,9 @@ export class AuditResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
     let obj = {audit: null, establishment: null, nodes: null, inquiryform: null}
     let key = route.params['key'];
-    return this.http.get(`rest/audits?key=${key}`)
+    let id = route.params['id'];
+    let url = (key) ? `rest/audits?key=${key}` : `rest/audits?id=${id}`;
+    return this.http.get(url)
                     .map((res: Response) => {
                       return res.json();
                     })
@@ -29,14 +31,17 @@ export class AuditResolver implements Resolve<any> {
                       obj.inquiryform = inquiryform;
                       return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: obj.audit.id_inquiryform, date: obj.audit.createdAt, id_audit: obj.audit.id})
                     })
+                    // .flatMap(nodes => {
+                    //   var node = new Node();
+                    //   node.childs = nodes;
+                    //   obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
+                    //   return this.restService.get(obj.audit.id_establishment, 'establishments')
+                    // })
                     .flatMap(nodes => {
-                      var node = new Node();
-                      node.childs = nodes;
-                      obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
-                      return this.restService.get(obj.audit.id_establishment, 'establishments')
-                    })
-                    .flatMap(establishment => {
-                       obj.establishment = establishment
+                      //  obj.establishment = establishment
+                       var node = new Node();
+                       node.childs = nodes;
+                       obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
                        return Observable.create(observer => {
                           observer.next(obj);
                           observer.complete();
