@@ -17,6 +17,11 @@ export class Impact {
 
   impactList= [
     {
+      id: 0,
+      label: "Aucun",
+      color: "#ffffff",
+    },
+    {
       id: 1,
       label: "Très faible",
       color: "#008000",
@@ -41,11 +46,6 @@ export class Impact {
       label: "Très fort",
       color: "#ff0000",
     },
-    {
-      id: 6,
-      label: "Aucun",
-      color: "#ffffff",
-    }
   ];
 
   getImpact(id_impact) {
