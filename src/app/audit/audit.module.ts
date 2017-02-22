@@ -5,6 +5,7 @@ import { RoutingModule } from './routing.module';
 import { ActiveListComponent } from './components/active-list/active-list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
+import { ReportComponent } from './components/report/report.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from './audit.resolver';
@@ -24,6 +25,7 @@ import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.compone
     ActiveListComponent,
     EditComponent,
     AnswerComponent,
+    ReportComponent,
     AuditOldPathRedirectComponent
   ],
   providers: [

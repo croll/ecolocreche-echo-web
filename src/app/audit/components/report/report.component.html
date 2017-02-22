@@ -10,24 +10,47 @@
   <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="start center" class="search-container">
-  <md-input-container fxFlex>
-    <input mdInput #search [(value)]="searchTerm" type="search" placeholder="Recherche" fxFlex (keyup)="filterList(search.value)">
-  </md-input-container>
+<div class="presentation">
+  <p>L'audit Ecolo Crèche de votre établissement est désormais terminé. Cela nous permet à présent de vous envoyer ce rapport d’audit, composé de 8 thématiques (le Bâtiment/ les Energies : chauffage et électricité/ L’alimentation /Les activités et jeux/ Les produits d’entretien et d’hygiène/ l’Eau / les Fournitures de bureau / les Déchets).</p>
+  <p>Vous trouverez également un diagramme représentant l'impact de votre crèche sur l'environnement. Enfin, nous avons rassemblé vos représentations en matière de respect de l’environnement en dernière page.</p>
 </div>
 
-<md-toolbar fxLayout="row" fxLayoutAlign="end center" *ngIf="parentNodes.length">
-  <button fxFlexOffset="45px" md-button (click)="goToParent()">Remonter d'un niveau</button>
-</md-toolbar>
-
-<div *ngFor="let theme of node.childs" class="" style="margin: 80px 0 20px 0">
-  <md-toolbar color="primary">{{theme.title}}</md-toolbar>
-  <div *ngFor="let category of theme.childs" class="" style="margin: 80px 0 20px 0">
-    <div> > {{category.title}}</div>
-    <div *ngFor="let question of category.childs" class="" style="margin: 80px 0 20px 0">
-      <div> >> {{question.title}}</div>
-      <div> >>> {{question | json}}</div>
-      <div> >>> {{question.answer | json}}</div>
+<div *ngFor="let theme of node.childs">
+  <div class="echos-title echos-report-theme">{{theme.title}}</div>
+  <div *ngFor="let category of theme.childs">
+    <div class="echos-report-category"> {{category.title}}</div>
+    <div *ngFor="let question of category.childs">
+      <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
+      <!-- Check if question is answered or not -->
+      <div *ngIf="!questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
+      <div *ngIf="questionList[question.id_node].value !== undefined">
+        <!-- Check if question is ignored or not -->
+        <div *ngIf="questionList[question.id_node].ignored">
+          <div class="echos-report-ignored">Question ignorée</div>
+        </div>
+        <div *ngIf="!questionList[question.id_node].ignored">
+          <!-- Checkbox -->
+          <div *ngIf="questionList[question.id_node].type == 'q_checkbox' || questionList[question.id_node].type == 'q_radio'">
+            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center">
+                <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
+                <div fxFlexOffset="5px">{{choice.title}}</div>
+            </div>
+          </div>
+          <!-- Percent -->
+          <div *ngIf="questionList[question.id_node].type == 'q_percents'">
+            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center">
+              <div class="echos-percent">
+                {{choice.value}} %
+              </div>
+              <div fxFlexOffset="5px">{{choice.title}}</div>
+            </div>
+          </div>
+          <!-- Numeric and text -->
+          <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'">
+            <div class="echos-question-value">{{questionList[question.id_node].value}}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

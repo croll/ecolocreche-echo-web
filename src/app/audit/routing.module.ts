@@ -3,6 +3,7 @@ import { RouterModule, Routes }  from '@angular/router';
 import { ActiveListComponent } from './components/active-list/active-list.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
+import { ReportComponent } from './components/report/report.component';
 import { AuthGuard } from '../auth-guard.service';
 import { AuditResolver } from './audit.resolver';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
@@ -34,6 +35,17 @@ const routes: Routes = [
           infos: AuditResolver
         },
         component: AnswerComponent
+      },
+      {
+        path: ':id/rapport',
+        component: ReportComponent,
+        resolve: {
+          infos: AuditResolver
+        },
+      },
+      {
+        path: 'comparer/:id1/:id2',
+        component: ReportComponent
       }
     ]
   }

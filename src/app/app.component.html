@@ -45,6 +45,7 @@
              <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
              <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
           </md-list>
+          <button (click)="testPdf();">Test pdf</button>
         </div>
         <router-outlet></router-outlet>
       </div>

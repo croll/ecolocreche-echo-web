@@ -45,4 +45,7 @@ export class AppComponent{
     return this.loggedUser == null;
   }
 
+  testPdf() {
+  }
+
 }
