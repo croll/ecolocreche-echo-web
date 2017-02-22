@@ -49,8 +49,15 @@ export class ListComponent implements OnInit {
   }
 
   save() {
-    for (var i in this.list)
-      this.list[i].position = parseInt(i);
+    for (var i in this.list) {
+      let new_position = parseInt(i);
+      if (this.list[i].position != new_position) {
+        this.list[i].position = new_position;
+        this.restService.save(this.list[i], 'hist/nodes', {}, 'id_node').subscribe(() => {
+        });
+      }
+
+    }
     console.log(this.list);
   }
 
