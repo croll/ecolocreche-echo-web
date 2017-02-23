@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Node } from '../../node';
 import { RestService } from '../../../rest.service';
+import { FamilyTypes } from '../../familyTypes';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -25,30 +26,32 @@ export class EditComponent implements OnInit {
   descriptionCtrl: FormControl;
   positionCtrl: FormControl;
   colorCtrl: FormControl;
+  familyCtrl: FormControl;
+
+  familyTypes = FamilyTypes.getInstance();
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new Node();
+  }
 
-    this.idNodeCtrl = fb.control(this.id_node);
-    this.typeCtrl = fb.control('directory');
-    this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
-    this.descriptionCtrl = fb.control(this.current.description);
-    this.positionCtrl = fb.control(this.current.position || 0);
-    this.colorCtrl = fb.control(this.current.color);
+  ngOnInit() {
+    this.idNodeCtrl = this.fb.control(this.id_node);
+    this.typeCtrl = this.fb.control('directory');
+    this.titleCtrl = this.fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
+    this.descriptionCtrl = this.fb.control(this.current.description);
+    this.positionCtrl = this.fb.control(this.current.position || 0);
+    this.colorCtrl = this.fb.control(this.current.color);
 
-    this.echosForm = fb.group({
+    this.echosForm = this.fb.group({
       id_node: this.idNodeCtrl,
       type: this.typeCtrl,
       title: this.titleCtrl,
       description: this.descriptionCtrl,
       position: this.positionCtrl,
-      color: this.colorCtrl
+      color: this.colorCtrl,
     });
 
-  }
-
-  ngOnInit() {
     this.id_theme = this.route.snapshot.params['id_theme'];
     this.id_category = this.route.snapshot.params['id_category'];
     this.id_node_parent = this.route.snapshot.params['id_node_parent'] || null;
@@ -59,7 +62,14 @@ export class EditComponent implements OnInit {
     } else {
       this.id_node = this.id_theme;
       this.type = 'theme';
+
+      // only themes have family
+      this.familyCtrl = this.fb.control(this.current.family, [Validators.required]);
+      this.echosForm.addControl('family', this.familyCtrl);
     }
+
+
+
     if (this.id_node) {
       this.get();
     }

@@ -26,6 +26,11 @@
         <textarea mdInput formControlName="description" placeholder="Description"></textarea>
       </md-input-container>
     </div>
+    <div style="padding: 8px 0 15px">
+      <md-select placeholder="Famille *" formControlName="family" style="min-width: 200px">
+        <md-option *ngFor="let t of familyTypes.typeList" [value]="t.id">{{t.label}}</md-option>
+      </md-select>
+    </div>
     <div fxLayout="row" fxLayoutAlign="left center">
       <md-input-container>
         <input mdInput #bgColor formControlName="color" placeholder="Couleur">
