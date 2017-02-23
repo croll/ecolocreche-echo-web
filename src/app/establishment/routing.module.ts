@@ -4,6 +4,7 @@ import { ListComponent } from './components/list/list.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AuthGuard } from '../auth-guard.service';
+import { EstablishmentResolver } from './establishment.resolver';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
       {
         path: ':id',
         component: DetailComponent,
+        resolve: {
+          infos: EstablishmentResolver
+        }
       },
       {
         path: ':id/editer',

@@ -38,7 +38,7 @@ import { RestService } from './rest.service';
     UserLogoutComponent,
     UserListComponent,
     UserEditComponent,
-    UserDetailComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -84,8 +84,7 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
   font-size: 0.9rem;
 }
 
-.echos-menu, md-sidenav,
-.echos-menu, mat-sidenav {
+.echos-menu {
   md-list-item, mat-list-item {
     padding-left: 30px;
     padding-right: 30px;
@@ -124,11 +123,14 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
     border-bottom: 1px solid mat-color($accent);
     background: #f0f0f0;
   }
+  .md-line, .mat-line {
+    white-space: normal!important;
+  }
   .md-list-item, .mat-list-item, .mat-list-item-content {
     padding: 22px 0px;
     height: auto!important;
   }
-  div[md-line], div[mat-line] {
+  div {
     .have-childs {
       & > div:first-child {
         padding-top: 4px;

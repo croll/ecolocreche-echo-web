@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
 import { RestService } from '../../../rest.service';
@@ -8,22 +8,16 @@ import { Audit } from '../../../audit/audit';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent {
 
   private id: number;
-  item: Establishment;
-  auditList: Audit[];
+  item: any;
+  infos: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
-    this.item = new Establishment();
-  }
-
-  ngOnInit() {
-    this.restService.get(this.id, 'establishments').subscribe(item => {
-      this.item = Object.assign(this.item, item);
-    });
-    this._getAudits();
+    this.item = this.route.snapshot.data['infos'];
+    console.log(this.item);
   }
 
   getStatusLabel(id) {
@@ -38,17 +32,13 @@ export class DetailComponent implements OnInit {
 
   private _getLabel(list, id) {
     let match = null;
-    list.forEach(function(s:any) {
+    this.item.audits.forEach(function(s:any) {
       if (s.id == id) {
         match = s.label;
         return;
       }
     });
     return match;
-  }
-
-  private _getAudits() {
-    this.restService.getList('audits', {id_establishment: this.id}).subscribe(audits => this.auditList = audits);
   }
 
 }

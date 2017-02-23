@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     RoutingModule,
     ReactiveFormsModule,
     AnswerModule,
-	  MaterialModule.forRoot(),
+	  MaterialModule,
     FlexLayoutModule,
     ChartsModule,
     FormsModule
@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
     EditComponent,
     AnswerComponent,
     ReportComponent,
-    AuditOldPathRedirectComponent
+    AuditOldPathRedirectComponent,
   ],
   providers: [
     AuditResolver

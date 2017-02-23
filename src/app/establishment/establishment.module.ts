@@ -7,6 +7,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
+import { EstablishmentResolver } from './establishment.resolver';
 
 @NgModule({
   imports: [
@@ -14,14 +15,16 @@ import { MaterialModule, MdIconRegistry } from '@angular/material';
     RoutingModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-	  MaterialModule.forRoot()
+	  MaterialModule
   ],
   declarations: [
     ListComponent,
     DetailComponent,
     EditComponent
   ],
-  providers: []
+  providers: [
+    EstablishmentResolver
+  ]
 })
 
 export class EstablishmentModule { }
