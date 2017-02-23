@@ -21,7 +21,7 @@
     <button md-button color="primary" (click)="toggleChartType(themeImpact[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button>
   </div>
   <md-card>
-    <canvas style="max-width: 300px; margin: 0 auto" baseChart [datasets]="themeImpact[theme.id_node].datasets" [colors]="themeImpact[theme.id_node].colors" [labels]="themeImpact[theme.id_node].labels" [chartType]="themeImpact[theme.id_node].chartType" legend="true" [options]="themeImpact[theme.id_node].options"></canvas>
+    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="themeImpact[theme.id_node].datasets" [colors]="themeImpact[theme.id_node].colors" [labels]="themeImpact[theme.id_node].labels" [chartType]="themeImpact[theme.id_node].chartType" legend="true" [options]="themeImpact[theme.id_node].options"></canvas>
   </md-card>
   <div *ngFor="let category of theme.childs">
     <div class="echos-report-category"> {{category.title}}</div>

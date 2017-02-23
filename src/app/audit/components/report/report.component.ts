@@ -20,6 +20,7 @@ export class ReportComponent implements OnInit {
   themeImpact: any;
   cache: any;
   chartType: string = 'pie';
+  hideChart: boolean;
 
   auditTools = AuditTools.getInstance();
 
@@ -45,12 +46,14 @@ export class ReportComponent implements OnInit {
   }
 
   toggleChartType(chartType, id_theme) {
+    this.hideChart = true;
     chartType = (chartType == 'bar') ? 'pie' : 'bar';
     Object.assign(this.themeImpact[id_theme], this.auditTools.toChartDatas(chartType, this.cache.themeImpact[id_theme]));
     setTimeout(() => {
-      this.chart.ngOnChanges({});
+      this.hideChart = false;
+      this._chart.ngOnChanges({});
       // this._chart.refresh();
-    }, 250);
+    }, 0);
   }
 
 }
