@@ -12,6 +12,7 @@ import { AuditResolver } from './audit.resolver';
 import { AnswerModule } from '../question/answer.module';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ChartsModule } from 'ng2-charts';
     AnswerModule,
 	  MaterialModule.forRoot(),
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ],
   declarations: [
     ActiveListComponent,

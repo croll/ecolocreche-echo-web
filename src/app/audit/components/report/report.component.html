@@ -15,16 +15,13 @@
   <p>Vous trouverez également un diagramme représentant l'impact de votre crèche sur l'environnement. Enfin, nous avons rassemblé vos représentations en matière de respect de l’environnement en dernière page.</p>
 </div>
 
-<md-select (change)="setChartType($event)">
-  <md-option value="pie">Camembert</md-option>
-  <md-option value="radar">Araignée</md-option>
-  <md-option value="bar">Baton</md-option>
-</md-select>
-
 <div *ngFor="let theme of node.childs">
-  <div class="echos-title echos-report-theme">{{theme.title}}</div>
+  <div class="echos-title echos-report-theme" fxLayout="row">
+    <div fxFlex>{{theme.title}}</div>
+    <button md-button color="primary" (click)="toggleChartType(themeImpact[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button>
+  </div>
   <md-card>
-    <canvas baseChart [datasets]="themeImpact[theme.id_node].datasets" [colors]="themeImpact[theme.id_node].colors" [labels]="themeImpact[theme.id_node].labels" [chartType]="themeImpact[theme.id_node].chartType" legend="true" [options]="themeImpact[theme.id_node].options"></canvas>
+    <canvas style="max-width: 300px; margin: 0 auto" baseChart [datasets]="themeImpact[theme.id_node].datasets" [colors]="themeImpact[theme.id_node].colors" [labels]="themeImpact[theme.id_node].labels" [chartType]="themeImpact[theme.id_node].chartType" legend="true" [options]="themeImpact[theme.id_node].options"></canvas>
   </md-card>
   <div *ngFor="let category of theme.childs">
     <div class="echos-report-category"> {{category.title}}</div>
