@@ -8,8 +8,7 @@ import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { PageNotFoundComponent }   from './not-found.component';
 import { PageHomeComponent }   from './home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
@@ -53,8 +52,7 @@ import { RestService } from './rest.service';
     AuditModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgxChartsModule,
-    NgxDatatableModule,
+    // NgxDatatableModule,
     MaterialModule.forRoot(),
     FlexLayoutModule
   ],
