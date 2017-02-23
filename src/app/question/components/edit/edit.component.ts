@@ -22,6 +22,7 @@ export class EditComponent implements OnInit {
   idCtrl: FormControl;
   titleCtrl: FormControl;
   descriptionCtrl: FormControl;
+  privcommentCtrl: FormControl;
   typeCtrl: FormControl;
 
   private id_node: number;
@@ -34,12 +35,14 @@ export class EditComponent implements OnInit {
     this.idCtrl = fb.control(this.id_node);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
+    this.privcommentCtrl = fb.control(this.current.privcomment);
     this.typeCtrl = fb.control(this.current.type, [Validators.required]);
 
     this.echosForm = fb.group({
       id_node: this.idCtrl,
       title: this.titleCtrl,
       description: this.descriptionCtrl,
+      privcomment: this.privcommentCtrl,
       type: this.typeCtrl,
     });
 

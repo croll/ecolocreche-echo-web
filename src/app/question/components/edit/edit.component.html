@@ -35,6 +35,12 @@
     </md-input-container>
   </div>
 
+  <div>
+    <md-input-container>
+      <input mdInput formControlName="privcomment" placeholder="Commentaire privé">
+    </md-input-container>
+  </div>
+
   <input *ngIf="id_node" type="hidden" formControlName="id_node">
 
   <q-checkbox-edit *ngIf="echosForm.controls.type.value == 'q_checkbox'" [choices]="choices"></q-checkbox-edit>
