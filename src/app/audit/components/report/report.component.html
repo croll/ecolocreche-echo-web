@@ -15,8 +15,17 @@
   <p>Vous trouverez également un diagramme représentant l'impact de votre crèche sur l'environnement. Enfin, nous avons rassemblé vos représentations en matière de respect de l’environnement en dernière page.</p>
 </div>
 
+<md-select (change)="setChartType($event)">
+  <md-option value="pie">Camembert</md-option>
+  <md-option value="radar">Araignée</md-option>
+  <md-option value="bar">Baton</md-option>
+</md-select>
+
 <div *ngFor="let theme of node.childs">
   <div class="echos-title echos-report-theme">{{theme.title}}</div>
+  <md-card>
+    <canvas baseChart [datasets]="themeImpact[theme.id_node].datasets" [colors]="themeImpact[theme.id_node].colors" [labels]="themeImpact[theme.id_node].labels" [chartType]="themeImpact[theme.id_node].chartType" legend="true" [options]="themeImpact[theme.id_node].options"></canvas>
+  </md-card>
   <div *ngFor="let category of theme.childs">
     <div class="echos-report-category"> {{category.title}}</div>
     <div *ngFor="let question of category.childs">
