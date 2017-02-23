@@ -52,7 +52,8 @@
             </div>
           </div>
           <!-- Numeric and text -->
-          <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'">
+          <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'" fxLayout="row">
+            <div style="color: #888; font-size: 0.8em; padding-top: 1px">Réponse:</div>
             <div class="echos-report-question-value">{{questionList[question.id_node].value}}</div>
           </div>
         </div>
