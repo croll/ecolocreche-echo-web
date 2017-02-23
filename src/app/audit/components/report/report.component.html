@@ -16,7 +16,7 @@
 </div>
 
 <div *ngFor="let theme of node.childs">
-  <div class="echos-title echos-report-theme" fxLayout="row" [scrollSpyAffix]="{topMargin: 70}">
+  <div class="echos-title echos-report-theme" fxLayout="row">
     <div fxFlex>{{theme.title}}</div>
     <button md-button color="primary" (click)="toggleChartType(themeImpact[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button>
   </div>
