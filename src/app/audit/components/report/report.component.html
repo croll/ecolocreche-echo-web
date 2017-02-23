@@ -23,28 +23,28 @@
   <md-card>
     <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="themeImpact[theme.id_node].datasets" [colors]="themeImpact[theme.id_node].colors" [labels]="themeImpact[theme.id_node].labels" [chartType]="themeImpact[theme.id_node].chartType" legend="true" [options]="themeImpact[theme.id_node].options"></canvas>
   </md-card>
-  <div *ngFor="let category of theme.childs">
+  <md-card *ngFor="let category of theme.childs">
     <div class="echos-report-category"> {{category.title}}</div>
     <div *ngFor="let question of category.childs">
       <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
       <!-- Check if question is answered or not -->
       <div *ngIf="!questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
+      <div *ngIf="questionList[question.id_node].ignored">
+        <div class="echos-report-ignored">Question ignorée</div>
+      </div>
       <div *ngIf="questionList[question.id_node].value !== undefined">
         <!-- Check if question is ignored or not -->
-        <div *ngIf="questionList[question.id_node].ignored">
-          <div class="echos-report-ignored">Question ignorée</div>
-        </div>
         <div *ngIf="!questionList[question.id_node].ignored">
           <!-- Checkbox -->
           <div *ngIf="questionList[question.id_node].type == 'q_checkbox' || questionList[question.id_node].type == 'q_radio'">
-            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center">
+            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center" class="echos-report-choice">
                 <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
                 <div fxFlexOffset="5px">{{choice.title}}</div>
             </div>
           </div>
           <!-- Percent -->
           <div *ngIf="questionList[question.id_node].type == 'q_percents'">
-            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center">
+            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center" class="echos-report-choice">
               <div class="echos-percent">
                 {{choice.value}} %
               </div>
@@ -53,10 +53,12 @@
           </div>
           <!-- Numeric and text -->
           <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'">
-            <div class="echos-question-value">{{questionList[question.id_node].value}}</div>
+            <div class="echos-report-question-value">{{questionList[question.id_node].value}}</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </md-card>
 </div>
+
+<div style="height: 80px"></div>

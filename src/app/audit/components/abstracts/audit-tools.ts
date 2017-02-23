@@ -39,8 +39,10 @@ export class AuditTools {
                     if (parseInt(id_choice) == c.id_choice) {
                       if (node.type != 'q_percents' || value[id_choice] > 0) {
                         let impact = AuditTools.impact.getImpact(c.impact);
-                        themeImpact[id_theme].impact[impact.id]++;
-                        themeImpact[id_theme].totalAnswersWithImpact++;
+                        if (impact.id != 0) {
+                          themeImpact[id_theme].impact[impact.id]++;
+                          themeImpact[id_theme].totalAnswersWithImpact++;
+                        }
                         let choice = {title: c.title, impact: impact, comment: c.comment, value: value[id_choice], color: null};
                         question.value.push(choice);
                       }
@@ -54,8 +56,10 @@ export class AuditTools {
                   if (value == c.id_choice) {
                     // console.log(question.title, c.impact, AuditTools.impact.getImpact(c.impact));
                     let impact = AuditTools.impact.getImpact(c.impact);
-                    themeImpact[id_theme].impact[impact.id]++;
-                    themeImpact[id_theme].totalAnswersWithImpact++;
+                    if (impact.id != 0) {
+                      themeImpact[id_theme].impact[impact.id]++;
+                      themeImpact[id_theme].totalAnswersWithImpact++;
+                    }
                     let choice = {title: c.title, impact: impact, comment: c.comment, color: null}
                     question.value.push(choice);
                   }
@@ -74,29 +78,6 @@ export class AuditTools {
     }
     return {questionList: questionsList, themeImpact: themeImpact};
   }
-  //
-  // generateChartDatas(themeImpact) {
-  //   for (let id_theme in themeImpact) {
-  //     themeImpact[id_theme].labels = [themeImpact[id_theme].title];
-  //     themeImpact[id_theme].datasets = [];
-  //     themeImpact[id_theme].colors = [{}];
-  //     themeImpact[id_theme].options = {scales:{yAxes:[{stacked:true}]}, stacked: true};
-  //     let themeInfos = themeImpact[id_theme];
-  //     for (let id_impact in themeImpact[id_theme].impact) {
-  //       let impact = AuditTools.impact.getImpact(id_impact)
-  //       let dataset = {
-  //         label: impact.label,
-  //         backgroundColor: impact.color,
-  //         data: [themeImpact[id_theme].impact[id_impact]]
-  //       }
-  //       themeImpact[id_theme].datasets.push(dataset);
-  //       // themeImpact[id_theme].labels.push(impact.label);
-  //       // themeImpact[id_theme].data.push(themeImpact[id_theme].impact[id_impact]);
-  //       // themeImpact[id_theme].colors.backgroundColor.push(impact.color);
-  //     }
-  //   }
-  //   return themeImpact;
-  // }
 
   toChartDatas(chartType, datas) {
 
