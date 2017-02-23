@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Node } from '../../node';
 import { RestService } from '../../../rest.service';
+import { ColorPickerService } from 'angular2-color-picker';
+
 
 @Component({
   templateUrl: './edit.component.html',
@@ -25,8 +27,9 @@ export class EditComponent implements OnInit {
   descriptionCtrl: FormControl;
   positionCtrl: FormControl;
   colorCtrl: FormControl;
+  pickedColor: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, colorPickerService: ColorPickerService) {
 
     this.current = new Node();
 
@@ -68,6 +71,8 @@ export class EditComponent implements OnInit {
   get() {
       this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
         this.echosForm.patchValue(item);
+        this.pickedColor = '#'+item.color;
+        console.log(this.pickedColor);
         this.current = item;
       }, (err) => {
         console.error(err);
@@ -94,6 +99,11 @@ export class EditComponent implements OnInit {
   goBack(): boolean {
     this.location.back();
     return false;
+  }
+
+  setColor(color) {
+    this.echosForm.patchValue({color: color});
+    console.log("COLOR", color);
   }
 
 }
