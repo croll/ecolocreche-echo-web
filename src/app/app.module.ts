@@ -9,6 +9,8 @@ import { PageNotFoundComponent }   from './not-found.component';
 import { PageHomeComponent }   from './home.component';
 import { AppRoutingModule } from './app-routing.module';
 // import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ScrollSpyModule } from 'ng2-scrollspy';
+
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
@@ -54,6 +56,7 @@ import { RestService } from './rest.service';
     ReactiveFormsModule,
     // NgxDatatableModule,
     MaterialModule.forRoot(),
+    ScrollSpyModule.forRoot(),
     FlexLayoutModule
   ],
   providers: [

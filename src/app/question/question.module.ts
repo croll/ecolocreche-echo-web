@@ -21,7 +21,7 @@ import { MaterialModule, MdIconRegistry } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-	  MaterialModule.forRoot()
+	  MaterialModule
   ],
   declarations: [
     DetailComponent,

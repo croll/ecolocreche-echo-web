@@ -13,6 +13,8 @@ import { AnswerModule } from '../question/answer.module';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+// import { ScrollSpyAffixDirective } from 'ng2-scrollspy/dist/plugin/affix.directive';
+import { ScrollSpyAffixModule } from 'ng2-scrollspy/dist/plugin/affix';
 
 @NgModule({
   imports: [
@@ -20,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     RoutingModule,
     ReactiveFormsModule,
     AnswerModule,
-	  MaterialModule.forRoot(),
+    ScrollSpyAffixModule,
+	  MaterialModule,
     FlexLayoutModule,
     ChartsModule,
     FormsModule
@@ -30,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     EditComponent,
     AnswerComponent,
     ReportComponent,
-    AuditOldPathRedirectComponent
+    AuditOldPathRedirectComponent,
   ],
   providers: [
     AuditResolver

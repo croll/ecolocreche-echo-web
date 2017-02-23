@@ -14,7 +14,7 @@ import { InquiryFormResolver } from './inquiry-form.resolver';
     CommonModule,
     RoutingModule,
     ReactiveFormsModule,
-	  MaterialModule.forRoot(),
+	  MaterialModule,
     FlexLayoutModule
   ],
   declarations: [
