@@ -17,7 +17,7 @@
        <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Déconnexion</md-list-item>
     </md-list>
   </md-sidenav>
-  <div fxLayout="column" style="height: 100vh">
+  <div fxLayout="column" style="height: 100vh" scrollSpy>
     <div>
       <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
         <button md-button (click)="sidenav.toggle()" class="echos-menu-button">
