@@ -128,7 +128,7 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
     background: #f0f0f0;
   }
   .md-line, .mat-line {
-    white-space: normal!important;
+    //white-space: normal!important;
   }
   .md-list-item, .mat-list-item, .mat-list-item-content {
     padding: 22px 0px;
@@ -144,6 +144,7 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
       & > div:nth-child(2):not(.small-list) {
         color: $echos-light-grey;
         padding: 8px 0 0 ;
+        white-space: normal;
         div {
           padding-left: 5px;
           &:before {
