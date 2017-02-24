@@ -32,7 +32,13 @@ export class EditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
-    this.current = new Node();
+    if (this.route.snapshot.data['infos']) {
+      this.current = this.route.snapshot.data['infos'];
+      this.pickedColor = '#'+this.current.color;
+    } else {
+      this.current = new Node();
+    }
+
   }
 
   ngOnInit() {
@@ -68,22 +74,6 @@ export class EditComponent implements OnInit {
       this.echosForm.addControl('family', this.familyCtrl);
     }
 
-
-
-    if (this.id_node) {
-      this.get();
-    }
-  }
-
-  get() {
-      this.restService.get(this.id_node, 'hist/nodes').subscribe(item => {
-        this.echosForm.patchValue(item);
-        this.pickedColor = '#'+item.color;
-        console.log(this.pickedColor);
-        this.current = item;
-      }, (err) => {
-        console.error(err);
-      });
   }
 
   save() {
@@ -109,8 +99,7 @@ export class EditComponent implements OnInit {
   }
 
   setColor(color) {
-    this.echosForm.patchValue({color: color});
-    console.log("COLOR", color);
+    this.echosForm.patchValue({color: color.replace('#', '')});
   }
 
 }

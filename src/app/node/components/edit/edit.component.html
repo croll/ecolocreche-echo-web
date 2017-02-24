@@ -33,9 +33,9 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="left center">
       <md-input-container>
-        <input mdInput #bgColor formControlName="color" placeholder="Couleur" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="disabled">
+        <input mdInput #bgColor formControlName="color" placeholder="Couleur" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="'disabled'" [cpOKButtonText]="'Valider'" [cpCancelButton]="true" [cpCancelButtonText]="'Annuler'" [cpCancelButtonClass]="'echos-colorpicker-cancel-button'" [cpOKButton]="true" [cpOKButtonClass]="'echos-colorpicker-ok-button'">
       </md-input-container>
-      <div fxFlexOffset="10px" class="echos-color" [style.background]="pickedColor" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="disabled"></div>
+      <div fxFlexOffset="10px" class="echos-color" [style.background]="pickedColor" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="'disabled'" [cpOKButtonText]="'Valider'" [cpCancelButton]="true" [cpCancelButtonText]="'Annuler'" [cpCancelButtonClass]="'echos-colorpicker-cancel-button'" [cpOKButton]="true" [cpOKButtonClass]="'echos-colorpicker-ok-button'"></div>
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">

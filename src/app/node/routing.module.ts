@@ -4,6 +4,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { AuthGuard } from '../auth-guard.service';
+import { NodeResolver } from './node.resolver';
 
 const routes: Routes = [
   {
@@ -20,11 +21,17 @@ const routes: Routes = [
       },
       {
         path: ':id_theme',
-        component: DetailComponent
+        component: DetailComponent,
+        resolve: {
+          infos: NodeResolver
+        }
       },
       {
         path: ':id_theme/editer',
-        component: EditComponent
+        component: EditComponent,
+        resolve: {
+          infos: NodeResolver
+        }
       },
       {
         path: ':id_theme/rubrique/liste',
@@ -37,10 +44,16 @@ const routes: Routes = [
       {
         path: ':id_theme/rubrique/:id_category',
         component: DetailComponent,
+        resolve: {
+          infos: NodeResolver
+        }
       },
       {
         path: ':id_theme/rubrique/:id_category/editer',
-        component: EditComponent
+        component: EditComponent,
+        resolve: {
+          infos: NodeResolver
+        }
       }
     ]
   },
