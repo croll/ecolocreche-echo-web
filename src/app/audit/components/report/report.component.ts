@@ -27,7 +27,7 @@ export class ReportComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.infos = this.route.snapshot.data['infos'];
     this.cache  = this.auditTools.cacheDatas(this.infos.nodes);
     this.questionList = this.cache.questionList;
