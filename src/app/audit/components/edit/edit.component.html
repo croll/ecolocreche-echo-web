@@ -13,7 +13,7 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
     <md-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
-      <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id">{{ifl.title}}</md-option>
+      <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</md-option>
     </md-select>
     <div *ngIf="id" class="echos-error">Le type d'audit n'est pas modifiable</div>
   </div>
