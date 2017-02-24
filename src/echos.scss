@@ -40,6 +40,10 @@ a:hover {
   text-decoration: underline;
 }
 
+.hide {
+  display: none!important;
+}
+
 app-root > mat-sidenav-container, app-root > mat-progress-bar,
 app-root > md-sidenav-container, app-root > md-progress-bar {
   max-width: 1450px;
@@ -288,10 +292,6 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
   left: 0;
   right: 0;
   z-index: 42;
-}
-
-.hide {
-  display: none;
 }
 
 .echos-percent {

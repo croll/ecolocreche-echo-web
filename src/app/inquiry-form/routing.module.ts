@@ -5,6 +5,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AuthGuard } from '../auth-guard.service';
 import { InquiryFormResolver } from './inquiry-form.resolver';
+import { InquiryFormTreeResolver } from './inquiry-form-tree.resolver';
 
 const routes: Routes = [
   {
@@ -23,12 +24,16 @@ const routes: Routes = [
         path: ':id',
         component: DetailComponent,
         resolve: {
-          inquiryFormTree: InquiryFormResolver
+          inquiryFormTree: InquiryFormTreeResolver,
+          inquiryForm: InquiryFormResolver
         }
       },
       {
         path: ':id/editer',
-        component: EditComponent
+        component: EditComponent,
+        resolve: {
+          inquiryForm: InquiryFormResolver
+        }
       }
     ]
   }

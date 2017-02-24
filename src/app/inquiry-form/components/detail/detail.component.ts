@@ -26,19 +26,20 @@ export class DetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
-    this.inquiryform = new InquiryForm();
+
+    this.inquiryform = this.route.snapshot.data['inquiryForm'];
+
+    this.node = new Node();
+    this.node.childs = this.route.snapshot.data['inquiryFormTree']
+    this.filteredChildList = this.node.childs;
+    this.initialSelection = this.inquiryform.nodeslist;
+    this.userSelection = (this.inquiryform.nodeslist) ? JSON.parse(this.inquiryform.nodeslist) : [];
+
   }
 
   ngOnInit() {
-    this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(info => {
-      this.inquiryform = info;
-      this.node = new Node();
-      this.node.childs = this.route.snapshot.data['inquiryFormTree']
-      this.filteredChildList = this.node.childs;
-      this.initialSelection = this.inquiryform.nodeslist;
-      this.userSelection = (this.inquiryform.nodeslist) ? JSON.parse(this.inquiryform.nodeslist) : [];
-      this._checkSelection();
-    });
+    this._checkSelection();
+    this._checkSliders();
   }
 
   goToParent() {
