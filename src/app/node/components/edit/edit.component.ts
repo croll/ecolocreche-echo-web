@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
       this.current = new Node();
     }
 
-    if (this.route.snapshot.params['id_category']) {
+    if ((this.route.snapshot.url[1] && this.route.snapshot.url[1].path == 'rubrique') || (this.route.snapshot.url[4] && this.route.snapshot.url[4].path == 'rubrique')) {
       this.id_node = this.id_category;
       this.type = 'category';
       this.id_node_parent = this.id_theme
