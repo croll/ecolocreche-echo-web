@@ -10,6 +10,7 @@ import { PageHomeComponent }   from './home.component';
 import { AppRoutingModule } from './app-routing.module';
 // import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
+
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import { LoginComponent as UserLoginComponent} from './user/components/login/login.component';
