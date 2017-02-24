@@ -30,3 +30,7 @@
 <q-checkbox-detail *ngIf="item.type == 'q_checkbox'" [choices]="item.choices"></q-checkbox-detail>
 <q-radio-detail *ngIf="item.type == 'q_radio'" [choices]="item.choices"></q-radio-detail>
 <q-percents-detail *ngIf="item.type == 'q_percents'" [choices]="item.choices"></q-percents-detail>
+
+<md-toolbar fxLayout="row" fxLayoutAlign="end center">
+  <button md-button (click)="goBack()">Remonter d'un niveau</button>
+</md-toolbar>
