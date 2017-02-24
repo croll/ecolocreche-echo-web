@@ -127,7 +127,7 @@
   <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
 
   <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+    <button md-button *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}">Remonter d'un niveau</button>
   </md-toolbar>
 
   <md-list *ngIf="filteredChildList">
@@ -148,7 +148,7 @@
   </md-list>
 
   <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+    <button md-button *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}">Remonter d'un niveau</button>
   </md-toolbar>
 
 </div>
