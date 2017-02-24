@@ -28,6 +28,10 @@
     <input mdInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
   </md-input-container>
 
+  <div *ngIf="showSaveButton" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+    <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+  </div>
+
   <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
 
   <md-toolbar fxLayout="row" fxLayoutAlign="end center">

@@ -89,12 +89,20 @@ export class DetailComponent implements OnInit {
     this.childList[num2] = this.childList[num1];
     this.childList[num1] = tmp;
     this.showSaveButton = true;
+    console.log('SWAP!');
     return false;
   }
 
   save() {
-    for (var i in this.childList)
-        this.childList[i].position = parseInt(i);
+    for (var i in this.childList) {
+      let new_position = parseInt(i);
+      if (this.childList[i].position != new_position) {
+        this.childList[i].position = new_position;
+        this.restService.save(this.childList[i], 'hist/nodes', {}, 'id_node').subscribe(() => {
+        });
+      }
+
+    }
     console.log(this.childList);
   }
 
