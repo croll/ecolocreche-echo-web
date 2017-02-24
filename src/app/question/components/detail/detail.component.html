@@ -10,7 +10,7 @@
   <h1 fxFlex>
     Question<span class="titleItem">{{item.title}}</span>
   </h1>
-  <button md-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+  <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>
