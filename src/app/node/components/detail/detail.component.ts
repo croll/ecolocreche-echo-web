@@ -89,7 +89,6 @@ export class DetailComponent implements OnInit {
     this.childList[num2] = this.childList[num1];
     this.childList[num1] = tmp;
     this.showSaveButton = true;
-    console.log('SWAP!');
     return false;
   }
 
