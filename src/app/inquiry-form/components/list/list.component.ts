@@ -30,7 +30,6 @@ export class ListComponent implements OnInit {
       info => {
        this.list = info;
        this.filteredList = info;
-       console.log(this.list);
      },
      error => {
        this.errorMessage = <any>error;
