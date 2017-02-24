@@ -11,7 +11,7 @@
           <div *ngIf="!item.liveValue && item.value" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : lastItem}">{{item.value}} %</div>
           <div *ngIf="item.liveValue" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : lastItem}">{{item.liveValue}} %</div>
       </div>
-      <div class="echos-choice-description">{{item.comment}}</div>
+      <!-- <div class="echos-choice-description">{{item.comment}}</div> -->
     </div>
   </md-list-item>
 </md-list>
