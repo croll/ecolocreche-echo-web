@@ -22,7 +22,6 @@ export class NodeResolver implements Resolve<any> {
     } else {
       id = route.params['id_theme'];
     }
-    console.log("ICI", id)
     return this.restService.get(id, 'hist/nodes')
                     .flatMap(node => {
                        return Observable.create(observer => {
