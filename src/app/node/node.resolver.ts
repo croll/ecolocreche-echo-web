@@ -16,7 +16,13 @@ export class NodeResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    let id = route.params['id_theme'];
+    let id;
+    if (route.params['id_category']) {
+      id = route.params['id_category'];
+    } else {
+      id = route.params['id_theme'];
+    }
+    console.log("ICI", id)
     return this.restService.get(id, 'hist/nodes')
                     .flatMap(node => {
                        return Observable.create(observer => {
