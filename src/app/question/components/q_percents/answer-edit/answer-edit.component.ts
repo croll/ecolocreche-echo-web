@@ -43,6 +43,7 @@ export class AnswerEditComponent implements OnInit {
 
   ngOnInit() {
       this.value=this._value;
+      this.updatevalue();
   }
 
   updatevalue() {
@@ -50,7 +51,7 @@ export class AnswerEditComponent implements OnInit {
       let total = 0;
       for (let choice of this.choices) {
           if (choice != latest_choice)
-            total+=choice['value'];
+            total+=Number.isInteger(Number.parseInt(choice['value'])) ? Number.parseInt(choice['value']) : 0;
       }
 
       let latestval=100 - total;
@@ -60,6 +61,8 @@ export class AnswerEditComponent implements OnInit {
          latestval=100;
 
       latest_choice['value']=latestval;
+
+      console.log("latestval: ", latestval);
 
       this.propagateChange(this.value);
   }
@@ -71,7 +74,7 @@ export class AnswerEditComponent implements OnInit {
   get value() {
       let res={};
       for (let choice of this.choices) {
-          res[choice.id_choice] = choice['value'];
+          res[choice.id_choice] = Number.isInteger(Number.parseInt(choice['value'])) ? Number.parseInt(choice['value']) : 0;
       }
       return JSON.stringify(res);
   }
@@ -81,7 +84,7 @@ export class AnswerEditComponent implements OnInit {
           let ar=JSON.parse(val);
           for (let id_choice in ar) {
               let choice = this.findChoiceById(id_choice);
-              let value = parseInt(ar[id_choice]);
+              let value = Number.isInteger(parseInt(ar[id_choice])) ? parseInt(ar[id_choice]) : 0;
               if (choice) choice['value'] = value;
           }
       }
@@ -112,17 +115,18 @@ export class AnswerEditComponent implements OnInit {
   }
 
   validate(c: FormControl) {
+    var value = this.value;
       let err = {
           badTotalError: {
-              given: c.value,
+              given: value,
           }
       };
 
-      if (c.value) {
+      if (value) {
           let total = 0;
-          let ar=JSON.parse(c.value);
+          let ar=JSON.parse(value);
           for (let id_choice in ar) {
-              let value = parseInt(ar[id_choice]);
+              let value = Number.isInteger(parseInt(ar[id_choice])) ? parseInt(ar[id_choice]) : 0;
               total+=value;
           }
           if (total != 100) {

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Question } from '../../question';
 import { RestService } from '../../../rest.service';
 import { QTypes } from '../abstracts/qtypes';
+import { AuthService } from '../../../auth.service';
 
 @Component({
   templateUrl: './detail.component.html',
@@ -15,7 +16,7 @@ export class DetailComponent implements OnInit {
   private id_node: number;
   item: Question = new Question();
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private authService: AuthService) {
     this.id_node = parseInt(this.route.snapshot.params['id_node']);
   }
 

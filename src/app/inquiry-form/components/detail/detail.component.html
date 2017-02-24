@@ -8,7 +8,7 @@
   <h1 fxFlex>
     Fiche questionnaire<span class="titleItem">{{inquiryform.title}}</span>
   </h1>
-  <button *ngIf="authService.isSuperAgent()" md-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id_inquiryform, 'editer']"><md-icon>edit</md-icon></button>
+  <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id_inquiryform, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
 <div class="echos-title" *ngIf="inquiryform.description">Informations</div>

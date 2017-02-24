@@ -18,7 +18,7 @@
     <h1 fxFlex>
       Thème<span class="titleItem">{{item.title}}</span>
     </h1>
-    <button *ngIf="authService.isSuperAgent()" md-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+    <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
 
   <div *ngIf="item && item.description">
@@ -28,14 +28,14 @@
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des rubriques</div>
-    <button *ngIf="authService.isSuperAgent()" md-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<md-icon>add</md-icon></button>
+    <button *ngIf="authService.isAdmin()" md-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<md-icon>add</md-icon></button>
   </div>
 
   <md-input-container fxLayout>
     <input mdInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
   </md-input-container>
 
-  <div *ngIf="showSaveButton && authService.isSuperAgent()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
     <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
   </div>
 
@@ -48,7 +48,7 @@
   <md-list *ngIf="filteredChildList">
     <md-list-item class="echos-list-item" *ngFor="let category of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
       <div md-line fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" *ngIf="authService.isSuperAgent()">
+        <div fxLayout="column" *ngIf="authService.isAdmin()">
           <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
           <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
         </div>
@@ -92,7 +92,7 @@
     <h1 fxFlex>
       Rubrique<span class="titleItem">{{item.title}}</span>
     </h1>
-    <button *ngIf="authService.isSuperAgent()" md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+    <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
   </div>
 
   <div class="echos-title">Informations</div>
@@ -113,14 +113,14 @@
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des questions</div>
-    <button *ngIf="authService.isSuperAgent()" md-raised-button [routerLink]="['/question', 'creer', item.id_node]">Ajouter une question<md-icon>add</md-icon></button>
+    <button *ngIf="authService.isAdmin()" md-raised-button [routerLink]="['/question', 'creer', item.id_node]">Ajouter une question<md-icon>add</md-icon></button>
   </div>
 
   <md-input-container fxLayout>
     <input mdInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
   </md-input-container>
 
-  <div *ngIf="showSaveButton && authService.isSuperAgent()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
     <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
   </div>
 
@@ -133,7 +133,7 @@
   <md-list *ngIf="filteredChildList">
     <md-list-item class="echos-list-item" *ngFor="let question of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
       <div md-line fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" *ngIf="authService.isSuperAgent()">
+        <div fxLayout="column" *ngIf="authService.isAdmin()">
           <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
           <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
         </div>

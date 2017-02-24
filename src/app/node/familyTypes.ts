@@ -12,10 +12,10 @@ export class FamilyTypes {
 
   typeList = [{
     id: 'environnementales',
-    label: "Environnementales",
+    label: "Environnementale",
   },{
     id: 'sociales',
-    label: "Sociales",
+    label: "Sociale",
   }];
 
   getFamilleType(id_type): any {

@@ -100,7 +100,10 @@ export class AnswerEditComponent implements OnInit {
   save() {
       this.current.answer.ignored = this.ignoredCtrl.value ? this.ignoredCtrl.value : false;
       this.current.answer.value = this.valueCtrl.value ? this.valueCtrl.value : "{}";
-      this.restService.save(this.current.answer, 'answers/'+this.audit['id']+'/'+this.node['id_node'], {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE").subscribe((res) => {
+      var res = Object.assign(this.current.answer, {
+          audit_key: this.audit['key'],
+      });
+      this.restService.save(res, 'answers/'+this.audit['id']+'/'+this.node['id_node'], {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE").subscribe((res) => {
           this.isAnswered = true;
           this.ignoredCtrl.setValue(res.ignored);
           this.valueCtrl.setValue(res.value);
