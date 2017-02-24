@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { RestService } from '../../../rest.service';
 import { InquiryForm } from '../../inquiry-form';
+import { AuthService } from '../../../auth.service';
 // import { slideInDownAnimation } from '../../../animations';
 
 @Component({
@@ -18,7 +19,7 @@ export class ListComponent implements OnInit {
   //@HostBinding('style.display')   display = 'block';
   // @HostBinding('style.position')  position = 'absolute';
 
-  constructor(private restService: RestService) {
+  constructor(private restService: RestService, public authService: AuthService) {
   }
 
   ngOnInit() {

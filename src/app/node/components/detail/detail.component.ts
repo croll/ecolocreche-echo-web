@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../rest.service';
 import { Location } from '@angular/common';
 import { Node } from '../../node';
+import { AuthService } from '../../../auth.service';
 
 @Component({
   templateUrl: './detail.component.html',
@@ -20,7 +21,7 @@ export class DetailComponent implements OnInit {
   filteredChildList: Node[] = [];
   showSaveButton: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, public authService: AuthService) {
     this.id_theme = parseInt(this.route.snapshot.params['id_theme']);
     this.id_category = parseInt(this.route.snapshot.params['id_category']);
     if (this.id_category) {
