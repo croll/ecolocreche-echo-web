@@ -14,7 +14,7 @@ export class EditComponent implements OnInit {
 
   echosForm: FormGroup;
   id_node: number
-  id_node_parent: number;
+  id_node_parent: number = null;
   id_theme: number;
   id_category: number;
   label: string;
@@ -32,11 +32,23 @@ export class EditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
+    this.id_theme = this.route.snapshot.params['id_theme'];
+    this.id_category = this.route.snapshot.params['id_category'];
+
     if (this.route.snapshot.data['infos']) {
       this.current = this.route.snapshot.data['infos'];
       this.pickedColor = '#'+this.current.color;
     } else {
       this.current = new Node();
+    }
+
+    if (this.route.snapshot.url.length == 4 && this.route.snapshot.url[1].path == 'rubrique') {
+      this.id_node = this.id_category;
+      this.type = 'category';
+      this.id_node_parent = this.id_theme
+    } else {
+      this.id_node = this.id_theme;
+      this.type = 'theme';
     }
 
   }
@@ -58,18 +70,8 @@ export class EditComponent implements OnInit {
       color: this.colorCtrl,
     });
 
-    this.id_theme = this.route.snapshot.params['id_theme'];
-    this.id_category = this.route.snapshot.params['id_category'];
-    this.id_node_parent = this.route.snapshot.params['id_node_parent'] || null;
-    if (this.route.snapshot.url.length == 4 && this.route.snapshot.url[1].path == 'rubrique') {
-      this.id_node = this.id_category;
-      this.type = 'category';
-      this.id_node_parent = this.id_theme
-    } else {
-      this.id_node = this.id_theme;
-      this.type = 'theme';
-
-      // only themes have family
+    // only themes have family
+    if (this.type == 'theme') {
       this.familyCtrl = this.fb.control(this.current.family, [Validators.required]);
       this.echosForm.addControl('family', this.familyCtrl);
     }
