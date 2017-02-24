@@ -16,7 +16,8 @@ export class DetailComponent {
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
-    this.item = this.route.snapshot.data['infos'];
+    this.item = Object.assign(new Establishment(), this.route.snapshot.data['infos']);
+
   }
 
   getStatusLabel(id) {
@@ -31,7 +32,7 @@ export class DetailComponent {
 
   private _getLabel(list, id) {
     let match = null;
-    this.item.audits.forEach(function(s:any) {
+    list.forEach(function(s:any) {
       if (s.id == id) {
         match = s.label;
         return;
