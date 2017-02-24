@@ -63,11 +63,10 @@
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>Le {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>{{audit.inquiryform?.title}} - {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
-        <div *ngIf="!audit.active">Finalisé</div>
+        <div *ngIf="!audit.active">Terminé</div>
         <div *ngIf="audit.active" style="color: rgb(96, 190, 64)">En cours</div>
-        <div>{{audit.name}}</div>
       </div>
       <div class="percent">{{audit.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
       <md-icon color="primary">chevron_right</md-icon>

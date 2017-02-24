@@ -1,4 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../rest.service';
 import { Audit } from '../../audit';
 
@@ -12,22 +13,12 @@ export class ActiveListComponent implements OnInit {
   filteredList: any[] = [];
   errorMessage: string;
 
-  constructor(private restService: RestService) {
+  constructor(private restService: RestService, private route: ActivatedRoute) {
+    this.list = this.route.snapshot.data['infos'];
+    this.filteredList = this.list;
   }
 
   ngOnInit() {
-    this.getList();
-  }
-
-  getList() {
-    this.restService.getList('audits', {active: 1, sort: '-createdAt'}).subscribe(
-      audits => {
-       this.list = audits;
-       this.filteredList = this.list;
-     },
-     error => {
-       this.errorMessage = <any>error;
-     });
   }
 
   filterList(filter) {

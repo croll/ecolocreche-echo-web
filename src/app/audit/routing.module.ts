@@ -6,6 +6,7 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
 import { AuthGuard } from '../auth-guard.service';
 import { AuditResolver } from './audit.resolver';
+import { AuditListResolver } from './audit-list.resolver';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 
 const routes: Routes = [
@@ -15,7 +16,10 @@ const routes: Routes = [
     children: [
       {
         path: 'liste/actifs',
-        component: ActiveListComponent
+        component: ActiveListComponent,
+        resolve: {
+          infos: AuditListResolver
+        }
       },
       {
         path: 'creer/:id_establishment',
@@ -31,10 +35,10 @@ const routes: Routes = [
       },
       {
         path: ':key',
+        component: AnswerComponent,
         resolve: {
           infos: AuditResolver
-        },
-        component: AnswerComponent
+        }
       },
       {
         path: ':id/rapport',

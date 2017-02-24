@@ -9,6 +9,7 @@ import { ReportComponent } from './components/report/report.component';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from './audit.resolver';
+import { AuditListResolver } from './audit-list.resolver';
 import { AnswerModule } from '../question/answer.module';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 import { ChartsModule } from 'ng2-charts';
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     AuditOldPathRedirectComponent,
   ],
   providers: [
-    AuditResolver
+    AuditResolver,
+    AuditListResolver
   ]
 })
 

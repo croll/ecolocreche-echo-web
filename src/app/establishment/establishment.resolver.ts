@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/concatAll';
 
 @Injectable()
@@ -24,13 +25,21 @@ export class EstablishmentResolver implements Resolve<any> {
                       return this.restService.getList('audits', {id_establishment: establishment.id});
                     })
                     .flatMap(audits => {
-                      //  obj.establishment = establishment
-                       establishment.audits = audits;
+                      let done = 0;
                        return Observable.create(observer => {
-                          observer.next(establishment);
-                          observer.complete();
-                       });
-                    })
+                        audits.forEach(audit => {
+                          done++;
+                          this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').subscribe(iq => {
+                            audit.inquiryform = iq;
+                          })
+                          if (audits.length == done) {
+                            establishment.audits = audits;
+                            observer.next(establishment);
+                            observer.complete();
+                          }
+                        });
+                    });
+                  });
   }
 
 }
