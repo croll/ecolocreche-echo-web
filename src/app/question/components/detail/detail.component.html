@@ -32,5 +32,5 @@
 <q-percents-detail *ngIf="item.type == 'q_percents'" [choices]="item.choices"></q-percents-detail>
 
 <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-  <button md-button (click)="goBack()">Remonter d'un niveau</button>
+  <button md-button *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}">Remonter d'un niveau</button>
 </md-toolbar>
