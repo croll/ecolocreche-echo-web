@@ -30,7 +30,7 @@
       </div>
       <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
       <div fxFlex fxFlexOffset="20px" class="have-childs">
-        <div>{{item.title}}</div>
+        <div>{{item.title}}<span *ngIf="item.privcomment != ''"> [{{item.privcomment}}]</span></div>
         <div *ngIf="item.description">{{item.description}}</div>
         <div fxFlexAlign="start" *ngIf="item.type == 'directory' && item.childs" fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap="wrap" class="small-list">
           <div *ngFor="let child of item.childs">

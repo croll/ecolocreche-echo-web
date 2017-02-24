@@ -23,6 +23,11 @@
       <textarea mdInput formControlName="description" placeholder="Description"></textarea>
     </md-input-container>
   </div>
+  <div>
+    <md-input-container>
+      <textarea mdInput formControlName="comment" placeholder="Commentaire"></textarea>
+    </md-input-container>
+  </div>
   <input *ngIf="id_inquiryform" type="hidden" formControlName="id_inquiryform">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>

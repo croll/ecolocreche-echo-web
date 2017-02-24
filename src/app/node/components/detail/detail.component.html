@@ -112,7 +112,7 @@
           <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
         </div>
         <div fxFlex fxFlexOffset="20px" class="have-childs">
-          <div>{{question.title}}</div>
+          <div>{{question.title}}<span *ngIf="question.privcomment != ''"> [{{question.privcomment}}]</span></div>
           <div *ngIf="question.description">{{question.description}}</div>
         </div>
         <div style="width: 50px"></div>

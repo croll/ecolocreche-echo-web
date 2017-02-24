@@ -16,6 +16,7 @@ export class EditComponent implements OnInit {
   idInquiryFormCtrl: FormControl;
   titleCtrl: FormControl;
   descriptionCtrl: FormControl;
+  commentCtrl: FormControl;
   positionCtrl: FormControl;
 
   private id_inquiryform: number;
@@ -27,12 +28,14 @@ export class EditComponent implements OnInit {
     this.idInquiryFormCtrl = fb.control(this.id_inquiryform);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
+    this.commentCtrl = fb.control(this.current.comment);
     this.positionCtrl = fb.control(this.current.position);
 
     this.echosForm = fb.group({
       id_inquiryform: this.idInquiryFormCtrl,
       title: this.titleCtrl,
       description: this.descriptionCtrl,
+      comment: this.commentCtrl,
       position: this.positionCtrl,
     });
 

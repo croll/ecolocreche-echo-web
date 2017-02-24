@@ -6,6 +6,8 @@ export class Node {
   public title: string
   public position: number
   public description: string
+  public family: string
+  public privcomment: string
   public color: string
   public childs: any[]
 
