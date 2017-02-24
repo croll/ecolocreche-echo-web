@@ -24,7 +24,7 @@
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
-      <div fxLayout="column">
+      <div fxLayout="column" *ngIf="authService.isAdmin()">
         <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
         <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
       </div>
