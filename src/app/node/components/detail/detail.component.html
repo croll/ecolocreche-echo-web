@@ -1,3 +1,10 @@
+<!--
+
+   Liste des rubriques d'un theme
+
+-->
+
+
 <div *ngIf="type == 'theme'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
     <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
@@ -35,7 +42,7 @@
   <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
 
   <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+    <button md-button routerLink="/theme/liste">Remonter d'un niveau</button>
   </md-toolbar>
 
   <md-list *ngIf="filteredChildList">
@@ -60,10 +67,17 @@
   </md-list>
 
   <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button (click)="goBack()">Remonter d'un niveau</button>
+    <button md-button routerLink="/theme/liste">Remonter d'un niveau</button>
   </md-toolbar>
 
 </div>
+
+
+<!--
+
+   Liste des question d'une rubrique
+
+-->
 
 <div *ngIf="type == 'category'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
