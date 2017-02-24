@@ -27,6 +27,7 @@
     <div class="echos-report-category"> {{category.title}}</div>
     <div *ngFor="let question of category.childs">
       <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
+      <div *ngIf="questionList[question.id_node].description" class="echos-report-question-comment">{{questionList[question.id_node].description}}</div>
       <!-- Check if question is answered or not -->
       <div *ngIf="!questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
       <div *ngIf="questionList[question.id_node].ignored">
@@ -37,18 +38,24 @@
         <div *ngIf="!questionList[question.id_node].ignored">
           <!-- Checkbox -->
           <div *ngIf="questionList[question.id_node].type == 'q_checkbox' || questionList[question.id_node].type == 'q_radio'">
-            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center" class="echos-report-choice">
-                <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
-                <div fxFlexOffset="5px">{{choice.title}}</div>
+            <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
+                  <div fxFlexOffset="5px">{{choice.title}}</div>
+                </div>
+                <div *ngIf="choice.comment" class="echos-report-choice-comment">{{choice.comment}}</div>
             </div>
           </div>
           <!-- Percent -->
           <div *ngIf="questionList[question.id_node].type == 'q_percents'">
-            <div *ngFor="let choice of questionList[question.id_node].value" fxLayout="row" fxLayoutAlign="start center" class="echos-report-choice">
-              <div class="echos-percent">
-                {{choice.value}} %
+            <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="echos-percent">
+                  {{choice.value}} %
+                </div>
+                <div fxFlexOffset="5px">{{choice.title}}</div>
               </div>
-              <div fxFlexOffset="5px">{{choice.title}}</div>
+              <div *ngIf="choice.comment" class="echos-report-choice-comment">{{choice.comment}}</div>
             </div>
           </div>
           <!-- Numeric and text -->

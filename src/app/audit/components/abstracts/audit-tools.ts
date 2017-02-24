@@ -20,13 +20,13 @@ export class AuditTools {
         if (!node.id_node_parent) {
           id_theme = node.id_node;
           if (!themeImpact[id_theme]) {
-            themeImpact[id_theme] = {id: node.id, id_node: node.id_node, title: node.title, impact: {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0}, totalAnswersWithImpact: 0};
+            themeImpact[id_theme] = {id: node.id, id_node: node.id_node, title: node.title, family: node.family, impact: {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0}, totalAnswersWithImpact: 0};
           }
         }
         AuditTools.instance.cacheDatas(node, id_theme, questionsList, themeImpact);
         // If it'as a question
         if (node.type.substring(0, 2) == 'q_') {
-          let question = {id: node.id, id_node: node.id_node, id_theme: id_theme, title: node.title, comment: node.comment, type: node.type, ignored: false, choices: null, value: undefined};
+          let question = {id: node.id, id_node: node.id_node, id_theme: id_theme, title: node.title, description: node.description, type: node.type, ignored: false, choices: null, value: undefined};
           if (node.answer) {
             if (!node.answer.ignored) {
               let value = JSON.parse(node.answer.value);
