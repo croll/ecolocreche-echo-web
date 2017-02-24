@@ -31,14 +31,7 @@ export class AuditResolver implements Resolve<any> {
                       obj.inquiryform = inquiryform;
                       return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: obj.audit.id_inquiryform, date: obj.audit.createdAt, id_audit: obj.audit.id})
                     })
-                    // .flatMap(nodes => {
-                    //   var node = new Node();
-                    //   node.childs = nodes;
-                    //   obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
-                    //   return this.restService.get(obj.audit.id_establishment, 'establishments')
-                    // })
                     .flatMap(nodes => {
-                      //  obj.establishment = establishment
                        var node = new Node();
                        node.childs = nodes;
                        obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
