@@ -100,9 +100,8 @@ export class DetailComponent implements OnInit {
         this.restService.save(this.childList[i], 'hist/nodes', {}, 'id_node').subscribe(() => {
         });
       }
-
     }
-    console.log(this.childList);
+    this.showSaveButton = false;
   }
 
 }

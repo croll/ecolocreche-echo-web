@@ -9,9 +9,9 @@
        <md-divider></md-divider>
        <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAdmin()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
+       <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAdmin()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
+       <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
        <md-divider></md-divider>
        <md-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
        <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Déconnexion</md-list-item>
@@ -38,9 +38,9 @@
              <md-divider></md-divider>
              <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
              <md-divider></md-divider>
-             <md-list-item *ngIf="isAdmin()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
+             <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
              <md-divider></md-divider>
-             <md-list-item *ngIf="isAdmin()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
+             <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
              <md-divider></md-divider>
              <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
              <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
