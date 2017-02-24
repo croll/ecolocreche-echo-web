@@ -27,7 +27,13 @@ export class EditComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
-    this.current = new Establishment();
+    let instance = new Establishment();
+
+    if (this.route.snapshot.data['infos']) {
+      this.current = Object.assign(instance, this.route.snapshot.data['infos']);
+    } else {
+      this.current = instance;
+    }
 
     this.idCtrl = fb.control(this.id);
     this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
@@ -55,18 +61,6 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    if (this.id) {
-      this.get();
-    }
-  }
-
-  get() {
-      this.restService.get(this.id, 'establishments').subscribe(item => {
-        this.echosForm.patchValue(item);
-        this.current = item;
-      }, (err) => {
-        console.error(err);
-      });
   }
 
   save() {
