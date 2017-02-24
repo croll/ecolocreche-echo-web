@@ -17,7 +17,6 @@ export class DetailComponent {
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
     this.id = parseInt(this.route.snapshot.params['id']);
     this.item = this.route.snapshot.data['infos'];
-    console.log(this.item);
   }
 
   getStatusLabel(id) {
