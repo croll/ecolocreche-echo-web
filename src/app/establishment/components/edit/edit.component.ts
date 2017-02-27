@@ -35,7 +35,7 @@ export class EditComponent implements OnInit {
       this.current = instance;
     }
 
-    this.idCtrl = fb.control(this.id);
+    this.idCtrl = fb.control(this.current.id);
     this.nameCtrl = fb.control(this.current.name, [Validators.required, Validators.minLength(3)]);
     this.typeCtrl = fb.control(this.current.type, [Validators.required]);
     this.statusCtrl = fb.control(this.current.status, [Validators.required]);
@@ -60,12 +60,10 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
   }
 
   save() {
     this.restService.save(this.echosForm.value, 'establishments').subscribe((establishment) => {
-      console.log(establishment);
       this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {
       console.error(err);

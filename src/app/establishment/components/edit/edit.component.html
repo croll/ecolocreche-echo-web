@@ -1,12 +1,12 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
   <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des établissements</div>
-  <div *ngIf="!id" fxFlexAlign="start">Ajouter un établissement</div>
-  <div *ngIf="id" fxFlexAlign="start">Modifier un établissement</div>
+  <div *ngIf="!current.id" fxFlexAlign="start">Ajouter un établissement</div>
+  <div *ngIf="current.id" fxFlexAlign="start">Modifier un établissement</div>
 </div>
 
-<h1 *ngIf="!id">Ajouter un établissement</h1>
-<h1 *ngIf="id">Modifier un établissement</h1>
+<h1 *ngIf="!current.id">Ajouter un établissement</h1>
+<h1 *ngIf="current.id">Modifier un établissement</h1>
 
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
@@ -53,10 +53,10 @@
       <input mdInput type="email" formControlName="mail" placeholder="Adresse mail">
     </md-input-container>
   </div>
-  <input *ngIf="id" type="hidden" formControlName="id">
+  <input *ngIf="current.id" type="hidden" formControlName="id">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
     <button md-raised-button (click)="goBack()">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-    <button *ngIf="id" (click)="delete(id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
+    <button *ngIf="current.id" (click)="delete(current.id)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
   </div>
 </form>
