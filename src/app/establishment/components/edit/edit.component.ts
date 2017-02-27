@@ -65,7 +65,8 @@ export class EditComponent implements OnInit {
 
   save() {
     this.restService.save(this.echosForm.value, 'establishments').subscribe((establishment) => {
-      this.router.navigate(['/etablissement', this.id]);
+      console.log(establishment);
+      this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {
       console.error(err);
     });

@@ -25,6 +25,12 @@ export class EstablishmentResolver implements Resolve<any> {
                       return this.restService.getList('audits', {id_establishment: establishment.id});
                     })
                     .flatMap(audits => {
+                      if (!audits || audits.length == 0) {
+                        return Observable.create(observer => {
+                          establishment.audits = [];
+                          observer.next(establishment);
+                          observer.complete()});
+                      }
                       let done = 0;
                        return Observable.create(observer => {
                         audits.forEach(audit => {
