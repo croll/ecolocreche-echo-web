@@ -54,7 +54,8 @@
           <div *ngIf="questionList[question.id_node].type == 'q_percents'">
             <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="echos-percent">
+                <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
+                <div class="echos-percent" fxFlexOffset="8px">
                   {{choice.value}} %
                 </div>
                 <div fxFlexOffset="5px">{{choice.title}}</div>
