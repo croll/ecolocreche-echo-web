@@ -59,7 +59,7 @@ export class AuditTools {
                   if (value == c.id_choice) {
                     let impact = AuditTools.impact.getImpact(c.impact);
                     if (impact.id != 0) {
-                      if (!chartDatas.themes[id_theme].hasDatas) {
+                      if (chartDatas.themes[id_theme] && !chartDatas.themes[id_theme].hasDatas) {
                         chartDatas.themes[id_theme].hasDatas = true;
                       }
                       chartDatas.themes[id_theme].impact[impact.id]++;
@@ -135,10 +135,11 @@ export class AuditTools {
   }
 
   generateChartDatas(chartType, chartDatas) {
-    chartDatas.families = {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environmental: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, social: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}};
+    chartDatas.families = {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}};
     for (let id_theme in chartDatas.themes) {
       for(let k in chartDatas.themes[id_theme].impact) {
         let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
+        console.log(fam);
         if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[k]) {
           chartDatas.families[fam].hasDatas = true
         }
