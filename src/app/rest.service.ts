@@ -39,7 +39,7 @@ export class RestService {
   }
 
   //save(obj: InquiryForm, t: string): Observable<InquiryForm> {
-  save(obj: any, type: string, params?: any, keyname: string = 'id', message: string = "C'est bon !"): Observable<any> {
+  save(obj: any, type: string, params?: any, keyname: string = 'id', message: string = "Sauvegarde : ", submessage?: string): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, search: this.setParams(params) });
 
@@ -51,7 +51,7 @@ export class RestService {
       return this.http.put(`rest/${type}/${obj[keyname]}`, JSON.stringify(obj), options)
       .map((response) => {
           this.decLoading();
-          this.snackBar.open(message, "Sauvegardé", {
+          this.snackBar.open(message, submessage ? submessage : "Sauvegardé", {
                 duration: 3000,
               });
           return response;
@@ -69,7 +69,7 @@ export class RestService {
       return this.http.post(`rest/${type}`, JSON.stringify(obj), options)
       .map((response) => {
           this.decLoading();
-          this.snackBar.open(message, "Ajouté", {
+          this.snackBar.open(message, submessage ? submessage :  "Ajouté", {
                 duration: 3000,
               });
           return response;
@@ -85,7 +85,7 @@ export class RestService {
     }
   }
 
-  delete(id: number, type: string, message: string = "C'est bon !"): Observable<boolean> {
+  delete(id: number, type: string, message: string = "Suppression : "): Observable<boolean> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
