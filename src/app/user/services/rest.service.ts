@@ -2,54 +2,32 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { AuthService } from '../../auth.service';
+import { RestService as MainRestService } from '../../rest.service';
 
 import { User } from '../user';
+
 
 @Injectable()
 export class RestService {
   private restUrl = 'rest/users';  // URL to web API
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private http: Http, private authService: AuthService, private mainRestService: MainRestService) {
   }
 
   getList (): Observable<User[]> {
-    return this.http.get(this.restUrl)
-                    .map((res: Response) => { return this.extractData(res) })
-                    .catch(this.handleError);
+    return this.mainRestService.getList('users');
   }
 
   get(id: number): Observable<User> {
-    return this.http.get(`rest/users/${id}`)
-                    .map((res: Response) => { return this.extractData(res) })
-                    .catch(this.handleError);
+    return this.mainRestService.get(id, 'users');
   }
 
   save(obj): Observable<User> {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options       = new RequestOptions({ headers: headers });
-
-    if (obj.id) {
-      return this.http.put(`rest/users/${obj.id}`, JSON.stringify(obj), options)
-              .map((res: Response) => { return this.extractData(res) })
-              .catch(this.handleError);
-    } else {
-      return this.http.post('rest/users', JSON.stringify(obj), options)
-              .map((res: Response) => { return this.extractData(res) })
-              .catch(this.handleError);
-    }
+    return this.mainRestService.save(obj, 'users');
   }
 
   delete(id): Observable<boolean> {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options       = new RequestOptions({ headers: headers });
-
-    if (!id) {
-      return;
-    }
-
-    return this.http.delete(`rest/users/${id}`, options)
-      .catch(this.handleError);
-
+    return this.mainRestService.delete(id, 'users');
   }
 
 
