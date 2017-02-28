@@ -11,15 +11,25 @@ export class RestService {
   constructor(private http: Http, private snackBar: MdSnackBar) { }
 
   getList(type: string, params?: any): Observable<any[]> {
+    this.incLoading();
     return this.http.get(`rest/${type}`, {search: this.setParams(params)})
-                    .map(this.extractList)
-                    .catch(this.handleError);
+    .map((data) => {
+      this.decLoading();
+      return data;
+    })
+    .map(this.extractList)
+    .catch(this.handleError);
   }
 
   get(id: number, type: string, params?: any): Observable<any> {
+    this.incLoading();
     return this.http.get(`rest/${type}/${id}`, {search: this.setParams(params)})
-                    .map(this.extractOne)
-                    .catch(this.handleError);
+      .map((data) => {
+        this.decLoading();
+        return data;
+      })
+      .map(this.extractOne)
+      .catch(this.handleError);
   }
 
   //save(obj: InquiryForm, t: string): Observable<InquiryForm> {
@@ -105,6 +115,26 @@ export class RestService {
     }
     console.error(errMsg);
     return Observable.throw(errMsg);
+  }
+
+  private loading = 0;
+
+  private incLoading() {
+    this.loading++;
+    if (this.loading == 1) {
+      let elem = document.getElementById('loading');
+      if (elem)
+        elem.style.display="block";
+    }
+  }
+
+  private decLoading() {
+    this.loading--;
+    if (this.loading <= 0) {
+      let elem = document.getElementById('loading');
+      if (elem)
+        elem.style.display="none";
+    }
   }
 
 }
