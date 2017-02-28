@@ -21,7 +21,7 @@ export class AuditTools {
         if (!node.id_node_parent) {
           id_theme = node.id_node;
           if (!chartDatas.themes[id_theme]) {
-            chartDatas.themes[id_theme] = {id: node.id, id_node: node.id_node, title: node.title, family: node.family, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0};
+            chartDatas.themes[id_theme] = {id: node.id, id_node: node.id_node, hasDatas: false, title: node.title, family: node.family, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0};
           }
         }
         AuditTools.instance.cacheDatas(node, id_theme, questionsList, chartDatas);
@@ -84,7 +84,8 @@ export class AuditTools {
       chartType: chartType,
       datasets: [],
       colors: [{}],
-      options: {}
+      options: {},
+      hasDatas: false
     }
     if (chartType == 'pie') {
       let dataset = {
@@ -116,16 +117,14 @@ export class AuditTools {
   }
 
   generateChartDatas(chartType, chartDatas) {
-    chartDatas.families = {global: {impact: Object.assign({}, AuditTools.impactObj)}, other: {impact: Object.assign({}, AuditTools.impactObj)}, environmental: {impact: Object.assign({}, AuditTools.impactObj)}, social: {impact: Object.assign({}, AuditTools.impactObj)}};
+    chartDatas.families = {global: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environmental: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, social: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}};
     for (let id_theme in chartDatas.themes) {
-        for(let k in chartDatas.themes[id_theme].impact) {
-          let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
-          chartDatas.families[fam].impact[k] = chartDatas.families[fam].impact[k] + chartDatas.themes[id_theme].impact[k];
-          chartDatas.families['global'].impact[k] = chartDatas.families['global'].impact[k] + chartDatas.themes[id_theme].impact[k];
-        }
-      if (id_theme != 'families') {
-        Object.assign(chartDatas.themes[id_theme], AuditTools.instance.toChartDatas(chartType, chartDatas.themes[id_theme]));
+      for(let k in chartDatas.themes[id_theme].impact) {
+        let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
+        chartDatas.families[fam].impact[k] = chartDatas.families[fam].impact[k] + chartDatas.themes[id_theme].impact[k];
+        chartDatas.families['global'].impact[k] = chartDatas.families['global'].impact[k] + chartDatas.themes[id_theme].impact[k];
       }
+      Object.assign(chartDatas.themes[id_theme], AuditTools.instance.toChartDatas(chartType, chartDatas.themes[id_theme]));
     }
 
     // Generate family impact datas
