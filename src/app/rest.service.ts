@@ -52,13 +52,16 @@ export class RestService {
       .map((response) => {
           this.decLoading();
           this.snackBar.open(message, "Sauvegardé", {
-                duration: 4000,
+                duration: 3000,
               });
           return response;
       })
       .map(this.extractOne)
       .catch((err) => {
         this.decLoading();
+        this.snackBar.open(message, "ERREUR !", {
+              duration: 6000,
+            });
         return this.handleError(err);
       });
     } else {
@@ -67,19 +70,22 @@ export class RestService {
       .map((response) => {
           this.decLoading();
           this.snackBar.open(message, "Ajouté", {
-                duration: 4000,
+                duration: 3000,
               });
           return response;
       })
       .map(this.extractOne)
       .catch((err) => {
         this.decLoading();
+        this.snackBar.open(message, "ERREUR !", {
+              duration: 6000,
+            });
         return this.handleError(err);
       });
     }
   }
 
-  delete(id: number, type: string): Observable<boolean> {
+  delete(id: number, type: string, message: string = "C'est bon !"): Observable<boolean> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
@@ -92,10 +98,16 @@ export class RestService {
     return this.http.delete(`rest/${type}/${id}`, options)
       .map((data) => {
         this.decLoading();
+        this.snackBar.open(message, "Effacé", {
+              duration: 3000,
+            });
         return data;
       })
       .catch((err) => {
         this.decLoading();
+        this.snackBar.open(message, "ERREUR !", {
+              duration: 6000,
+            });
         return this.handleError(err);
       });
 
