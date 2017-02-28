@@ -41,8 +41,8 @@
   <div>
     <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button md-raised-button (click)="goBack()">Annuler</button>
-      <button *ngIf="id" (click)="del(id)" fxFlexOffset="20px" md-raised-button color="warn">Supprimer</button>
+      <button *ngIf="id" (click)="del(id)" md-raised-button color="warn">Supprimer</button>
+      <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
       <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </div>

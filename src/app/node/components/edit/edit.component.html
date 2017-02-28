@@ -39,9 +39,9 @@
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button md-raised-button (click)="goBack()">Annuler</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" md-raised-button color="warn">Effacer</button>
+      <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
       <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-      <button *ngIf="id_node" (click)="delete(id_node)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
     </div>
   </form>
 </div>
@@ -76,9 +76,9 @@
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button md-raised-button (click)="goBack()">Annuler</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" md-raised-button color="warn">Effacer</button>
+      <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
       <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-      <button *ngIf="id_node" (click)="delete(id_node)" fxFlexOffset="20px" md-raised-button color="warn">Effacer</button>
     </div>
   </form>
 </div>

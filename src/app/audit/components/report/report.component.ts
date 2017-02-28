@@ -33,7 +33,6 @@ export class ReportComponent implements OnInit {
     this.cache  = this.auditTools.cacheDatas(this.infos.nodes);
     this.questionList = this.cache.questionList;
     this.chartDatas = this.auditTools.generateChartDatas(this.chartType, this.cache.chartDatas);
-    console.log(this.chartDatas);
   }
 
   ngOnInit() {

@@ -41,8 +41,6 @@ export class AuditTools {
                         let impact = AuditTools.impact.getImpact(c.impact);
                         if (impact.id != 0) {
                           if (!chartDatas.themes[id_theme].hasDatas) {
-                            console.log("PROUT");
-                            console.log(id_theme);
                             chartDatas.themes[id_theme].hasDatas = true;
                           }
                           chartDatas.themes[id_theme].impact[impact.id]++;
