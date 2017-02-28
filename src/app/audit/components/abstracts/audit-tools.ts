@@ -105,6 +105,19 @@ export class AuditTools {
         dataset.backgroundColor.push(impact.color);
         dataset.data.push(datas.impact[id_impact]);
       }
+      params.options = {
+        tooltips: {
+          callbacks: {
+            label: (tooltipItem, data) => {
+              let total = 0;
+              for (let k in data.datasets[0].data) {
+                total += data.datasets[0].data[k];
+              }
+              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / total).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
+            }
+          }
+        }
+      }
       params.datasets.push(dataset);
     } else if (chartType == 'bar') {
       params.labels.push(datas.title);
