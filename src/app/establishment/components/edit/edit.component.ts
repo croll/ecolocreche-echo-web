@@ -71,11 +71,13 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'establishments', "Suppression de l'établissement : ").subscribe((response) => {
-      this.router.navigate(['/etablissement/liste']);
-    }, (err) => {
-      console.error(err);
-    });
+    if (confirm("Souhaitez vous vraiment supprimer cet établissement ?")) {
+      this.restService.delete(id, 'establishments', "Suppression de l'établissement : ").subscribe((response) => {
+        this.router.navigate(['/etablissement/liste']);
+      }, (err) => {
+        console.error(err);
+      });
+    }
   }
 
   goBack(): boolean {
