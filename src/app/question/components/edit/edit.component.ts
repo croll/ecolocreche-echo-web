@@ -80,7 +80,7 @@ export class EditComponent implements OnInit {
     // reset positions of choices
     for (var i in this.current.choices)
         this.current.choices[i].position = parseInt(i);
-    this.restService.save(this.current, 'hist/nodes', params, 'id_node').subscribe((node_hist) => {
+    this.restService.save(this.current, 'hist/nodes', params, 'id_node', "Enregistrement de la question : ").subscribe((node_hist) => {
       this.router.navigate(['/question', node_hist.id_node]);
     }, (err) => {
       console.error(err);
@@ -89,7 +89,7 @@ export class EditComponent implements OnInit {
 
   delete() {
     if (confirm("Souhaitez vous vraiment supprimer cette question ?")) {
-      this.restService.delete(this.id_node, 'hist/nodes').subscribe((response) => {
+      this.restService.delete(this.id_node, 'hist/nodes', "Suppression de la question : ").subscribe((response) => {
         this.router.navigate(['/theme/'+this.current['nodepath'][0].id_node+'/rubrique/'+this.current['nodepath'][1].id_node]);
       }, (err) => {
         console.error(err);
