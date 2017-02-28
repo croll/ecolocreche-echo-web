@@ -22,10 +22,10 @@
 <div *ngFor="let theme of node.childs">
   <div class="echos-title echos-report-theme" fxLayout="row">
     <div fxFlex>{{theme.title}}</div>
-    <button md-button color="primary" (click)="toggleChartType(chartDatas[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button>
+    <button md-button color="primary" (click)="toggleChartType(chartDatas.themes[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button>
   </div>
   <md-card>
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas[theme.id_node].datasets" [colors]="chartDatas[theme.id_node].colors" [labels]="chartDatas[theme.id_node].labels" [chartType]="chartDatas[theme.id_node].chartType" legend="true" [options]="chartDatas[theme.id_node].options"></canvas>
+    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
   </md-card>
   <md-card *ngFor="let category of theme.childs">
     <div class="echos-report-category"> {{category.title}}</div>
@@ -75,21 +75,21 @@
 
 
 <div fxLayout="row" style="border: 1px solid red">
-  <div *ngIf="chartDatas?.familiesImpact['environmental']">
+  <div *ngIf="chartDatas?.families['environmental']">
     <div>Environnemental</div>
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.familiesImpact['environmental'].datasets" [colors]="chartDatas.familiesImpact['environmental'].colors" [labels]="chartDatas.familiesImpact['environmental'].labels" [chartType]="chartDatas.familiesImpact['environmental'].chartType" legend="true" [options]="chartDatas.familiesImpact['environmental'].options"></canvas>
+    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families['environmental'].datasets" [colors]="chartDatas.families['environmental'].colors" [labels]="chartDatas.families['environmental'].labels" [chartType]="chartDatas.families['environmental'].chartType" legend="true" [options]="chartDatas.families['environmental'].options"></canvas>
   </div>
-  <div *ngIf="chartDatas?.familiesImpact['social']">
+  <div *ngIf="chartDatas?.families['social']">
     <div>Social</div>
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.familiesImpact['social'].datasets" [colors]="chartDatas.familiesImpact['social'].colors" [labels]="chartDatas.familiesImpact['social'].labels" [chartType]="chartDatas.familiesImpact['social'].chartType" legend="true" [options]="chartDatas.familiesImpact['social'].options"></canvas>
+    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families['social'].datasets" [colors]="chartDatas.families['social'].colors" [labels]="chartDatas.families['social'].labels" [chartType]="chartDatas.families['social'].chartType" legend="true" [options]="chartDatas.families['social'].options"></canvas>
   </div>
-  <div *ngIf="chartDatas?.familiesImpact['other']">
+  <div *ngIf="chartDatas?.families['other']">
     <div>Autre</div>
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.familiesImpact['other'].datasets" [colors]="chartDatas.familiesImpact['environmental'].colors" [labels]="chartDatas.familiesImpact['other'].labels" [chartType]="chartDatas.familiesImpact['other'].chartType" legend="true" [options]="chartDatas.familiesImpact['other'].options"></canvas>
+    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families['other'].datasets" [colors]="chartDatas.families['other'].colors" [labels]="chartDatas.families['other'].labels" [chartType]="chartDatas.families['other'].chartType" legend="true" [options]="chartDatas.families['other'].options"></canvas>
   </div>
-  <div *ngIf="chartDatas?.familiesImpact['global']">
+  <div *ngIf="chartDatas?.families['global']">
     <div>Bilan de l'audit</div>
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.familiesImpact['global'].datasets" [colors]="chartDatas.familiesImpact['environmental'].colors" [labels]="chartDatas.familiesImpact['global'].labels" [chartType]="chartDatas.familiesImpact['global'].chartType" legend="true" [options]="chartDatas.familiesImpact['global'].options"></canvas>
+    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families['global'].datasets" [colors]="chartDatas.families['global'].colors" [labels]="chartDatas.families['global'].labels" [chartType]="chartDatas.families['global'].chartType" legend="true" [options]="chartDatas.families['global'].options"></canvas>
   </div>
 </div>
 
