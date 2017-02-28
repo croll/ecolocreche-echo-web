@@ -18,10 +18,11 @@ export class ReportComponent implements OnInit {
   node: any;
   infos: any;
   questionList: any;
-  themeImpact: any;
+  chartDatas: any;
   cache: any;
   chartType: string = 'pie';
-  hideChart: boolean;
+  hideChart: boolean = false;
+  graphics: {} = {};
 
   auditTools = AuditTools.getInstance();
 
@@ -31,7 +32,8 @@ export class ReportComponent implements OnInit {
     this.infos = this.route.snapshot.data['infos'];
     this.cache  = this.auditTools.cacheDatas(this.infos.nodes);
     this.questionList = this.cache.questionList;
-    this.themeImpact = this.auditTools.generateChartDatas(this.chartType, this.cache.themeImpact);
+    this.chartDatas = this.auditTools.generateChartDatas(this.chartType, this.cache.chartDatas);
+    console.log(this.chartDatas);
   }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class ReportComponent implements OnInit {
 
   setChartType(chartType, id_theme) {
     this.chartType = chartType.value;
-    Object.assign(this.themeImpact[id_theme], this.auditTools.toChartDatas(this.chartType, this.cache.themeImpact[id_theme]));
+    Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(this.chartType, this.cache.chartDatas[id_theme]));
     setTimeout(() => {
       this._chart.ngOnChanges({});
     }, 150);
@@ -49,7 +51,7 @@ export class ReportComponent implements OnInit {
   toggleChartType(chartType, id_theme) {
     this.hideChart = true;
     chartType = (chartType == 'bar') ? 'pie' : 'bar';
-    Object.assign(this.themeImpact[id_theme], this.auditTools.toChartDatas(chartType, this.cache.themeImpact[id_theme]));
+    Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(chartType, this.cache.chartDatas[id_theme]));
     setTimeout(() => {
       this.hideChart = false;
       this._chart.ngOnChanges({});
