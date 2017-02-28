@@ -160,7 +160,8 @@ export class RestService {
     if (this.loading == 1) {
       let elem = document.getElementById('loading');
       if (elem)
-        elem.style.display="block";
+        elem.className ="loading";
+        //elem.style.display="block";
     }
   }
 
@@ -169,7 +170,8 @@ export class RestService {
     if (this.loading <= 0) {
       let elem = document.getElementById('loading');
       if (elem)
-        elem.style.display="none";
+        elem.className = "not-loading";
+        //elem.style.display="none";
     }
   }
 
