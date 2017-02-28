@@ -98,7 +98,7 @@ export class DetailComponent implements OnInit {
       let new_position = parseInt(i);
       if (this.childList[i].position != new_position) {
         this.childList[i].position = new_position;
-        this.restService.save(this.childList[i], 'hist/nodes', {}, 'id_node').subscribe(() => {
+        this.restService.save(this.childList[i], 'hist/nodes', {}, 'id_node', "Ordre : ").subscribe(() => {
         });
       }
     }
