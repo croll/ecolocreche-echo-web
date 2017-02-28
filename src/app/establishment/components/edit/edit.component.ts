@@ -68,6 +68,7 @@ export class EditComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
+    return false;
   }
 
   delete(id) {
@@ -78,6 +79,7 @@ export class EditComponent implements OnInit {
         console.error(err);
       });
     }
+    return false;
   }
 
   goBack(): boolean {
