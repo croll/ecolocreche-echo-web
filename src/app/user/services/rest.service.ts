@@ -23,11 +23,11 @@ export class RestService {
   }
 
   save(obj): Observable<User> {
-    return this.mainRestService.save(obj, 'users');
+    return this.mainRestService.save(obj, 'users', undefined, 'id', "Sauvegarde de l'utilisateur : ");
   }
 
   delete(id): Observable<boolean> {
-    return this.mainRestService.delete(id, 'users');
+    return this.mainRestService.delete(id, 'users', "Suppression de l'utilisateur : ");
   }
 
 
