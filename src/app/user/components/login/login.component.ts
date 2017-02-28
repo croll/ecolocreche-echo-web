@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
             duration: 6000,
           });
     })
+    return false;
   }
 
 }
