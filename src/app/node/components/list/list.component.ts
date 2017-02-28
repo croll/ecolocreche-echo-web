@@ -54,7 +54,7 @@ export class ListComponent implements OnInit {
       let new_position = parseInt(i);
       if (this.list[i].position != new_position) {
         this.list[i].position = new_position;
-        this.restService.save(this.list[i], 'hist/nodes', {}, 'id_node').subscribe(() => {
+        this.restService.save(this.list[i], 'hist/nodes', {}, 'id_node', "Ordre : ").subscribe(() => {
         });
       }
 
