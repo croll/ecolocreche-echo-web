@@ -18,7 +18,10 @@ export class RestService {
       return data;
     })
     .map(this.extractList)
-    .catch(this.handleError);
+    .catch((err) => {
+      this.decLoading();
+      return this.handleError(err);
+    });
   }
 
   get(id: number, type: string, params?: any): Observable<any> {
@@ -29,7 +32,10 @@ export class RestService {
         return data;
       })
       .map(this.extractOne)
-      .catch(this.handleError);
+      .catch((err) => {
+        this.decLoading();
+        return this.handleError(err);
+      });
   }
 
   //save(obj: InquiryForm, t: string): Observable<InquiryForm> {
@@ -41,25 +47,35 @@ export class RestService {
     console.log(keyname);
 
     if (keyname in obj && obj[keyname]) {
+      this.incLoading();
       return this.http.put(`rest/${type}/${obj[keyname]}`, JSON.stringify(obj), options)
       .map((response) => {
+          this.decLoading();
           this.snackBar.open(message, "Sauvegardé", {
                 duration: 4000,
               });
           return response;
       })
       .map(this.extractOne)
-      .catch(this.handleError);
+      .catch((err) => {
+        this.decLoading();
+        return this.handleError(err);
+      });
     } else {
+      this.incLoading();
       return this.http.post(`rest/${type}`, JSON.stringify(obj), options)
       .map((response) => {
+          this.decLoading();
           this.snackBar.open(message, "Ajouté", {
                 duration: 4000,
               });
           return response;
       })
       .map(this.extractOne)
-      .catch(this.handleError);
+      .catch((err) => {
+        this.decLoading();
+        return this.handleError(err);
+      });
     }
   }
 
@@ -72,8 +88,16 @@ export class RestService {
       return;
     }
 
+    this.incLoading();
     return this.http.delete(`rest/${type}/${id}`, options)
-      .catch(this.handleError);
+      .map((data) => {
+        this.decLoading();
+        return data;
+      })
+      .catch((err) => {
+        this.decLoading();
+        return this.handleError(err);
+      });
 
   }
 
