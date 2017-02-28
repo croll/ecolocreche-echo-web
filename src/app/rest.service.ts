@@ -3,11 +3,12 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { MdSnackBar } from '@angular/material';
 
 @Injectable()
 export class RestService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private snackBar: MdSnackBar) { }
 
   getList(type: string, params?: any): Observable<any[]> {
     return this.http.get(`rest/${type}`, {search: this.setParams(params)})
@@ -22,7 +23,7 @@ export class RestService {
   }
 
   //save(obj: InquiryForm, t: string): Observable<InquiryForm> {
-  save(obj: any, type: string, params?: any, keyname: string = 'id'): Observable<any> {
+  save(obj: any, type: string, params?: any, keyname: string = 'id', message: string = "C'est bon !"): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, search: this.setParams(params) });
 
@@ -31,12 +32,24 @@ export class RestService {
 
     if (keyname in obj && obj[keyname]) {
       return this.http.put(`rest/${type}/${obj[keyname]}`, JSON.stringify(obj), options)
-              .map(this.extractOne)
-              .catch(this.handleError);
+      .map((response) => {
+          this.snackBar.open(message, "Sauvegardé", {
+                duration: 4000,
+              });
+          return response;
+      })
+      .map(this.extractOne)
+      .catch(this.handleError);
     } else {
       return this.http.post(`rest/${type}`, JSON.stringify(obj), options)
-              .map(this.extractOne)
-              .catch(this.handleError);
+      .map((response) => {
+          this.snackBar.open(message, "Ajouté", {
+                duration: 4000,
+              });
+          return response;
+      })
+      .map(this.extractOne)
+      .catch(this.handleError);
     }
   }
 
