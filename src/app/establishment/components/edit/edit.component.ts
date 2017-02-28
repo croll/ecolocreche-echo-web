@@ -63,7 +63,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(this.echosForm.value, 'establishments').subscribe((establishment) => {
+    this.restService.save(this.echosForm.value, 'establishments', undefined, 'id', "Sauvegarde de l'établissement : ").subscribe((establishment) => {
       this.router.navigate(['/etablissement', establishment.id]);
     }, (err) => {
       console.error(err);
@@ -71,7 +71,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'establishments').subscribe((response) => {
+    this.restService.delete(id, 'establishments', "Suppression de l'établissement : ").subscribe((response) => {
       this.router.navigate(['/etablissement/liste']);
     }, (err) => {
       console.error(err);
