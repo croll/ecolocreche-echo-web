@@ -40,6 +40,11 @@ export class AuditTools {
                       if (node.type != 'q_percents' || value[id_choice] > 0) {
                         let impact = AuditTools.impact.getImpact(c.impact);
                         if (impact.id != 0) {
+                          if (!chartDatas.themes[id_theme].hasDatas) {
+                            console.log("PROUT");
+                            console.log(id_theme);
+                            chartDatas.themes[id_theme].hasDatas = true;
+                          }
                           chartDatas.themes[id_theme].impact[impact.id]++;
                           chartDatas.themes[id_theme].totalAnswersWithImpact++;
                         }
@@ -56,6 +61,9 @@ export class AuditTools {
                   if (value == c.id_choice) {
                     let impact = AuditTools.impact.getImpact(c.impact);
                     if (impact.id != 0) {
+                      if (!chartDatas.themes[id_theme].hasDatas) {
+                        chartDatas.themes[id_theme].hasDatas = true;
+                      }
                       chartDatas.themes[id_theme].impact[impact.id]++;
                       chartDatas.themes[id_theme].totalAnswersWithImpact++;
                     }
@@ -84,8 +92,7 @@ export class AuditTools {
       chartType: chartType,
       datasets: [],
       colors: [{}],
-      options: {},
-      hasDatas: false
+      options: {}
     }
     if (chartType == 'pie') {
       let dataset = {
@@ -117,10 +124,13 @@ export class AuditTools {
   }
 
   generateChartDatas(chartType, chartDatas) {
-    chartDatas.families = {global: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environmental: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, social: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}};
+    chartDatas.families = {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environmental: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, social: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}};
     for (let id_theme in chartDatas.themes) {
       for(let k in chartDatas.themes[id_theme].impact) {
         let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
+        if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[k]) {
+          chartDatas.families[fam].hasDatas = true
+        }
         chartDatas.families[fam].impact[k] = chartDatas.families[fam].impact[k] + chartDatas.themes[id_theme].impact[k];
         chartDatas.families['global'].impact[k] = chartDatas.families['global'].impact[k] + chartDatas.themes[id_theme].impact[k];
       }
