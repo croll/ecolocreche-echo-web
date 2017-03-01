@@ -49,7 +49,6 @@ export class DetailComponent {
     } else {
       this.auditsToCompare.push(id);
     }
-    console.log(this.auditsToCompare);
   }
 
   public compare() {
