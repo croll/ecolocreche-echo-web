@@ -22,7 +22,6 @@ export class ReportComponent implements OnInit {
   cache: any;
   chartType: string = 'pie';
   hideChart: boolean = false;
-  graphics: {} = {};
 
   auditTools = AuditTools.getInstance();
 
