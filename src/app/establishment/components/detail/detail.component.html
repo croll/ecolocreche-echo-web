@@ -63,7 +63,7 @@
 </div>
 
 <md-toolbar *ngIf="item.audits && item.audits.length" style="margin: 20px 0 0 0">
-  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" [color]="primary">Comparer</button>
+  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color='primary'>Comparer</button>
 </md-toolbar>
 
 <md-list>
@@ -84,5 +84,5 @@
 </md-list>
 
 <md-toolbar *ngIf="item.audits && item.audits.length" style="text-align: center">
-  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" [color]="primary">Comparer</button>
+  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color="primary">Comparer</button>
 </md-toolbar>
