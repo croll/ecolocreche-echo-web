@@ -1,0 +1,61 @@
+.presentation {
+  p {
+    color: #333;
+  }
+}
+
+.echos-report-theme {
+  margin: 35px 0;
+  font-size: 2em;
+}
+
+.echos-report-category {
+  font-size: 1.7em;
+  margin: 35px 0 0 0;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.echos-report-question {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin: 25px 0 10px 0;
+}
+
+.echos-report-choice {
+  margin-bottom: 8px;
+}
+
+.echos-report-ignored {
+  color: #bd895a;
+}
+
+.echos-report-no-answer {
+  color: #cd6a6a;
+}
+
+.echos-report-question-value {
+  padding-left: 5px;
+}
+
+.echos-report-question-comment {
+  margin: 0 0 12px 0;
+  color: #444;
+}
+
+.echos-report-choice-comment {
+  margin: 10px 0 12px 0;
+  color: #444;
+}
+
+.echos-report-graph-title {
+  text-align: center;
+  font-size: 1.6em;
+  padding: 0 0 15px 0;
+  color: #444;
+}
+
+canvas {
+  max-width: 300px;
+  margin: 0 auto;
+}
