@@ -58,12 +58,21 @@
 
 <div *ngIf="!item.audits || !item.audits.length" class="echos-warning">Aucun audit trouvé.</div>
 
+<div class="help">
+  Pour comparer deux audits, sélectionnez les à l'aide des cases à cocher et cliquez sur le bouton "Comparer".
+</div>
+
+<md-toolbar *ngIf="item.audits && item.audits.length" style="margin: 20px 0 0 0">
+  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color='primary'>Comparer</button>
+</md-toolbar>
+
 <md-list>
-  <md-list-item class="echos-list-item" [routerLink]="['/audit', audit.key]" *ngFor="let audit of item.audits">
+  <md-list-item class="echos-list-item" *ngFor="let audit of item.audits">
     <div md-line fxLayout="row" fxLayoutAlign="start center">
+      <md-checkbox [disabled]="auditsToCompare.length == 2 && auditsToCompare.indexOf(audit.id) == -1" (change)="toggleCompare(audit.id)" fxFlex="50px"></md-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>{{audit.inquiryform?.title}} - {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div [routerLink]="['/audit', audit.key]">{{audit.inquiryform?.title}} - {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!audit.active">Terminé</div>
         <div *ngIf="audit.active" style="color: rgb(96, 190, 64)">En cours</div>
@@ -73,3 +82,7 @@
     </div>
   </md-list-item>
 </md-list>
+
+<md-toolbar *ngIf="item.audits && item.audits.length" style="text-align: center">
+  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color="primary">Comparer</button>
+</md-toolbar>

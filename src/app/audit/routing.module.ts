@@ -4,6 +4,7 @@ import { ActiveListComponent } from './components/active-list/active-list.compon
 import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
+import { CompareComponent } from './components/compare/compare.component';
 import { AuthGuard } from '../auth-guard.service';
 import { AuditResolver } from './audit.resolver';
 import { AuditListResolver } from './audit-list.resolver';
@@ -48,8 +49,11 @@ const routes: Routes = [
         },
       },
       {
-        path: 'comparer/:id1/:id2',
-        component: ReportComponent
+        path: 'comparer/:id/:id2',
+        resolve: {
+          infos: AuditResolver,
+        },
+        component: CompareComponent
       }
     ]
   }
