@@ -14,6 +14,15 @@ export class AuditTools {
     return AuditTools.instance;
   }
 
+  mergeQuestions(list1, list2) {
+    for (let id_node in list1) {
+      if (!list2[id_node]) {
+        list2[id_node] = list1[id_node];
+      }
+    }
+    return list2;
+  }
+
   cacheDatas(nodes, id_theme = null, questionsList = {}, chartDatas = {themes: {}, families: {}}) {
     if (nodes.childs && nodes.childs.length) {
       nodes.childs.forEach(node => {
@@ -139,7 +148,6 @@ export class AuditTools {
     for (let id_theme in chartDatas.themes) {
       for(let k in chartDatas.themes[id_theme].impact) {
         let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
-        console.log(fam);
         if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[k]) {
           chartDatas.families[fam].hasDatas = true
         }

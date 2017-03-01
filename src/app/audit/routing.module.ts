@@ -49,7 +49,10 @@ const routes: Routes = [
         },
       },
       {
-        path: 'comparer/:id1/:id2',
+        path: 'comparer/:id/:id2',
+        resolve: {
+          infos: AuditResolver,
+        },
         component: CompareComponent
       }
     ]

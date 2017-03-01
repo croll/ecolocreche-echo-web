@@ -24,7 +24,7 @@ export class AnswerComponent implements OnInit {
   infos: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    this.infos = this.route.snapshot.data['infos']
+    this.infos = this.route.snapshot.data['infos'];
   }
 
   ngOnInit() {

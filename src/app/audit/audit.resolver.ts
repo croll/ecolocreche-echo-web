@@ -15,10 +15,24 @@ export class AuditResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    let obj = {audit: null, establishment: null, nodes: null, inquiryform: null}
     let key = route.params['key'];
-    let id = route.params['id'];
-    let url = (key) ? `rest/audits?key=${key}` : `rest/audits?id=${id}`;
+    let id = parseInt(route.params['id']);
+    let id2 = parseInt(route.params['id2']);
+    if (!id2) {
+      return this._getAudit(id || key);
+    } else if (id){
+      return Observable.forkJoin(
+        this._getAudit(id),
+        this._getAudit(id2)
+      )
+    } else {
+      return null;
+    }
+  }
+
+  private _getAudit(idOrKey) {
+    let obj = {audit: null, establishment: null, nodes: null, inquiryform: null}
+    let url = (typeof(idOrKey) == 'string') ? `rest/audits?key=${idOrKey}` : `rest/audits?id=${idOrKey}`;
     return this.http.get(url)
                     .map((res: Response) => {
                       return res.json();
@@ -40,6 +54,7 @@ export class AuditResolver implements Resolve<any> {
                           observer.complete();
                        });
                     })
+
   }
 
   private _filterSelectedNodes(nodes, list) {
