@@ -90,4 +90,13 @@ export class RestService {
     .catch(this.handleError);
   }
 
+  lostpassword(username: string): Observable<User> {
+    console.log("youhou ?");
+    return this.http.post('rest/lostpassword', {
+      username: username,
+    })
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
 }
