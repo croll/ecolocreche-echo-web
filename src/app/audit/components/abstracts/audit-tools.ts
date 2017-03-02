@@ -14,13 +14,17 @@ export class AuditTools {
     return AuditTools.instance;
   }
 
-  mergeQuestions(list1, list2) {
+  merge(list1, list2) {
+    let arr = [];
     for (let id_node in list1) {
-      if (!list2[id_node]) {
-        list2[id_node] = list1[id_node];
+      arr.push(list1[id_node]);
+    }
+    for (let id_node in list2) {
+      if (!list1[id_node]) {
+        arr.push(list1[id_node]);
       }
     }
-    return list2;
+    return arr;
   }
 
   cacheDatas(nodes, id_theme = null, questionsList = {}, chartDatas = {themes: {}, families: {}}) {
@@ -94,6 +98,7 @@ export class AuditTools {
   }
 
   toChartDatas(chartType, datas) {
+    console.log(datas);
     let params = {
       labels: [],
       chartType: chartType,
@@ -116,11 +121,7 @@ export class AuditTools {
         tooltips: {
           callbacks: {
             label: (tooltipItem, data) => {
-              let total = 0;
-              for (let k in data.datasets[0].data) {
-                total += data.datasets[0].data[k];
-              }
-              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / total).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
+              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas.totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
             }
           }
         }
