@@ -1,8 +1,15 @@
 md-card {
-  // margin: 20px auto;
+  margin: 30px 30px 30px 0;
   max-width: 500px;
+  &.center {
+    margin: 30px auto;
+  }
   h3 {
     margin: 5px auto;
     text-align: center;
   }
+}
+
+.echos-title {
+  margin-top: 30px;
 }
