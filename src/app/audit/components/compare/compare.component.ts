@@ -43,19 +43,32 @@ export class CompareComponent implements OnInit {
       this.audit1 = tmp2;
       this.audit2 = tmp1;
     }
-    // console.log(this.audit1, this.audit2);
     this.audit1Cache  = this.auditTools.cacheDatas(this.audit1.nodes);
     this.audit2Cache  = this.auditTools.cacheDatas(this.audit2.nodes);
     this.themeList = this.auditTools.merge(this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes);
-    // this.audit1ChartDatas = this.auditTools.generateChartDatas(this.chartType, this.audit1Cache.chartDatas);
-    // this.audit2ChartDatas = this.auditTools.generateChartDatas(this.chartType, this.audit2Cache.chartDatas);
-
 
     this.charts.environment = {
       audit1: this.auditTools.toChartDatas('pie', this.audit1Cache.chartDatas.families, 'environnementales'),
       audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'environnementales'),
-      global: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.families, this.audit2Cache.chartDatas.families], 'environnementales')
+      global: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.families, this.audit2Cache.chartDatas.families], 'environnementales'),
+      radar: this.auditTools.toChartDatas('radar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], 'environnementales'),
+      themes: []
     };
+
+    this.charts.social = {
+      audit1: this.auditTools.toChartDatas('pie', this.audit1Cache.chartDatas.families, 'sociales'),
+      audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'sociales'),
+      global: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.families, this.audit2Cache.chartDatas.families], 'sociales'),
+      radar: this.auditTools.toChartDatas('radar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], 'sociales'),
+      themes: []
+    };
+
+    for (let theme_id in this.audit1Cache.chartDatas.themes) {
+      let family = (this.audit1Cache.chartDatas.themes[theme_id].family == 'environnementales') ? 'environment' : 'social';
+      this.charts[family].themes.push({title: this.audit1Cache.chartDatas.themes[theme_id].title, chart: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], theme_id)});
+    }
+
+    console.log(this.charts);
 
   }
 

@@ -84,13 +84,22 @@ export class AuditTools {
                 question.value = [];
                 node.choices.forEach(c => {
                   if (value == c.id_choice) {
+                    let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
                     let impact = AuditTools.impact.getImpact(c.impact);
                     if (impact.id != 0) {
                       if (chartDatas.themes[id_theme] && !chartDatas.themes[id_theme].hasDatas) {
                         chartDatas.themes[id_theme].hasDatas = true;
                       }
+                      // families
+                      if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[impact.id]) {
+                        chartDatas.families[fam].hasDatas = true
+                      }
                       chartDatas.themes[id_theme].impact[impact.id]++;
                       chartDatas.themes[id_theme].totalAnswersWithImpact++;
+                      chartDatas.families[fam].impact[impact.id]++;
+                      chartDatas.families['global'].impact[impact.id]++;
+                      chartDatas.families[fam].totalAnswersWithImpact++;
+                      chartDatas.families['global'].totalAnswersWithImpact++;
                     }
                     let choice = {title: c.title, impact: impact, comment: c.comment, color: null}
                     question.value.push(choice);
@@ -223,7 +232,65 @@ export class AuditTools {
       });
 
     } else if (chartType == 'radar') {
+      console.log(datas);
+      params.options = {
+      }
+      let colors = [
+        {
+          backgroundColor: "rgba(179,181,198,0.2)",
+          borderColor: "rgba(179,181,198,1)",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)"
+        },
+        {
+          backgroundColor: "rgba(63, 136, 38, 0.2)",
+          borderColor: "rgba(63, 136, 38, 1)",
+          pointBackgroundColor: "rgba(63, 136, 38, 1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(63, 136, 38, 1)"
+        }
+      ]
       datas = [].concat(datas);
+      let num = 0;
+      // cycle through collections passed in argument
+      datas.forEach(d => {
+        // cycle through themes
+        let dataset = {
+          label: '',
+          backgroundColor: colors[num].backgroundColor,
+          borderColor: colors[num].borderColor,
+          pointBackgroundColor: colors[num].pointBackgroundColor,
+          pointBorderColor: colors[num].pointBorderColor,
+          pointHoverBackgroundColor: colors[num].pointHoverBackgroundColor,
+          pointHoverBorderColor: colors[num].pointHoverBorderColor,
+          data: []
+        };
+        for(let theme_id in d) {
+          dataset.label = d[theme_id].title;
+          // if it matches the asked family
+          if (d[theme_id].family == id) {
+            // Set radar chart labels once
+            if (num == 0) {
+              params.labels.push(d[theme_id].title);
+            }
+            // for each impact of the theme
+            let value = 0;
+            for (let id_impact in d[theme_id].impact) {
+              // only get "positive" impact
+              if (parseInt(id_impact) == 1 || parseInt(id_impact) == 2) {
+                value += d[theme_id].impact[id_impact];
+              }
+            }
+            // set value
+            dataset.data.push((value * 100 / d[theme_id].totalAnswersWithImpact).toFixed(2));
+          }
+          params.datasets.push(dataset);
+        }
+        num++;
+      });
     }
     return params;
   }

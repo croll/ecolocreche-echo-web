@@ -3,6 +3,8 @@
   <div fxFlexAlign="start">Comparaison de deux audits</div>
 </div>
 
+<!-- Premiere page -->
+
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
     Dossier de labellisation
@@ -13,18 +15,6 @@
 <div>Date d'entrée de la démarche:  {{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
 <div>Date du premier audit:  {{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
 <div>Date du second audit:  {{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
-  {{charts.environment.audit1|json}}
-  <div></div>
-  {{charts.environment.audit2|json}}
-  <md-card>
-    <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
-  </md-card>
-  <md-card>
-    <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
-  </md-card>
-  <md-card>
-    <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
-  </md-card>
 
 <h2>Engagement sur les thèmes suivants</h2>
 
@@ -34,35 +24,82 @@
   </div>
 </div>
 
+<!-- Page du résumé du bilan environnemental -->
+
 <h2>Bilan: Évolution de l'impact sur les questions environnementales</h2>
 <h3>Audit de départ:  {{audit1.audit.createdAt | date:'dd/MM/y'}}</h3>
 <h3>Audit intermédaire:  {{audit2.audit.createdAt | date:'dd/MM/y'}}</h3>
 
-<div fxLayout="row" *ngIf="chartDatas?.families.environnementales.hasDatas || chartDatas?.families.sociales.hasDatas">
-  <md-card style="margin:0 auto" *ngIf="chartDatas?.families.environnementales.hasDatas">
-    <div>
-      <div class="echos-report-graph-title">Impact environnemental</div>
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.environnementales.datasets" [colors]="chartDatas.families.environnementales.colors" [labels]="chartDatas.families.environnementales.labels" [chartType]="chartDatas.families.environnementales.chartType" legend="true" [options]="chartDatas.families.environnementales.options"></canvas>
-    </div>
+<div fxLayout="row">
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
+    <h3>Audit de départ</h3>
   </md-card>
-  <md-card style="margin:0 auto" *ngIf="chartDatas?.families.sociales.hasDatas">
-    <div>
-      <div class="echos-report-graph-title">Impact social</div>
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.sociales.datasets" [colors]="chartDatas.families.sociales.colors" [labels]="chartDatas.families.sociales.labels" [chartType]="chartDatas.families.sociales.chartType" legend="true" [options]="chartDatas.families.sociales.options"></canvas>
-    </div>
-  </md-card>
-  <md-card style="margin:0 auto" *ngIf="chartDatas?.families.other.hasDatas">
-    <div>
-      <div class="echos-report-graph-title">Non classé</div>
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.other.datasets" [colors]="chartDatas.families.other.colors" [labels]="chartDatas.families.other.labels" [chartType]="chartDatas.families.other.chartType" legend="true" [options]="chartDatas.families.other.options"></canvas>
-    </div>
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
+    <h3>Audit intermédiaire</h3>
   </md-card>
 </div>
+<div>
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
+    <h5>Gauche: audit de départ</h5>
+    <h5>Droite: audit intermédiaire</h5>
+  </md-card>
+</div>
+<md-card>
+  <canvas baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
+</md-card>
 
-<div *ngIf="chartDatas && !chartDatas?.families.environnementales.hasDatas && !chartDatas?.families.sociales.hasDatas">
-  <md-card style="margin:0 auto">
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.global.datasets" [colors]="chartDatas.families.global.colors" [labels]="chartDatas.families.global.labels" [chartType]="chartDatas.families.global.chartType" legend="true" [options]="chartDatas.families.global.options"></canvas>
+<!-- Page des graphs des familles environnementales -->
+
+<md-card *ngFor="let chart of charts.environment.themes">
+  <h3>{{chart.title}}</h3>
+  <div fxLayout="row">
+    <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
+    <md-input-container>
+      <textarea mdInput>pouet</textarea>
+    </md-input-container>
+  </div>
+</md-card>
+
+<!-- Page du résumé du bilan social -->
+
+<h2>Bilan: Évolution de l'impact sur les questions sociales</h2>
+<h3>Audit de départ:  {{audit1.audit.createdAt | date:'dd/MM/y'}}</h3>
+<h3>Audit intermédaire:  {{audit2.audit.createdAt | date:'dd/MM/y'}}</h3>
+
+<div fxLayout="row">
+  <md-card>
+    <canvas baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
+    <h3>Audit de départ</h3>
+  </md-card>
+  <md-card>
+    <canvas baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
+    <h3>Audit intermédiaire</h3>
   </md-card>
 </div>
+<div>
+  <md-card>
+    <canvas baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
+    <h5>Gauche: audit de départ</h5>
+    <h5>Droite: audit intermédiaire</h5>
+  </md-card>
+</div>
+<md-card>
+  <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
+</md-card>
+
+<!-- Page des graphs des familles sociales -->
+
+<md-card *ngFor="let chart of charts.social.themes">
+  <h3>{{chart.title}}</h3>
+  <div fxLayout="row">
+    <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
+    <md-input-container>
+      <textarea mdInput>pouet</textarea>
+    </md-input-container>
+  </div>
+</md-card>
 
 <div style="height: 80px"></div>
