@@ -29,7 +29,7 @@ export class AuditTools {
 
   cacheDatas(nodes, id_theme = null, questionsList = {}, chartDatas = null) {
     if (chartDatas === null) {
-      chartDatas = {themes: {}, families: {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}}};
+      chartDatas = {themes: {}, families: {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}}};
     }
     if (nodes.childs && nodes.childs.length) {
       nodes.childs.forEach(node => {
@@ -54,20 +54,24 @@ export class AuditTools {
                   node.choices.forEach(c => {
                     if (parseInt(id_choice) == c.id_choice) {
                       if (node.type != 'q_percents' || value[id_choice] > 0) {
+                        let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
                         let impact = AuditTools.impact.getImpact(c.impact);
                         if (impact.id != 0) {
                           if (!chartDatas.themes[id_theme].hasDatas) {
                             chartDatas.themes[id_theme].hasDatas = true;
                           }
-                          chartDatas.themes[id_theme].impact[impact.id]++;
-                          chartDatas.themes[id_theme].totalAnswersWithImpact++;
                           // families
-                          let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
                           if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[impact.id]) {
                             chartDatas.families[fam].hasDatas = true
                           }
-                          chartDatas.families[fam].impact[impact.id] = chartDatas.families[fam].impact[impact.id] + chartDatas.themes[id_theme].impact[impact.id];
-                          chartDatas.families['global'].impact[impact.id] = chartDatas.families['global'].impact[impact.id] + chartDatas.themes[id_theme].impact[impact.id];
+                          // chartDatas.families[fam].impact[impact.id] = chartDatas.families[fam].impact[impact.id] + chartDatas.themes[id_theme].impact[impact.id];
+                          // chartDatas.families['global'].impact[impact.id] = chartDatas.families['global'].impact[impact.id] + chartDatas.themes[id_theme].impact[impact.id];
+                          chartDatas.themes[id_theme].impact[impact.id]++;
+                          chartDatas.themes[id_theme].totalAnswersWithImpact++;
+                          chartDatas.families[fam].impact[impact.id]++;
+                          chartDatas.families['global'].impact[impact.id]++;
+                          chartDatas.families[fam].totalAnswersWithImpact++;
+                          chartDatas.families['global'].totalAnswersWithImpact++;
                         }
                         let choice = {title: c.title, impact: impact, comment: c.comment, value: value[id_choice], color: null};
                         question.value.push(choice);
@@ -130,12 +134,7 @@ export class AuditTools {
         tooltips: {
           callbacks: {
             label: (tooltipItem, data) => {
-              let total = 0;
-              for (let k in data.datasets[0].data) {
-                total += data.datasets[0].data[k];
-              }
-              //return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas[id].totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
-              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / total).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
+              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas[id].totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
             }
           }
         }
@@ -143,24 +142,41 @@ export class AuditTools {
       params.datasets.push(dataset);
     } else if (chartType == 'bar') {
       datas = [].concat(datas);
+      let num = 0;
+      if (datas.length == 2) {
+        params.labels.push('');
+      } else {
+        params.labels.push('');
+      }
       datas.forEach(d => {
-        params.labels.push(d[id].title);
-        params.options = {scales:{xAxes:[{stacked:true}], yAxes:[{stacked:true}]}, stacked: true};
-        let dataset = [];
+        params.options = {
+          scaleSteps: 5,
+          scales:{
+            yAxes:[
+              {
+                ticks: { beginAtZero: true, min: 0, max: 100, stepSize: 10},
+                stacked:true
+              }
+            ]
+          },
+          stacked: true
+        };
         for (let id_impact in d[id].impact) {
           let impact = AuditTools.impact.getImpact(id_impact)
-          let d = {
+          let val = Math.round(d[id].impact[id_impact] * 100 / d[id].totalAnswersWithImpact);
+          let dataset = {
             label: impact.label,
             backgroundColor: impact.color,
-            data: [d[id].impact[id_impact]]
+            data: [val],
+            stack: num
           }
+          params.datasets.push(dataset);
         }
-        params.datasets.push(dataset);
+        num++;
       });
     } else if (chartType == 'radar') {
       datas = [].concat(datas);
     }
-    console.log(params);
     return params;
   }
 
