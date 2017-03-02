@@ -27,7 +27,10 @@ export class AuditTools {
     return arr;
   }
 
-  cacheDatas(nodes, id_theme = null, questionsList = {}, chartDatas = {themes: {}, families: {}}) {
+  cacheDatas(nodes, id_theme = null, questionsList = {}, chartDatas = null) {
+    if (chartDatas === null) {
+      chartDatas = {themes: {}, families: {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}}};
+    }
     if (nodes.childs && nodes.childs.length) {
       nodes.childs.forEach(node => {
         // Store impact informations for graph generation
@@ -58,6 +61,13 @@ export class AuditTools {
                           }
                           chartDatas.themes[id_theme].impact[impact.id]++;
                           chartDatas.themes[id_theme].totalAnswersWithImpact++;
+                          // families
+                          let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
+                          if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[impact.id]) {
+                            chartDatas.families[fam].hasDatas = true
+                          }
+                          chartDatas.families[fam].impact[impact.id] = chartDatas.families[fam].impact[impact.id] + chartDatas.themes[id_theme].impact[impact.id];
+                          chartDatas.families['global'].impact[impact.id] = chartDatas.families['global'].impact[impact.id] + chartDatas.themes[id_theme].impact[impact.id];
                         }
                         let choice = {title: c.title, impact: impact, comment: c.comment, value: value[id_choice], color: null};
                         question.value.push(choice);
@@ -97,8 +107,7 @@ export class AuditTools {
     return {questionList: questionsList, chartDatas: chartDatas};
   }
 
-  toChartDatas(chartType, datas) {
-    console.log(datas);
+  toChartDatas(chartType, datas, id) {
     let params = {
       labels: [],
       chartType: chartType,
@@ -111,56 +120,59 @@ export class AuditTools {
         backgroundColor: [],
         data: []
       }
-      for (let id_impact in datas.impact) {
+      for (let id_impact in datas[id].impact) {
         let impact = AuditTools.impact.getImpact(id_impact)
         params.labels.push(impact.label);
         dataset.backgroundColor.push(impact.color);
-        dataset.data.push(datas.impact[id_impact]);
+        dataset.data.push(datas[id].impact[id_impact]);
       }
       params.options = {
         tooltips: {
           callbacks: {
             label: (tooltipItem, data) => {
-              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas.totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
+              let total = 0;
+              for (let k in data.datasets[0].data) {
+                total += data.datasets[0].data[k];
+              }
+              //return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas[id].totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
+              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / total).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
             }
           }
         }
       }
       params.datasets.push(dataset);
     } else if (chartType == 'bar') {
-      params.labels.push(datas.title);
-      params.options = {scales:{yAxes:[{stacked:true}]}, stacked: true};
-      for (let id_impact in datas.impact) {
-        let impact = AuditTools.impact.getImpact(id_impact)
-        let dataset = {
-          label: impact.label,
-          backgroundColor: impact.color,
-          data: [datas.impact[id_impact]]
+      console.log('ici', datas);
+      datas = [].concat(datas);
+      console.log(datas);
+      datas.forEach(d => {
+        params.labels.push(d[id].title);
+        console.log(d, id);
+        params.options = {scales:{yAxes:[{stacked:true}]}, stacked: true};
+        for (let id_impact in d[id].impact) {
+          let impact = AuditTools.impact.getImpact(id_impact)
+          let dataset = {
+            label: impact.label,
+            backgroundColor: impact.color,
+            data: [d[id].impact[id_impact]]
+          }
+          params.datasets.push(dataset);
         }
-        params.datasets.push(dataset);
-      }
+      });
     } else if (chartType == 'radar') {
+      datas = [].concat(datas);
     }
     return params;
   }
 
   generateChartDatas(chartType, chartDatas) {
-    chartDatas.families = {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj)}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj)}};
     for (let id_theme in chartDatas.themes) {
-      for(let k in chartDatas.themes[id_theme].impact) {
-        let fam = (!chartDatas.themes[id_theme].family) ? 'other' : chartDatas.themes[id_theme].family;
-        if (!chartDatas.families[fam].hasDatas && chartDatas.themes[id_theme].impact[k]) {
-          chartDatas.families[fam].hasDatas = true
-        }
-        chartDatas.families[fam].impact[k] = chartDatas.families[fam].impact[k] + chartDatas.themes[id_theme].impact[k];
-        chartDatas.families['global'].impact[k] = chartDatas.families['global'].impact[k] + chartDatas.themes[id_theme].impact[k];
-      }
-      Object.assign(chartDatas.themes[id_theme], AuditTools.instance.toChartDatas(chartType, chartDatas.themes[id_theme]));
+      Object.assign(chartDatas.themes[id_theme], AuditTools.instance.toChartDatas(chartType, chartDatas.themes, id_theme));
     }
 
     // Generate family impact datas
     for (let fam in chartDatas.families) {
-      Object.assign(chartDatas.families[fam], AuditTools.instance.toChartDatas(chartType, chartDatas.families[fam]));
+      Object.assign(chartDatas.families[fam], AuditTools.instance.toChartDatas(chartType, chartDatas.families, fam));
     }
     return chartDatas;
   }
