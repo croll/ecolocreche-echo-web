@@ -33,7 +33,7 @@
       <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
       <div *ngIf="questionList[question.id_node].description" class="echos-report-question-comment">{{questionList[question.id_node].description}}</div>
       <!-- Check if question is answered or not -->
-      <div *ngIf="!questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
+      <div *ngIf="!questionList[question.id_node].ignored && questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
       <div *ngIf="questionList[question.id_node].ignored">
         <div class="echos-report-ignored">Question ignorée</div>
       </div>
@@ -69,9 +69,6 @@
             <div class="echos-report-question-value">{{questionList[question.id_node].value}}</div>
           </div>
         </div>
-      </div>
-      <div *ngIf="questionList[question.id_node].value === undefined" class="echos-report-no-answer">
-        Aucune réponse
       </div>
     </div>
   </md-card>
