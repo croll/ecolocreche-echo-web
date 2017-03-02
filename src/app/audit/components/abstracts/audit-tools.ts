@@ -21,7 +21,7 @@ export class AuditTools {
     }
     for (let id_node in list2) {
       if (!list1[id_node]) {
-        arr.push(list1[id_node]);
+        arr.push(list2[id_node]);
       }
     }
     return arr;
