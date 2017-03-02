@@ -137,30 +137,77 @@ export class AuditTools {
               return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas[id].totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
             }
           }
+        },
+        animation: {
+          duration: 0,
+          onComplete: function () {
+            let chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+
+            ctx.font = '16px Arial';
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#000";
+
+            this.data.datasets.forEach((dataset, datasetIndex) => {
+                var meta = this.getDatasetMeta(datasetIndex),
+                    total = 0, //total values to compute fraction
+                    labelxy = [],
+                    offset = Math.PI / 2, //start sector from top
+                    radius,
+                    centerx,
+                    centery,
+                    lastend = 0; //prev arc's end line: starting with 0
+
+                for (var val of dataset.data) { total += val; }
+
+                meta.data.forEach((element, index) => {
+                    radius = 0.9 * element._model.outerRadius - element._model.innerRadius;
+                    centerx = element._model.x;
+                    centery = element._model.y;
+                    var thispart = dataset.data[index],
+                        arcsector = Math.PI * (2 * thispart / total);
+                    if (element.hasValue() && dataset.data[index] > 0) {
+                      labelxy.push(lastend + arcsector / 2 + Math.PI + offset);
+                    }
+                    else {
+                      labelxy.push(-1);
+                    }
+                    lastend += arcsector;
+                });
+
+                var lradius = radius * 3 / 4;
+                for (var idx in labelxy) {
+                  if (labelxy[idx] === -1) continue;
+                  let langle = labelxy[idx],
+                      dx = centerx + lradius * Math.cos(langle),
+                      dy = centery + lradius * Math.sin(langle),
+                      val = Math.round(dataset.data[idx] / total * 100);
+                  ctx.fillText(val + '%', dx, dy);
+                }
+
+            });
+          }
         }
       }
       params.datasets.push(dataset);
     } else if (chartType == 'bar') {
       datas = [].concat(datas);
       let num = 0;
-      if (datas.length == 2) {
-        params.labels.push('');
-      } else {
-        params.labels.push('');
-      }
+      params.labels.push('');
+      params.options = {
+        scaleSteps: 5,
+        scales:{
+          yAxes:[
+            {
+              ticks: { beginAtZero: true, min: 0, max: 100, stepSize: 10},
+              stacked:true
+            }
+          ]
+        },
+        stacked: true
+      };
+
       datas.forEach(d => {
-        params.options = {
-          scaleSteps: 5,
-          scales:{
-            yAxes:[
-              {
-                ticks: { beginAtZero: true, min: 0, max: 100, stepSize: 10},
-                stacked:true
-              }
-            ]
-          },
-          stacked: true
-        };
         for (let id_impact in d[id].impact) {
           let impact = AuditTools.impact.getImpact(id_impact)
           let val = Math.round(d[id].impact[id_impact] * 100 / d[id].totalAnswersWithImpact);
@@ -174,6 +221,7 @@ export class AuditTools {
         }
         num++;
       });
+
     } else if (chartType == 'radar') {
       datas = [].concat(datas);
     }
