@@ -142,26 +142,25 @@ export class AuditTools {
       }
       params.datasets.push(dataset);
     } else if (chartType == 'bar') {
-      console.log('ici', datas);
       datas = [].concat(datas);
-      console.log(datas);
       datas.forEach(d => {
         params.labels.push(d[id].title);
-        console.log(d, id);
-        params.options = {scales:{yAxes:[{stacked:true}]}, stacked: true};
+        params.options = {scales:{xAxes:[{stacked:true}], yAxes:[{stacked:true}]}, stacked: true};
+        let dataset = [];
         for (let id_impact in d[id].impact) {
           let impact = AuditTools.impact.getImpact(id_impact)
-          let dataset = {
+          let d = {
             label: impact.label,
             backgroundColor: impact.color,
             data: [d[id].impact[id_impact]]
           }
-          params.datasets.push(dataset);
         }
+        params.datasets.push(dataset);
       });
     } else if (chartType == 'radar') {
       datas = [].concat(datas);
     }
+    console.log(params);
     return params;
   }
 

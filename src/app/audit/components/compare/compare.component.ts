@@ -19,6 +19,7 @@ export class CompareComponent implements OnInit {
   audit1: any;
   audit2: any;
   questionList: any;
+  themeList: any;
   audit2QuestionList: any;
   audit1ChartDatas: any;
   audit2ChartDatas: any;
@@ -26,24 +27,39 @@ export class CompareComponent implements OnInit {
   audit2Cache: any;
   chartType: string = 'pie';
   hideChart: boolean = false;
+  charts: any = {};
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
-    console.log(this.route.snapshot.data['infos']);
-    this.audit1 = this.route.snapshot.data['infos'][0];
-    this.audit2 = this.route.snapshot.data['infos'][1];
+    let tmp1 = this.route.snapshot.data['infos'][0];
+    let tmp2 = this.route.snapshot.data['infos'][1];
+    if (new Date(tmp1.audit.createdAt) < new Date(tmp2.audit.createdAt)) {
+      this.audit1 = tmp1;
+      this.audit2 = tmp2;
+    } else {
+      this.audit1 = tmp2;
+      this.audit2 = tmp1;
+    }
+    // console.log(this.audit1, this.audit2);
     this.audit1Cache  = this.auditTools.cacheDatas(this.audit1.nodes);
     this.audit2Cache  = this.auditTools.cacheDatas(this.audit2.nodes);
-    this.questionList = this.auditTools.mergeQuestions(this.audit1Cache.questionList, this.audit1Cache.questionList);
-    this.audit1ChartDatas = this.auditTools.generateChartDatas(this.chartType, this.audit1Cache.chartDatas);
-    this.audit2ChartDatas = this.auditTools.generateChartDatas(this.chartType, this.audit2Cache.chartDatas);
+    this.themeList = this.auditTools.merge(this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes);
+    // this.audit1ChartDatas = this.auditTools.generateChartDatas(this.chartType, this.audit1Cache.chartDatas);
+    // this.audit2ChartDatas = this.auditTools.generateChartDatas(this.chartType, this.audit2Cache.chartDatas);
+
+
+    this.charts.environment = {
+      audit1: this.auditTools.toChartDatas('pie', this.audit1Cache.chartDatas.families, 'environnementales'),
+      audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'environnementales'),
+      global: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.families, this.audit2Cache.chartDatas.families], 'environnementales')
+    };
+
   }
 
   ngOnInit() {
-    // this.node = this.infos.nodes;
   }
 
   setChartType(chartType, id_theme) {

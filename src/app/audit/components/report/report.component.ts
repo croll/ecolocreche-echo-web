@@ -40,7 +40,7 @@ export class ReportComponent implements OnInit {
 
   setChartType(chartType, id_theme) {
     this.chartType = chartType.value;
-    Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(this.chartType, this.cache.chartDatas[id_theme]));
+    Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(this.chartType, this.cache.chartDatas, id_theme));
     setTimeout(() => {
       this._chart.ngOnChanges({});
     }, 150);
@@ -49,7 +49,7 @@ export class ReportComponent implements OnInit {
   toggleChartType(chartType, id_theme) {
     this.hideChart = true;
     chartType = (chartType == 'bar') ? 'pie' : 'bar';
-    Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(chartType, this.cache.chartDatas[id_theme]));
+    Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(chartType, this.cache.chartDatas, id_theme));
     setTimeout(() => {
       this.hideChart = false;
       this._chart.ngOnChanges({});

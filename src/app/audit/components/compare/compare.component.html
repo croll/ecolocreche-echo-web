@@ -5,13 +5,38 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    <!-- Rapport de l'audit de {{audit1.establishment.name}} -->
+    Dossier de labellisation
   </h1>
 </div>
 
-  <!-- <md-card>
-    <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
-  </md-card> -->
+<div>Nom de la crèche:  {{audit1.audit.establishment.name}}</div>
+<div>Date d'entrée de la démarche:  {{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
+<div>Date du premier audit:  {{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+<div>Date du second audit:  {{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+  {{charts.environment.audit1|json}}
+  <div></div>
+  {{charts.environment.audit2|json}}
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
+  </md-card>
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
+  </md-card>
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" legend="true" [options]="charts.environment.global.options"></canvas>
+  </md-card>
+
+<h2>Engagement sur les thèmes suivants</h2>
+
+<div class="table">
+  <div *ngFor="let theme of themeList">
+    {{theme.title}}
+  </div>
+</div>
+
+<h2>Bilan: Évolution de l'impact sur les questions environnementales</h2>
+<h3>Audit de départ:  {{audit1.audit.createdAt | date:'dd/MM/y'}}</h3>
+<h3>Audit intermédaire:  {{audit2.audit.createdAt | date:'dd/MM/y'}}</h3>
 
 <div fxLayout="row" *ngIf="chartDatas?.families.environnementales.hasDatas || chartDatas?.families.sociales.hasDatas">
   <md-card style="margin:0 auto" *ngIf="chartDatas?.families.environnementales.hasDatas">
