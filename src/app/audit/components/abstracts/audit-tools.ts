@@ -232,25 +232,24 @@ export class AuditTools {
       });
 
     } else if (chartType == 'radar') {
-      console.log(datas);
       params.options = {
       }
       let colors = [
         {
-          backgroundColor: "rgba(179,181,198,0.2)",
-          borderColor: "rgba(179,181,198,1)",
-          pointBackgroundColor: "rgba(179,181,198,1)",
-          pointBorderColor: "#fff",
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgba(179,181,198,1)"
-        },
-        {
-          backgroundColor: "rgba(63, 136, 38, 0.2)",
+          backgroundColor: "rgba(63, 136, 38, 0.05)",
           borderColor: "rgba(63, 136, 38, 1)",
           pointBackgroundColor: "rgba(63, 136, 38, 1)",
           pointBorderColor: "#fff",
           pointHoverBackgroundColor: "#fff",
           pointHoverBorderColor: "rgba(63, 136, 38, 1)"
+        },
+        {
+          backgroundColor: "rgba(173, 174, 186, 0.05)",
+          borderColor: "rgba(173, 174, 186, 1)",
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(173, 174, 186, 1)"
         }
       ]
       datas = [].concat(datas);
@@ -260,14 +259,9 @@ export class AuditTools {
         // cycle through themes
         let dataset = {
           label: '',
-          backgroundColor: colors[num].backgroundColor,
-          borderColor: colors[num].borderColor,
-          pointBackgroundColor: colors[num].pointBackgroundColor,
-          pointBorderColor: colors[num].pointBorderColor,
-          pointHoverBackgroundColor: colors[num].pointHoverBackgroundColor,
-          pointHoverBorderColor: colors[num].pointHoverBorderColor,
           data: []
         };
+        Object.assign(dataset, colors[num]);
         for(let theme_id in d) {
           dataset.label = d[theme_id].title;
           // if it matches the asked family
