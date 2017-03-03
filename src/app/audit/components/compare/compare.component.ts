@@ -45,7 +45,6 @@ export class CompareComponent implements OnInit {
     }
     this.audit1Cache  = this.auditTools.cacheDatas(this.audit1.nodes);
     this.audit2Cache  = this.auditTools.cacheDatas(this.audit2.nodes);
-    console.log(this.audit1Cache);
     this.themeList = this.auditTools.merge(this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes);
 
     this.charts.environment = {

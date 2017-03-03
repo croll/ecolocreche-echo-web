@@ -68,6 +68,14 @@
 </md-card>
 <md-card>
   <canvas baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
+    <div fxFlexOffset="8px">Audit de départ</div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
+    <div fxFlexOffset="8px">Audit intermédiaire</div>
+  </div>
 </md-card>
 
 <!-- Page des graphs des familles environnementales -->
@@ -119,6 +127,14 @@
 </div>
 <md-card>
   <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
+    <div fxFlexOffset="8px">Audit de départ</div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
+    <div fxFlexOffset="8px">Audit intermédiaire</div>
+  </div>
 </md-card>
 
 <!-- Page des graphs des familles sociales -->
