@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Audit } from '../../audit';
 import { RestService} from '../../../rest.service';
 import { InquiryForm } from '../../../inquiry-form/inquiry-form';
+import { Http, Response } from '@angular/http';
+import { MdSnackBar } from '@angular/material';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -25,7 +27,7 @@ export class EditComponent implements OnInit {
   private id_establishment: number;
   private inquiryFormList: InquiryForm[];
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MdSnackBar) {
 
     this.current = new Audit();
 
@@ -102,6 +104,17 @@ export class EditComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
+  }
+
+  sendmail(id) {
+    this.http.post('/rest/auditmail', {
+      id_audit: id,
+    }).subscribe(() => {
+      this.snackBar.open("Mail de l'audit : ", "ENVOYÉ", {
+            duration: 3000,
+          });
+    })
+    return false;
   }
 
   goBack(): boolean {
