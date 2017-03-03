@@ -22,7 +22,7 @@
 <div *ngFor="let theme of node.childs">
   <div class="echos-title echos-report-theme" fxLayout="row">
     <div fxFlex>{{theme.title}}</div>
-    <button md-button color="primary" (click)="toggleChartType(chartDatas.themes[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button>
+    <!-- <button md-button color="primary" (click)="toggleChartType(chartDatas.themes[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button> -->
   </div>
   <md-card>
     <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
