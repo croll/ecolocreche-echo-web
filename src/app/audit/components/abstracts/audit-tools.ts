@@ -236,7 +236,7 @@ export class AuditTools {
       }
       let colors = [
         {
-          backgroundColor: "rgba(63, 136, 38, 0.05)",
+          backgroundColor: "rgba(63, 136, 38, 0.02)",
           borderColor: "rgba(63, 136, 38, 1)",
           pointBackgroundColor: "rgba(63, 136, 38, 1)",
           pointBorderColor: "#fff",
