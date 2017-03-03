@@ -264,6 +264,7 @@ export class AuditTools {
         Object.assign(dataset, colors[num]);
         for(let theme_id in d) {
           // dataset.label = d[theme_id].title;
+          dataset.label = 'Valeur';
           // if it matches the asked family
           if (d[theme_id].family == id) {
             // Set radar chart labels once
