@@ -28,6 +28,7 @@ import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { RestService } from './rest.service';
+import { WkHtmlToPdfService } from './wkhtmltopdf.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { RestService } from './rest.service';
   providers: [
     AuthGuard,
     AuthService,
-    RestService
+    RestService,
+    WkHtmlToPdfService
   ],
   bootstrap: [AppComponent]
 })

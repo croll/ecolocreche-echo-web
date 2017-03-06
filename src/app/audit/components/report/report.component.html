@@ -10,6 +10,8 @@
   <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
+<button md-button (click)="pdf()">PDF</button>
+
 <div *ngIf="!infos.inquiryform.comment" class="presentation">
   <p>L'audit Ecolo Crèche de votre établissement est désormais terminé. Cela nous permet à présent de vous envoyer ce rapport d’audit, composé de 8 thématiques (le Bâtiment/ les Energies : chauffage et électricité/ L’alimentation /Les activités et jeux/ Les produits d’entretien et d’hygiène/ l’Eau / les Fournitures de bureau / les Déchets).</p>
   <p>Vous trouverez également un diagramme représentant l'impact de votre crèche sur l'environnement. Enfin, nous avons rassemblé vos représentations en matière de respect de l’environnement en dernière page.</p>

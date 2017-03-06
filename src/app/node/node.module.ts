@@ -7,7 +7,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
-import { ColorPickerModule } from 'angular2-color-picker';
+import { ColorPickerModule } from '../ext/ngx-color-picker';
 import { NodeResolver } from './node.resolver'
 
 @NgModule({
