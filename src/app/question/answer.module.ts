@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ChartsModule } from 'ng2-charts';
 
 // import our software
 import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
@@ -20,7 +21,8 @@ import { AnswerEditComponent as NumericAnswerEditComponent } from './components/
     FormsModule,
     ReactiveFormsModule,
 	  MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ChartsModule
   ],
   declarations: [
     AnswerEditComponent,

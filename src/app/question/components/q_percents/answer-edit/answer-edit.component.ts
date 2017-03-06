@@ -5,6 +5,7 @@ import { Impact } from '../../abstracts/impacts';
 import { Question } from '../../../question';
 import { Choice } from '../../../choice';
 import { Answer } from '../../../answer';
+import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'q-percents-answer-edit',
@@ -28,9 +29,41 @@ export class AnswerEditComponent implements OnInit {
   impact: Impact;
   vals = [0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
   nothundred = false;
+  overhundred = false;
+  total = 0;
+
+  donut:any = {
+    colors: [{
+      backgroundColor: ["#ff9800", "#C0C0C0"]
+    }],
+    datasets: [
+      {
+        data: [0,0]
+      }],
+    options: { tooltips: { enabled: false } }
+  }
 
   constructor(private fb: FormBuilder, public sanitizer: DomSanitizer) {
     this.impact = Impact.getInstance(sanitizer);
+  }
+
+  setDonutChartValue() {
+    this.total = 0;
+    for (let choice of this.choices) {
+      this.total+=Number.isInteger(Number.parseInt(choice['value'])) ? Number.parseInt(choice['value']) : 0;
+    }
+    let max = (this.total < 100) ? 100 - this.total : 0;
+    // let color = (this.total < 100) ? "#ff9800" : "#FF6384";
+    Object.assign(this.donut, {
+      // colors: [{
+      //   backgroundColor: ["#ff9800", "#C0C0C0"]
+      // }],
+      datasets: [{data: [this.total, max]}]
+    });
+    this.nothundred = (this.total < 100) ? true : false;
+    this.overhundred = (this.total > 100) ? true : false;
+
+    this.propagateChange(this.value);
   }
 
   findChoiceById(id_choice) : Choice {
@@ -43,7 +76,8 @@ export class AnswerEditComponent implements OnInit {
 
   ngOnInit() {
       this.value=this._value;
-      this.updatevalue();
+      // this.updatevalue();
+      this.setDonutChartValue();
   }
 
   updatevalue() {
@@ -62,7 +96,7 @@ export class AnswerEditComponent implements OnInit {
 
       latest_choice['value']=latestval;
 
-      console.log("latestval: ", latestval);
+      // console.log("latestval: ", latestval);
 
       this.propagateChange(this.value);
   }

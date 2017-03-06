@@ -1,3 +1,60 @@
 .choice-row {
   overflow-y: hidden;
 }
+
+.percent-container {
+  width: 60px;
+  padding-left: 8px;
+  div {
+    width: 50px;
+  }
+}
+
+.chart-container {
+  md-card {
+    padding: 2px;
+  }
+  .chart {
+    position: relative;
+    min-width: 150px;
+    min-height: 150px;
+    padding: 20px 50px;
+    .percent {
+      width: 60px;
+      text-align: center;
+      top: 45%;
+      left: 37%;
+      font-size: 1.4em;
+      color: #c0c0c0;
+      position: absolute;
+      font-weight: bold;
+    }
+  }
+}
+
+.nothundred {
+  color: #333;
+  text-align: center;
+  padding: 0 0 5px 0;
+}
+
+.overhundred {
+  text-align: center;
+  padding: 0 0 5px 0;
+}
+
+.error {
+  color: #f76242!important;
+}
+
+.normal {
+  color: #ff9800!important;
+}
+
+.ok {
+  color: #009688!important;
+}
+
+.disabled {
+  color: #C0C0C0!important;
+}
