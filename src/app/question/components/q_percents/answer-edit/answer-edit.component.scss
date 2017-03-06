@@ -13,16 +13,17 @@
 .chart-container {
   md-card {
     padding: 2px;
+    min-width: 250px;
   }
   .chart {
     position: relative;
-    padding: 20px 50px;
+    padding: 10px 70px;
     .percent {
       width: 60px;
       text-align: center;
-      top: 45%;
-      left: 37%;
-      font-size: 1.1em;
+      top: 46%;
+      left: 38%;
+      font-size: 1.3em;
       color: #c0c0c0;
       position: absolute;
       font-weight: bold;

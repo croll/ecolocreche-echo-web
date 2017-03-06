@@ -11,7 +11,7 @@
             <!-- <md-slider [(ngModel)]="item.value" min="0" max="100" step="5" tickInterval="1" (onTouched)="onTouched()" thumbLabel="false" [value]="item.value" (input)="onInput($event.value, item)" (change)="updatevalue();setDonutChartValue()" [disabled]="readonly ? true : lastItem"></md-slider> -->
             <md-slider [(ngModel)]="item.value" min="0" max="100" step="5" tickInterval="1" (onTouched)="onTouched()" thumbLabel="false" [value]="item.value" (input)="onInput($event.value, item)" (change)="setDonutChartValue()" [disabled]="readonly ? true : false"></md-slider>
             <div class="percent-container">
-              <div *ngIf="!item.liveValue && item.value" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : false}">{{item.value}} %</div>
+              <div *ngIf="!item.liveValue && item.value" class="echos-slider-value">{{item.value}} %</div>
               <!-- <div *ngIf="item.liveValue" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : lastItem}">{{item.liveValue}} %</div> -->
               <div *ngIf="item.liveValue" class="echos-slider-value">{{item.liveValue}} %</div>
             </div>
