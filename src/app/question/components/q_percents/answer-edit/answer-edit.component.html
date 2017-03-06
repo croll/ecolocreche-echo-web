@@ -20,10 +20,10 @@
       </div>
     </md-list-item>
   </md-list>
-  <div class="chart-container" fxFlexOffset="50px">
+  <div class="chart-container" fxFlexOffset="50px" *ngIf="!readonly">
     <md-card>
       <div class="chart">
-        <canvas baseChart width="150px" height="150px" [datasets]="donut.datasets" [colors]="donut.colors" [chartType]="'doughnut'" legend="'false'" [options]="donut.options"></canvas>
+        <canvas baseChart width="100px" height="100px" [datasets]="donut.datasets" [colors]="donut.colors" [chartType]="'doughnut'" legend="'false'" [options]="donut.options"></canvas>
         <div class="percent" [ngClass]="{error: total > 100, ok: total == 100, normal: total < 100, disabled: total == 0}">{{total}}%</div>
       </div>
       <div *ngIf="!overhundred" class="nothundred">Le total doit faire 100%</div>

@@ -27,6 +27,6 @@
     <div fxLayout="row" fxLayoutAlign="start center" class="echos-buttons-container">
       <button *ngIf="!isAnswered" fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
       <button *ngIf="isAnswered || this.answer?.ignored" (click)="modify()" fxFlexOffset="20px" md-raised-button>Modifier cette réponse</button>
-      <button *ngIf="!isAnswered" (click)="ignore()" fxFlexOffset="20px" md-raised-button color="accent">Ignorer cette question</button>
+      <button *ngIf="!isAnswered" (click)="ignore()" fxFlexOffset="20px" md-raised-button>Ignorer cette question</button>
     </div>
 </form>
