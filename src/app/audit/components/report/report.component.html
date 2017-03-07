@@ -3,108 +3,112 @@
   <div fxFlexAlign="start">Rapport d'audit</div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="start center">
-  <h1 fxFlex>
-    Rapport de l'audit de {{infos.audit.establishment.name}}
-  </h1>
-  <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
-</div>
+<div id='exportpdf'>
 
-<button md-button (click)="pdf()">PDF</button>
-
-<div *ngIf="!infos.inquiryform.comment" class="presentation">
-  <p>L'audit Ecolo Crèche de votre établissement est désormais terminé. Cela nous permet à présent de vous envoyer ce rapport d’audit, composé de 8 thématiques (le Bâtiment/ les Energies : chauffage et électricité/ L’alimentation /Les activités et jeux/ Les produits d’entretien et d’hygiène/ l’Eau / les Fournitures de bureau / les Déchets).</p>
-  <p>Vous trouverez également un diagramme représentant l'impact de votre crèche sur l'environnement. Enfin, nous avons rassemblé vos représentations en matière de respect de l’environnement en dernière page.</p>
-</div>
-
-<div *ngIf="infos.inquiryform.comment" class="presentation">
-  {{infos.inquiryform.comment}}
-</div>
-
-<div *ngFor="let theme of node.childs">
-  <div class="echos-title echos-report-theme" fxLayout="row">
-    <div fxFlex>{{theme.title}}</div>
-    <!-- <button md-button color="primary" (click)="toggleChartType(chartDatas.themes[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button> -->
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <h1 fxFlex>
+      Rapport de l'audit de {{infos.audit.establishment.name}}
+    </h1>
+    <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
   </div>
-  <md-card>
-    <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
-  </md-card>
-  <md-card *ngFor="let category of theme.childs">
-    <div class="echos-report-category"> {{category.title}}</div>
-    <div *ngFor="let question of category.childs">
-      <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
-      <div *ngIf="questionList[question.id_node].description" class="echos-report-question-comment">{{questionList[question.id_node].description}}</div>
-      <!-- Check if question is answered or not -->
-      <div *ngIf="!questionList[question.id_node].ignored && questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
-      <div *ngIf="questionList[question.id_node].ignored">
-        <div class="echos-report-ignored">Question ignorée</div>
-      </div>
-      <div *ngIf="questionList[question.id_node].value !== undefined">
-        <!-- Check if question is ignored or not -->
-        <div *ngIf="!questionList[question.id_node].ignored">
-          <!-- Checkbox -->
-          <div *ngIf="questionList[question.id_node].type == 'q_checkbox' || questionList[question.id_node].type == 'q_radio'">
-            <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
+
+  <button md-button (click)="pdf()">PDF</button>
+
+  <div *ngIf="!infos.inquiryform.comment" class="presentation">
+    <p>L'audit Ecolo Crèche de votre établissement est désormais terminé. Cela nous permet à présent de vous envoyer ce rapport d’audit, composé de 8 thématiques (le Bâtiment/ les Energies : chauffage et électricité/ L’alimentation /Les activités et jeux/ Les produits d’entretien et d’hygiène/ l’Eau / les Fournitures de bureau / les Déchets).</p>
+    <p>Vous trouverez également un diagramme représentant l'impact de votre crèche sur l'environnement. Enfin, nous avons rassemblé vos représentations en matière de respect de l’environnement en dernière page.</p>
+  </div>
+
+  <div *ngIf="infos.inquiryform.comment" class="presentation">
+    {{infos.inquiryform.comment}}
+  </div>
+
+  <div *ngFor="let theme of node.childs">
+    <div class="echos-title echos-report-theme" fxLayout="row">
+      <div fxFlex>{{theme.title}}</div>
+      <!-- <button md-button color="primary" (click)="toggleChartType(chartDatas.themes[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button> -->
+    </div>
+    <md-card>
+      <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
+    </md-card>
+    <md-card *ngFor="let category of theme.childs">
+      <div class="echos-report-category"> {{category.title}}</div>
+      <div *ngFor="let question of category.childs">
+        <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
+        <div *ngIf="questionList[question.id_node].description" class="echos-report-question-comment">{{questionList[question.id_node].description}}</div>
+        <!-- Check if question is answered or not -->
+        <div *ngIf="!questionList[question.id_node].ignored && questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
+        <div *ngIf="questionList[question.id_node].ignored">
+          <div class="echos-report-ignored">Question ignorée</div>
+        </div>
+        <div *ngIf="questionList[question.id_node].value !== undefined">
+          <!-- Check if question is ignored or not -->
+          <div *ngIf="!questionList[question.id_node].ignored">
+            <!-- Checkbox -->
+            <div *ngIf="questionList[question.id_node].type == 'q_checkbox' || questionList[question.id_node].type == 'q_radio'">
+              <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
+                    <div fxFlexOffset="5px">{{choice.title}}</div>
+                  </div>
+                  <div *ngIf="choice.comment" class="echos-report-choice-comment">{{choice.comment}}</div>
+              </div>
+            </div>
+            <!-- Percent -->
+            <div *ngIf="questionList[question.id_node].type == 'q_percents'">
+              <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
+                  <div class="echos-percent" fxFlexOffset="8px">
+                    {{choice.value}} %
+                  </div>
                   <div fxFlexOffset="5px">{{choice.title}}</div>
                 </div>
                 <div *ngIf="choice.comment" class="echos-report-choice-comment">{{choice.comment}}</div>
-            </div>
-          </div>
-          <!-- Percent -->
-          <div *ngIf="questionList[question.id_node].type == 'q_percents'">
-            <div *ngFor="let choice of questionList[question.id_node].value" class="echos-report-choice">
-              <div fxLayout="row" fxLayoutAlign="start center">
-                <div *ngIf="choice.impact" class="echos-color" [ngStyle]="{'background-color': choice.impact.color}"></div>
-                <div class="echos-percent" fxFlexOffset="8px">
-                  {{choice.value}} %
-                </div>
-                <div fxFlexOffset="5px">{{choice.title}}</div>
               </div>
-              <div *ngIf="choice.comment" class="echos-report-choice-comment">{{choice.comment}}</div>
             </div>
-          </div>
-          <!-- Numeric and text -->
-          <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'" fxLayout="row">
-            <div style="color: #888; font-size: 0.8em; padding-top: 1px">Réponse:</div>
-            <div class="echos-report-question-value">{{questionList[question.id_node].value}}</div>
+            <!-- Numeric and text -->
+            <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'" fxLayout="row">
+              <div style="color: #888; font-size: 0.8em; padding-top: 1px">Réponse:</div>
+              <div class="echos-report-question-value">{{questionList[question.id_node].value}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </md-card>
-</div>
+    </md-card>
+  </div>
 
-<div class="echos-title echos-report-theme" fxLayout="row">
-  <div fxFlex>Bilan de l'audit</div>
-</div>
+  <div class="echos-title echos-report-theme" fxLayout="row">
+    <div fxFlex>Bilan de l'audit</div>
+  </div>
 
-<div fxLayout="row" *ngIf="chartDatas?.families.environnementales.hasDatas || chartDatas?.families.sociales.hasDatas">
-  <md-card style="margin:0 auto" *ngIf="chartDatas?.families.environnementales.hasDatas">
-    <div>
-      <div class="echos-report-graph-title">Impact environnemental</div>
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.environnementales.datasets" [colors]="chartDatas.families.environnementales.colors" [labels]="chartDatas.families.environnementales.labels" [chartType]="chartDatas.families.environnementales.chartType" legend="true" [options]="chartDatas.families.environnementales.options"></canvas>
-    </div>
-  </md-card>
-  <md-card style="margin:0 auto" *ngIf="chartDatas?.families.sociales.hasDatas">
-    <div>
-      <div class="echos-report-graph-title">Impact social</div>
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.sociales.datasets" [colors]="chartDatas.families.sociales.colors" [labels]="chartDatas.families.sociales.labels" [chartType]="chartDatas.families.sociales.chartType" legend="true" [options]="chartDatas.families.sociales.options"></canvas>
-    </div>
-  </md-card>
-  <md-card style="margin:0 auto" *ngIf="chartDatas?.families.other.hasDatas">
-    <div>
-      <div class="echos-report-graph-title">Non classé</div>
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.other.datasets" [colors]="chartDatas.families.other.colors" [labels]="chartDatas.families.other.labels" [chartType]="chartDatas.families.other.chartType" legend="true" [options]="chartDatas.families.other.options"></canvas>
-    </div>
-  </md-card>
-</div>
+  <div fxLayout="row" *ngIf="chartDatas?.families.environnementales.hasDatas || chartDatas?.families.sociales.hasDatas">
+    <md-card style="margin:0 auto" *ngIf="chartDatas?.families.environnementales.hasDatas">
+      <div>
+        <div class="echos-report-graph-title">Impact environnemental</div>
+        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.environnementales.datasets" [colors]="chartDatas.families.environnementales.colors" [labels]="chartDatas.families.environnementales.labels" [chartType]="chartDatas.families.environnementales.chartType" legend="true" [options]="chartDatas.families.environnementales.options"></canvas>
+      </div>
+    </md-card>
+    <md-card style="margin:0 auto" *ngIf="chartDatas?.families.sociales.hasDatas">
+      <div>
+        <div class="echos-report-graph-title">Impact social</div>
+        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.sociales.datasets" [colors]="chartDatas.families.sociales.colors" [labels]="chartDatas.families.sociales.labels" [chartType]="chartDatas.families.sociales.chartType" legend="true" [options]="chartDatas.families.sociales.options"></canvas>
+      </div>
+    </md-card>
+    <md-card style="margin:0 auto" *ngIf="chartDatas?.families.other.hasDatas">
+      <div>
+        <div class="echos-report-graph-title">Non classé</div>
+        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.other.datasets" [colors]="chartDatas.families.other.colors" [labels]="chartDatas.families.other.labels" [chartType]="chartDatas.families.other.chartType" legend="true" [options]="chartDatas.families.other.options"></canvas>
+      </div>
+    </md-card>
+  </div>
 
-<div *ngIf="chartDatas && !chartDatas?.families.environnementales.hasDatas && !chartDatas?.families.sociales.hasDatas">
-  <md-card style="margin:0 auto">
-    <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.global.datasets" [colors]="chartDatas.families.global.colors" [labels]="chartDatas.families.global.labels" [chartType]="chartDatas.families.global.chartType" legend="true" [options]="chartDatas.families.global.options"></canvas>
-  </md-card>
-</div>
+  <div *ngIf="chartDatas && !chartDatas?.families.environnementales.hasDatas && !chartDatas?.families.sociales.hasDatas">
+    <md-card style="margin:0 auto">
+      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.global.datasets" [colors]="chartDatas.families.global.colors" [labels]="chartDatas.families.global.labels" [chartType]="chartDatas.families.global.chartType" legend="true" [options]="chartDatas.families.global.options"></canvas>
+    </md-card>
+  </div>
 
-<div style="height: 80px"></div>
+  <div style="height: 80px"></div>
+
+</div>

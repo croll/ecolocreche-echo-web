@@ -10,11 +10,24 @@ export class WkHtmlToPdfService {
   }
 
   print() {
-    let outp = '<html><head><style>';
+    let outp = '<!DOCTYPE html>';
+    outp += '<html>';
+    outp += ' <head>';
+    outp += '  <meta charset="utf-8"/>';
+    outp += '  <style>';
     outp += this.getallcss();
-    outp += '</head><body>';
-    outp += document.getElementsByTagName('app-root')[0].innerHTML;
-    outp += '</body></html>';
+    outp += `  </style>`;
+    /*
+    outp += `<script>
+      document.registerElement('md-sidenav-container');
+    </script>`;
+    */
+    outp += ' </head>';
+    outp += ' <body>';
+    //outp += document.getElementsByTagName('app-root')[0].innerHTML;
+    outp += document.getElementById('exportpdf').innerHTML;
+    outp += ' </body>';
+    outp += '</html>';
 
     this.http.post('/rest/pdf', outp).subscribe((res) => {
       console.log(res);
