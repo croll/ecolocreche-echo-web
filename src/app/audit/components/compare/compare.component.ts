@@ -5,6 +5,7 @@ import { Node } from '../../../node/node';
 import { RestService } from '../../../rest.service';
 import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
+import { ExportCSVService } from '../../export-csv.service';
 
 import * as moment from 'moment';
 
@@ -33,7 +34,7 @@ export class CompareComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService) {
     let tmp1 = this.route.snapshot.data['infos'][0];
     let tmp2 = this.route.snapshot.data['infos'][1];
     if (new Date(tmp1.audit.createdAt) < new Date(tmp2.audit.createdAt)) {
@@ -93,6 +94,10 @@ export class CompareComponent implements OnInit {
       this._chart.ngOnChanges({});
       // this._chart.refresh();
     }, 0);
+  }
+
+  exportCSV() {
+    this.csvService.getContent(this.audit1Cache, this.audit2Cache);
   }
 
 }
