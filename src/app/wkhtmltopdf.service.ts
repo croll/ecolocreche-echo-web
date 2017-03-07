@@ -9,6 +9,34 @@ export class WkHtmlToPdfService {
   }
 
   print() {
+    // get element to print
+    let src = document.getElementById('exportpdf');
+
+    // clone this element, because we are going to modify it
+    let elem = src.cloneNode(true);
+
+    // replace canvas by images
+    let _canvases_src = src.getElementsByTagName('canvas');
+    let _canvases_dst = elem['getElementsByTagName']('canvas');
+
+    // problems with HTMLCollections, so we convert them to array
+    let canvases_dst=[];
+    for (let i in _canvases_src) {
+      canvases_dst[i] = _canvases_dst[i];
+    }
+
+    for (let i in _canvases_src) {
+      let canvas_src = _canvases_src[i];
+      let canvas_dst = canvases_dst[i];
+      if (canvas_src.toDataURL) {
+        var image = new Image();
+        image.src = canvas_src.toDataURL("image/png");
+        image.setAttribute('style', canvas_src.getAttribute('style'));
+        canvas_dst['replaceWith'](image);
+      }
+    }
+
+    // make the final html page
     let outp = '<!DOCTYPE html>';
     outp += '<html>';
     outp += ' <head>';
@@ -18,16 +46,18 @@ export class WkHtmlToPdfService {
     outp += `  </style>`;
     outp += ' </head>';
     outp += ' <body>';
-    outp += document.getElementById('exportpdf').innerHTML;
+    outp += elem['innerHTML'];
     outp += ' </body>';
     outp += '</html>';
 
+    // request server to convert this html page to pdf
     this.http.post('/rest/pdf', outp, {
       responseType: ResponseContentType.Blob
     }).subscribe((data) => {
+      // open a window with this new PDF
       var url= window.URL.createObjectURL(data.blob());
       window.open(url);
-      //console.log(data);
+      //window.location = url;
     });
 
   }

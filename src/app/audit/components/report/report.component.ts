@@ -6,7 +6,6 @@ import { RestService } from '../../../rest.service';
 import { WkHtmlToPdfService } from '../../../wkhtmltopdf.service';
 import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
-
 import * as moment from 'moment';
 
 @Component({

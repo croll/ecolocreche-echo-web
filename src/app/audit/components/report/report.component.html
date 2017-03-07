@@ -29,7 +29,7 @@
       <!-- <button md-button color="primary" (click)="toggleChartType(chartDatas.themes[theme.id_node].chartType, theme.id_node)">Changer de représenation graphique</button> -->
     </div>
     <md-card>
-      <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
+      <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" id='canvas-chart-global-{{theme.id_node}}' baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
     </md-card>
     <md-card *ngFor="let category of theme.childs">
       <div class="echos-report-category"> {{category.title}}</div>
@@ -86,26 +86,26 @@
     <md-card style="margin:0 auto" *ngIf="chartDatas?.families.environnementales.hasDatas">
       <div>
         <div class="echos-report-graph-title">Impact environnemental</div>
-        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.environnementales.datasets" [colors]="chartDatas.families.environnementales.colors" [labels]="chartDatas.families.environnementales.labels" [chartType]="chartDatas.families.environnementales.chartType" legend="true" [options]="chartDatas.families.environnementales.options"></canvas>
+        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" id='canvas-environmental' baseChart [datasets]="chartDatas.families.environnementales.datasets" [colors]="chartDatas.families.environnementales.colors" [labels]="chartDatas.families.environnementales.labels" [chartType]="chartDatas.families.environnementales.chartType" legend="true" [options]="chartDatas.families.environnementales.options"></canvas>
       </div>
     </md-card>
     <md-card style="margin:0 auto" *ngIf="chartDatas?.families.sociales.hasDatas">
       <div>
         <div class="echos-report-graph-title">Impact social</div>
-        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.sociales.datasets" [colors]="chartDatas.families.sociales.colors" [labels]="chartDatas.families.sociales.labels" [chartType]="chartDatas.families.sociales.chartType" legend="true" [options]="chartDatas.families.sociales.options"></canvas>
+        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" id='canvas-social-global' baseChart [datasets]="chartDatas.families.sociales.datasets" [colors]="chartDatas.families.sociales.colors" [labels]="chartDatas.families.sociales.labels" [chartType]="chartDatas.families.sociales.chartType" legend="true" [options]="chartDatas.families.sociales.options"></canvas>
       </div>
     </md-card>
     <md-card style="margin:0 auto" *ngIf="chartDatas?.families.other.hasDatas">
       <div>
         <div class="echos-report-graph-title">Non classé</div>
-        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.other.datasets" [colors]="chartDatas.families.other.colors" [labels]="chartDatas.families.other.labels" [chartType]="chartDatas.families.other.chartType" legend="true" [options]="chartDatas.families.other.options"></canvas>
+        <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" id='canvas-environmental' baseChart [datasets]="chartDatas.families.other.datasets" [colors]="chartDatas.families.other.colors" [labels]="chartDatas.families.other.labels" [chartType]="chartDatas.families.other.chartType" legend="true" [options]="chartDatas.families.other.options"></canvas>
       </div>
     </md-card>
   </div>
 
   <div *ngIf="chartDatas && !chartDatas?.families.environnementales.hasDatas && !chartDatas?.families.sociales.hasDatas">
     <md-card style="margin:0 auto">
-      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto" baseChart [datasets]="chartDatas.families.global.datasets" [colors]="chartDatas.families.global.colors" [labels]="chartDatas.families.global.labels" [chartType]="chartDatas.families.global.chartType" legend="true" [options]="chartDatas.families.global.options"></canvas>
+      <canvas *ngIf="!hideChart" style="max-width: 300px; margin: 0 auto"  id='canvas-famillies' baseChart [datasets]="chartDatas.families.global.datasets" [colors]="chartDatas.families.global.colors" [labels]="chartDatas.families.global.labels" [chartType]="chartDatas.families.global.chartType" legend="true" [options]="chartDatas.families.global.options"></canvas>
     </md-card>
   </div>
 
