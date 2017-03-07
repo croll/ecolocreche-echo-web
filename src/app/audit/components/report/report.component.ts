@@ -6,6 +6,7 @@ import { RestService } from '../../../rest.service';
 import { WkHtmlToPdfService } from '../../../wkhtmltopdf.service';
 import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
+import { ExportCSVService } from '../../export-csv.service';
 import * as moment from 'moment';
 
 @Component({
@@ -27,7 +28,7 @@ export class ReportComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private wkService: WkHtmlToPdfService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private wkService: WkHtmlToPdfService, private csvService: ExportCSVService) {
     this.infos = this.route.snapshot.data['infos'];
     this.cache  = this.auditTools.cacheDatas(this.infos.nodes);
     this.questionList = this.cache.questionList;
@@ -59,6 +60,10 @@ export class ReportComponent implements OnInit {
 
   pdf() {
     this.wkService.print();
+  }
+
+  exportCSV() {
+    this.csvService.getContent(this.cache);
   }
 
 }

@@ -17,10 +17,11 @@ export class ExportCSVService {
       outp += 'REPONSE;IMPACT;'
     }
     outp +=  "COMMENTAIRE\r\n";
-    let themeList = (cachedAudit2Datas) ? this.auditTools.merge(cachedAudit1Datas.chartDatas.themes, cachedAudit2Datas.chartDatas.themes) : cachedAudit1Datas.chartDatas.themes;
-    let categoriesList = (cachedAudit2Datas) ? Object.assign(cachedAudit1Datas.chartDatas.categories, cachedAudit2Datas.chartDatas.categories) : cachedAudit1Datas.chartDatas.categories;
-    let mergedQuestionList = (cachedAudit2Datas) ? this.auditTools.merge(cachedAudit1Datas.questionList, cachedAudit2Datas.questionList) : cachedAudit1Datas.questionList;
+    let themeList = (cachedAudit2Datas) ? this.auditTools.merge(cachedAudit1Datas.chartDatas.themes, cachedAudit2Datas.chartDatas.themes) : this._asArray(cachedAudit1Datas.chartDatas.themes);
+    let categoryList = (cachedAudit2Datas) ? Object.assign(cachedAudit1Datas.chartDatas.categories, cachedAudit2Datas.chartDatas.categories) : cachedAudit1Datas.chartDatas.categories;
+    let mergedQuestionList = (cachedAudit2Datas) ? this.auditTools.merge(cachedAudit1Datas.questionList, cachedAudit2Datas.questionList) : this._asArray(cachedAudit1Datas.questionList);
     // console.log(themeList);
+    // console.log(categoryList);
     // console.log(mergedQuestionList);
     // console.log(cachedAudit1Datas);
     // console.log(cachedAudit2Datas);
@@ -31,7 +32,7 @@ export class ExportCSVService {
       mergedQuestionList.forEach(question => {
         let addQuestion = false;
         let tmpOutp = '';
-        tmpOutp += '"'+theme.title.replace(/"/g, '`')+'";"'+categoriesList[question.id_node_parent].title+'";"'+question.title.replace(/"/g, '`')+'";';
+        tmpOutp += '"'+theme.title.replace(/"/g, '`')+'";"'+categoryList[question.id_node_parent].title+'";"'+question.title.replace(/"/g, '`')+'";';
         let answer1 = null, answer2 = null;
         // If the question is of same theme
         if (cachedAudit1Datas.questionList[question.id_node] && cachedAudit1Datas.questionList[question.id_node].id_theme == theme.id_node) {
@@ -77,7 +78,6 @@ export class ExportCSVService {
   }
 
   getAnswer(question):any {
-    console.log(question);
     let obj = {value: '', impact: '', comment: ''};
     if (question.ignored) {
       obj.value = 'Question ignorée';
@@ -87,7 +87,6 @@ export class ExportCSVService {
       obj.value = 'Aucune réponse';
       return obj;
     }
-    console.log(typeof(question.value));
     if (typeof(question.value) != 'object') {
       obj.value = '"'+question.value.toString().replace(/"/g, '`')+'"';
       return obj;
@@ -157,6 +156,14 @@ export class ExportCSVService {
        str = str.substr(0, str.length-1);
      }
     return '"'+str+'"';
+  }
+
+  private _asArray(obj) {
+    let arr = [];
+    for (let id in obj) {
+      arr.push(obj[id]);
+    }
+    return arr;
   }
 
 
