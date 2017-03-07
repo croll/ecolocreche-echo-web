@@ -25,11 +25,7 @@ export class WkHtmlToPdfService {
     this.http.post('/rest/pdf', outp, {
       responseType: ResponseContentType.Blob
     }).subscribe((data) => {
-      console.log("data: ", data);
-      console.log("blob 1 : ", data.blob());
-      var blob = new Blob([data.blob()], { type: 'application/pdf' });
-      console.log("blob 2 : ", blob);
-      var url= window.URL.createObjectURL(blob);
+      var url= window.URL.createObjectURL(data.blob());
       window.open(url);
       //console.log(data);
     });
