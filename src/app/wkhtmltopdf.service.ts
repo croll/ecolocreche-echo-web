@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http, Headers, Response, URLSearchParams, RequestOptions, ResponseContentType } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-
 
 @Injectable()
 export class WkHtmlToPdfService {
@@ -17,44 +16,23 @@ export class WkHtmlToPdfService {
     outp += '  <style>';
     outp += this.getallcss();
     outp += `  </style>`;
-    /*
-    outp += `<script>
-      document.registerElement('md-sidenav-container');
-    </script>`;
-    */
     outp += ' </head>';
     outp += ' <body>';
-    //outp += document.getElementsByTagName('app-root')[0].innerHTML;
     outp += document.getElementById('exportpdf').innerHTML;
     outp += ' </body>';
     outp += '</html>';
 
-    this.http.post('/rest/pdf', outp).subscribe((res) => {
-      console.log(res);
-
+    this.http.post('/rest/pdf', outp, {
+      responseType: ResponseContentType.Blob
+    }).subscribe((data) => {
+      console.log("data: ", data);
+      console.log("blob 1 : ", data.blob());
+      var blob = new Blob([data.blob()], { type: 'application/pdf' });
+      console.log("blob 2 : ", blob);
+      var url= window.URL.createObjectURL(blob);
+      window.open(url);
+      //console.log(data);
     });
-
-    // let data = new URLSearchParams();
-    // data.append('html', outp)
-    // let headers = new Headers({ 'Content-Type': 'application/json' });
-    // let options = new RequestOptions({ headers: headers });
-    //
-    // this.http.post('/rest/pdf', JSON.stringify({html: outp}), options)
-    //   .map((data) => {
-    //     return data;
-    //   })
-    //   .catch((error: Response | any) => {
-    //     let errMsg: string;
-    //     if (error instanceof Response) {
-    //       const body = error.json() || '';
-    //       const err = body.error || JSON.stringify(body);
-    //       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    //     } else {
-    //       errMsg = error.message ? error.message : error.toString();
-    //     }
-    //     console.error(errMsg);
-    //     return Observable.throw(errMsg);
-    //   });
 
   }
 
