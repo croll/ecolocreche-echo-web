@@ -41,9 +41,12 @@ export class WkHtmlToPdfService {
     outp += '<html>';
     outp += ' <head>';
     outp += '  <meta charset="utf-8"/>';
-    outp += '  <style>';
-    outp += this.getallcss();
-    outp += `  </style>`;
+    outp += '  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
+    outp += '  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">';
+    outp += '  <link href="http://localhost:1242/assets/pdf.css" rel="stylesheet">';
+    //outp += '  <style>';
+    //outp += this.getallcss();
+    //outp += `  </style>`;
     outp += ' </head>';
     outp += ' <body>';
     outp += elem['innerHTML'];
@@ -79,7 +82,7 @@ export class WkHtmlToPdfService {
                   css.push(rule.selectorText+' {\n'+rule.style.cssText+'\n}\n');
           }
       }
-    }
+  }
     return css.join('\n')+'\n';
 }
 
