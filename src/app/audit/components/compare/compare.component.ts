@@ -6,6 +6,7 @@ import { RestService } from '../../../rest.service';
 import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 import { ExportCSVService } from '../../export-csv.service';
+import { WkHtmlToPdfService } from '../../../wkhtmltopdf.service';
 
 import * as moment from 'moment';
 
@@ -34,7 +35,7 @@ export class CompareComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private wkService: WkHtmlToPdfService) {
     let tmp1 = this.route.snapshot.data['infos'][0];
     let tmp2 = this.route.snapshot.data['infos'][1];
     if (new Date(tmp1.audit.createdAt) < new Date(tmp2.audit.createdAt)) {
@@ -69,8 +70,6 @@ export class CompareComponent implements OnInit {
       this.charts[family].themes.push({title: this.audit1Cache.chartDatas.themes[theme_id].title, chart: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], theme_id)});
     }
 
-    console.log(this.charts);
-
   }
 
   ngOnInit() {
@@ -94,6 +93,10 @@ export class CompareComponent implements OnInit {
       this._chart.ngOnChanges({});
       // this._chart.refresh();
     }, 0);
+  }
+
+  pdf() {
+    this.wkService.print();
   }
 
   exportCSV() {

@@ -5,154 +5,158 @@
 
 <!-- Premiere page -->
 
-<div fxLayout="row" fxLayoutAlign="start center">
-  <h1 fxFlex>
-    Dossier de labellisation
-  </h1>
-  <button md-fab color="primary" (click)="exportCSV()" fxFlexOffset="8px"><md-icon>grid_on</md-icon></button>
-  <button md-fab color="primary" (click)="pdf()" fxFlexOffset="8px"><md-icon>picture_as_pdf</md-icon></button>
-</div>
+<div id='exportpdf'>
 
-<div class="echos-infos">
-  <div fxLayout="row">
-    <label>Nom de la crèche:</label>
-    <div fxFlexOffset="10px">{{audit1.audit.establishment.name}}</div>
-  </div>
-  <div fxLayout="row">
-    <label>Date d'entrée de la démarche:</label>
-    <div fxFlexOffset="10px">{{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-  <div fxLayout="row">
-    <label>Date du premier audit:</label>
-    <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-  <div fxLayout="row">
-    <label>Date du second audit:</label>
-    <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-</div>
-
-<div class="echos-title">Engagement sur les thèmes suivants: </div>
-<div class="table">
-  <div *ngFor="let theme of themeList">
-    {{theme.title}}
-  </div>
-</div>
-
-<!-- Page du résumé du bilan environnemental -->
-
-<div class="echos-title">Bilan: Évolution de l'impact sur les questions environnementales</div>
-<div class="echos-infos">
-  <div fxLayout="row">
-    <label>Audit de départ:</label>
-    <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-  <div fxLayout="row">
-    <label>Audit intermédiaire:</label>
-    <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-</div>
-
-<div fxLayout="row">
-  <md-card>
-    <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
-    <h3>Audit de départ</h3>
-  </md-card>
-  <md-card>
-    <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
-    <h3>Audit intermédiaire</h3>
-  </md-card>
-</div>
-<md-card>
-  <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
-  <h3>Gauche: audit de départ</h3>
-  <h3>Droite: audit intermédiaire</h3>
-</md-card>
-<md-card>
-  <canvas baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
   <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
-    <div fxFlexOffset="8px">Audit de départ</div>
+    <h1 fxFlex>
+      Dossier de labellisation
+    </h1>
+    <button class='not-in-pdf' md-fab color="primary" (click)="exportCSV()" fxFlexOffset="8px"><md-icon>grid_on</md-icon></button>
+    <button class='not-in-pdf' md-fab color="primary" (click)="pdf()" fxFlexOffset="8px"><md-icon>picture_as_pdf</md-icon></button>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
-    <div fxFlexOffset="8px">Audit intermédiaire</div>
+
+  <div class="echos-infos">
+    <div fxLayout="row">
+      <label>Nom de la crèche:</label>
+      <div fxFlexOffset="10px">{{audit1.audit.establishment.name}}</div>
+    </div>
+    <div fxLayout="row">
+      <label>Date d'entrée de la démarche:</label>
+      <div fxFlexOffset="10px">{{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
+    </div>
+    <div fxLayout="row">
+      <label>Date du premier audit:</label>
+      <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
+    <div fxLayout="row">
+      <label>Date du second audit:</label>
+      <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
   </div>
-</md-card>
 
-<!-- Page des graphs des familles environnementales -->
+  <div class="echos-title">Engagement sur les thèmes suivants: </div>
+  <div class="table">
+    <div *ngFor="let theme of themeList">
+      {{theme.title}}
+    </div>
+  </div>
 
-<div class="echos-title">Détail: Évolution des impacts par thème</div>
+  <!-- Page du résumé du bilan environnemental -->
 
-<md-card *ngFor="let chart of charts.environment.themes">
-  <h2>{{chart.title}}</h2>
+  <div class="echos-title">Bilan: Évolution de l'impact sur les questions environnementales</div>
+  <div class="echos-infos">
+    <div fxLayout="row">
+      <label>Audit de départ:</label>
+      <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
+    <div fxLayout="row">
+      <label>Audit intermédiaire:</label>
+      <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
+  </div>
+
   <div fxLayout="row">
-    <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
-    <md-input-container>
-      <textarea mdInput>pouet</textarea>
-    </md-input-container>
+    <md-card>
+      <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
+      <h3>Audit de départ</h3>
+    </md-card>
+    <md-card>
+      <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
+      <h3>Audit intermédiaire</h3>
+    </md-card>
   </div>
-  <h3>Gauche: audit de départ</h3>
-  <h3>Droite: audit intermédiaire</h3>
-</md-card>
-
-<!-- Page du résumé du bilan social -->
-
-<div class="echos-title">Bilan: Évolution de l'impact sur les questions sociales</div>
-<div class="echos-infos">
-  <div fxLayout="row">
-    <label>Audit de départ:</label>
-    <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-  <div fxLayout="row">
-    <label>Audit intermédiaire:</label>
-    <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
-  </div>
-</div>
-
-<div fxLayout="row">
   <md-card>
-    <canvas baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
-    <h3>Audit de départ</h3>
-  </md-card>
-  <md-card>
-    <canvas baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
-    <h3>Audit intermédiaire</h3>
-  </md-card>
-</div>
-<div>
-  <md-card>
-    <canvas baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
+    <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
     <h3>Gauche: audit de départ</h3>
     <h3>Droite: audit intermédiaire</h3>
   </md-card>
-</div>
-<md-card>
-  <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
-    <div fxFlexOffset="8px">Audit de départ</div>
+  <md-card>
+    <canvas baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
+      <div fxFlexOffset="8px">Audit de départ</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
+      <div fxFlexOffset="8px">Audit intermédiaire</div>
+    </div>
+  </md-card>
+
+  <!-- Page des graphs des familles environnementales -->
+
+  <div class="echos-title">Détail: Évolution des impacts par thème</div>
+
+  <md-card *ngFor="let chart of charts.environment.themes">
+    <h2>{{chart.title}}</h2>
+    <div fxLayout="row">
+      <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
+      <!-- <md-input-container>
+        <textarea mdInput>pouet</textarea>
+      </md-input-container> -->
+    </div>
+    <h3>Gauche: audit de départ</h3>
+    <h3>Droite: audit intermédiaire</h3>
+  </md-card>
+
+  <!-- Page du résumé du bilan social -->
+
+  <div class="echos-title">Bilan: Évolution de l'impact sur les questions sociales</div>
+  <div class="echos-infos">
+    <div fxLayout="row">
+      <label>Audit de départ:</label>
+      <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
+    <div fxLayout="row">
+      <label>Audit intermédiaire:</label>
+      <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
-    <div fxFlexOffset="8px">Audit intermédiaire</div>
-  </div>
-</md-card>
 
-<!-- Page des graphs des familles sociales -->
-
-<div class="echos-title">Détail: Évolution des impacts par thème</div>
-
-<md-card *ngFor="let chart of charts.social.themes">
-  <h2>{{chart.title}}</h2>
   <div fxLayout="row">
-    <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
-    <md-input-container>
-      <textarea mdInput>pouet</textarea>
-    </md-input-container>
+    <md-card>
+      <canvas baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
+      <h3>Audit de départ</h3>
+    </md-card>
+    <md-card>
+      <canvas baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
+      <h3>Audit intermédiaire</h3>
+    </md-card>
   </div>
-  <h3>Gauche: audit de départ</h3>
-  <h3>Droite: audit intermédiaire</h3>
-</md-card>
+  <div>
+    <md-card>
+      <canvas baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
+      <h3>Gauche: audit de départ</h3>
+      <h3>Droite: audit intermédiaire</h3>
+    </md-card>
+  </div>
+  <md-card>
+    <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
+      <div fxFlexOffset="8px">Audit de départ</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
+      <div fxFlexOffset="8px">Audit intermédiaire</div>
+    </div>
+  </md-card>
+
+  <!-- Page des graphs des familles sociales -->
+
+  <div class="echos-title">Détail: Évolution des impacts par thème</div>
+
+  <md-card *ngFor="let chart of charts.social.themes">
+    <h2>{{chart.title}}</h2>
+    <div fxLayout="row">
+      <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
+      <!-- <md-input-container>
+        <textarea mdInput>pouet</textarea>
+      </md-input-container> -->
+    </div>
+    <h3>Gauche: audit de départ</h3>
+    <h3>Droite: audit intermédiaire</h3>
+  </md-card>
+
+</div>
 
 <div style="height: 80px"></div>
