@@ -15,6 +15,7 @@ import { AnswerModule } from '../question/answer.module';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+import { ExportCSVService } from './export-csv.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
   ],
   providers: [
     AuditResolver,
-    AuditListResolver
+    AuditListResolver,
+    ExportCSVService
   ]
 })
 

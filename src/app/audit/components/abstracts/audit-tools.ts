@@ -29,21 +29,27 @@ export class AuditTools {
 
   cacheDatas(nodes, id_theme = null, questionsList = {}, chartDatas = null) {
     if (chartDatas === null) {
-      chartDatas = {themes: {}, families: {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}}};
+      chartDatas = {themes: {}, categories: {}, families: {global: {hasDatas: true, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, other: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, environnementales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}, sociales: {hasDatas: false, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0}}};
     }
     if (nodes.childs && nodes.childs.length) {
       nodes.childs.forEach(node => {
-        // Store impact informations for graph generation
+        // Store theme informations
         if (!node.id_node_parent) {
           id_theme = node.id_node;
           if (!chartDatas.themes[id_theme]) {
             chartDatas.themes[id_theme] = {id: node.id, id_node: node.id_node, hasDatas: false, title: node.title, family: node.family, impact: Object.assign({}, AuditTools.impactObj), totalAnswersWithImpact: 0};
           }
         }
+        // Store category informations
+        if (node.id_node_parent && node.type == 'directory') {
+          if (!chartDatas.categories[id_theme]) {
+            chartDatas.categories[node.id_node] = {id: node.id, id_node: node.id_node, title: node.title};
+          }
+        }
         AuditTools.instance.cacheDatas(node, id_theme, questionsList, chartDatas);
         // If it'as a question
         if (node.type.substring(0, 2) == 'q_') {
-          let question = {id: node.id, id_node: node.id_node, id_theme: id_theme, title: node.title, description: node.description, type: node.type, ignored: false, choices: null, value: undefined};
+          let question = {id: node.id, id_node: node.id_node, id_node_parent: node.id_node_parent, id_theme: id_theme, title: node.title, description: node.description, type: node.type, ignored: false, choices: null, value: undefined};
           if (node.answer) {
             if (!node.answer.ignored) {
               let value = JSON.parse(node.answer.value);
