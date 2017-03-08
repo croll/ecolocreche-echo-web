@@ -33,7 +33,7 @@
     </md-card>
     <md-card *ngFor="let category of theme.childs">
       <div class="echos-report-category"> {{category.title}}</div>
-      <div *ngFor="let question of category.childs">
+      <div style='page-break-inside:avoid;' *ngFor="let question of category.childs">
         <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
         <div *ngIf="questionList[question.id_node].description" class="echos-report-question-comment">{{questionList[question.id_node].description}}</div>
         <!-- Check if question is answered or not -->
