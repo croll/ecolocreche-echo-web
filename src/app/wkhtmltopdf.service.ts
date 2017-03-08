@@ -48,6 +48,7 @@ export class WkHtmlToPdfService {
     //outp += this.getallcss();
     //outp += `  </style>`;
     outp += '  <style>';
+    outp += `   .not-in-pdf { display: none }`;
     outp += `  </style>`;
     outp += ' </head>';
     outp += ' <body>';

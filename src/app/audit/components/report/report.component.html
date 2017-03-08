@@ -9,10 +9,10 @@
     <h1 fxFlex>
       Rapport de l'audit de {{infos.audit.establishment.name}}
     </h1>
-    <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
-    <button md-fab color="primary" (click)="exportCSV()" fxFlexOffset="8px"><md-icon>grid_on</md-icon></button>
-    <button md-fab color="primary" (click)="pdf()" fxFlexOffset="8px"><md-icon>picture_as_pdf</md-icon></button>
+    <button class='not-in-pdf' md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
   </div>
+
+  <button class='not-in-pdf' md-button (click)="pdf()">PDF</button>
 
   <div *ngIf="!infos.inquiryform.comment" class="presentation">
     <p>L'audit Ecolo Crèche de votre établissement est désormais terminé. Cela nous permet à présent de vous envoyer ce rapport d’audit, composé de 8 thématiques (le Bâtiment/ les Energies : chauffage et électricité/ L’alimentation /Les activités et jeux/ Les produits d’entretien et d’hygiène/ l’Eau / les Fournitures de bureau / les Déchets).</p>
