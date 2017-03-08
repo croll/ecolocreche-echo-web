@@ -31,7 +31,7 @@ export class AuditResolver implements Resolve<any> {
   }
 
   private _getAudit(idOrKey) {
-    let obj = {audit: null, establishment: null, nodes: null, inquiryform: null}
+    let obj = {audit: null, nodes: null, inquiryform: null}
     let url = (typeof(idOrKey) == 'string') ? `rest/audits?key=${idOrKey}` : `rest/audits?id=${idOrKey}`;
     return this.http.get(url)
                     .map((res: Response) => {

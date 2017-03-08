@@ -22,6 +22,7 @@ export class EditComponent implements OnInit {
   synthesisCtrl: FormControl;
   activeCtrl: FormControl;
   keyCtrl: FormControl;
+  infos: any;
 
   private id: number;
   private id_establishment: number;
@@ -32,15 +33,29 @@ export class EditComponent implements OnInit {
     this.current = new Audit();
 
     this.id = this.route.snapshot.params['id'];
+    this.infos = this.route.snapshot.data['infos'];
+    console.log(this.infos);
 
-    this.idCtrl = fb.control(this.id);
-    this.idEstablishmentCtrl = fb.control(this.id_establishment, [Validators.required]);
-    this.idInquiryFormCtrl = fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
-    this.synthesisCtrl = fb.control(this.current.synthesis || '');
-    this.activeCtrl = fb.control(this.current.active, [Validators.required]);
-    this.keyCtrl = fb.control(this.current.key || this._generateKey(), [Validators.required]);
+  }
 
-    this.echosForm = fb.group({
+  ngOnInit() {
+    this._getFormList();
+    if (this.infos && this.infos.audit) {
+      Object.assign(this.current, this.infos.audit)
+      this.id_establishment = this.infos.audit.establishment.id;
+    } else {
+      this.echosForm.patchValue({id_establishment: this.id_establishment, active: 1});
+      this.id_establishment = this.route.snapshot.params['id_establishment'];
+    }
+
+    this.idCtrl = this.fb.control(this.id);
+    this.idEstablishmentCtrl = this.fb.control(this.current.id_establishment, [Validators.required]);
+    this.idInquiryFormCtrl = this.fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
+    this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
+    this.activeCtrl = this.fb.control(this.current.active, [Validators.required]);
+    this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
+
+    this.echosForm = this.fb.group({
       id: this.idCtrl,
       id_establishment: this.idEstablishmentCtrl,
       id_inquiryform: this.idInquiryFormCtrl,
@@ -48,27 +63,6 @@ export class EditComponent implements OnInit {
       active: this.activeCtrl,
       key: this.keyCtrl
     });
-
-  }
-
-  ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.id_establishment = this.route.snapshot.params['id_establishment'];
-    this._getFormList();
-    if (this.id) {
-      this.get();
-    } else {
-      this.echosForm.patchValue({id_establishment: this.id_establishment, active: 1});
-    }
-  }
-
-  get() {
-      this.restService.get(this.id, 'audits').subscribe(item => {
-        this.echosForm.patchValue(item);
-        this.current = Object.assign(this.current, item);
-      }, (err) => {
-        console.error(err);
-      });
   }
 
   private _getFormList() {
@@ -90,7 +84,6 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    console.log(this.echosForm.value);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
       this.goBack();
     }, (err) => {
@@ -115,6 +108,15 @@ export class EditComponent implements OnInit {
           });
     })
     return false;
+  }
+
+  saveAndGoToEstablishment() {
+    this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
+      console.log("ID EST", this.id_establishment);
+      this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   goBack(): boolean {

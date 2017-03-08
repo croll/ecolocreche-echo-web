@@ -28,7 +28,10 @@ const routes: Routes = [
       },
       {
         path: ':id/editer',
-        component: EditComponent
+        component: EditComponent,
+        resolve: {
+          infos: AuditResolver
+        }
       },
       {
         path: 'accueil/:unknown/:key',
