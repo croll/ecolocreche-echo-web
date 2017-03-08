@@ -85,6 +85,7 @@ export class EditComponent implements OnInit {
 
   save() {
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
+      console.log("SAVE !!!:::!:!:!");
       this.goBack();
     }, (err) => {
       console.error(err);
@@ -110,10 +111,10 @@ export class EditComponent implements OnInit {
     return false;
   }
 
-  saveAndGoToEstablishment() {
+  saveAndGoToEstablishment(event) {
+    event.preventDefault();
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
-      console.log("ID EST:::", this.id_establishment);
-      // this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
+      this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
     }, (err) => {
       console.error(err);
     });
