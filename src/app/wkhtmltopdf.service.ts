@@ -47,9 +47,11 @@ export class WkHtmlToPdfService {
     //outp += '  <style>';
     //outp += this.getallcss();
     //outp += `  </style>`;
+    outp += '  <style>';
+    outp += `  </style>`;
     outp += ' </head>';
     outp += ' <body>';
-    outp += elem['innerHTML'];
+    outp += elem['innerHTML'].replace(/display: flex/g, 'display: -webkit-flex');
     outp += ' </body>';
     outp += '</html>';
 
