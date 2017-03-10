@@ -158,17 +158,17 @@
 
   <div class="echos-title">Détail: Évolution des impacts par thème</div>
 
-  <md-card *ngFor="let chart of charts.social.themes">
-    <h2>{{chart.title}}</h2>
-    <div fxLayout="row">
+  <div fxLayout="row" *ngFor="let chart of charts.social.themes">
+    <md-card>
+      <h2>{{chart.title}}</h2>
       <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
-      <!-- <md-input-container>
-        <textarea mdInput>pouet</textarea>
-      </md-input-container> -->
+      <h3>Gauche: audit de départ</h3>
+      <h3>Droite: audit intermédiaire</h3>
+    </md-card>
+    <div class="comment-container" fxFlex>
+      <textarea placeholder="Commentaire..."></textarea>
     </div>
-    <h3>Gauche: audit de départ</h3>
-    <h3>Droite: audit intermédiaire</h3>
-  </md-card>
+  </div>
 
 </div>
 

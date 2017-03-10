@@ -30,7 +30,7 @@ export class CompareComponent implements OnInit {
   chartType: string = 'pie';
   hideChart: boolean = false;
   charts: any = {};
-  logo: string = 'ecolocreche.jpg';
+  logo: string = 'ecolocreche.png';
   customThemeList: string[] = [];
 
   auditTools = AuditTools.getInstance();
@@ -109,7 +109,7 @@ export class CompareComponent implements OnInit {
   }
 
   swapLogo() {
-    this.logo = (this.logo == 'ecolocreche.jpg') ? 'ecoaccueil.jpg' : 'ecolocreche.jpg';
+    this.logo = (this.logo == 'ecolocreche.png') ? 'ecoaccueil.png' : 'ecolocreche.png';
     console.log(this.logo);
   }
 
