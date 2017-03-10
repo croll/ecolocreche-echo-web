@@ -54,6 +54,7 @@ export class WkHtmlToPdfService {
       if (textarea_dst.replaceWith) {
         let divelem = document.createElement('div');
         divelem.innerText = textarea_src['value'];
+        divelem.setAttribute('style', textarea_src.getAttribute('style'));
         textarea_dst['replaceWith'](divelem);
       }
     }
