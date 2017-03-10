@@ -35,6 +35,20 @@
       <label>Date du second audit:</label>
       <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
+    <div *ngFor="let cinfo of customInfoList" fxLayout="row">
+      <label>{{cinfo.label}}</label>
+      <div fxFlexOffset="10px">{{cinfo.value}}</div>
+      <button  [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="removeCustomInfo(cinfo.label)"><md-icon>delete</md-icon></button>
+    </div>
+    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}">
+      <md-input-container>
+        <input mdInput #customInfoLabel placeholder="Libellé">
+      </md-input-container>
+      <md-input-container fxFlexOffset="8px">
+        <input mdInput #customInfoValue placeholder="Valeur">
+      </md-input-container>
+      <button md-raised-button (click)="addCustomInfo(customInfoLabel, customInfoValue)" fxFlexOffset="8px">Ajouter une ligne</button>
+    </div>
   </div>
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
 
@@ -50,7 +64,7 @@
       <md-input-container>
         <input mdInput #customTheme>
       </md-input-container>
-      <button md-button (click)="addCustomTheme(customTheme)" fxFlexOffset="8px" style="padding:5px 2px">Ajouter un thème</button>
+      <button md-raised-button (click)="addCustomTheme(customTheme)" fxFlexOffset="8px" style="padding:5px 2px">Ajouter un thème</button>
     </div>
   </div>
 

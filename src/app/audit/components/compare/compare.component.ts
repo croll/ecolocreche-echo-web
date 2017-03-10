@@ -32,6 +32,7 @@ export class CompareComponent implements OnInit {
   charts: any = {};
   logo: string = 'ecolocreche.png';
   customThemeList: string[] = [];
+  customInfoList: any[] = [];
 
   auditTools = AuditTools.getInstance();
 
@@ -121,8 +122,21 @@ export class CompareComponent implements OnInit {
     el.value = '';
   }
 
-  removeCustomTheme(theme) {
-    this.customThemeList.splice(this.customThemeList.indexOf(theme), 1);
+  addCustomInfo(label, value) {
+    if (!label.value || !value.value) return;
+    this.customInfoList.push({label: label.value, value: value.value});
+    label.value = '';
+    value.value = '';
+  }
+
+  removeCustomInfo(label) {
+    let i = 0;
+    this.customInfoList.forEach(info => {
+      if (info.label == label) {
+        this.customInfoList.splice(i, 1);
+        return;
+      }
+    })
   }
 
 }
