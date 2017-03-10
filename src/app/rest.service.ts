@@ -155,7 +155,7 @@ export class RestService {
 
   private loading = 0;
 
-  private incLoading() {
+  public incLoading() {
     this.loading++;
     if (this.loading == 1) {
       let elem = document.getElementById('loading');
@@ -165,7 +165,7 @@ export class RestService {
     }
   }
 
-  private decLoading() {
+  public decLoading() {
     this.loading--;
     if (this.loading <= 0) {
       let elem = document.getElementById('loading');

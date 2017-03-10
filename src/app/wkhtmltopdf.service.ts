@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams, RequestOptions, ResponseContentType } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import { RestService} from './rest.service';
 
 @Injectable()
 export class WkHtmlToPdfService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private restService: RestService) {
   }
 
   print() {
@@ -57,9 +58,13 @@ export class WkHtmlToPdfService {
     outp += '</html>';
 
     // request server to convert this html page to pdf
+    console.log("loading...");
+    this.restService.incLoading();
     this.http.post('/rest/pdf', outp, {
       responseType: ResponseContentType.Blob
     }).subscribe((data) => {
+      console.log("loading... done");
+      this.restService.decLoading();
       // open a window with this new PDF
       var url= window.URL.createObjectURL(data.blob());
       //window.open(url);
