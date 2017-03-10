@@ -44,7 +44,7 @@ export class WkHtmlToPdfService {
     outp += '  <meta charset="utf-8"/>';
     outp += '  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">';
     outp += '  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">';
-    outp += '  <link href="http://localhost:1242/assets/pdf.css" rel="stylesheet">';
+    outp += '  <link href="'+window.location.protocol + '//' + window.location.host + '/assets/pdf.css'+'" rel="stylesheet">';
     //outp += '  <style>';
     //outp += this.getallcss();
     //outp += `  </style>`;
