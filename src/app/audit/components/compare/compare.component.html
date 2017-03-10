@@ -70,7 +70,7 @@
 
   <!-- Page du résumé du bilan environnemental -->
 
-  <div class="echos-title">Bilan: Évolution de l'impact sur les questions environnementales</div>
+  <div class="echos-title" style="page-break-before:always">Bilan: Évolution de l'impact sur les questions environnementales</div>
   <div class="echos-infos">
     <div fxLayout="row">
       <label>Audit de départ:</label>
@@ -111,9 +111,9 @@
 
   <!-- Page des graphs des familles environnementales -->
 
-  <div class="echos-title">Détail: Évolution des impacts par thème</div>
+  <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-  <div fxLayout="row" *ngFor="let chart of charts.environment.themes">
+  <div fxLayout="row" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid">
     <md-card>
       <h2>{{chart.title}}</h2>
       <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
@@ -121,13 +121,13 @@
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
     <div class="comment-container" fxFlex>
-      <textarea placeholder="Commentaire..." class="to-pdf-div"></textarea>
+      <textarea placeholder="Commentaire..." class="to-pdf-div" style="border: 1px solid #c0c0c0; min-width: 100%;min-height:200px"></textarea>
     </div>
   </div>
 
   <!-- Page du résumé du bilan social -->
 
-  <div class="echos-title">Bilan: Évolution de l'impact sur les questions sociales</div>
+  <div class="echos-title" style="page-break-before:always">Bilan: Évolution de l'impact sur les questions sociales</div>
   <div class="echos-infos">
     <div fxLayout="row">
       <label>Audit de départ:</label>
@@ -170,7 +170,7 @@
 
   <!-- Page des graphs des familles sociales -->
 
-  <div class="echos-title">Détail: Évolution des impacts par thème</div>
+  <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
   <div fxLayout="row" *ngFor="let chart of charts.social.themes">
     <md-card>
