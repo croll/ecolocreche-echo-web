@@ -37,6 +37,28 @@ export class WkHtmlToPdfService {
       }
     }
 
+
+    // replace textareas by div
+    let _textareas_src = src.getElementsByClassName('textarea-to-pdf-div');
+    let _textareas_dst = elem['getElementsByClassName']('textarea-to-pdf-div');
+
+    // problems with HTMLCollections, so we convert them to array
+    let textareas_dst=[];
+    for (let i in _textareas_src) {
+      textareas_dst[i] = _textareas_dst[i];
+    }
+
+    for (let i in _textareas_src) {
+      let textarea_src = _textareas_src[i];
+      let textarea_dst = textareas_dst[i];
+      if (textarea_dst.replaceWith) {
+        let divelem = document.createElement('div');
+        divelem.innerText = textarea_src['value'];
+        textarea_dst['replaceWith'](divelem);
+      }
+    }
+
+
     // make the final html page
     let outp = '<!DOCTYPE html>';
     outp += '<html>';
