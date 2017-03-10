@@ -1,5 +1,6 @@
 md-card {
   margin: 30px 30px 30px 0;
+  min-width: 400px;
   max-width: 500px;
   &.center {
     margin: 30px auto;
@@ -10,6 +11,25 @@ md-card {
   }
 }
 
+.report-logo {
+  cursor: pointer;
+  background-color: red;
+  width: 150px;
+  height: 150px;
+  img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 .echos-title {
   margin-top: 30px;
+}
+
+.comment-container {
+  // border: 1px solid red;
+  textarea {
+    min-width: 400px;
+    min-height: 300px;
+  }
 }

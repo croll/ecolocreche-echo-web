@@ -11,6 +11,9 @@
     <h1 fxFlex>
       Dossier de labellisation
     </h1>
+    <div class="report-logo">
+      <img [src]="'assets/images/'+logo" (click)="swapLogo()">
+    </div>
     <button class='not-in-pdf' md-fab color="primary" (click)="exportCSV()" fxFlexOffset="8px"><md-icon>grid_on</md-icon></button>
     <button class='not-in-pdf' md-fab color="primary" (click)="pdf()" fxFlexOffset="8px"><md-icon>picture_as_pdf</md-icon></button>
   </div>
@@ -33,11 +36,21 @@
       <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
   </div>
-
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
+
   <div class="table">
     <div *ngFor="let theme of themeList">
       {{theme.title}}
+    </div>
+    <div *ngFor="let ctl of customThemeList" fxLayout="row">
+      <div>{{ctl}}</div>
+      <button  [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="customThemeList.splice(customThemeList.indexOf(ctl))"><md-icon>delete</md-icon></button>
+    </div>
+    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}">
+      <md-input-container>
+        <input mdInput #customTheme>
+      </md-input-container>
+      <button md-button (click)="addCustomTheme(customTheme)" fxFlexOffset="8px" style="padding:5px 2px">Ajouter un thème</button>
     </div>
   </div>
 
@@ -86,17 +99,17 @@
 
   <div class="echos-title">Détail: Évolution des impacts par thème</div>
 
-  <md-card *ngFor="let chart of charts.environment.themes">
-    <h2>{{chart.title}}</h2>
-    <div fxLayout="row">
+  <div fxLayout="row" *ngFor="let chart of charts.environment.themes">
+    <md-card>
+      <h2>{{chart.title}}</h2>
       <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
-      <!-- <md-input-container>
-        <textarea mdInput>pouet</textarea>
-      </md-input-container> -->
+      <h3>Gauche: audit de départ</h3>
+      <h3>Droite: audit intermédiaire</h3>
+    </md-card>
+    <div class="comment-container" fxFlex>
+      <textarea placeholder="Commentaire..."></textarea>
     </div>
-    <h3>Gauche: audit de départ</h3>
-    <h3>Droite: audit intermédiaire</h3>
-  </md-card>
+  </div>
 
   <!-- Page du résumé du bilan social -->
 

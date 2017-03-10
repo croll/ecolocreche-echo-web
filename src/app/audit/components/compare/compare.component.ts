@@ -30,6 +30,8 @@ export class CompareComponent implements OnInit {
   chartType: string = 'pie';
   hideChart: boolean = false;
   charts: any = {};
+  logo: string = 'ecolocreche.jpg';
+  customThemeList: string[] = [];
 
   auditTools = AuditTools.getInstance();
 
@@ -101,6 +103,26 @@ export class CompareComponent implements OnInit {
 
   exportCSV() {
     this.csvService.getContent(this.audit1Cache, this.audit2Cache);
+  }
+
+  changeLogo(e) {
+  }
+
+  swapLogo() {
+    this.logo = (this.logo == 'ecolocreche.jpg') ? 'ecoaccueil.jpg' : 'ecolocreche.jpg';
+    console.log(this.logo);
+  }
+
+  addCustomTheme(el) {
+    if (this.customThemeList.indexOf(el.value) != -1) {
+      return false;
+    }
+    this.customThemeList.push(el.value);
+    el.value = '';
+  }
+
+  removeCustomTheme(theme) {
+    this.customThemeList.splice(this.customThemeList.indexOf(theme), 1);
   }
 
 }
