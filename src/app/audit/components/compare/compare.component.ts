@@ -30,7 +30,7 @@ export class CompareComponent implements OnInit {
   chartType: string = 'pie';
   hideChart: boolean = false;
   charts: any = {};
-  logo: string = 'ecolocreche.png';
+  logo: string = '';
   customThemeList: string[] = [];
   customInfoList: any[] = [];
 
@@ -76,6 +76,7 @@ export class CompareComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.swapLogo();
   }
 
   setChartType(chartType, id_theme) {
@@ -110,7 +111,7 @@ export class CompareComponent implements OnInit {
   }
 
   swapLogo() {
-    this.logo = (this.logo == 'ecolocreche.png') ? 'ecoaccueil.png' : 'ecolocreche.png';
+    this.logo = window.location.protocol + '//' + window.location.host + '/assets/images/' + ((this.logo.indexOf('ecoaccueil') != -1) ? 'ecolocreche.png' : 'ecoaccueil.png');
     console.log(this.logo);
   }
 
