@@ -121,7 +121,7 @@
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
     <div class="comment-container" fxFlex>
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; min-width: 100%;min-height:200px"></textarea>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 100%;min-height:200px"></textarea>
     </div>
   </div>
 
@@ -172,7 +172,7 @@
 
   <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-  <div fxLayout="row" *ngFor="let chart of charts.social.themes">
+  <div fxLayout="row" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid">
     <md-card>
       <h2>{{chart.title}}</h2>
       <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
@@ -180,7 +180,7 @@
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
     <div class="comment-container" fxFlex>
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div"></textarea>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 100%;min-height:200px"></textarea>
     </div>
   </div>
 
