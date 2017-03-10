@@ -139,9 +139,22 @@ export class AuditTools {
         backgroundColor: [],
         data: []
       }
+      let socialLabels = {
+        0: "Aucun",
+        1: "Très positif",
+        2: "Positif",
+        3: "Neutre",
+        4: "Négatif",
+        5: "Très négatif"
+      }
       for (let id_impact in datas[id].impact) {
         let impact = AuditTools.impact.getImpact(id_impact)
-        params.labels.push(impact.label);
+        // Custom label for social family
+        if (id == 'sociales') {
+          params.labels.push(socialLabels[id_impact]);
+        } else {
+          params.labels.push(impact.label);
+        }
         dataset.backgroundColor.push(impact.color);
         dataset.data.push(datas[id].impact[id_impact]);
       }
