@@ -90,8 +90,8 @@ export class WkHtmlToPdfService {
       this.restService.decLoading();
       // open a window with this new PDF
       var url= window.URL.createObjectURL(data.blob());
-      //window.open(url);
-      window.location.href = url;
+      window.open(url);
+      //window.location.href = url;
     });
 
   }
