@@ -14,7 +14,7 @@
        <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
        <md-divider></md-divider>
        <md-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
-       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Déconnexion</md-list-item>
+       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
     </md-list>
   </md-sidenav>
   <div fxLayout="column" style="height: 100vh">
