@@ -58,7 +58,7 @@
         <input type="checkbox" style="border:1px solid #c0c0c0; background: #fff" checked/>{{theme.title}}
       </div>
       <div class="pdf-float-left">
-        <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 400px;min-height:30px"></textarea>
+        <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 450px;min-height:30px"></textarea>
       </div>
     </div>
     <!-- <div *ngFor="let ctl of customThemeList" fxLayout="row">
@@ -89,7 +89,7 @@
   </div>
 
   <div style="margin: 30px 0 5px 0">
-    <a (click)="balance_sheet_environmental_pie = !balance_sheet_environmental_pie" [ngClass]="{'not-in-pdf' : true}">Changer de représentation graphique</a>
+    <a (click)="balance_sheet_environmental_pie = !balance_sheet_environmental_pie" [ngClass]="{'not-in-pdf' : true}" style="cursor:pointer">Changer de représentation graphique</a>
   </div>
 
   <div fxLayout="row" class="pdf-clear-both-after" *ngIf="balance_sheet_environmental_pie">
@@ -133,7 +133,7 @@
       <h4>Droite: audit intermédiaire</h4>
     </md-card>
     <div class="comment-container" fxFlex class="pdf-float-left">
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 400px;min-height:200px"></textarea>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 0px;min-width: 450px;min-height:200px"></textarea>
     </div>
   </div>
 
@@ -152,7 +152,7 @@
   </div>
 
   <div style="margin: 30px 0 5px 0">
-    <a (click)="balance_sheet_social_pie = !balance_sheet_social_pie" [ngClass]="{'not-in-pdf' : true}">Changer de représentation graphique</a>
+    <a (click)="balance_sheet_social_pie = !balance_sheet_social_pie" [ngClass]="{'not-in-pdf' : true}" style="cursor:pointer">Changer de représentation graphique</a>
   </div>
 
   <div fxLayout="row" class="pdf-clear-both-after" *ngIf="balance_sheet_social_pie">
@@ -198,7 +198,7 @@
       <h4>Droite: audit intermédiaire</h4>
     </md-card>
     <div class="comment-container pdf-float-left" fxFlex>
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 400px;min-height:200px"></textarea>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 0px;min-width: 405px;min-height:200px"></textarea>
     </div>
   </div>
 
