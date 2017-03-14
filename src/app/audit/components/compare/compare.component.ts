@@ -112,7 +112,6 @@ export class CompareComponent implements OnInit {
 
   swapLogo() {
     this.logo = window.location.protocol + '//' + window.location.host + '/assets/images/' + ((this.logo.indexOf('ecoaccueil') != -1) ? 'ecolocreche.png' : 'ecoaccueil.png');
-    console.log(this.logo);
   }
 
   addCustomTheme(el) {

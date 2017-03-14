@@ -53,10 +53,15 @@
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
 
   <div class="table">
-    <div *ngFor="let theme of themeList">
-      {{theme.title}}
+    <div *ngFor="let theme of themeList" fxLayout="row" class="pdf-clear-both-after" style="padding: 5px">
+      <div class="pdf-float-left" style="min-width: 300px">
+        <input type="checkbox" style="border:1px solid #c0c0c0; background: #fff" checked/>{{theme.title}}
+      </div>
+      <div class="pdf-float-left">
+        <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 400px;min-height:30px"></textarea>
+      </div>
     </div>
-    <div *ngFor="let ctl of customThemeList" fxLayout="row">
+    <!-- <div *ngFor="let ctl of customThemeList" fxLayout="row">
       <div>{{ctl}}</div>
       <button  [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="customThemeList.splice(customThemeList.indexOf(ctl))"><md-icon>delete</md-icon></button>
     </div>
@@ -65,12 +70,13 @@
         <input mdInput #customTheme>
       </md-input-container>
       <button md-raised-button (click)="addCustomTheme(customTheme)" fxFlexOffset="8px" style="padding:5px 2px">Ajouter un thème</button>
-    </div>
+    </div> -->
   </div>
 
   <!-- Page du résumé du bilan environnemental -->
 
   <div class="echos-title" style="page-break-before:always">Bilan: Évolution de l'impact sur les questions environnementales</div>
+
   <div class="echos-infos">
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Audit de départ:</label>
@@ -82,7 +88,11 @@
     </div>
   </div>
 
-  <div fxLayout="row" class="pdf-clear-both-after">
+  <div style="margin: 30px 0 5px 0">
+    <a (click)="balance_sheet_environmental_pie = !balance_sheet_environmental_pie" [ngClass]="{'not-in-pdf' : true}">Changer de représentation graphique</a>
+  </div>
+
+  <div fxLayout="row" class="pdf-clear-both-after" *ngIf="balance_sheet_environmental_pie">
     <md-card style="max-width:300px!important" class="pdf-float-left">
       <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
       <h3>Audit de départ</h3>
@@ -93,7 +103,7 @@
     </md-card>
   </div>
 
-  <md-card style="max-width:300px!important">
+  <md-card style="max-width:300px!important;margin-top: 30px!important" *ngIf="!balance_sheet_environmental_pie">
     <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
     <h3>Gauche: audit de départ</h3>
     <h3>Droite: audit intermédiaire</h3>
@@ -123,7 +133,7 @@
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
     <div class="comment-container" fxFlex class="pdf-float-left">
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 200px;min-height:200px"></textarea>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 400px;min-height:200px"></textarea>
     </div>
   </div>
 
@@ -141,7 +151,11 @@
     </div>
   </div>
 
-  <div fxLayout="row" class="pdf-clear-both-after">
+  <div style="margin: 30px 0 5px 0">
+    <a (click)="balance_sheet_social_pie = !balance_sheet_social_pie" [ngClass]="{'not-in-pdf' : true}">Changer de représentation graphique</a>
+  </div>
+
+  <div fxLayout="row" class="pdf-clear-both-after" *ngIf="balance_sheet_social_pie">
     <md-card style="max-width:300px!important" class="pdf-float-left">
       <canvas baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
       <h3>Audit de départ</h3>
@@ -151,14 +165,16 @@
       <h3>Audit intermédiaire</h3>
     </md-card>
   </div>
-  <div>
+
+  <div *ngIf="!balance_sheet_social_pie">
     <md-card style="max-width:300px!important">
       <canvas baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
       <h3>Gauche: audit de départ</h3>
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
   </div>
-  <md-card style="max-width:400px!important">
+
+  <md-card style="max-width:400px!important;margin-top: 30px!important">
     <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
@@ -182,7 +198,7 @@
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
     <div class="comment-container pdf-float-left" fxFlex>
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 200px;min-height:200px"></textarea>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 400px;min-height:200px"></textarea>
     </div>
   </div>
 
