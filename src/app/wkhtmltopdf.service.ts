@@ -90,10 +90,18 @@ export class WkHtmlToPdfService {
       this.restService.decLoading();
       // open a window with this new PDF
       var url= window.URL.createObjectURL(data.blob());
-      // window.open(url);
-      window.location.href = url;
-    });
+      //window.open(url);
+      //window.location.href = url;
 
+      var fileName = 'export.pdf';
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 
   getallcss() {
