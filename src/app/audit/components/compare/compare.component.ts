@@ -139,4 +139,9 @@ export class CompareComponent implements OnInit {
     })
   }
 
+  toggleTheme(e) {
+    let parent = e.target.parentElement.parentElement.parentElement.parentElement;
+    parent.classList.toggle('not-in-pdf');
+  }
+
 }
