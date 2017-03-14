@@ -59,9 +59,15 @@ export class Impact {
   getImpactColorStyle(id_impact) {
     let impact = this.getImpact(id_impact);
     if (impact)
-      return this.sanitizer.bypassSecurityTrustStyle("background-color: "+impact.color);
+      return {
+        backgroundColor: impact.color,
+      };
+      //return this.sanitizer.bypassSecurityTrustStyle("background-color: "+impact.color);
     else
-      return this.sanitizer.bypassSecurityTrustStyle("background-color: none");
+      return {
+        backgroundColor: "none",
+      };
+      //return this.sanitizer.bypassSecurityTrustStyle("background-color: none");
   }
 
 }
