@@ -4,7 +4,7 @@
 <md-list>
   <md-list-item class="echos-list-item" *ngFor="let item of choices">
     <div md-line fxLayout="row" fxLayoutAlign="left center">
-        <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+        <div class="echos-color-box" [ngStyle]="impact.getImpactColorStyle(item.impact)"></div>
         <div fxLayout="column" class="have-childs">
             <div>{{item.title}}</div>
             <div>{{item.comment}}</div>

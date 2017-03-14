@@ -12,7 +12,7 @@
             <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up</md-icon></button>
             <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
           </div>
-          <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div>
+          <div class="echos-color-box" [ngStyle]="impact.getImpactColorStyle(item.impact)"></div>
           <div fxLayout="column" fxFlexOffset="30px" fxFlex>
             <md-input-container>
               <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
