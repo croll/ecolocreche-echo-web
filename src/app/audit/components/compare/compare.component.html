@@ -7,11 +7,11 @@
 
 <div id='exportpdf'>
 
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <h1 fxFlex>
+  <div fxLayout="row" fxLayoutAlign="start center" class="pdf-clear-both-after">
+    <h1 fxFlex class="pdf-float-left">
       Dossier de labellisation
     </h1>
-    <div class="report-logo" style="width: 150px;height: 150px;">
+    <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;">
       <img [src]="logo"(click)="swapLogo()" style="width: 150px;height: 150px;">
     </div>
     <button class='not-in-pdf' md-fab color="primary" (click)="exportCSV()" fxFlexOffset="8px"><md-icon>grid_on</md-icon></button>
@@ -19,32 +19,32 @@
   </div>
 
   <div class="echos-infos">
-    <div fxLayout="row">
-      <label>Nom de la crèche:</label>
-      <div fxFlexOffset="10px">{{audit1.audit.establishment.name}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Nom de la crèche:</label>
+      <div fxFlexOffset="10px" class="pdf-float-left">{{audit1.audit.establishment.name}}</div>
     </div>
-    <div fxLayout="row">
-      <label>Date d'entrée de la démarche:</label>
-      <div fxFlexOffset="10px">{{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Date d'entrée de la démarche:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row">
-      <label>Date du premier audit:</label>
-      <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Date du premier audit:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row">
-      <label>Date du second audit:</label>
-      <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Date du second audit:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
-    <div *ngFor="let cinfo of customInfoList" fxLayout="row">
-      <label>{{cinfo.label}}</label>
-      <div fxFlexOffset="10px">{{cinfo.value}}</div>
+    <div *ngFor="let cinfo of customInfoList" fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">{{cinfo.label}}</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{cinfo.value}}</div>
       <button  [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="removeCustomInfo(cinfo.label)"><md-icon>delete</md-icon></button>
     </div>
-    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}">
-      <md-input-container>
+    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}" class="pdf-clear-both-after">
+      <md-input-container class="pdf-float-left">
         <input mdInput #customInfoLabel placeholder="Libellé">
       </md-input-container>
-      <md-input-container fxFlexOffset="8px">
+      <md-input-container fxFlexOffset="8px" class="pdf-float-left">
         <input mdInput #customInfoValue placeholder="Valeur">
       </md-input-container>
       <button md-raised-button (click)="addCustomInfo(customInfoLabel, customInfoValue)" fxFlexOffset="8px">Ajouter une ligne</button>
@@ -60,7 +60,7 @@
       <div>{{ctl}}</div>
       <button  [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="customThemeList.splice(customThemeList.indexOf(ctl))"><md-icon>delete</md-icon></button>
     </div>
-    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}">
+    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}" class="pdf-clear-both-after">
       <md-input-container>
         <input mdInput #customTheme>
       </md-input-container>
@@ -72,40 +72,42 @@
 
   <div class="echos-title" style="page-break-before:always">Bilan: Évolution de l'impact sur les questions environnementales</div>
   <div class="echos-infos">
-    <div fxLayout="row">
-      <label>Audit de départ:</label>
-      <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Audit de départ:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row">
-      <label>Audit intermédiaire:</label>
-      <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Audit intermédiaire:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
   </div>
 
-  <div fxLayout="row">
-    <md-card>
+  <div fxLayout="row" class="pdf-clear-both-after">
+    <md-card style="max-width:300px!important" class="pdf-float-left">
       <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
       <h3>Audit de départ</h3>
     </md-card>
-    <md-card>
+    <md-card style="max-width:300px!important" class="pdf-float-left">
       <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
       <h3>Audit intermédiaire</h3>
     </md-card>
   </div>
-  <md-card>
+
+  <md-card style="max-width:300px!important">
     <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
     <h3>Gauche: audit de départ</h3>
     <h3>Droite: audit intermédiaire</h3>
   </md-card>
-  <md-card>
+
+  <md-card style="max-width:400px!important">
     <canvas baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
-      <div fxFlexOffset="8px">Audit de départ</div>
+    <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
+      <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
+      <div fxFlexOffset="8px" class="pdf-float-left">Audit de départ</div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
-      <div fxFlexOffset="8px">Audit intermédiaire</div>
+    <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center" class="pdf-clear-both-after">
+      <div class="echos-color pdf-float-left" style="background-color: rgba(63, 136, 38, 1)"></div>
+      <div fxFlexOffset="8px" class="pdf-float-left">Audit intermédiaire</div>
     </div>
   </md-card>
 
@@ -113,15 +115,15 @@
 
   <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-  <div fxLayout="row" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid">
-    <md-card>
+  <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid">
+    <md-card style="max-width:300px!important" class="pdf-float-left">
       <h2>{{chart.title}}</h2>
       <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
       <h3>Gauche: audit de départ</h3>
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
-    <div class="comment-container" fxFlex>
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 100%;min-height:200px"></textarea>
+    <div class="comment-container" fxFlex class="pdf-float-left">
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 200px;min-height:200px"></textarea>
     </div>
   </div>
 
@@ -129,42 +131,42 @@
 
   <div class="echos-title" style="page-break-before:always">Bilan: Évolution de l'impact sur les questions sociales</div>
   <div class="echos-infos">
-    <div fxLayout="row">
-      <label>Audit de départ:</label>
-      <div fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Audit de départ:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row">
-      <label>Audit intermédiaire:</label>
-      <div fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+    <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Audit intermédiaire:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
   </div>
 
-  <div fxLayout="row">
-    <md-card>
+  <div fxLayout="row" class="pdf-clear-both-after">
+    <md-card style="max-width:300px!important" class="pdf-float-left">
       <canvas baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
       <h3>Audit de départ</h3>
     </md-card>
-    <md-card>
+    <md-card style="max-width:300px!important" class="pdf-float-left">
       <canvas baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
       <h3>Audit intermédiaire</h3>
     </md-card>
   </div>
   <div>
-    <md-card>
+    <md-card style="max-width:300px!important">
       <canvas baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
       <h3>Gauche: audit de départ</h3>
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
   </div>
-  <md-card>
+  <md-card style="max-width:400px!important">
     <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="echos-color" style="background-color: rgba(173, 174, 186, 1)"></div>
-      <div fxFlexOffset="8px">Audit de départ</div>
+    <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
+      <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
+      <div fxFlexOffset="8px" class="pdf-float-left">Audit de départ</div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="echos-color" style="background-color: rgba(63, 136, 38, 1)"></div>
-      <div fxFlexOffset="8px">Audit intermédiaire</div>
+    <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
+      <div class="echos-color pdf-float-left" style="background-color: rgba(63, 136, 38, 1)"></div>
+      <div fxFlexOffset="8px" class="pdf-float-left">Audit intermédiaire</div>
     </div>
   </md-card>
 
@@ -172,15 +174,15 @@
 
   <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-  <div fxLayout="row" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid">
-    <md-card>
+  <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid">
+    <md-card style="max-width:300px!important" class="pdf-float-left">
       <h2>{{chart.title}}</h2>
       <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
       <h3>Gauche: audit de départ</h3>
       <h3>Droite: audit intermédiaire</h3>
     </md-card>
-    <div class="comment-container" fxFlex>
-      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 100%;min-height:200px"></textarea>
+    <div class="comment-container pdf-float-left" fxFlex>
+      <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 20px;min-width: 200px;min-height:200px"></textarea>
     </div>
   </div>
 
