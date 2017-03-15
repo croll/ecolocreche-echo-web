@@ -245,8 +245,8 @@
   <!-- Page de commentaires -->
 
   <div style="margin: 50px 0 0px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
-    <button md-raised-button color="primary" *ngIf="!hide_comments" (click)="hide_comments = false">Afficher les commentaires</button>
-    <button md-raised-button *ngIf="hide_comments" (click)="hide_comments = true">Masquer les commentaires</button>
+    <button md-raised-button color="primary" *ngIf="hide_comments" (click)="hide_comments = false">Afficher les commentaires</button>
+    <button md-raised-button *ngIf="!hide_comments" (click)="hide_comments = true">Masquer les commentaires</button>
   </div>
 
   <div *ngIf="!hide_comments">
