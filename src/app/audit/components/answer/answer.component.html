@@ -1,5 +1,6 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div [routerLink]="['/etablissement', infos.audit.establishment.id]" fxFlexAlign="start">{{infos.audit.establishment.name}}</div>
   <div fxFlexAlign="start">Compléter un audit</div>
 </div>
 
