@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 import { RestService as UserRestService} from './user/services/rest.service';
 import { User } from './user/user';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 @Component({
   selector: 'app-root',
