@@ -55,7 +55,7 @@ import { WkHtmlToPdfService } from './wkhtmltopdf.service';
     AppRoutingModule,
     ReactiveFormsModule,
     // NgxDatatableModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     FlexLayoutModule
   ],
   providers: [
