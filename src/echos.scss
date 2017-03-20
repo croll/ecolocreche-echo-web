@@ -10,10 +10,16 @@ $echos-dark-grey: #333;
 $echos-grey: #555;
 $echos-light-grey: #777;
 
+// html, body, material-app, md-sidenav-container, .my-content {
+//   margin: 0;
+//   width: 100%;
+//   height: 100%;
+// }
+
 /* ngx-datatable */
-@import '~@swimlane/ngx-datatable/release/datatable.css';
-@import '~@swimlane/ngx-datatable/release/material.css';
-@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+// @import '~@swimlane/ngx-datatable/release/datatable.css';
+// @import '~@swimlane/ngx-datatable/release/material.css';
+// @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 /* Hack md-hint (en attendant que ce soit corrigé) */
 md-hint, mat-hint {
@@ -26,9 +32,16 @@ md-hint, mat-hint {
   z-index: 1000;
 }
 
-body {
+html {
+  height: 100%;
+}
+
+body, app-root {
   margin: 0;
   font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a, a:hover, a:visited {
@@ -63,10 +76,6 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
 .echos-error {
   padding-top: 5px;
   color: #f76242;
-}
-
-.echos-header {
-  margin-top: 20px;
 }
 
 .echos-title {
@@ -215,8 +224,14 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
   }
 }
 
+.echos-header {
+  margin-top: 20px;
+}
+
 .echos-main-container {
   margin-top: 30px;
+  flex: 1;
+  flex-grow: 1;
   .echos-menu {
     display: none;
   }
