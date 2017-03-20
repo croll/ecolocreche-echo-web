@@ -23,7 +23,7 @@
     </md-input-container>
   </div>
   <div>
-    <md-select placeholder="Statut *" formControlName="active" [disabled]="!authService.isSuperAgent()" style="margin: 8px 0 18px 0">
+    <md-select placeholder="Statut *" formControlName="active" style="margin: 8px 0 18px 0">
       <md-option [value]="1">En cours</md-option>
       <md-option [value]="0">Terminé</md-option>
     </md-select>
@@ -35,7 +35,7 @@
     <button *ngIf="id" (click)="delete(id)" md-raised-button color="warn">Effacer</button>
     <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-    <button fxFlexOffset="20px" md-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)">Enregistrer et retourner à la fiche établissement</button>
+    <button *ngIf="id" fxFlexOffset="20px" md-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)">Enregistrer et retourner à la fiche établissement</button>
   </div>
   <button *ngIf="id" (click)="sendmail(id)" md-raised-button>Renvoyer le mail</button>
 </form>

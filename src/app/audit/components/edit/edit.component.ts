@@ -46,14 +46,18 @@ export class EditComponent implements OnInit {
       Object.assign(this.current, this.infos.audit)
       this.id_establishment = this.infos.audit.establishment.id;
     } else {
+      this.current.active = 1;
       this.id_establishment = this.route.snapshot.params['id_establishment'];
     }
 
     this.idCtrl = this.fb.control(this.id);
+
+    let activeDisabled = (this.id || !this.authService.isSuperAgent()) ? true : false;
+
     this.idEstablishmentCtrl = this.fb.control(this.id_establishment, [Validators.required]);
     this.idInquiryFormCtrl = this.fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
-    this.activeCtrl = this.fb.control({value: this.current.active, disabled: true}, [Validators.required]);
+    this.activeCtrl = this.fb.control({value: this.current.active, disabled: activeDisabled}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
 
     this.echosForm = this.fb.group({
@@ -85,6 +89,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
+    console.log(this.echosForm.value);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
       console.log("SAVE !!!:::!:!:!");
       this.goBack();
