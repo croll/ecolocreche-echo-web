@@ -33,8 +33,20 @@ export class AnswerComponent implements OnInit {
     this._getProgress(this.node);
   }
 
-  goToParent() {
-    this.node = this.parentNodes.pop();
+  goToParent(num = 1) {
+    for(let i = 0; i < num; i++) {
+      this.node = this.parentNodes.pop();
+    }
+    this.filterList();
+    this._getProgress(this.node);
+  }
+
+  goToRoot() {
+    if (!this.parentNodes.length) {
+      return;
+    }
+    this.node = this.parentNodes[0];
+    this.parentNodes = [];
     this.filterList();
     this._getProgress(this.node);
   }

@@ -12,13 +12,13 @@
   <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'rapport']" fxFlexOffset="35px"><md-icon>assessment</md-icon></button>
 </div>
 
-<div class="echos-title" style="margin: 80px 0 20px 0">
+<div class="echos-answer-breadcrumb">
   <div *ngIf="node" fxLayout="row" fxLayoutAlign="start center">
-    <div>Liste des thèmes</div>
-    <div *ngFor="let pn of parentNodes">
-      <div *ngIf="pn.title">&nbsp;>&nbsp;{{pn.title}}</div>
+    <div (click)="goToRoot()" class="rootNode">Liste des thèmes</div>
+    <div *ngFor="let pn of parentNodes; let i = index">
+      <div *ngIf="pn.title" class="parentNode" (click)="goToParent(i)">{{pn.title}}</div>
     </div>
-    <div *ngIf="node.title">&nbsp;>&nbsp;{{node.title}}</div>
+    <div *ngIf="node.title" class="currentNode" fxFlex>{{node.title}}</div>
   </div>
 </div>
 
