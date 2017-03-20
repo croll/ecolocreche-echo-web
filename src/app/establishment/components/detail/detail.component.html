@@ -52,7 +52,7 @@
 
 <div class="echos-title" fxLayout="row" style="margin-top: 80px">
   <div fxFlex>Liste des audits</div>
-  <button md-raised-button [routerLink]="['/audit/creer', item.id]">Démarrer un audit<md-icon>add</md-icon></button>
+  <button *ngIf="authService.isSuperAgent()" md-raised-button [routerLink]="['/audit/creer', item.id]">Démarrer un audit<md-icon>add</md-icon></button>
 </div>
 
 <div *ngIf="!item.audits || !item.audits.length" class="echos-warning">Aucun audit trouvé.</div>
