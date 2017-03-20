@@ -8,8 +8,8 @@
   <h1 fxFlex>
     Audit de {{infos.audit.establishment.name}}
   </h1>
-  <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
-  <button md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'rapport']" fxFlexOffset="35px"><md-icon>assessment</md-icon></button>
+  <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><md-icon>edit</md-icon></button>
+  <button *ngIf="authService.isSuperAgent()" md-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'rapport']" fxFlexOffset="35px"><md-icon>assessment</md-icon></button>
 </div>
 
 <div class="echos-answer-breadcrumb">

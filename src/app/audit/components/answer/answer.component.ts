@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm, InquiryFormExt } from '../../../inquiry-form/inquiry-form';
 import { Node } from '../../../node/node';
 import { RestService } from '../../../rest.service';
+import { AuthService } from '../../../auth.service';
 import * as moment from 'moment'
 
 
@@ -23,7 +24,7 @@ export class AnswerComponent implements OnInit {
   userSelection: any;
   infos: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService) {
     this.infos = this.route.snapshot.data['infos'];
   }
 
