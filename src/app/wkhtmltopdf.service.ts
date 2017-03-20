@@ -88,21 +88,42 @@ export class WkHtmlToPdfService {
     }).subscribe((data) => {
       console.log("loading... done");
       this.restService.decLoading();
-      // open a window with this new PDF
-      var url= window.URL.createObjectURL(data.blob());
-      //window.open(url);
-      //window.location.href = url;
 
-      var fileName = 'export.pdf';
-      var a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      window.URL.revokeObjectURL(url);
+      this.triggerDownload(data.blob())
     });
   }
+
+  triggerDownload(blob) {
+
+    let proposedFileName = 'export.pdf';
+
+    if (typeof window.navigator.msSaveBlob !== 'undefined'){
+      window.navigator.msSaveBlob(blob, proposedFileName);
+    } else {
+      var downloadUrl = URL.createObjectURL(blob);
+
+      // build and open link - use HTML5 a[download] attribute to specify filename
+      var a = document.createElement("a");
+
+      // safari doesn't support this yet
+      if (typeof a.download === 'undefined') {
+          window.open(downloadUrl);
+      }
+
+      var link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = proposedFileName;
+      document.body.appendChild(link);
+      var event = new MouseEvent('click', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true
+      });
+      link.dispatchEvent(event);
+      document.body.removeChild(link);
+    }
+  }
+
 
   getallcss() {
     var css = [];
