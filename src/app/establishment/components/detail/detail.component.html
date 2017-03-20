@@ -71,13 +71,13 @@
       <md-checkbox [disabled]="auditsToCompare.length == 2 && auditsToCompare.indexOf(audit.id) == -1" (change)="toggleCompare(audit.id)" fxFlex="50px"></md-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div [routerLink]="['/audit', audit.key]">{{audit.inquiryform?.title}} - {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>{{audit.inquiryform?.title}} - {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!audit.active">Terminé</div>
         <div *ngIf="audit.active" style="color: rgb(96, 190, 64)">En cours</div>
       </div>
       <div class="percent">{{audit.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
-      <button md-button  [routerLink]="['/audit', audit.key]"><md-icon color="primary">chevron_right</md-icon></button>
+      <button md-button *ngIf="audit.active || authService.isSuperAgent()" [routerLink]="['/audit', audit.key]"><md-icon color="primary">chevron_right</md-icon></button>
     </div>
   </md-list-item>
 </md-list>
