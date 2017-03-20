@@ -58,14 +58,6 @@ a:hover {
   display: none!important;
 }
 
-app-root > mat-sidenav-container, app-root > mat-progress-bar,
-app-root > md-sidenav-container, app-root > md-progress-bar {
-  max-width: 1450px;
-  margin: 0 auto;
-  border-left: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-}
-
 .echos-logo {
   background: url(assets/images/logo-echos.jpg) no-repeat;
   height: 83px;
