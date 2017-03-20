@@ -8,7 +8,7 @@
   <h1 fxFlex>
     Fiche établissement<span class="titleItem">{{item.name}}</span>
   </h1>
-  <button md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
+  <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>
