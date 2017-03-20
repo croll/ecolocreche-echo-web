@@ -18,7 +18,7 @@
       <md-checkbox>Se souvenir de moi</md-checkbox>
 
       <md-toolbar fxLayout="row">
-        <button md-raised-button routerLink="/motdepasse" (click)="false"><md-icon>info</md-icon> Mot de passe oublié ?</button>
+        <button type="button" md-raised-button routerLink="/motdepasse" (click)="false"><md-icon>info</md-icon> Mot de passe oublié ?</button>
         <div fxFlex>&nbsp;</div>
         <button md-raised-button type="submit" [disabled]="!loginForm.form.valid"><md-icon>person</md-icon> Connexion</button>
       </md-toolbar>
