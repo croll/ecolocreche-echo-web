@@ -1,8 +1,6 @@
-<div fxLayout="row" fxLayoutAlign="start center">
+<div fxLayout="column" fxLayoutAlign="start start" fxLayout.gt-md="row" fxLayoutAlign.gt-md="start center">
   <md-list class="echos-answer-container" fxFlex>
-    <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let lastItem = last" fxLayout="column" fxLayout="row">
-      <div fxFlex>
-        <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
+    <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let lastItem = last" fxLayout="row" fxLayoutAlign="start center">
             <!-- <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div> -->
             <div class="echos-slider-title">{{item.title}}</div>
             <!-- <md-select [(ngModel)]="item.value" (change)="updatevalue()" [disabled]="readonly ? true : lastItem">
@@ -10,17 +8,15 @@
             </md-select> -->
             <!-- <md-slider [(ngModel)]="item.value" min="0" max="100" step="5" tickInterval="1" (onTouched)="onTouched()" thumbLabel="false" [value]="item.value" (input)="onInput($event.value, item)" (change)="updatevalue();setDonutChartValue()" [disabled]="readonly ? true : lastItem"></md-slider> -->
             <md-slider [(ngModel)]="item.value" min="0" max="100" step="5" tickInterval="1" (onTouched)="onTouched()" thumbLabel="false" [value]="item.value" (input)="onInput($event.value, item)" (change)="setDonutChartValue()" [disabled]="readonly ? true : false"></md-slider>
-            <div class="percent-container">
+            <div class="percent-container" fxFlex="80px">
               <div *ngIf="!item.liveValue && item.value" class="echos-slider-value">{{item.value}} %</div>
               <!-- <div *ngIf="item.liveValue" class="echos-slider-value" [ngClass]="{disabled: readonly ? true : lastItem}">{{item.liveValue}} %</div> -->
               <div *ngIf="item.liveValue" class="echos-slider-value">{{item.liveValue}} %</div>
             </div>
-        </div>
         <!-- <div class="echos-choice-description">{{item.comment}}</div> -->
-      </div>
     </md-list-item>
   </md-list>
-  <div class="chart-container" fxFlexOffset="50px" *ngIf="!readonly">
+  <div class="chart-container" fxFlexOffset="50px" *ngIf="!readonly" fxFlexAlign="center" fxFlexOffset="30px">
     <md-card>
       <div class="chart">
         <canvas baseChart width="100px" height="100px" [datasets]="donut.datasets" [colors]="donut.colors" [chartType]="'doughnut'" legend="'false'" [options]="donut.options"></canvas>

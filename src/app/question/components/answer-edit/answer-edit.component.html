@@ -1,4 +1,4 @@
-<md-toolbar color="primary" fxFlex>{{current.title}}</md-toolbar>
+<md-toolbar color="primary" fxFlex style="white-space: none">{{current.title}}</md-toolbar>
 <div *ngIf="current.description" class="echos-description">{{current.description}}</div>
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
