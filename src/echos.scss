@@ -172,6 +172,7 @@ app-root > md-sidenav-container, app-root > md-progress-bar {
 md-list-item.echos-list-item, mat-list-item.echos-list-item {
   cursor: pointer;
   border-bottom: 1px solid #a5a5a5;
+  padding: 8px 0;
   &:last-child {
     border-bottom: 1px solid transparent;
   }
@@ -312,6 +313,12 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
   .copyright-caption {
     font-size: 1rem;
   }
+}
+
+@media all and (-ms-high-contrast:none) {
+ .echos-footer {
+   display: none;
+ }
 }
 
 .echos-infos {
