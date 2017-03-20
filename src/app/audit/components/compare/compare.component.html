@@ -90,7 +90,7 @@
     </div>
   </div>
 
-  <div style="margin: 30px 0 20px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_balance_sheet_environmental_pie" (click)="hide_balance_sheet_environmental_pie = false">Afficher les graphiques de type "camembert"</button>
     <button md-raised-button *ngIf="!hide_balance_sheet_environmental_pie" (click)="hide_balance_sheet_environmental_pie = true">Masquer les graphiques de type "camembert"</button>
   </div>
@@ -106,18 +106,18 @@
     </md-card>
   </div>
 
-  <div style="margin: 30px 0 0 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_balance_sheet_environmental_bar" (click)="hide_balance_sheet_environmental_bar = false">Afficher le graphique de type "baton"</button>
     <button md-raised-button *ngIf="!hide_balance_sheet_environmental_bar" (click)="hide_balance_sheet_environmental_bar = true">Masquer le graphiques de type "baton"</button>
   </div>
 
-  <md-card style="max-width:300px!important;margin-top: 30px!important" *ngIf="!hide_balance_sheet_environmental_bar">
+  <md-card style="max-width:300px!important" *ngIf="!hide_balance_sheet_environmental_bar">
     <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
     <h4>Gauche: audit de départ</h4>
     <h4>Droite: audit intermédiaire</h4>
   </md-card>
 
-  <div style="margin: 30px 0 20px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_balance_sheet_environmental_radar" (click)="hide_balance_sheet_environmental_radar = false">Afficher le graphique de type "araignée"</button>
     <button md-raised-button *ngIf="!hide_balance_sheet_environmental_radar" (click)="hide_balance_sheet_environmental_radar = true">Masquer le graphique de type "araignée"</button>
   </div>
@@ -136,7 +136,7 @@
 
   <!-- Page des graphs des familles environnementales -->
 
-  <div style="margin: 50px 0 0px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div style="margin: 50px 0 0 8px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
     <button md-raised-button color="primary" *ngIf="hide_environment_details" (click)="hide_environment_details = false">Afficher le détail des évolutions des impacts par thème</button>
     <button md-raised-button *ngIf="!hide_environment_details" (click)="hide_environment_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
@@ -173,7 +173,7 @@
     </div>
   </div>
 
-  <div style="margin: 30px 0 20px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_balance_sheet_social_pie" (click)="hide_balance_sheet_social_pie = false">Afficher les graphiques de type "camembert"</button>
     <button md-raised-button *ngIf="!hide_balance_sheet_social_pie" (click)="hide_balance_sheet_social_pie = true">Masquer les graphiques de type "camembert"</button>
   </div>
@@ -189,7 +189,7 @@
     </md-card>
   </div>
 
-  <div style="margin: 30px 0 0 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_balance_sheet_social_bar" (click)="hide_balance_sheet_social_bar = false">Afficher les graphiques de type "baton"</button>
     <button md-raised-button *ngIf="!hide_balance_sheet_social_bar" (click)="hide_balance_sheet_social_bar = true">Masquer les graphiques de type "baton"</button>
   </div>
@@ -202,12 +202,12 @@
     </md-card>
   </div>
 
-  <div style="margin: 30px 0 20px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_balance_sheet_social_radar" (click)="hide_balance_sheet_social_radar = false">Afficher les graphiques de type "araignée"</button>
     <button md-raised-button *ngIf="!hide_balance_sheet_social_radar" (click)="hide_balance_sheet_social_radar = true">Masquer les graphiques de type "araignée"</button>
   </div>
 
-  <md-card style="max-width:400px!important;margin-top: 30px!important" *ngIf="!hide_balance_sheet_social_radar">
+  <md-card style="max-width:400px!important" *ngIf="!hide_balance_sheet_social_radar">
     <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
@@ -221,7 +221,8 @@
 
   <!-- Page des graphs des familles sociales -->
 
-  <div style="margin: 50px 0 0px 0; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div style="margin: 50px 0 0 8px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_social_details" (click)="hide_social_details = false">Afficher le détail des évolutions des impacts par thème</button>
     <button md-raised-button *ngIf="!hide_social_details" (click)="hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
