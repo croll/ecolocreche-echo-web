@@ -52,9 +52,9 @@ export class AuditTools {
           let question = {id: node.id, id_node: node.id_node, id_node_parent: node.id_node_parent, id_theme: id_theme, title: node.title, description: node.description, type: node.type, ignored: false, choices: null, value: undefined};
           if (node.answer) {
             if (!node.answer.ignored) {
-              let value = JSON.parse(node.answer.value);
               // checkbox of percentage
               if (node.type == 'q_checkbox' || node.type == 'q_percents') {
+                let value = JSON.parse(node.answer.value);
                 question.value = [];
                 for(let id_choice in value) {
                   node.choices.forEach(c => {
@@ -87,6 +87,7 @@ export class AuditTools {
                 }
                 // radio
               } else if (node.type == 'q_radio'){
+                let value = JSON.parse(node.answer.value);
                 question.value = [];
                 node.choices.forEach(c => {
                   if (value == c.id_choice) {
@@ -113,7 +114,7 @@ export class AuditTools {
                 });
                 // All other question type, for now string and number
               } else {
-                question.value = value;
+                question.value = node.answer.value;
               }
             } else {
               question.ignored = true;
