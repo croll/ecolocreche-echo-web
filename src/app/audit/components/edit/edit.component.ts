@@ -89,7 +89,6 @@ export class EditComponent implements OnInit {
   save() {
     console.log(this.echosForm.value);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
-      console.log("SAVE !!!:::!:!:!");
       this.goBack();
     }, (err) => {
       console.error(err);
