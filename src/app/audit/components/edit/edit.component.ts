@@ -7,6 +7,7 @@ import { RestService} from '../../../rest.service';
 import { InquiryForm } from '../../../inquiry-form/inquiry-form';
 import { Http, Response } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
+import { AuthService } from '../../../auth.service';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -28,7 +29,7 @@ export class EditComponent implements OnInit {
   private id_establishment: number;
   private inquiryFormList: InquiryForm[];
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MdSnackBar) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MdSnackBar, public authService: AuthService) {
 
     this.current = new Audit();
 
@@ -52,7 +53,7 @@ export class EditComponent implements OnInit {
     this.idEstablishmentCtrl = this.fb.control(this.id_establishment, [Validators.required]);
     this.idInquiryFormCtrl = this.fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
-    this.activeCtrl = this.fb.control(this.current.active, [Validators.required]);
+    this.activeCtrl = this.fb.control({value: this.current.active, disabled: true}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
 
     this.echosForm = this.fb.group({

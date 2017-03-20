@@ -23,7 +23,7 @@
     </md-input-container>
   </div>
   <div>
-    <md-select placeholder="Statut *" formControlName="active" style="margin: 8px 0 18px 0">
+    <md-select placeholder="Statut *" formControlName="active" [disabled]="!authService.isSuperAgent()" style="margin: 8px 0 18px 0">
       <md-option [value]="1">En cours</md-option>
       <md-option [value]="0">Terminé</md-option>
     </md-select>
