@@ -17,6 +17,8 @@ export class AppComponent{
 
   loggedUser: User = null;
 
+  menuVisibility: boolean = false;
+
   constructor(private authService: AuthService, private userRestService: UserRestService) {
     this.userRestService.whoami().subscribe((user) => {
     });
@@ -45,6 +47,20 @@ export class AppComponent{
 
   isNotLogged() {
     return this.loggedUser == null;
+  }
+
+  menuClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.menuVisibility = false;
+  }
+
+  menuHide() {
+    this.menuVisibility = false;
+  }
+
+  toggleMenu() {
+    this.menuVisibility = !this.menuVisibility;
   }
 
 }

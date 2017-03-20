@@ -1,59 +1,58 @@
-<!-- <md-sidenav-container fullscreen fxLayout="row" style="border: 3px solid blue">
-  <md-sidenav #sidenav>
+  <!-- <div class="echos-sidenav">
     <md-list>
-       <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="sidenav.close()">Mon compte</md-list-item>
+     <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="sidenav.close()">Mon compte</md-list-item>
+     <md-divider></md-divider>
+     <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="sidenav.close()">Les établissements</md-list-item>
+     <md-divider></md-divider>
+     <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="sidenav.close()">Les audits en cours</md-list-item>
+     <md-divider></md-divider>
+     <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="sidenav.close()">Les utilisateurs</md-list-item>
+     <md-divider></md-divider>
+     <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="sidenav.close()">Banque de questions</md-list-item>
+     <md-divider></md-divider>
+     <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="sidenav.close()">Les questionnaires</md-list-item>
+     <md-divider></md-divider>
+     <md-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active" (click)="sidenav.close()">Déconnexion</md-list-item>
+     <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="sidenav.close()">Connexion</md-list-item>
+  </md-list>
+</div> -->
+
+<div fxLayout="row" fxLayoutWrap="none" class="echos-header">
+  <button md-button (click)="toggleMenu()" class="echos-menu-button">
+    <md-icon>menu</md-icon>
+  </button>
+  <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
+</div>
+<div class="echos-main-container" fxLayout="row">
+  <div class="echos-menu" [ngClass]="{'echos-menu-hide': !menuVisibility}" (click)="menuHide()">
+    <md-list>
+       <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="menuClick($event)">Mon compte</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="sidenav.close()">Les établissements</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="menuClick($event)">Les établissements</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="sidenav.close()">Les audits en cours</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="menuClick($event)">Les audits en cours</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="sidenav.close()">Les utilisateurs</md-list-item>
+       <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="menuClick($event)">Les utilisateurs</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="sidenav.close()">Banque de questions</md-list-item>
+       <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="menuClick($event)">Banque de questions</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="sidenav.close()">Les questionnaires</md-list-item>
+       <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuClick($event)">Les questionnaires</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active" (click)="sidenav.close()">Déconnexion</md-list-item>
-       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="sidenav.close()">Connexion</md-list-item>
+       <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuClick($event)">Déconnexion</md-list-item>
+       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuClick($event)">Connexion</md-list-item>
     </md-list>
-  </md-sidenav> -->
-  <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
-    <button md-button (click)="sidenav.toggle()" class="echos-menu-button">
-      <md-icon>menu</md-icon>
-    </button>
-    <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
   </div>
-  <div class="echos-main-container" fxLayout="row">
-    <div class="echos-menu">
-      <md-list>
-         <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active">Mon compte</md-list-item>
-         <md-divider></md-divider>
-         <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active">Les établissements</md-list-item>
-         <md-divider></md-divider>
-         <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active">Les audits en cours</md-list-item>
-         <md-divider></md-divider>
-         <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active">Les utilisateurs</md-list-item>
-         <md-divider></md-divider>
-         <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active">Banque de questions</md-list-item>
-         <md-divider></md-divider>
-         <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active">Les questionnaires</md-list-item>
-         <md-divider></md-divider>
-         <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active">Déconnexion</md-list-item>
-         <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active">Connexion</md-list-item>
-      </md-list>
-    </div>
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>
+<div class="echos-footer">
+  <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between">
+    <div fxFlexOffset.gt-sm="50px" fxFlexOffset="35px"> Copyright 2017 ECHO(S)</div>
+    <div class="copyright-caption">Pour une transition écologique Audit.Formation.Conseil</div>
   </div>
-  <div class="echos-footer">
-    <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="space-between">
-      <div fxFlexOffset.gt-sm="50px" fxFlexOffset="35px"> Copyright 2017 ECHO(S)</div>
-      <div class="copyright-caption">Pour une transition écologique Audit.Formation.Conseil</div>
-    </div>
-    <div class="croll-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="end end">
-      <div fxFlexOffset="35px" fxFlexOffset.gt-sm="50px">Réalisation logiciel : <a class="croll" href="http://www.croll.fr" title="CROLL" target="_blank">CROLL</a></div>
-    </div>
+  <div class="croll-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-sm="end end">
+    <div fxFlexOffset="35px" fxFlexOffset.gt-sm="50px">Réalisation logiciel : <a class="croll" href="http://www.croll.fr" title="CROLL" target="_blank">CROLL</a></div>
   </div>
-<!-- </md-sidenav-container> -->
+</div>
 
 <md-progress-bar id="mainprogress" color="accent" mode="determinate" value="processProgressPercent" ></md-progress-bar>
 
