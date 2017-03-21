@@ -49,13 +49,9 @@ export class AppComponent{
     return this.loggedUser == null;
   }
 
-  menuClick(e) {
+  menuHide(e) {
     e.preventDefault();
     e.stopPropagation();
-    this.menuVisibility = false;
-  }
-
-  menuHide() {
     this.menuVisibility = false;
   }
 
