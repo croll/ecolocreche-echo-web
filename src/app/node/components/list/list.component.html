@@ -33,7 +33,7 @@
         <div>{{item.title}}<span *ngIf="item.privcomment != ''"> [{{item.privcomment}}]</span></div>
         <div *ngIf="item.description">{{item.description}}</div>
         <div fxFlexAlign="start" *ngIf="item.type == 'directory' && item.childs" fxLayout="row" fxLayoutAlign="start center" class="small-list">
-          <div *ngFor="let child of item.childs" style="white-space: wrap">
+          <div *ngFor="let child of item.childs" style="white-space: nowrap">
             {{child.title}}
           </div>
         </div>
