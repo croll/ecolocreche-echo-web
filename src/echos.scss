@@ -497,3 +497,13 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
   opacity: 0;
   transition: visibility 0s, opacity 0.5s linear;
 }
+
+.echos-main-container {
+
+    .mat-list .mat-list-item .mat-list-text>*, .mat-nav-list .mat-list-item .mat-list-text>* {
+        white-space: normal;
+    }
+    .mat-toolbar .mat-toolbar-row {
+        white-space: normal;        
+    }
+}
