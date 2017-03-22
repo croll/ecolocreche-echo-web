@@ -129,7 +129,7 @@ a:hover {
   }
 }
 
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 960px) {
   .echos-menu-button {
    display: none!important;
   }
@@ -144,8 +144,10 @@ a:hover {
   }
 }
 
-.echos-menu-hide {
-  display: none!important;
+@media screen and (max-width: 959px) {
+    .echos-menu-hide {
+      display: none!important;
+    }
 }
 
 .echos-color-box {
@@ -502,6 +504,6 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
         white-space: normal;
     }
     .mat-toolbar .mat-toolbar-row {
-        white-space: normal;        
+        white-space: normal;
     }
 }
