@@ -223,6 +223,9 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
             content: '';
           }
         }
+		div {
+			white-space: normal!important;
+		}
       }
     }
   }
