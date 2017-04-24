@@ -24,10 +24,6 @@
       <div fxFlexOffset="10px" class="pdf-float-left">{{audit1.audit.establishment.name}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after">
-      <label class="pdf-float-left">Date d'entrée de la démarche:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.establishment.createdAt | date:'dd/MM/y'}}</div>
-    </div>
-    <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Date du premier audit:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
@@ -36,11 +32,11 @@
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
     </div>
     <div *ngFor="let cinfo of customInfoList" fxLayout="row" class="pdf-clear-both-after">
-      <label class="pdf-float-left">{{cinfo.label}}</label>
+      <label class="pdf-float-left">{{cinfo.label}}:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{cinfo.value}}</div>
-      <button  [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="removeCustomInfo(cinfo.label)"><md-icon>delete</md-icon></button>
+      <button [ngClass]="{'not-in-pdf' : true}" md-raised-button color="warn" (click)="removeCustomInfo(cinfo.label)"><md-icon>delete</md-icon></button>
     </div>
-    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}" class="pdf-clear-both-after">
+    <div fxLayout="row" class="pdf-clear-both-after not-in-pdf">
       <md-input-container class="pdf-float-left">
         <input mdInput #customInfoLabel placeholder="Libellé">
       </md-input-container>
@@ -60,7 +56,7 @@
       </div>
       <div class="pdf-float-left" style="min-width: 300px">{{theme.title}}</div>
       <div class="pdf-float-left">
-        <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 470px;max-width: 470px;min-height:30px;max-height: none!important"></textarea>
+        <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 470px;max-width: 470px;min-height:30px;max-height: auto"></textarea>
       </div>
     </div>
     <!-- <div *ngFor="let ctl of customThemeList" fxLayout="row">
@@ -145,7 +141,7 @@
 
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid;margin-bottom:5px">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid;margin-bottom:10px">
       <md-card style="max-width:300px!important" class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
@@ -153,7 +149,7 @@
         <h4>Droite: audit intermédiaire</h4>
       </md-card>
       <div class="comment-container" fxFlex class="pdf-float-left">
-        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 0px;min-width: 470px;max-width: 470px;min-height:200px;max-height: none!important"></textarea>
+        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 450px;max-width: 450px;min-height:245px;max-height: 245px;margin-left:10px"></textarea>
       </div>
     </div>
 
@@ -221,7 +217,7 @@
 
   <!-- Page des graphs des familles sociales -->
 
-  <div style="margin: 50px 0 0 8px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div style="margin: 50px 0 0 8px; cursor: pointer">
   <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
     <button md-raised-button color="primary" *ngIf="hide_social_details" (click)="hide_social_details = false">Afficher le détail des évolutions des impacts par thème</button>
     <button md-raised-button *ngIf="!hide_social_details" (click)="hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
@@ -229,7 +225,7 @@
 
   <div *ngIf="!hide_social_details">
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid;margin-bottom:5px">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid;margin-bottom:10px">
       <md-card style="max-width:300px!important" class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
@@ -237,7 +233,7 @@
         <h4>Droite: audit intermédiaire</h4>
       </md-card>
       <div class="comment-container pdf-float-left" fxFlex>
-        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0; margin-top: 0px;min-width: 470px;max-width: 470px;min-height:200px;max-height: none!important"></textarea>
+        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 450px;max-width: 450px;min-height:200px;min-height:245px;max-height: 245px;margin-left:10px"></textarea>
       </div>
     </div>
   </div>
@@ -245,7 +241,7 @@
 
   <!-- Page de commentaires -->
 
-  <div style="margin: 50px 0 0 8px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+  <div style="margin: 50px 0 0 8px; cursor: pointer" class="not-in-pdf">
     <button md-raised-button color="primary" *ngIf="hide_comments" (click)="hide_comments = false">Afficher les commentaires</button>
     <button md-raised-button *ngIf="!hide_comments" (click)="hide_comments = true">Masquer les commentaires</button>
   </div>
