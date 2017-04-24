@@ -7,7 +7,7 @@
   <h1 fxFlex>
     Liste des établissements
   </h1>
-  <button *ngIf="authService.isAdmin()" md-fab color="primary" routerLink="../creer"><md-icon>add</md-icon></button>
+  <button *ngIf="authService.isSuperAgent()" md-fab color="primary" routerLink="../creer"><md-icon>add</md-icon></button>
 </div>
 
 <md-input-container fxLayout>
