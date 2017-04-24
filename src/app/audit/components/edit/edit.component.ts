@@ -95,11 +95,13 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'audits').subscribe((response) => {
-      this.router.navigate(['/etablissement/liste']);
-    }, (err) => {
-      console.error(err);
-    });
+    if (confirm("Souhaitez vous vraiment supprimer cet audit ?")) {
+      this.restService.delete(id, 'audits').subscribe((response) => {
+        this.router.navigate(['/etablissement/liste']);
+      }, (err) => {
+        console.error(err);
+      });
+    }
     return false;
   }
 
