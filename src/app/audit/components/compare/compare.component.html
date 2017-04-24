@@ -141,7 +141,7 @@
 
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid;margin-bottom:10px">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid;margin-bottom:5px">
       <md-card style="max-width:300px!important" class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
@@ -225,7 +225,7 @@
 
   <div *ngIf="!hide_social_details">
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid;margin-bottom:10px">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid;margin-bottom:5px">
       <md-card style="max-width:300px!important" class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
