@@ -30,7 +30,7 @@
   </div>
   <input *ngIf="id_inquiryform" type="hidden" formControlName="id_inquiryform">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id" (click)="delete(id)" md-raised-button color="warn">Effacer</button>
+    <button *ngIf="id_inquiryform" (click)="delete()" md-raised-button color="warn">Effacer</button>
     <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
     <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>

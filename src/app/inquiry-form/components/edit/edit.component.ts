@@ -66,11 +66,13 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'hist/inquiryforms').subscribe((response) => {
-      this.router.navigate(['/questionnaire/liste']);
-    }, (err) => {
-      console.error(err);
-    });
+    if (confirm("Souhaitez vous vraiment supprimer ce questionnaire ?")) {
+      this.restService.delete(this.id_inquiryform, 'hist/inquiryforms').subscribe((response) => {
+        this.router.navigate(['/questionnaire/liste']);
+      }, (err) => {
+        console.error(err);
+      });
+    }
   }
 
   goBack(): boolean {
