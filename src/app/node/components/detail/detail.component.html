@@ -56,7 +56,7 @@
           <div>{{category.title}}</div>
           <div *ngIf="category.description">{{category.description}}</div>
           <div fxFlexAlign="start" *ngIf="category.childs" fxLayout="row" fxLayoutAlign="start center" class="small-list">
-            <div *ngFor="let child of category.childs">
+            <div *ngFor="let child of category.childs" style="white-space: nowrap">
               {{child.title}}
             </div>
           </div>

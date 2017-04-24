@@ -56,7 +56,7 @@
           <div fxFlex fxFlexAlign="start">{{childItem.title}}<span *ngIf="childItem.privcomment"> [{{childItem.privcomment}}]</span></div>
           <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
           <div fxFlexAlign="start" *ngIf="childItem.type == 'directory' && childItem.childs" fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap="wrap" class="small-list">
-            <div *ngFor="let child of childItem.childs">
+            <div *ngFor="let child of childItem.childs" style="white-space: nowrap">
               {{child.title}}
             </div>
           </div>

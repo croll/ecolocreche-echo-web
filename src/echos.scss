@@ -129,7 +129,7 @@ a:hover {
   }
 }
 
-@media screen and (min-width: 959px) {
+@media screen and (min-width: 960px) {
   .echos-menu-button {
    display: none!important;
   }
@@ -145,9 +145,9 @@ a:hover {
 }
 
 @media screen and (max-width: 959px) {
-  .echos-menu-hide {
-    display: none!important;
-  }
+    .echos-menu-hide {
+      display: none!important;
+    }
 }
 
 .echos-color-box {
@@ -211,6 +211,7 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
       .small-list {
         padding-top: 8px;
         font-size: 0.8em;
+        flex-wrap: wrap;
         color: $echos-dark-grey!important;
         & > *:after {
           padding-right: 3px;
@@ -222,6 +223,9 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
             content: '';
           }
         }
+		div {
+			white-space: normal!important;
+		}
       }
     }
   }
@@ -495,4 +499,14 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s linear;
+}
+
+.echos-main-container {
+
+    .mat-list .mat-list-item .mat-list-text>*, .mat-nav-list .mat-list-item .mat-list-text>* {
+        white-space: normal;
+    }
+    .mat-toolbar .mat-toolbar-row {
+        white-space: normal;
+    }
 }

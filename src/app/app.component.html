@@ -24,22 +24,22 @@
   <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
 </div>
 <div class="echos-main-container" fxLayout="row">
-  <div class="echos-menu" [ngClass]="{'echos-menu-hide': !menuVisibility}" (click)="menuHide()">
+  <div [ngClass]="{'echos-menu': true, 'echos-menu-hide': !menuVisibility}" (click)="menuHide($event)">
     <md-list>
-       <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="menuClick($event)">Mon compte</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="menuHide($event)">Mon compte</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="menuClick($event)">Les établissements</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="menuHide($event)">Les établissements</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="menuClick($event)">Les audits en cours</md-list-item>
+       <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="menuHide($event)">Les audits en cours</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="menuClick($event)">Les utilisateurs</md-list-item>
+       <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="menuHide($event)">Les utilisateurs</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="menuClick($event)">Banque de questions</md-list-item>
+       <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="menuHide($event)">Banque de questions</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuClick($event)">Les questionnaires</md-list-item>
+       <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuHide($event)">Les questionnaires</md-list-item>
        <md-divider></md-divider>
-       <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuClick($event)">Déconnexion</md-list-item>
-       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuClick($event)">Connexion</md-list-item>
+       <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)">Déconnexion</md-list-item>
+       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)">Connexion</md-list-item>
     </md-list>
   </div>
   <router-outlet></router-outlet>

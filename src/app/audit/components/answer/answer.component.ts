@@ -70,53 +70,28 @@ export class AnswerComponent implements OnInit {
       }
     });
   }
-  private _getProgress(node, root?) {
-    if (node.childs && node.childs.length) {
-      node.childs.forEach(child => {
-        if (child.childs && child.childs.length) {
-          this._getProgress(child, root || child);
-        } else if (root) {
-          root.numQuestions = (root.numQuestions) ? (root.numQuestions + 1) : 1;
-          if (!root.numAnswers) root.numAnswers = 0;
-          if (child.answer) {
-            root.numAnswers++;
+
+  private _getProgress(dir) {
+    var r = {
+    question_count: 0,
+    answer_count: 0,
+    };
+      dir.childs.forEach((row) => {
+         if (row.type.startsWith('q_')) {
+             r.question_count++;
+             if (row.answer) {
+                 r.answer_count++;
+             }
           }
-          root.progress = Math.round(root.numAnswers * 100 / root.numQuestions);
-        }
+          else if (row.type == 'directory') {
+              var _r = this._getProgress(row);
+              r.question_count += _r.question_count;
+              r.answer_count += _r.answer_count;
+          }
       });
-    }
-  }
+    dir.progress = Math.round(r.answer_count * 100 / r.question_count);
+    return r;
 
-  // private _getProgress(node, directParent = null, parents = []) {
-  //   if (node.childs && node.childs.length) {
-  //     node.childs.forEach(child => {
-  //       if (child.childs && child.childs.length) {
-  //         if (directParent) {
-  //           parents.push(parents);
-  //         }
-  //         this._getProgress(child, node, parents);
-  //       } else {
-  //         // No child, it's a question
-  //         console.log(child.title);
-  //         console.log(parents);
-  //         console.log('----');
-  //       }
-  //     });
-  //   }
-  // }
-
-  private _getProgress2(node, id_node_grandParent = null) {
-    if (node.childs && node.childs.length) {
-      node.childs.forEach(child => {
-        if (child.childs && child.childs.length) {
-          this._getProgress2(child, child.id_node_parent);
-        } else {
-          // No child, it's a question
-          console.log(child.title, child.id_node_parent, id_node_grandParent)
-          console.log(child);
-        }
-      });
-    }
   }
 
   filterList(filter?) {

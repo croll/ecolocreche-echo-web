@@ -87,7 +87,6 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-    console.log(this.echosForm.value);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
       this.goBack();
     }, (err) => {
@@ -101,6 +100,7 @@ export class EditComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
+    return false;
   }
 
   sendmail(id) {
