@@ -55,6 +55,7 @@ export class WkHtmlToPdfService {
         let divelem = document.createElement('div');
         divelem.innerText = textarea_src['value'];
         divelem.setAttribute('style', textarea_src.getAttribute('style'));
+        divelem.className += ' textarea-to-pdf-div';
         textarea_dst['replaceWith'](divelem);
       }
     }
