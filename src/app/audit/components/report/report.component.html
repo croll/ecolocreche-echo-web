@@ -14,8 +14,12 @@
     <button md-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px"><md-icon>picture_as_pdf</md-icon></button>
   </div>
 
-  <div class="echos-infos" *ngIf="infos.audit.date_end">
+  <div class="echos-infos">
     <div fxLayout="row" class="pdf-clear-both-after">
+      <label class="pdf-float-left">Date de création de l'audit:</label>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{infos.audit.createdAt | date:'dd/MM/y'}}</div>
+    </div>
+    <div fxLayout="row" class="pdf-clear-both-after" *ngIf="infos.audit.date_end">
       <label class="pdf-float-left">Finalisé le:</label>
       <div fxFlexOffset="10px" class="pdf-float-left">{{infos.audit.date_end | date:'dd/MM/yyyy à HH:mm'}}</div>
     </div>
