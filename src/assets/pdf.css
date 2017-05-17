@@ -25,6 +25,10 @@
   padding-top: 4px!important;
 }
 
+.textarea-to-pdf-div {
+  font-size: 11px!important;
+}
+
 md-card {
   border: none!important;
   padding: 5px!important;

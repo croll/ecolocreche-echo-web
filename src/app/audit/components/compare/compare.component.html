@@ -141,15 +141,16 @@
 
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes" style="page-break-inside:avoid;margin-bottom:5px">
-      <md-card style="max-width:300px!important" class="pdf-float-left">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes; let idx = index" style="page-break-inside:avoid!important;margin-bottom:20px">
+      <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
+      <md-card style="max-width:350px!important" class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </md-card>
       <div class="comment-container" fxFlex class="pdf-float-left">
-        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 450px;max-width: 450px;min-height:245px;max-height: 245px;margin-left:10px"></textarea>
+        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 440px;max-width: 440px;min-height:365px;max-height: 365px;margin-left:10px"></textarea>
       </div>
     </div>
 
@@ -225,7 +226,8 @@
 
   <div *ngIf="!hide_social_details">
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes" style="page-break-inside:avoid;margin-bottom:5px">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes; let idx = index" style="page-break-inside:avoid;margin-bottom:20px">
+      <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
       <md-card style="max-width:300px!important" class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
@@ -233,7 +235,7 @@
         <h4>Droite: audit intermédiaire</h4>
       </md-card>
       <div class="comment-container pdf-float-left" fxFlex>
-        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 450px;max-width: 450px;min-height:200px;min-height:245px;max-height: 245px;margin-left:10px"></textarea>
+        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 440px;max-width: 440px;min-height:365px;max-height: 365px;margin-left:10px"></textarea>
       </div>
     </div>
   </div>
