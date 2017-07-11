@@ -23,16 +23,16 @@
     </md-input-container>
   </div>
   <div>
-    <md-input-container style="margin-top: 18px">
-      <input mdInput type="text" formControlName="createdAt" placeholder="Date de création">
-    </md-input-container>
-    <div *ngIf="createdAtCtrl.hasError('frenchDate')" class="echos-error" style="margin: -14px 0 18px 0">Le format de date doit être de la forme jj/mm/aaaa hh:mm</div>
-  </div>
-  <div>
     <md-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
       <md-option [value]="1">En cours</md-option>
       <md-option [value]="0">Terminé</md-option>
     </md-select>
+  </div>
+  <div>
+    <md-input-container style="margin-top: 8px">
+      <input mdInput type="text" formControlName="createdAt" placeholder="Date de création">
+    </md-input-container>
+    <div *ngIf="createdAtCtrl.hasError('frenchDate')" class="echos-error" style="margin: -14px 0 18px 0">Le format de date doit être de la forme jj/mm/aaaa hh:mm</div>
   </div>
   <input *ngIf="id" type="hidden" formControlName="id">
   <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">
