@@ -98,7 +98,7 @@ export class EditComponent implements OnInit {
     return new Date(m[3], m[2], m[1], m[4], m[5]);
   }
 
-  save() {
+  save(event) {
     event.preventDefault();
     this.echosForm.value.createdAt = this._dateStringToObj(this.echosForm.value.createdAt);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
