@@ -22,7 +22,7 @@ export class EstablishmentResolver implements Resolve<any> {
     return this.restService.get(id, 'establishments')
                     .flatMap(est => {
                       establishment = est;
-                      return this.restService.getList('audits', {id_establishment: establishment.id});
+                      return this.restService.getList('audits', {id_establishment: establishment.id, sort:'-createdAt'});
                     })
                     .flatMap(audits => {
                       if (!audits || audits.length == 0) {
