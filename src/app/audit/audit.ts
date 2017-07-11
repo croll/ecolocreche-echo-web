@@ -6,4 +6,5 @@ export class Audit {
   public active: number
   public key: string
   public date_end: string
+  public createdAt: string
 }

@@ -23,7 +23,13 @@
     </md-input-container>
   </div>
   <div>
-    <md-select placeholder="Statut *" formControlName="active" style="margin: 8px 0 18px 0">
+    <md-input-container style="margin-top: 18px">
+      <input mdInput type="text" formControlName="createdAt" placeholder="Date de création">
+    </md-input-container>
+    <div *ngIf="!createdAtCtrl.valid" class="echos-error" style="margin: -14px 0 18px 0">Le format de date doit être de la forme jj/mm/aaaa hh:mm</div>
+  </div>
+  <div>
+    <md-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
       <md-option [value]="1">En cours</md-option>
       <md-option [value]="0">Terminé</md-option>
     </md-select>

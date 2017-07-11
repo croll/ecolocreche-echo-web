@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Audit } from '../../audit';
 import { RestService} from '../../../rest.service';
@@ -8,6 +8,8 @@ import { InquiryForm } from '../../../inquiry-form/inquiry-form';
 import { Http, Response } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
 import { AuthService } from '../../../auth.service';
+import { DateModel, DatePickerOptions } from 'ng2-datepicker';
+import { CustomValidators } from '../../../custom.validators';
 
 @Component({
   templateUrl: './edit.component.html',
@@ -24,6 +26,7 @@ export class EditComponent implements OnInit {
   activeCtrl: FormControl;
   keyCtrl: FormControl;
   infos: any;
+  createdAtCtrl: FormControl;
 
   private id: number;
   private id_establishment: number;
@@ -35,18 +38,21 @@ export class EditComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
     this.infos = this.route.snapshot.data['infos'];
-    console.log(this.infos);
 
   }
 
   ngOnInit() {
     this._getFormList();
 
+    let datePipe = new DatePipe("fr-FR");
+
     if (this.infos && this.infos.audit) {
       Object.assign(this.current, this.infos.audit)
+      this.current.createdAt = datePipe.transform(this.current.createdAt, 'dd/MM/yyyy H:mm');
       this.id_establishment = this.infos.audit.establishment.id;
     } else {
       this.current.active = 1;
+      this.current.createdAt = datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
       this.id_establishment = this.route.snapshot.params['id_establishment'];
     }
 
@@ -57,6 +63,7 @@ export class EditComponent implements OnInit {
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
     this.activeCtrl = this.fb.control({value: this.current.active, disabled: !this.authService.isSuperAgent()}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
+    this.createdAtCtrl = this.fb.control(this.current.createdAt || new Date(), Validators.compose([Validators.required, CustomValidators.frenchDate]));
 
     this.echosForm = this.fb.group({
       id: this.idCtrl,
@@ -64,7 +71,8 @@ export class EditComponent implements OnInit {
       id_inquiryform: this.idInquiryFormCtrl,
       synthesis: this.synthesisCtrl,
       active: this.activeCtrl,
-      key: this.keyCtrl
+      key: this.keyCtrl,
+      createdAt: this.createdAtCtrl
     });
   }
 
@@ -86,7 +94,14 @@ export class EditComponent implements OnInit {
       s4() + '-' + s4() + s4() + s4();
   }
 
+  private _dateStringToObj(str) {
+    let m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{2}):(\d{2}$)/);
+    return new Date(m[3], m[2], m[1], m[4], m[5]);
+  }
+
   save() {
+    event.preventDefault();
+    this.echosForm.value.createdAt = this._dateStringToObj(this.echosForm.value.createdAt);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
       this.goBack();
     }, (err) => {
@@ -118,6 +133,7 @@ export class EditComponent implements OnInit {
 
   saveAndGoToEstablishment(event) {
     event.preventDefault();
+    this.echosForm.value.createdAt = this._dateStringToObj(this.echosForm.value.createdAt);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
       this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
     }, (err) => {
