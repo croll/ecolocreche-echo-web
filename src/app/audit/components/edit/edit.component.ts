@@ -8,7 +8,6 @@ import { InquiryForm } from '../../../inquiry-form/inquiry-form';
 import { Http, Response } from '@angular/http';
 import { MdSnackBar } from '@angular/material';
 import { AuthService } from '../../../auth.service';
-import { DateModel, DatePickerOptions } from 'ng2-datepicker';
 import { CustomValidators } from '../../../custom.validators';
 
 @Component({
