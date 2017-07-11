@@ -95,7 +95,7 @@ export class EditComponent implements OnInit {
 
   private _dateStringToObj(str) {
     let m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{2}):(\d{2}$)/);
-    return new Date(m[3], m[2], m[1], m[4], m[5]);
+    return new Date(m[3], parseInt(m[2])-1, m[1], m[4], m[5]);
   }
 
   save(event) {
