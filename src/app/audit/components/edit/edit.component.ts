@@ -99,7 +99,6 @@ export class EditComponent implements OnInit {
   }
 
   save(event) {
-    event.preventDefault();
     this.echosForm.value.createdAt = this._dateStringToObj(this.echosForm.value.createdAt);
     this.restService.save(this.echosForm.value, 'audits').subscribe((establishment) => {
       this.goBack();
@@ -108,6 +107,7 @@ export class EditComponent implements OnInit {
     });
     return false;
   }
+
 
   delete(id) {
     if (confirm("Souhaitez vous vraiment supprimer cet audit ?")) {
