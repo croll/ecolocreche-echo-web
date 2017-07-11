@@ -10,7 +10,7 @@
 
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
-<form (ngSubmit)="save()" [formGroup]="echosForm">
+<form (ngSubmit)="save($event)" [formGroup]="echosForm">
   <div>
     <md-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
       <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</md-option>
