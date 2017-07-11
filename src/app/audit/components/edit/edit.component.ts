@@ -62,7 +62,7 @@ export class EditComponent implements OnInit {
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
     this.activeCtrl = this.fb.control({value: this.current.active, disabled: !this.authService.isSuperAgent()}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
-    this.createdAtCtrl = this.fb.control(this.current.createdAt || new Date(), Validators.compose([Validators.required, CustomValidators.frenchDate]));
+    this.createdAtCtrl = this.fb.control({value: this.current.createdAt || new Date(), disabled: !this.authService.isAdmin()}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
 
     this.echosForm = this.fb.group({
       id: this.idCtrl,
