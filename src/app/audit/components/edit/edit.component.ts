@@ -26,7 +26,7 @@ export class EditComponent implements OnInit {
   keyCtrl: FormControl;
   infos: any;
   createdAtCtrl: FormControl;
-  isAdmin: boolean;
+  showCreationDateField: boolean;
 
   private id: number;
   private id_establishment: number;
@@ -58,7 +58,7 @@ export class EditComponent implements OnInit {
 
     this.idCtrl = this.fb.control(this.id);
 
-    this.isAdmin = this.authService.isAdmin();
+    this.showCreationDateField = (this.authService.isAdmin() && !this.infos && this.infos.audit);
 
     this.idEstablishmentCtrl = this.fb.control(this.id_establishment, [Validators.required]);
     this.idInquiryFormCtrl = this.fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
