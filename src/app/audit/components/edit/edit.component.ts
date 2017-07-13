@@ -55,6 +55,8 @@ export class EditComponent implements OnInit {
       this.current.active = 1;
       this.current.createdAt = datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
       this.id_establishment = this.route.snapshot.params['id_establishment'];
+
+      }
       this.showCreationDateField = false;
     }
 
@@ -65,7 +67,7 @@ export class EditComponent implements OnInit {
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
     this.activeCtrl = this.fb.control({value: this.current.active, disabled: !this.authService.isSuperAgent()}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
-    this.createdAtCtrl = this.fb.control({value: this.current.createdAt || new Date(), disabled: !this.showCreationDateField}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
+    this.createdAtCtrl = this.fb.control({value: this.current.createdAt || new Date(), disabled: !this.authService.isAdmin()}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
 
     this.echosForm = this.fb.group({
       id: this.idCtrl,
