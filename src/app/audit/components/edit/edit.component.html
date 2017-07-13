@@ -28,7 +28,7 @@
       <md-option [value]="0">Terminé</md-option>
     </md-select>
   </div>
-  <div>
+  <div *ngIf="isAdmin">
     <md-input-container style="margin-top: 8px">
       <input mdInput type="text" formControlName="createdAt" placeholder="Date de création">
     </md-input-container>

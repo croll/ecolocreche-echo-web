@@ -26,6 +26,7 @@ export class EditComponent implements OnInit {
   keyCtrl: FormControl;
   infos: any;
   createdAtCtrl: FormControl;
+  isAdmin: boolean;
 
   private id: number;
   private id_establishment: number;
@@ -57,12 +58,14 @@ export class EditComponent implements OnInit {
 
     this.idCtrl = this.fb.control(this.id);
 
+    this.isAdmin = this.authService.isAdmin();
+
     this.idEstablishmentCtrl = this.fb.control(this.id_establishment, [Validators.required]);
     this.idInquiryFormCtrl = this.fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
     this.activeCtrl = this.fb.control({value: this.current.active, disabled: !this.authService.isSuperAgent()}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
-    this.createdAtCtrl = this.fb.control({value: this.current.createdAt || new Date(), disabled: !this.authService.isAdmin()}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
+    this.createdAtCtrl = this.fb.control({value: this.current.createdAt || new Date(), disabled: !this.isAdmin}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
 
     this.echosForm = this.fb.group({
       id: this.idCtrl,
