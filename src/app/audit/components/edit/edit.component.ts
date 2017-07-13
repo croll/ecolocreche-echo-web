@@ -55,8 +55,6 @@ export class EditComponent implements OnInit {
       this.current.active = 1;
       this.current.createdAt = datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
       this.id_establishment = this.route.snapshot.params['id_establishment'];
-
-      }
       this.showCreationDateField = false;
     }
 
