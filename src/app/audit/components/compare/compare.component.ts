@@ -41,7 +41,7 @@ export class CompareComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private wkService: WkHtmlToPdfService) {
     let tmp1 = this.route.snapshot.data['infos'][0];
     let tmp2 = this.route.snapshot.data['infos'][1];
-    if (new Date(tmp1.audit.createdAt) < new Date(tmp2.audit.createdAt)) {
+    if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
       this.audit1 = tmp1;
       this.audit2 = tmp2;
     } else {
