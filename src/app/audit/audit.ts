@@ -5,6 +5,6 @@ export class Audit {
   public synthesis: string
   public active: number
   public key: string
+  public date_start: string
   public date_end: string
-  public createdAt: string
 }
