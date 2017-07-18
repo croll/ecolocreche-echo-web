@@ -12,7 +12,7 @@ export class AuditListResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    return this.restService.getList('audits', {active: 1, sort: '-start_date'})
+    return this.restService.getList('audits', {active: 1, sort: '-date_start'})
       .flatMap(audits => {
         let done = 0;
          return Observable.create(observer => {
