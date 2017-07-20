@@ -25,11 +25,11 @@
     </div>
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Date du premier audit:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Date du second audit:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div *ngFor="let cinfo of customInfoList" fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">{{cinfo.label}}:</label>
@@ -78,11 +78,11 @@
   <div class="echos-infos">
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Audit de départ:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Audit intermédiaire:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
   </div>
 
@@ -162,11 +162,11 @@
   <div class="echos-infos">
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Audit de départ:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Audit intermédiaire:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
   </div>
 

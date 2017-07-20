@@ -17,7 +17,7 @@
   <div class="echos-infos">
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Date de création de l'audit:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{infos.audit.createdAt | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left" fxFlexOffset="10px">{{infos.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after" *ngIf="infos.audit.date_end">
       <label class="pdf-float-left">Finalisé le:</label>
