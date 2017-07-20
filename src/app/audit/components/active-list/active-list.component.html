@@ -18,7 +18,7 @@
     <div md-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
         <div>{{item.establishment.name}}</div>
-        <div>{{item.inquiryform?.title}} - {{item.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+        <div>{{item.inquiryform?.title}} - {{item.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
       </div>
       <div class="echos-percent">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
       <md-icon color="primary" fxFlexOffset="25px">chevron_right</md-icon>

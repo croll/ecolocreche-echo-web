@@ -71,7 +71,7 @@
       <md-checkbox [disabled]="auditsToCompare.length == 2 && auditsToCompare.indexOf(audit.id) == -1" (change)="toggleCompare(audit.id)" fxFlex="50px"></md-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>{{audit.inquiryform?.title}} - {{audit.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!audit.active">Terminé</div>
         <div *ngIf="audit.active" style="color: rgb(96, 190, 64)">En cours</div>
