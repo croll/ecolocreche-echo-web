@@ -252,7 +252,6 @@ export class AuditTools {
       });
 
     } else if (chartType == 'radar') {
-      console.log("_____________________________________");
       params.options = {
         scale: {
           ticks: {
@@ -321,7 +320,6 @@ export class AuditTools {
         num++;
       });
     }
-    console.log(params);
     return params;
   }
 
