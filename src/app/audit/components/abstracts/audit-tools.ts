@@ -127,7 +127,7 @@ export class AuditTools {
     return {questionList: questionsList, chartDatas: chartDatas};
   }
 
-  toChartDatas(chartType, datas, id) {
+  toChartDatas(chartType, datas, themeIdOrFam) {
     let params = {
       labels: [],
       chartType: chartType,
@@ -148,22 +148,22 @@ export class AuditTools {
         4: "Négatif",
         5: "Très négatif"
       }
-      for (let id_impact in datas[id].impact) {
+      for (let id_impact in datas[themeIdOrFam].impact) {
         let impact = AuditTools.impact.getImpact(id_impact)
         // Custom label for social family
-        if (id == 'sociales') {
+        if (themeIdOrFam == 'sociales') {
           params.labels.push(socialLabels[id_impact]);
         } else {
           params.labels.push(impact.label);
         }
         dataset.backgroundColor.push(impact.color);
-        dataset.data.push(datas[id].impact[id_impact]);
+        dataset.data.push(datas[themeIdOrFam].impact[id_impact]);
       }
       params.options = {
         tooltips: {
           callbacks: {
             label: (tooltipItem, data) => {
-              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas[id].totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
+              return ' '+(data.datasets[0].data[tooltipItem.index] * 100 / datas[themeIdOrFam].totalAnswersWithImpact).toFixed(1) + '% ('+data.datasets[0].data[tooltipItem.index]+')';
             }
           }
         },
@@ -237,9 +237,9 @@ export class AuditTools {
       };
 
       datas.forEach(d => {
-        for (let id_impact in d[id].impact) {
+        for (let id_impact in d[themeIdOrFam].impact) {
           let impact = AuditTools.impact.getImpact(id_impact)
-          let val = Math.round(d[id].impact[id_impact] * 100 / d[id].totalAnswersWithImpact);
+          let val = Math.round(d[themeIdOrFam].impact[id_impact] * 100 / d[themeIdOrFam].totalAnswersWithImpact);
           let dataset = {
             label: impact.label,
             backgroundColor: impact.color,
@@ -252,41 +252,52 @@ export class AuditTools {
       });
 
     } else if (chartType == 'radar') {
+      console.log("_____________________________________");
       params.options = {
-      }
+        scale: {
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            max: 100,
+            stepSize: 10
+          }
+        }
+      };
       let colors = [
         {
-          backgroundColor: "rgba(63, 136, 38, 0.02)",
-          borderColor: "rgba(63, 136, 38, 1)",
-          pointBackgroundColor: "rgba(63, 136, 38, 1)",
-          pointBorderColor: "#fff",
-          pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgba(63, 136, 38, 1)"
-        },
-        {
-          backgroundColor: "rgba(173, 174, 186, 0.05)",
+          backgroundColor: "rgba(173, 174, 186, 0.5)",
           borderColor: "rgba(173, 174, 186, 1)",
           pointBackgroundColor: "rgba(179,181,198,1)",
           pointBorderColor: "#fff",
           pointHoverBackgroundColor: "#fff",
-          pointHoverBorderColor: "rgba(173, 174, 186, 1)"
+          pointHoverBorderColor: "rgba(173, 174, 186, 1)",
+          fill: true
+        },
+        {
+          backgroundColor: "rgba(63, 136, 38, 0.2)",
+          borderColor: "rgba(63, 136, 38, 1)",
+          pointBackgroundColor: "rgba(63, 136, 38, 1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(63, 136, 38, 1)",
+          fill: true
         }
       ]
       datas = [].concat(datas);
       let num = 0;
       // cycle through collections passed in argument
       datas.forEach(d => {
-        // cycle through themes
         let dataset = {
           label: '',
           data: []
         };
         Object.assign(dataset, colors[num]);
+        // cycle through themes
         for(let theme_id in d) {
           // dataset.label = d[theme_id].title;
           dataset.label = 'Valeur';
           // if it matches the asked family
-          if (d[theme_id].family == id) {
+          if (d[theme_id].family == themeIdOrFam) {
             // Set radar chart labels once
             if (num == 0) {
               params.labels.push(d[theme_id].title);
@@ -300,13 +311,17 @@ export class AuditTools {
               }
             }
             // set value
-            dataset.data.push((value * 100 / d[theme_id].totalAnswersWithImpact).toFixed(2));
+            if (value && d[theme_id].totalAnswersWithImpact !== 0) {
+              value = parseFloat((value * 100 / d[theme_id].totalAnswersWithImpact).toFixed(2));
+            }
+            dataset.data.push(value);
           }
-          params.datasets.push(dataset);
         }
+        params.datasets.push(dataset);
         num++;
       });
     }
+    console.log(params);
     return params;
   }
 
