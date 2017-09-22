@@ -252,6 +252,9 @@ export class AuditTools {
       });
 
     } else if (chartType == 'radar') {
+      // Store dataset length, used to set empty data for non existing datas to avoid spider graph display bug
+      var datasetLength = 0;
+      // Graph options
       params.options = {
         scale: {
           ticks: {
@@ -298,7 +301,7 @@ export class AuditTools {
           // if it matches the asked family
           if (d[theme_id].family == themeIdOrFam) {
             // Set radar chart labels once
-            if (num == 0) {
+            if (params.labels.indexOf(d[theme_id].title) === -1) {
               params.labels.push(d[theme_id].title);
             }
             // for each impact of the theme
@@ -314,11 +317,24 @@ export class AuditTools {
               value = parseFloat((value * 100 / d[theme_id].totalAnswersWithImpact).toFixed(2));
             }
             dataset.data.push(value);
+            if (dataset.data.length > datasetLength) {
+              datasetLength = dataset.data.length;
+            }
           }
         }
         params.datasets.push(dataset);
         num++;
       });
+      // Check if datasets are coherents
+      if (params.datasets.length > 1) {
+        let cacheWrongDatasets = [];
+        params.datasets.forEach(function(d, num) {
+          if (params.datasets[num].data.length == 0) {
+            params.datasets[num].data = Array.apply(null, {length: datasetLength}).map(Number.call, function() { return 0})
+          }
+        });
+      }
+      // console.log(params);
     }
     return params;
   }
