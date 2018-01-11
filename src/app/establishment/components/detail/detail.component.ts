@@ -22,12 +22,12 @@ export class DetailComponent {
     this.auditsToCompare = [];
   }
 
-  getStatusLabel(id) {
+  getStatusLabel() {
     if (!this.item || !this.item.status) return;
     return this._getLabel(this.item.statusList, this.item.status);
   }
 
-  getTypeLabel(id) {
+  getTypeLabel() {
     if (!this.item || !this.item.type) return;
     return this._getLabel(this.item.typeList, this.item.type);
   }

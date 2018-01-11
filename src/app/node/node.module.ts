@@ -6,9 +6,10 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { ColorPickerModule } from '../ext/ngx-color-picker';
 import { NodeResolver } from './node.resolver'
+import { MatIconRegistry } from '@angular/material';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
@@ -16,8 +17,8 @@ import { NodeResolver } from './node.resolver'
     RoutingModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-	  MaterialModule,
-    ColorPickerModule
+    ColorPickerModule,
+    MaterialModule
   ],
   declarations: [
     DetailComponent,

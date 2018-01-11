@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des établissements</div>
   <div *ngIf="!current.id" fxFlexAlign="start">Ajouter un établissement</div>
   <div *ngIf="current.id" fxFlexAlign="start">Modifier un établissement</div>
@@ -12,51 +12,51 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
-    <md-input-container>
-      <input mdInput formControlName="name" placeholder="Nom de l'établissement *">
-      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'établissement est requis</md-hint>
-      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</md-hint>
-    </md-input-container>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nom de l'établissement *">
+      <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'établissement est requis</mat-hint>
+      <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</mat-hint>
+    </mat-form-field>
   </div>
   <div style="padding: 8px 0 15px">
-    <md-select placeholder="Type *" formControlName="type">
-      <md-option *ngFor="let t of current.typeList" [value]="t.id">{{t.label}}</md-option>
-    </md-select>
+    <mat-select placeholder="Type *" formControlName="type">
+      <mat-option *ngFor="let t of current.typeList" [value]="t.id">{{t.label}}</mat-option>
+    </mat-select>
   </div>
   <div style="padding: 8px 0 8px">
-    <md-select placeholder="Statut *" formControlName="status">
-      <md-option *ngFor="let s of current.statusList" [value]="s.id">{{s.label}}</md-option>
-    </md-select>
+    <mat-select placeholder="Statut *" formControlName="status">
+      <mat-option *ngFor="let s of current.statusList" [value]="s.id">{{s.label}}</mat-option>
+    </mat-select>
   </div>
   <div>
-    <md-input-container>
-      <input mdInput formControlName="address" placeholder="Adresse">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Adresse">
+    </mat-form-field>
   </div>
   <div>
-    <md-input-container>
-      <input mdInput formControlName="postalcode" placeholder="Code postal">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput formControlName="postalcode" placeholder="Code postal">
+    </mat-form-field>
   </div>
   <div>
-    <md-input-container>
-      <input mdInput formControlName="city" placeholder="Ville">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput formControlName="city" placeholder="Ville">
+    </mat-form-field>
   </div>
   <div>
-    <md-input-container>
-      <input mdInput type="tel" formControlName="phone" placeholder="Téléphone">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput type="tel" formControlName="phone" placeholder="Téléphone">
+    </mat-form-field>
   </div>
   <div>
-    <md-input-container>
-      <input mdInput type="email" formControlName="mail" placeholder="Adresse mail">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput type="email" formControlName="mail" placeholder="Adresse mail">
+    </mat-form-field>
   </div>
   <input *ngIf="current.id" type="hidden" formControlName="id">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="current.id" (click)="delete(current.id)" md-raised-button color="warn">Effacer</button>
-    <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="current.id" (click)="delete(current.id)" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
 </form>

@@ -6,8 +6,9 @@ import { ListComponent } from './components/list/list.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { EstablishmentResolver } from './establishment.resolver';
+import { MatIconRegistry } from '@angular/material';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { EstablishmentResolver } from './establishment.resolver';
     RoutingModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-	  MaterialModule
+    MaterialModule
   ],
   declarations: [
     ListComponent,

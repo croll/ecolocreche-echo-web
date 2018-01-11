@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/utilisateur/liste" fxFlexAlign="start">Les utilisateurs</div>
   <div *ngIf="!current.id" fxFlexAlign="start">Ajouter un utilisateur</div>
   <div *ngIf="current.id" fxFlexAlign="start">Modifier un utilisateur</div>
@@ -13,37 +13,37 @@
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
   <div>
-    <md-input-container>
-      <input mdInput formControlName="name" placeholder="Nom de l'utilisateur *" [(ngModel)]="current.name">
-      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'utilisateur est requis</md-hint>
-      <md-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'utilisateur doit contenir 3 caractères minimum</md-hint>
-    </md-input-container>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nom de l'utilisateur *" [(ngModel)]="current.name">
+      <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'utilisateur est requis</mat-hint>
+      <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'utilisateur doit contenir 3 caractères minimum</mat-hint>
+    </mat-form-field>
   </div>
 
   <div>
-    <md-input-container>
-      <input mdInput type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
+    </mat-form-field>
   </div>
 
   <div>
-    <md-input-container>
-      <input mdInput type="password" formControlName="password" placeholder="Mot de passe">
-    </md-input-container>
+    <mat-form-field>
+      <input matInput type="password" formControlName="password" placeholder="Mot de passe">
+    </mat-form-field>
   </div>
 
   <div *ngIf="authService.isAdmin()" style="padding: 8px 0 8px">
-    <md-select placeholder="Type de compte *" formControlName="account_type">
-      <md-option *ngFor="let s of typeList" [value]="s.id">{{s.label}}</md-option>
-  </md-select>
+    <mat-select placeholder="Type de compte *" formControlName="account_type">
+      <mat-option *ngFor="let s of typeList" [value]="s.id">{{s.label}}</mat-option>
+  </mat-select>
   </div>
 
   <div>
     <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="id" (click)="del(id)" md-raised-button color="warn">Supprimer</button>
-      <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-      <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id" (click)="del(id)" mat-raised-button color="warn">Supprimer</button>
+      <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+      <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </div>
 

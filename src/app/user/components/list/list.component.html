@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div fxFlexAlign="start">Les utilisateurs</div>
 </div>
 
@@ -7,12 +7,12 @@
   <h1 fxFlex>
     Les utilisateurs
   </h1>
-  <button md-fab color="primary" routerLink="../creer"><md-icon>add</md-icon></button>
+  <button mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
 </div>
 
-<md-input-container fxLayout>
-  <input mdInput #search type="search" placeholder="Chercher un utilisateur..." fxFlex (keyup)="updateFilter(search.value)">
-</md-input-container>
+<mat-form-field fxLayout>
+  <input matInput #search type="search" placeholder="Chercher un utilisateur..." fxFlex (keyup)="updateFilter(search.value)">
+</mat-form-field>
 
 <!-- version ngx-datatable -->
 <!--
@@ -25,17 +25,17 @@
 </ngx-datatable>
 -->
 
-<!-- version md-list -->
-<md-list>
-  <md-list-item class="echos-list-item" [routerLink]="['/utilisateur', item.id]" *ngFor="let item of filtered_rows">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<!-- version mat-list -->
+<mat-list>
+  <mat-list-item class="echos-list-item" [routerLink]="['/utilisateur', item.id]" *ngFor="let item of filtered_rows">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div fxLayout="column" class="have-childs">
           <div>{{item.name}}</div>
           <div *ngIf="item.email">{{item.email}}</div>
         </div>
       </div>
-      <md-icon color="primary">chevron_right</md-icon>
+      <mat-icon color="primary">chevron_right</mat-icon>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>

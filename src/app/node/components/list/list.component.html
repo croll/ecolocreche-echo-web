@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
   <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
   <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
@@ -10,23 +10,23 @@
   <h1 fxFlex>
     Liste des thèmes
   </h1>
-  <button md-fab color="primary" routerLink="../creer" *ngIf="authService.isAdmin()"><md-icon>add</md-icon></button>
+  <button mat-fab color="primary" routerLink="../creer" *ngIf="authService.isAdmin()"><mat-icon>add</mat-icon></button>
 </div>
 
-<md-input-container fxLayout>
-  <input mdInput #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
-</md-input-container>
+<mat-form-field fxLayout>
+  <input matInput #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
+</mat-form-field>
 
 <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-  <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+  <button mat-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
 </div>
 
-<md-list>
-  <md-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<mat-list>
+  <mat-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="column" *ngIf="authService.isAdmin()">
-        <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
-        <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
+        <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><mat-icon>arrow_drop_up_circle</mat-icon></button>
+        <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
       </div>
       <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
       <div fxFlex fxFlexOffset="20px" class="have-childs">
@@ -39,13 +39,13 @@
         </div>
       </div>
       <div style="width: 50px"></div>
-      <button md-button [routerLink]="['/theme', item.id_node]"><md-icon color="primary">chevron_right</md-icon></button>
+      <button mat-button [routerLink]="['/theme', item.id_node]"><mat-icon color="primary">chevron_right</mat-icon></button>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>
 
 <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-  <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+  <button mat-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
 </div>
 
 <div *ngIf="!filteredList.length">Aucun thème n'a été trouvé.</div>

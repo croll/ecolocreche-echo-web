@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div fxFlexAlign="start">Liste des questionnaires</div>
 </div>
 
@@ -7,23 +7,23 @@
   <h1 fxFlex>
     Liste des questionnaires
   </h1>
-  <button *ngIf="authService.isAdmin()" md-fab color="primary" routerLink="../creer"><md-icon>add</md-icon></button>
+  <button *ngIf="authService.isAdmin()" mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
 </div>
 
-<md-input-container fxLayout>
-  <input mdInput #search type="search" placeholder="Chercher un questionnaire" fxFlex (keyup)="filterList(search.value)">
-</md-input-container>
+<mat-form-field fxLayout>
+  <input matInput #search type="search" placeholder="Chercher un questionnaire" fxFlex (keyup)="filterList(search.value)">
+</mat-form-field>
 
-<md-list>
-  <md-list-item class="echos-list-item" [routerLink]="['/questionnaire', item.id_inquiryform]" *ngFor="let item of filteredList">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<mat-list>
+  <mat-list-item class="echos-list-item" [routerLink]="['/questionnaire', item.id_inquiryform]" *ngFor="let item of filteredList">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
         <div>{{item.title}}</div>
         <div *ngIf="item.description">{{item.description}}</div>
       </div>
-      <md-icon color="primary">chevron_right</md-icon>
+      <mat-icon color="primary">chevron_right</mat-icon>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>
 
 <div *ngIf="!filteredList.length">Aucun questionnaire n'a été trouvé.</div>

@@ -6,7 +6,7 @@ import { Audit } from '../../audit';
 import { RestService} from '../../../rest.service';
 import { InquiryForm } from '../../../inquiry-form/inquiry-form';
 import { Http, Response } from '@angular/http';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../../auth.service';
 import { CustomValidators } from '../../../custom.validators';
 
@@ -28,11 +28,13 @@ export class EditComponent implements OnInit {
   dateStartCtrl: FormControl;
   showCreationDateField: boolean;
 
-  private id: number;
-  private id_establishment: number;
-  private inquiryFormList: InquiryForm[];
+  id: number;
+  id_establishment: number;
+  inquiryFormList: InquiryForm[];
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MdSnackBar, public authService: AuthService) {
+  key: string;
+
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MatSnackBar, public authService: AuthService) {
 
     this.current = new Audit();
 

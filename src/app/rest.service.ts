@@ -3,12 +3,12 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class RestService {
 
-  constructor(private http: Http, private snackBar: MdSnackBar) { }
+  constructor(private http: Http, private snackBar: MatSnackBar) { }
 
   getList(type: string, params?: any): Observable<any[]> {
     this.incLoading();

@@ -1,15 +1,15 @@
-<md-list>
-  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<mat-list>
+  <mat-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
-          <md-checkbox [(ngModel)]="item.selected" (change)="updatevalue()" [disabled]="readonly ? true : false">
+          <mat-checkbox [(ngModel)]="item.selected" (change)="updatevalue()" [disabled]="readonly ? true : false">
             <!-- <div class="echos-color-box" [ngStyle]="impact.getImpactColorStyle(item.impact)"></div> -->
             <span>{{item.title}}</span>
-          </md-checkbox>
+          </mat-checkbox>
         </div>
         <!-- <div class="echos-choice-description">{{item.comment}}</div> -->
       </div>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>

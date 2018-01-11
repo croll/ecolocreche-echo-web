@@ -7,7 +7,7 @@
 
 <div *ngIf="type == 'theme'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
     <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
     <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
     <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
@@ -18,7 +18,7 @@
     <h1 fxFlex>
       Thème<span class="titleItem">{{item.title}}</span>
     </h1>
-    <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+    <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><mat-icon>edit</mat-icon></button>
   </div>
 
   <div *ngIf="item && item.description">
@@ -28,29 +28,29 @@
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des rubriques</div>
-    <button *ngIf="authService.isAdmin()" md-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<md-icon>add</md-icon></button>
+    <button *ngIf="authService.isAdmin()" mat-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<mat-icon>add</mat-icon></button>
   </div>
 
-  <md-input-container fxLayout>
-    <input mdInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
-  </md-input-container>
+  <mat-form-field fxLayout>
+    <input matInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
+  </mat-form-field>
 
   <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-    <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
   </div>
 
   <div *ngIf="!filteredChildList.length">Aucune rubrique n'a été trouvée.</div>
 
-  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button routerLink="/theme/liste">Remonter d'un niveau</button>
-  </md-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button routerLink="/theme/liste">Remonter d'un niveau</button>
+  </mat-toolbar>
 
-  <md-list *ngIf="filteredChildList">
-    <md-list-item class="echos-list-item" *ngFor="let category of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
-      <div md-line fxLayout="row" fxLayoutAlign="start center">
+  <mat-list *ngIf="filteredChildList">
+    <mat-list-item class="echos-list-item" *ngFor="let category of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
+      <div mat-line fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="column" *ngIf="authService.isAdmin()">
-          <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
-          <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
+          <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><mat-icon>arrow_drop_up_circle</mat-icon></button>
+          <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
         </div>
         <div fxFlex fxFlexOffset="20px" class="have-childs">
           <div>{{category.title}}</div>
@@ -61,14 +61,14 @@
             </div>
           </div>
         </div>
-        <button md-button [routerLink]="['/theme', item.id_node, 'rubrique', category.id_node]"><md-icon color="primary">chevron_right</md-icon></button>
+        <button mat-button [routerLink]="['/theme', item.id_node, 'rubrique', category.id_node]"><mat-icon color="primary">chevron_right</mat-icon></button>
       </div>
-    </md-list-item>
-  </md-list>
+    </mat-list-item>
+  </mat-list>
 
-  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button routerLink="/theme/liste">Remonter d'un niveau</button>
-  </md-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button routerLink="/theme/liste">Remonter d'un niveau</button>
+  </mat-toolbar>
 
 </div>
 
@@ -81,7 +81,7 @@
 
 <div *ngIf="type == 'category'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
     <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
     <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
     <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
@@ -92,7 +92,7 @@
     <h1 fxFlex>
       Rubrique<span class="titleItem">{{item.title}}</span>
     </h1>
-    <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+    <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><mat-icon>edit</mat-icon></button>
   </div>
 
   <div class="echos-title">Informations</div>
@@ -113,42 +113,42 @@
 
   <div class="echos-title" fxLayout="row" style="margin-top: 70px">
     <div fxFlex>Liste des questions</div>
-    <button *ngIf="authService.isAdmin()" md-raised-button [routerLink]="['/question', 'creer', item.id_node]">Ajouter une question<md-icon>add</md-icon></button>
+    <button *ngIf="authService.isAdmin()" mat-raised-button [routerLink]="['/question', 'creer', item.id_node]">Ajouter une question<mat-icon>add</mat-icon></button>
   </div>
 
-  <md-input-container fxLayout>
-    <input mdInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
-  </md-input-container>
+  <mat-form-field fxLayout>
+    <input matInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
+  </mat-form-field>
 
   <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-    <button md-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
   </div>
 
   <div *ngIf="!filteredChildList.length">Aucune question n'a été trouvée.</div>
 
-  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}">Remonter d'un niveau</button>
-  </md-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}">Remonter d'un niveau</button>
+  </mat-toolbar>
 
-  <md-list *ngIf="filteredChildList">
-    <md-list-item class="echos-list-item" *ngFor="let question of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
-      <div md-line fxLayout="row" fxLayoutAlign="start center">
+  <mat-list *ngIf="filteredChildList">
+    <mat-list-item class="echos-list-item" *ngFor="let question of filteredChildList; let firstItem = first; let lastItem = last; let i = index">
+      <div mat-line fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="column" *ngIf="authService.isAdmin()">
-          <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up_circle</md-icon></button>
-          <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
+          <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><mat-icon>arrow_drop_up_circle</mat-icon></button>
+          <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
         </div>
         <div fxFlex fxFlexOffset="20px" class="have-childs">
           <div>{{question.title}}<span *ngIf="question.privcomment != ''"> [{{question.privcomment}}]</span></div>
           <div *ngIf="question.description">{{question.description}}</div>
         </div>
         <div style="width: 50px"></div>
-        <button md-button [routerLink]="['/question', question.id_node]"><md-icon color="primary">chevron_right</md-icon></button>
+        <button mat-button [routerLink]="['/question', question.id_node]"><mat-icon color="primary">chevron_right</mat-icon></button>
       </div>
-    </md-list-item>
-  </md-list>
+    </mat-list-item>
+  </mat-list>
 
-  <md-toolbar fxLayout="row" fxLayoutAlign="end center">
-    <button md-button *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}">Remonter d'un niveau</button>
-  </md-toolbar>
+  <mat-toolbar fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}">Remonter d'un niveau</button>
+  </mat-toolbar>
 
 </div>

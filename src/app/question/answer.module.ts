@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChartsModule } from 'ng2-charts';
+import { MatIconRegistry } from '@angular/material';
+import { MaterialModule } from '../material.module';
 
 // import our software
 import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
@@ -20,9 +21,9 @@ import { AnswerEditComponent as NumericAnswerEditComponent } from './components/
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-	  MaterialModule,
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+    MaterialModule
   ],
   declarations: [
     AnswerEditComponent,

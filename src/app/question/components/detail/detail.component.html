@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
   <div *ngIf="item && item.nodepath && item.nodepath[0]" routerLink="/theme/{{item.nodepath[0].id_node}}" fxFlexAlign="start">{{item.nodepath[0].title}}</div>
   <div *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}" fxFlexAlign="start">{{item.nodepath[1].title}}</div>
@@ -10,7 +10,7 @@
   <h1 fxFlex>
     Question<span class="titleItem">{{item.title}}<span *ngIf="item.privcomment"> [{{item.privcomment}}]</span></span>
   </h1>
-  <button *ngIf="authService.isAdmin()" md-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><md-icon>edit</md-icon></button>
+  <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><mat-icon>edit</mat-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>
@@ -31,6 +31,6 @@
 <q-radio-detail *ngIf="item.type == 'q_radio'" [choices]="item.choices"></q-radio-detail>
 <q-percents-detail *ngIf="item.type == 'q_percents'" [choices]="item.choices"></q-percents-detail>
 
-<md-toolbar fxLayout="row" fxLayoutAlign="end center">
-  <button md-button *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}">Remonter d'un niveau</button>
-</md-toolbar>
+<mat-toolbar fxLayout="row" fxLayoutAlign="end center">
+  <button mat-button *ngIf="item && item.nodepath && item.nodepath[1]" routerLink="/theme/{{item.nodepath[0].id_node}}/rubrique/{{item.nodepath[1].id_node}}">Remonter d'un niveau</button>
+</mat-toolbar>

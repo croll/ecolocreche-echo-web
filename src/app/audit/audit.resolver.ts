@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Node } from '../node/node';
 import { RestService } from '../rest.service';
 import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';

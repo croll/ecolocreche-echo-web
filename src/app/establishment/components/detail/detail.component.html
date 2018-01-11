@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des établissements</div>
   <div fxFlexAlign="start">Fiche établissement</div>
 </div>
@@ -8,7 +8,7 @@
   <h1 fxFlex>
     Fiche établissement<span class="titleItem">{{item.name}}</span>
   </h1>
-  <button *ngIf="authService.isSuperAgent()" md-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><md-icon>edit</md-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><mat-icon>edit</mat-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>
@@ -52,7 +52,7 @@
 
 <div class="echos-title" fxLayout="row" style="margin-top: 80px">
   <div fxFlex>Liste des audits</div>
-  <button *ngIf="authService.isSuperAgent()" md-raised-button [routerLink]="['/audit/creer', item.id]">Démarrer un audit<md-icon>add</md-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-raised-button [routerLink]="['/audit/creer', item.id]">Démarrer un audit<mat-icon>add</mat-icon></button>
 </div>
 
 <div *ngIf="!item.audits || !item.audits.length" class="echos-warning">Aucun audit trouvé.</div>
@@ -61,14 +61,14 @@
   Pour comparer deux audits, sélectionnez les à l'aide des cases à cocher et cliquez sur le bouton "Comparer".
 </div>
 
-<md-toolbar *ngIf="item.audits && item.audits.length" style="margin: 20px 0 0 0">
-  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color='primary'>Comparer</button>
-</md-toolbar>
+<mat-toolbar *ngIf="item.audits && item.audits.length" style="margin: 20px 0 0 0">
+  <button mat-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color='primary'>Comparer</button>
+</mat-toolbar>
 
-<md-list>
-  <md-list-item class="echos-list-item" *ngFor="let audit of item.audits">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
-      <md-checkbox [disabled]="auditsToCompare.length == 2 && auditsToCompare.indexOf(audit.id) == -1" (change)="toggleCompare(audit.id)" fxFlex="50px"></md-checkbox>
+<mat-list>
+  <mat-list-item class="echos-list-item" *ngFor="let audit of item.audits">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
+      <mat-checkbox [attr.disabled]="auditsToCompare.length == 2 && auditsToCompare.indexOf(audit.id) == -1" (change)="toggleCompare(audit.id)" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
@@ -77,11 +77,11 @@
         <div *ngIf="audit.active" style="color: rgb(96, 190, 64)">En cours</div>
       </div>
       <div class="percent">{{audit.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
-      <button md-button *ngIf="audit.active || authService.isSuperAgent()" [routerLink]="['/audit', audit.key]"><md-icon color="primary">chevron_right</md-icon></button>
+      <button mat-button *ngIf="audit.active || authService.isSuperAgent()" [routerLink]="['/audit', audit.key]"><mat-icon color="primary">chevron_right</mat-icon></button>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>
 
-<md-toolbar *ngIf="item.audits && item.audits.length" style="text-align: center">
-  <button md-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color="primary">Comparer</button>
-</md-toolbar>
+<mat-toolbar *ngIf="item.audits && item.audits.length" style="text-align: center">
+  <button mat-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.length != 2" color="primary">Comparer</button>
+</mat-toolbar>

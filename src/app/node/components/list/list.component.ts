@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
   filteredList: Node[] = [];
   errorMessage: string;
   showSaveButton: boolean;
+  item: Node;
 
   // @HostBinding('@routeAnimation') routeAnimation = true;
   //@HostBinding('style.display')   display = 'block';

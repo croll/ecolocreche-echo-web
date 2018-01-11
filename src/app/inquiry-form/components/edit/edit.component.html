@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des établissements</div>
   <div *ngIf="!id_inquiryform" fxFlexAlign="start">Ajouter un questionnaire</div>
   <div *ngIf="id_inquiryform" fxFlexAlign="start">Modifier un modifier</div>
@@ -12,26 +12,26 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>
-    <md-input-container>
-      <input mdInput formControlName="title" placeholder="Nom du questionnaire *">
-      <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du questionnaire est requis</md-hint>
-      <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du questionnaire doit contenir 3 caractères minimum</md-hint>
-    </md-input-container>
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Nom du questionnaire *">
+      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du questionnaire est requis</mat-hint>
+      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du questionnaire doit contenir 3 caractères minimum</mat-hint>
+    </mat-form-field>
   </div>
   <div>
-    <md-input-container>
-      <textarea mdInput formControlName="description" placeholder="Description"></textarea>
-    </md-input-container>
+    <mat-form-field>
+      <textarea matInput formControlName="description" placeholder="Description"></textarea>
+    </mat-form-field>
   </div>
   <div>
-    <md-input-container>
-      <textarea mdInput formControlName="comment" placeholder="Commentaire"></textarea>
-    </md-input-container>
+    <mat-form-field>
+      <textarea matInput formControlName="comment" placeholder="Commentaire"></textarea>
+    </mat-form-field>
   </div>
   <input *ngIf="id_inquiryform" type="hidden" formControlName="id_inquiryform">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id_inquiryform" (click)="delete()" md-raised-button color="warn">Effacer</button>
-    <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id_inquiryform" (click)="delete()" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
 </form>

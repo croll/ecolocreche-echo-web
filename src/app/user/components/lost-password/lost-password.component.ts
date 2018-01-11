@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { RestService } from '../../services/rest.service';
 
@@ -14,7 +14,7 @@ export class LostPasswordComponent implements OnInit {
     name: "",
   }
 
-  constructor(private restService: RestService, private snackBar: MdSnackBar, private router: Router) { }
+  constructor(private restService: RestService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
   }

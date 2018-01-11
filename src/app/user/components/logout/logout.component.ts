@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../services/rest.service';
 import { Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { MdSnackBar } from '@angular/material';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private restService: RestService, private router: Router, private snackBar: MdSnackBar) { }
+  constructor(private restService: RestService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.restService.logout()

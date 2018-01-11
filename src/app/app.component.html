@@ -1,46 +1,46 @@
   <!-- <div class="echos-sidenav">
-    <md-list>
-     <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="sidenav.close()">Mon compte</md-list-item>
-     <md-divider></md-divider>
-     <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="sidenav.close()">Les établissements</md-list-item>
-     <md-divider></md-divider>
-     <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="sidenav.close()">Les audits en cours</md-list-item>
-     <md-divider></md-divider>
-     <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="sidenav.close()">Les utilisateurs</md-list-item>
-     <md-divider></md-divider>
-     <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="sidenav.close()">Banque de questions</md-list-item>
-     <md-divider></md-divider>
-     <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="sidenav.close()">Les questionnaires</md-list-item>
-     <md-divider></md-divider>
-     <md-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active" (click)="sidenav.close()">Déconnexion</md-list-item>
-     <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="sidenav.close()">Connexion</md-list-item>
-  </md-list>
+    <mat-list>
+     <mat-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="sidenav.close()">Mon compte</mat-list-item>
+     <mat-divider></mat-divider>
+     <mat-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="sidenav.close()">Les établissements</mat-list-item>
+     <mat-divider></mat-divider>
+     <mat-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="sidenav.close()">Les audits en cours</mat-list-item>
+     <mat-divider></mat-divider>
+     <mat-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="sidenav.close()">Les utilisateurs</mat-list-item>
+     <mat-divider></mat-divider>
+     <mat-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="sidenav.close()">Banque de questions</mat-list-item>
+     <mat-divider></mat-divider>
+     <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="sidenav.close()">Les questionnaires</mat-list-item>
+     <mat-divider></mat-divider>
+     <mat-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active" (click)="sidenav.close()">Déconnexion</mat-list-item>
+     <mat-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="sidenav.close()">Connexion</mat-list-item>
+  </mat-list>
 </div> -->
 
 <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
-  <button md-button (click)="toggleMenu()" class="echos-menu-button">
-    <md-icon>menu</md-icon>
+  <button mat-button (click)="toggleMenu()" class="echos-menu-button">
+    <mat-icon>menu</mat-icon>
   </button>
   <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
 </div>
 <div class="echos-main-container" fxLayout="row">
   <div [ngClass]="{'echos-menu': true, 'echos-menu-hide': !menuVisibility}" (click)="menuHide($event)">
-    <md-list>
-       <md-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="menuHide($event)">Mon compte</md-list-item>
-       <md-divider></md-divider>
-       <md-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="menuHide($event)">Les établissements</md-list-item>
-       <md-divider></md-divider>
-       <md-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="menuHide($event)">Les audits en cours</md-list-item>
-       <md-divider></md-divider>
-       <md-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="menuHide($event)">Les utilisateurs</md-list-item>
-       <md-divider></md-divider>
-       <md-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="menuHide($event)">Banque de questions</md-list-item>
-       <md-divider></md-divider>
-       <md-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuHide($event)">Les questionnaires</md-list-item>
-       <md-divider></md-divider>
-       <md-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)">Déconnexion</md-list-item>
-       <md-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)">Connexion</md-list-item>
-    </md-list>
+    <mat-list>
+       <mat-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="menuHide($event)">Mon compte</mat-list-item>
+       <!-- <mat-divider></mat-divider> -->
+       <mat-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="menuHide($event)">Les établissements</mat-list-item>
+       <!-- <mat-divider></mat-divider> -->
+       <mat-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="menuHide($event)">Les audits en cours</mat-list-item>
+       <!-- <mat-divider></mat-divider> -->
+       <mat-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="menuHide($event)">Les utilisateurs</mat-list-item>
+       <!-- <mat-divider></mat-divider> -->
+       <mat-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="menuHide($event)">Banque de questions</mat-list-item>
+       <!-- <mat-divider></mat-divider> -->
+       <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuHide($event)">Les questionnaires</mat-list-item>
+       <!-- <mat-divider></mat-divider> -->
+       <mat-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)">Déconnexion</mat-list-item>
+       <mat-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)">Connexion</mat-list-item>
+    </mat-list>
   </div>
   <router-outlet></router-outlet>
 </div>
@@ -54,11 +54,11 @@
   </div>
 </div>
 
-<md-progress-bar id="mainprogress" color="accent" mode="determinate" value="processProgressPercent" ></md-progress-bar>
+<mat-progress-bar id="mainprogress" color="accent" mode="determinate" value="processProgressPercent" ></mat-progress-bar>
 
 <div id="loading" class="not-loading">
   <div style="position: absolute; left: 0; right: 0; top: 40%; text-align: center; font-weight: bold;">
-    <md-spinner style="display: inline-block"></md-spinner>
+    <mat-spinner style="display: inline-block"></mat-spinner>
     <br />
     <br />
     Chargement...

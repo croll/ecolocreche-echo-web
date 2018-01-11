@@ -12,7 +12,8 @@ import { DetailComponent as DetailComponent_q_radio } from './components/q_radio
 import { EditComponent as EditComponent_q_percents } from './components/q_percents/edit/edit.component';
 import { DetailComponent as DetailComponent_q_percents } from './components/q_percents/detail/detail.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule, MdIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { MaterialModule, MdIconRegistry } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-	  MaterialModule,
+    MaterialModule
   ],
   declarations: [
     DetailComponent,

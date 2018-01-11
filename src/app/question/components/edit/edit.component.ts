@@ -25,7 +25,7 @@ export class EditComponent implements OnInit {
   privcommentCtrl: FormControl;
   typeCtrl: FormControl;
 
-  private id_node: number;
+  public id_node: number;
   private id_node_parent: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {

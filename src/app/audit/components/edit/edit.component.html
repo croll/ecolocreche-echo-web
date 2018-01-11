@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div routerLink="/etablissement/liste" fxFlexAlign="start">Fiche établissement</div>
   <div *ngIf="!id" fxFlexAlign="start">Démarrer un audit</div>
   <div *ngIf="id" fxFlexAlign="start">Modifier un audit</div>
@@ -12,36 +12,36 @@
 
 <form [formGroup]="echosForm">
   <div>
-    <md-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
-      <md-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</md-option>
-    </md-select>
+    <mat-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
+      <mat-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</mat-option>
+    </mat-select>
     <div *ngIf="id" class="echos-error">Le type d'audit n'est pas modifiable</div>
   </div>
   <div>
-    <md-input-container style="margin-top: 18px">
-      <textarea mdInput formControlName="synthesis" placeholder="Synthèse"></textarea>
-    </md-input-container>
+    <mat-form-field style="margin-top: 18px">
+      <textarea matInput formControlName="synthesis" placeholder="Synthèse"></textarea>
+    </mat-form-field>
   </div>
   <div>
-    <md-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
-      <md-option [value]="1">En cours</md-option>
-      <md-option [value]="0">Terminé</md-option>
-    </md-select>
+    <mat-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
+      <mat-option [value]="1">En cours</mat-option>
+      <mat-option [value]="0">Terminé</mat-option>
+    </mat-select>
   </div>
   <div *ngIf="showCreationDateField">
-    <md-input-container style="margin-top: 8px">
-      <input mdInput type="text" formControlName="date_start" placeholder="Date de création">
-    </md-input-container>
+    <mat-form-field style="margin-top: 8px">
+      <input matInput type="text" formControlName="date_start" placeholder="Date de création">
+    </mat-form-field>
     <div *ngIf="dateStartCtrl.hasError('frenchDate')" class="echos-error" style="margin: -14px 0 18px 0">Le format de date doit être de la forme jj/mm/aaaa hh:mm</div>
   </div>
   <input *ngIf="id" type="hidden" formControlName="id">
   <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">
   <input *ngIf="key" type="hidden" formControlName="key">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id" (click)="delete(id)" md-raised-button color="warn">Effacer</button>
-    <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" md-raised-button type="button" (click)="save($event)" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-    <button *ngIf="id" fxFlexOffset="20px" md-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)">Enregistrer et retourner à la fiche établissement</button>
+    <button *ngIf="id" (click)="delete(id)" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="button" (click)="save($event)" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" fxFlexOffset="20px" mat-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)">Enregistrer et retourner à la fiche établissement</button>
   </div>
-  <button *ngIf="id" (click)="sendmail(id)" md-raised-button>Renvoyer le mail</button>
+  <button *ngIf="id" (click)="sendmail(id)" mat-raised-button>Renvoyer le mail</button>
 </form>

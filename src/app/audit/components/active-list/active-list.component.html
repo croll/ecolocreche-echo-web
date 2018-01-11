@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div fxFlexAlign="start">Liste des audits en cours</div>
 </div>
 
@@ -9,21 +9,21 @@
   </h1>
 </div>
 
-<md-input-container fxLayout>
-  <input mdInput #search type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(search.value)">
-</md-input-container>
+<mat-form-field fxLayout>
+  <input matInput #search type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(search.value)">
+</mat-form-field>
 
-<md-list>
-  <md-list-item class="echos-list-item" [routerLink]="['/audit', item.key]" *ngFor="let item of filteredList">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<mat-list>
+  <mat-list-item class="echos-list-item" [routerLink]="['/audit', item.key]" *ngFor="let item of filteredList">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
         <div>{{item.establishment.name}}</div>
         <div>{{item.inquiryform?.title}} - {{item.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
       </div>
       <div class="echos-percent">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
-      <md-icon color="primary" fxFlexOffset="25px">chevron_right</md-icon>
+      <mat-icon color="primary" fxFlexOffset="25px">chevron_right</mat-icon>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>
 
 <div *ngIf="!filteredList.length">Aucun audit n'a été trouvé.</div>

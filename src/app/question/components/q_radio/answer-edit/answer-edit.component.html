@@ -1,17 +1,17 @@
-<md-radio-group [(ngModel)]="radios" [disabled]="readonly ? true : false" (change)="updatevalue()">
-<md-list>
-  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<mat-radio-group [(ngModel)]="radios" [disabled]="readonly ? true : false" (change)="updatevalue()">
+<mat-list>
+  <mat-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div class="choice-row" fxLayout="row" fxLayoutAlign="start center">
-          <md-radio-button [value]="item.id_choice" [checked]="item.id_choice == radios">
+          <mat-radio-button [value]="item.id_choice" [checked]="item.id_choice == radios">
             <!-- <div class="echos-color-box" [style]="impact.getImpactColorStyle(item.impact)"></div> -->
             <span>{{item.title}}</span>
-          </md-radio-button>
+          </mat-radio-button>
         </div>
         <!-- <div class="echos-choice-description">{{item.comment}}</div> -->
       </div>
     </div>
-  </md-list-item>
-</md-list>
-</md-radio-group>
+  </mat-list-item>
+</mat-list>
+</mat-radio-group>

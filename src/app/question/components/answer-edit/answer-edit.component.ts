@@ -32,6 +32,8 @@ export class AnswerEditComponent implements OnInit {
   ignoredCtrl: FormControl;
   valueCtrl: FormControl;
 
+  answer: Answer;
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
 

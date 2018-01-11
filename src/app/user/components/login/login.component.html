@@ -1,5 +1,5 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-  <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div fxFlexAlign="start">Connexion</div>
 </div>
 
@@ -7,21 +7,21 @@
 
 <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
   <div fxLayout="column">
-      <md-input-container>
-        <input mdInput placeholder="Nom d'utilisateur / adresse mail" [(ngModel)]="model.name" name="name">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput placeholder="Nom d'utilisateur / adresse mail" [(ngModel)]="model.name" name="name">
+      </mat-form-field>
 
-      <md-input-container>
-        <input mdInput type="password" placeholder="Mot de passe" [(ngModel)]="model.password" name="password">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Mot de passe" [(ngModel)]="model.password" name="password">
+      </mat-form-field>
 
-      <md-checkbox>Se souvenir de moi</md-checkbox>
+      <mat-checkbox>Se souvenir de moi</mat-checkbox>
 
-      <md-toolbar fxLayout="row">
-        <button type="button" md-raised-button routerLink="/motdepasse" (click)="false"><md-icon>info</md-icon> Mot de passe oublié ?</button>
+      <mat-toolbar fxLayout="row">
+        <button type="button" mat-raised-button routerLink="/motdepasse" (click)="false"><mat-icon>info</mat-icon> Mot de passe oublié ?</button>
         <div fxFlex>&nbsp;</div>
-        <button md-raised-button type="submit" [disabled]="!loginForm.form.valid"><md-icon>person</md-icon> Connexion</button>
-      </md-toolbar>
+        <button mat-raised-button type="submit" [disabled]="!loginForm.form.valid"><mat-icon>person</mat-icon> Connexion</button>
+      </mat-toolbar>
 
   </div>
 </form>

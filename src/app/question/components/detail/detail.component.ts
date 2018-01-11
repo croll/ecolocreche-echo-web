@@ -16,7 +16,7 @@ export class DetailComponent implements OnInit {
   private id_node: number;
   item: Question = new Question();
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService) {
     this.id_node = parseInt(this.route.snapshot.params['id_node']);
   }
 

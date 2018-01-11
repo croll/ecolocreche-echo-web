@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
   commentCtrl: FormControl;
   positionCtrl: FormControl;
 
-  private id_inquiryform: number;
+  id_inquiryform: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 

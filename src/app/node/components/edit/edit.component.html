@@ -1,6 +1,6 @@
 <div *ngIf="type == 'theme'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
     <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
     <div *ngIf="current && current.nodepath && current.nodepath[0]" routerLink="/theme/{{current.nodepath[0].id_node}}" fxFlexAlign="start">{{current.nodepath[0].title}}</div>
     <div *ngIf="current && current.nodepath && current.nodepath[1]" routerLink="/theme/{{current.nodepath[0].id_node}}/rubrique/{{current.nodepath[1].id_node}}" fxFlexAlign="start">{{current.nodepath[1].title}}</div>
@@ -15,40 +15,40 @@
 
   <form (ngSubmit)="save()" [formGroup]="echosForm">
     <div>
-      <md-input-container>
-        <input mdInput formControlName="title" placeholder="Nom du thème *">
-        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du thème est requis</md-hint>
-        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du thème doit contenir 3 caractères minimum</md-hint>
-      </md-input-container>
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Nom du thème *">
+        <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du thème est requis</mat-hint>
+        <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du thème doit contenir 3 caractères minimum</mat-hint>
+      </mat-form-field>
     </div>
     <div>
-      <md-input-container>
-        <textarea mdInput formControlName="description" placeholder="Description"></textarea>
-      </md-input-container>
+      <mat-form-field>
+        <textarea matInput formControlName="description" placeholder="Description"></textarea>
+      </mat-form-field>
     </div>
     <div style="padding: 8px 0 15px">
-      <md-select placeholder="Famille *" formControlName="family" style="min-width: 200px">
-        <md-option *ngFor="let t of familyTypes.typeList" [value]="t.id">{{t.label}}</md-option>
-      </md-select>
+      <mat-select placeholder="Famille *" formControlName="family" style="min-width: 200px">
+        <mat-option *ngFor="let t of familyTypes.typeList" [value]="t.id">{{t.label}}</mat-option>
+      </mat-select>
     </div>
     <div fxLayout="row" fxLayoutAlign="left center">
-      <md-input-container>
-        <input mdInput #bgColor formControlName="color" placeholder="Couleur" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="'disabled'" [cpOKButtonText]="'Valider'" [cpCancelButton]="true" [cpCancelButtonText]="'Annuler'" [cpCancelButtonClass]="'echos-colorpicker-cancel-button'" [cpOKButton]="true" [cpOKButtonClass]="'echos-colorpicker-ok-button'">
-      </md-input-container>
+      <mat-form-field>
+        <input matInput #bgColor formControlName="color" placeholder="Couleur" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="'disabled'" [cpOKButtonText]="'Valider'" [cpCancelButton]="true" [cpCancelButtonText]="'Annuler'" [cpCancelButtonClass]="'echos-colorpicker-cancel-button'" [cpOKButton]="true" [cpOKButtonClass]="'echos-colorpicker-ok-button'">
+      </mat-form-field>
       <div fxFlexOffset="10px" class="echos-color" [style.background]="pickedColor" [(colorPicker)]="pickedColor" (colorPickerChange)="pickedColor=$event; setColor($event)" [cpAlphaChannel]="'disabled'" [cpOKButtonText]="'Valider'" [cpCancelButton]="true" [cpCancelButtonText]="'Annuler'" [cpCancelButtonClass]="'echos-colorpicker-cancel-button'" [cpOKButton]="true" [cpOKButtonClass]="'echos-colorpicker-ok-button'"></div>
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="id_node" (click)="delete(id_node)" md-raised-button color="warn">Effacer</button>
-      <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-      <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" mat-raised-button color="warn">Effacer</button>
+      <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+      <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </form>
 </div>
 
 <div *ngIf="type == 'category'">
   <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
-    <div routerLink="/" fxFlexAlign="start"><md-icon>home</md-icon></div>
+    <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
     <div routerLink="/theme/liste" fxFlexAlign="start">Banque de questions</div>
     <div *ngIf="current && current.nodepath && current.nodepath[0]" routerLink="/theme/{{current.nodepath[0].id_node}}" fxFlexAlign="start">{{current.nodepath[0].title}}</div>
     <div *ngIf="current && current.nodepath && current.nodepath[1]" routerLink="/theme/{{current.nodepath[0].id_node}}/rubrique/{{current.nodepath[1].id_node}}" fxFlexAlign="start">{{current.nodepath[1].title}}</div>
@@ -63,22 +63,22 @@
 
   <form (ngSubmit)="save()" [formGroup]="echosForm">
     <div>
-      <md-input-container>
-        <input mdInput formControlName="title" placeholder="Nom de la rubrique *">
-        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom de la rubrique est requis</md-hint>
-        <md-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom de la rubrique doit contenir 3 caractères minimum</md-hint>
-      </md-input-container>
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Nom de la rubrique *">
+        <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom de la rubrique est requis</mat-hint>
+        <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom de la rubrique doit contenir 3 caractères minimum</mat-hint>
+      </mat-form-field>
     </div>
     <div>
-      <md-input-container>
-        <textarea mdInput formControlName="description" placeholder="Description"></textarea>
-      </md-input-container>
+      <mat-form-field>
+        <textarea matInput formControlName="description" placeholder="Description"></textarea>
+      </mat-form-field>
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="id_node" (click)="delete(id_node)" md-raised-button color="warn">Effacer</button>
-      <button md-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-      <button fxFlexOffset="20px" md-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" mat-raised-button color="warn">Effacer</button>
+      <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+      <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </form>
 </div>

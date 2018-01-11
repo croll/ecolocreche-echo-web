@@ -1,4 +1,4 @@
-@import '~@angular/material/core/theming/all-theme';
+@import '~@angular/material/theming';
 @include mat-core();
 $primary: mat-palette($mat-teal);
 $accent:  mat-palette($mat-orange);
@@ -21,8 +21,7 @@ $echos-light-grey: #777;
 // @import '~@swimlane/ngx-datatable/release/material.css';
 // @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
-/* Hack md-hint (en attendant que ce soit corrigé) */
-md-hint, mat-hint {
+mat-hint {
   color: rgb(242, 74, 74);
   top: 40px;
   min-width: 500px;
@@ -91,7 +90,7 @@ a:hover {
 }
 
 .echos-menu {
-  md-list-item, mat-list-item {
+  mat-list-item {
     padding-left: 30px;
     padding-right: 30px;
     color: $echos-dark-grey;
@@ -115,7 +114,7 @@ a:hover {
     height: 100%;
     background: rgba(0, 0, 0, 0.9);
     z-index: 10000;
-    md-list-item, mat-list-item {
+    mat-list-item {
       color: #fff!important;
       font-size: 2em!important;
       font-weight: bold!important;
@@ -161,7 +160,7 @@ a:hover {
   margin: 0 8px;
 }
 
-md-list-item.echos-list-item, mat-list-item.echos-list-item {
+mat-list-item.echos-list-item {
   cursor: pointer;
   border-bottom: 1px solid #a5a5a5;
   padding: 8px 0;
@@ -172,10 +171,10 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
     border-bottom: 1px solid mat-color($accent);
     background: #f0f0f0;
   }
-  .md-line, .mat-line {
+  .mat-line {
     //white-space: normal!important;
   }
-  .md-list-item, .mat-list-item, .mat-list-item-content {
+  .mat-list-item, .mat-list-item-content {
     padding: 22px 0px;
     height: auto!important;
   }
@@ -242,7 +241,7 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
       content: '/';
     }
     &:first-child {
-      md-icon, mat-icon {
+      mat-icon {
         font-size: 18px;
         fill: $echos-dark-grey;
         display: block;
@@ -374,12 +373,12 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
 
 .echos-question-list {
 
-  mat-list-item, md-list-item {
+  mat-list-item {
     border-bottom: 1px solid #a5a5a5;
   }
 
-  .mat-radio-label-content, .md-radio-label-content,
-  .mat-checkbox-label, .md-checkbox-label {
+  .mat-radio-label-content,
+  .mat-checkbox-label {
 
   }
 
@@ -399,7 +398,7 @@ md-list-item.echos-list-item, mat-list-item.echos-list-item {
     padding-left: 0;
   }
 
-  md-slider {
+  mat-slider {
     width: 300px;
   }
 

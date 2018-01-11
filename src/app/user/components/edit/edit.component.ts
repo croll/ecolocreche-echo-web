@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
   passwordCtrl: FormControl;
   typeCtrl: FormControl;
 
-  private id: number;
+  public id: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location) {
 

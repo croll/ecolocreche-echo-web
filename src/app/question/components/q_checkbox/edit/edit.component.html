@@ -1,35 +1,35 @@
 <div class="echos-title" fxLayout="row" fxLayoutAlign="start center" style="margin: 80px 0 20px 0">
   <div fxFlex>Choix possible</div>
-  <button md-raised-button (click)="addChoice()"><md-icon>add</md-icon>Ajouter un choix</button>
+  <button mat-raised-button (click)="addChoice()"><mat-icon>add</mat-icon>Ajouter un choix</button>
 </div>
 
-<md-list>
-  <md-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
-    <div md-line fxLayout="row" fxLayoutAlign="start center">
+<mat-list>
+  <mat-list-item class="echos-list-item" *ngFor="let item of choices; let i = index; let firstItem = first; let lastItem = last">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex>
         <div fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="column">
-            <button md-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><md-icon>arrow_drop_up</md-icon></button>
-            <button md-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><md-icon>arrow_drop_down</md-icon></button>
+            <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><mat-icon>arrow_drop_up</mat-icon></button>
+            <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
           </div>
           <div class="echos-color-box" [ngStyle]="impact.getImpactColorStyle(item.impact)"></div>
           <div fxLayout="column" fxFlexOffset="30px" fxFlex>
-            <md-input-container>
-              <input mdInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
-            </md-input-container>
-            <md-input-container>
-              <textarea mdInput fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"></textarea>
-            </md-input-container>
+            <mat-form-field>
+              <input matInput fxFlex [(ngModel)]="item.title" placeholder="Intitulé"/>
+            </mat-form-field>
+            <mat-form-field>
+              <textarea matInput fxFlex [(ngModel)]="item.comment" placeholder="Commentaire"></textarea>
+            </mat-form-field>
           </div>
           <div fxFlexOffset="40px">
-            <md-select [(ngModel)]="item.impact" placeholder="Impact *">
-              <md-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</md-option>
-            </md-select>
+            <mat-select [(ngModel)]="item.impact" placeholder="Impact *">
+              <mat-option *ngFor="let t of impact.impactList" [value]="t.id">{{t.label}}</mat-option>
+            </mat-select>
           </div>
         </div>
         <div>{{item.description}}</div>
       </div>
-      <button fxFlexOffset="40px" md-mini-fab (click)="deleteChoice(item)" color="warn" style="margin-right:12px"><md-icon>delete</md-icon></button>
+      <button fxFlexOffset="40px" mat-mini-fab (click)="deleteChoice(item)" color="warn" style="margin-right:12px"><mat-icon>delete</mat-icon></button>
     </div>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>

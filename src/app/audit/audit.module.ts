@@ -7,7 +7,6 @@ import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
 import { CompareComponent } from './components/compare/compare.component';
-import { MaterialModule, MdIconRegistry } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from './audit.resolver';
 import { AuditListResolver } from './audit-list.resolver';
@@ -16,6 +15,8 @@ import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.compone
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { ExportCSVService } from './export-csv.service';
+import { MatIconRegistry } from '@angular/material';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
@@ -23,10 +24,10 @@ import { ExportCSVService } from './export-csv.service';
     RoutingModule,
     ReactiveFormsModule,
     AnswerModule,
-	  MaterialModule,
     FlexLayoutModule,
     ChartsModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   declarations: [
     ActiveListComponent,

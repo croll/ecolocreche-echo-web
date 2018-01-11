@@ -33,6 +33,15 @@ export class CompareComponent implements OnInit {
   logo: string = '';
   customThemeList: string[] = [];
   customInfoList: any[] = [];
+  hide_comments = false;
+  hide_social_details = false;
+  hide_balance_sheet_social_radar = false;
+  hide_balance_sheet_social_bar = false;
+  hide_balance_sheet_social_pie = false;
+  hide_environment_details = false;
+  hide_balance_sheet_environmental_radar = false;
+  hide_balance_sheet_environmental_bar = false;
+  hide_balance_sheet_environmental_pie = false;
 
   auditTools = AuditTools.getInstance();
 

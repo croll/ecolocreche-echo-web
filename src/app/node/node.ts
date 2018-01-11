@@ -10,6 +10,7 @@ export class Node {
   public privcomment: string
   public color: string
   public childs: any[]
+  public nodepath: string
 
   constructor() {
     this.childs = [];
