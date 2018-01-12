@@ -508,4 +508,8 @@ mat-list-item.echos-list-item {
     .mat-toolbar .mat-toolbar-row {
         white-space: normal;
     }
+    .mat-list, .mat-list-item, .mat-list-item-content {
+      height: auto!important;
+      min-height: 48px;
+    }
 }
