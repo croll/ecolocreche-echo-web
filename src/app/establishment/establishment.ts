@@ -16,7 +16,8 @@ export class Establishment {
       {id: 'micro-creche', label: 'Micro crèche'},
       {id: 'multi-accueil', label: 'Multi accueil'},
       {id: 'relais-d-assistante', label: 'Relais d\'assistante'},
-      {id: 'autre', label: 'Autre'}
+      {id: 'assistant-maternel', label: 'Assistant maternel'},
+      {id: 'autre', label: 'Autre'},
     ];
   public statusList: {}[] = [
       {id: 'association', label: 'Association'},
@@ -24,6 +25,9 @@ export class Establishment {
       {id: 'entreprise', label: 'Entreprise'},
       {id: 'publique', label: 'Publique'},
       {id: 'indetermine', label: 'Indéterminé'},
-      {id: 'autre', label: 'Autre'}
+      {id: 'domicile', label: 'Domicile'},
+      {id: 'creche-familiale', label: 'Crèche familiale'},
+      {id: 'mam', label: 'MAM'},
+      {id: 'autre', label: 'Autre'},
     ];
 }
