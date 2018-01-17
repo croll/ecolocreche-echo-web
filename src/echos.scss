@@ -513,3 +513,9 @@ mat-list-item.echos-list-item {
       min-height: 48px;
     }
 }
+
+@media print {
+  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, .not-in-pdf {
+    display: none !important;
+  }
+}

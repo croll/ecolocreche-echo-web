@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm, InquiryFormExt } from '../../../inquiry-form/inquiry-form';
 import { Node } from '../../../node/node';
 import { RestService } from '../../../rest.service';
-import { WkHtmlToPdfService } from '../../../wkhtmltopdf.service';
+import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 import { ExportCSVService } from '../../export-csv.service';
@@ -28,7 +28,7 @@ export class ReportComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private wkService: WkHtmlToPdfService, private csvService: ExportCSVService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private wkService: PuppeteerPdfService, private csvService: ExportCSVService) {
     this.infos = this.route.snapshot.data['infos'];
     this.cache  = this.auditTools.cacheDatas(this.infos.nodes);
     this.questionList = this.cache.questionList;
@@ -59,7 +59,7 @@ export class ReportComponent implements OnInit {
   }
 
   pdf() {
-    this.wkService.print();
+    this.wkService.print("audit", this.infos.audit.id);
   }
 
   exportCSV() {

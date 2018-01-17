@@ -30,6 +30,7 @@ import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { RestService } from './rest.service';
 import { WkHtmlToPdfService } from './wkhtmltopdf.service';
+import { PuppeteerPdfService } from './puppeteerpdf.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { WkHtmlToPdfService } from './wkhtmltopdf.service';
     AuthGuard,
     AuthService,
     RestService,
-    WkHtmlToPdfService
+    //WkHtmlToPdfService
+    PuppeteerPdfService
   ],
   bootstrap: [AppComponent]
 })
