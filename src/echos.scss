@@ -515,7 +515,7 @@ mat-list-item.echos-list-item {
 }
 
 @media print {
-  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, .not-in-pdf {
+  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
     display: none !important;
   }
 }
