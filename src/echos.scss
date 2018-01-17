@@ -518,4 +518,10 @@ mat-list-item.echos-list-item {
   .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, .not-in-pdf {
     display: none !important;
   }
+  .do-not-break {
+    page-break-inside: avoid;
+  }
+}
+
+@media print  {
 }

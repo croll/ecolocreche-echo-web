@@ -44,7 +44,7 @@
       <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" id='canvas-chart-global-{{theme.id_node}}' baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
     </mat-card>
 
-    <mat-card *ngFor="let category of theme.childs">
+    <mat-card *ngFor="let category of theme.childs" class="do-not-break">
       <div class="echos-report-category"> {{category.title}}</div>
       <div style='page-break-inside:avoid;' *ngFor="let question of category.childs">
         <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
