@@ -22,9 +22,10 @@ import { EditComponent as UserEditComponent} from './user/components/edit/edit.c
 import { DetailComponent as UserDetailComponent} from './user/components/detail/detail.component';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
-//import { AnswerModule } from './question/answer.module'; // a remetre, test
+import { AnswerModule } from './question/answer.module'; // a remetre, test
 import { AuditModule } from './audit/audit.module';
 import { NodeModule } from './node/node.module';
+import { RecapActionsModule } from './recap-actions/recap-actions.module';
 import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
@@ -50,9 +51,10 @@ import { PuppeteerPdfService } from './puppeteerpdf.service';
 	  HttpModule,
     EstablishmentModule,
     QuestionModule,
-    //AnswerModule, a remetre, test
+    AnswerModule,
     NodeModule,
     InquiryFormModule,
+    RecapActionsModule,
     AuditModule,
     AppRoutingModule,
     ReactiveFormsModule,
