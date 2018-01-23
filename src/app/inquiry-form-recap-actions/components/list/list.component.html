@@ -1,0 +1,29 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
+  <div fxFlexAlign="start">Liste des recap-actions</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    Liste des recap-actions
+  </h1>
+  <button *ngIf="authService.isAdmin()" mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
+</div>
+
+<mat-form-field fxLayout>
+  <input matInput #search type="search" placeholder="Chercher un dossier recap actions" fxFlex (keyup)="filterList(search.value)">
+</mat-form-field>
+
+<mat-list>
+  <mat-list-item class="echos-list-item" [routerLink]="['/recap-actions', item.id_recap_actions]" *ngFor="let item of filteredList">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex class="have-childs">
+        <div>{{item.title}}</div>
+        <div *ngIf="item.description">{{item.description}}</div>
+      </div>
+      <mat-icon color="primary">chevron_right</mat-icon>
+    </div>
+  </mat-list-item>
+</mat-list>
+
+<div *ngIf="!filteredList.length">Aucun recap-actions n'a été trouvé.</div>
