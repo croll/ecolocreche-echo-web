@@ -18,6 +18,8 @@ export class EditComponent implements OnInit {
   descriptionCtrl: FormControl;
   commentCtrl: FormControl;
   positionCtrl: FormControl;
+  mailTitleCtrl: FormControl;
+  mailBodyCtrl: FormControl;
 
   id_inquiryform: number;
 
@@ -30,6 +32,8 @@ export class EditComponent implements OnInit {
     this.descriptionCtrl = fb.control(this.current.description);
     this.commentCtrl = fb.control(this.current.comment);
     this.positionCtrl = fb.control(this.current.position);
+    this.mailTitleCtrl = fb.control(this.current.mail_title);
+    this.mailBodyCtrl = fb.control(this.current.mail_body);
 
     this.echosForm = fb.group({
       id_inquiryform: this.idInquiryFormCtrl,
@@ -37,6 +41,8 @@ export class EditComponent implements OnInit {
       description: this.descriptionCtrl,
       comment: this.commentCtrl,
       position: this.positionCtrl,
+      mail_title: this.mailTitleCtrl,
+      mail_body: this.mailBodyCtrl,
     });
 
   }
