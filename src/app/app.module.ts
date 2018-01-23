@@ -24,14 +24,19 @@ import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './question/answer.module'; // a remetre, test
 import { AuditModule } from './audit/audit.module';
-import { NodeModule } from './node/node.module';
-import { RecapActionsModule } from './recap-actions/recap-actions.module';
-import { InquiryFormModule } from './inquiry-form/inquiry-form.module';
+import { InquiryFormAuditModule } from './inquiry-form-audit/inquiry-form-audit.module';
+import { InquiryFormAuditNodeModule } from './inquiry-form-audit-node/inquiry-form-audit-node.module';
+import { InquiryFormRecapActionsModule } from './inquiry-form-recap-actions/inquiry-form-recap-actions.module';
+import { InquiryFormRecapActionsNodeModule } from './inquiry-form-recap-actions-node/inquiry-form-recap-actions-node.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { RestService } from './rest.service';
 import { WkHtmlToPdfService } from './wkhtmltopdf.service';
 import { PuppeteerPdfService } from './puppeteerpdf.service';
+
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
@@ -52,9 +57,10 @@ import { PuppeteerPdfService } from './puppeteerpdf.service';
     EstablishmentModule,
     QuestionModule,
     AnswerModule,
-    NodeModule,
-    InquiryFormModule,
-    RecapActionsModule,
+    InquiryFormAuditNodeModule,
+    InquiryFormAuditModule,
+    InquiryFormRecapActionsModule,
+    InquiryFormRecapActionsNodeModule,
     AuditModule,
     AppRoutingModule,
     ReactiveFormsModule,

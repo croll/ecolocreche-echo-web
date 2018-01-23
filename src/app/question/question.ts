@@ -1,6 +1,6 @@
 import { Choice } from './choice';
 import { Answer } from './answer';
-import { Node } from '../node/node';
+import { Node } from '../common/models/node';
 
 export class Question {
 
