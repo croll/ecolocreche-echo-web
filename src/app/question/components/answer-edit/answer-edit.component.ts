@@ -31,6 +31,7 @@ export class AnswerEditComponent implements OnInit {
   idCtrl: FormControl;
   ignoredCtrl: FormControl;
   valueCtrl: FormControl;
+  commentCtrl: FormControl;
 
   answer: Answer;
 
@@ -43,11 +44,13 @@ export class AnswerEditComponent implements OnInit {
       this.idCtrl = this.fb.control(this.node['id_node']);
       this.ignoredCtrl = this.fb.control(this.current.answer.ignored);
       this.valueCtrl = this.fb.control(this.current.answer.value);
+      this.commentCtrl = this.fb.control(this.current.answer.comment);
 
       this.echosForm = this.fb.group({
         id_node: this.idCtrl,
         ignored: this.ignoredCtrl,
         value: this.valueCtrl,
+        comment: this.commentCtrl,
       });
 
       this.get();
@@ -59,11 +62,13 @@ export class AnswerEditComponent implements OnInit {
       this.idCtrl.setValue(this.node.id_node);
       this.ignoredCtrl.setValue(this.node.answer ? this.node.answer.ignored : false);
       this.valueCtrl.setValue(this.node.answer ? this.node.answer.value : "");
+      this.commentCtrl.setValue(this.node.answer ? this.node.answer.comment : "");
 
       this.current = Object.assign(this.current, this.node);
       if (! this.current.answer) {
         this.current.answer = new Answer();
         this.current.answer.ignored = false;
+        this.current.answer.comment = "";
         this.isAnswered = false;
       } else {
           this.isAnswered = true;
@@ -102,6 +107,7 @@ export class AnswerEditComponent implements OnInit {
   save() {
       this.current.answer.ignored = this.ignoredCtrl.value ? this.ignoredCtrl.value : false;
       this.current.answer.value = this.valueCtrl.value ? this.valueCtrl.value : "{}";
+      this.current.answer.comment = this.commentCtrl.value ? this.commentCtrl.value : "";
       var res = Object.assign(this.current.answer, {
           audit_key: this.audit['key'],
       });
@@ -109,6 +115,7 @@ export class AnswerEditComponent implements OnInit {
           this.isAnswered = true;
           this.ignoredCtrl.setValue(res.ignored);
           this.valueCtrl.setValue(res.value);
+          this.commentCtrl.setValue(res.comment);
           this.node.answer = res;
       });
       return false;

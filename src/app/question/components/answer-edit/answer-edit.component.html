@@ -24,6 +24,10 @@
       <button *ngIf="isAnswered" (click)="modify()" fxFlexOffset="20px" mat-raised-button color="warn">Modifier cette réponse</button>
     </div> -->
 
+    <div fxLayout="row" fxLayoutAlign="start center" class="answer-comment-container">
+      <textarea [readonly]="isAnswered" formControlName="comment"></textarea>
+    </div>
+
     <div fxLayout="row" fxLayoutAlign="start center" class="echos-buttons-container">
       <button *ngIf="!isAnswered" fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
       <button *ngIf="isAnswered || this.answer?.ignored" (click)="modify()" fxFlexOffset="20px" mat-raised-button>Modifier cette réponse</button>
