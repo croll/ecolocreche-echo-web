@@ -4,7 +4,7 @@ import { Location, DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Audit } from '../../audit';
 import { RestService} from '../../../rest.service';
-import { InquiryForm } from '../../../inquiry-form/inquiry-form';
+import { InquiryForm } from '../../../common/models/inquiry-form';
 import { Http, Response } from '@angular/http';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../../auth.service';
