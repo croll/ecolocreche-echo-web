@@ -5,10 +5,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../../common/models/inquiry-form';
 import { RestService } from '../../../rest.service';
 
+const default_audit_mail_subject = `ECHO(S): Audit de {establishment_name}`;
+const default_audit_mail_body = `Bonjour,
+
+Voici le lien vers l'audit concernant l'établissement {establishment_name}.
+
+{audit_url}
+
+Cordialement,
+
+Echo(s)
+`;
+
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
+
 export class EditComponent implements OnInit {
 
   echosForm: FormGroup;
@@ -34,8 +47,8 @@ export class EditComponent implements OnInit {
     this.descriptionCtrl = fb.control(this.current.description);
     this.commentCtrl = fb.control(this.current.comment);
     this.positionCtrl = fb.control(this.current.position);
-    this.mailTitleCtrl = fb.control(this.current.mail_title);
-    this.mailBodyCtrl = fb.control(this.current.mail_body);
+    this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_audit_mail_subject);
+    this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_audit_mail_body);
 
     this.echosForm = fb.group({
       id_inquiryform: this.idInquiryFormCtrl,
