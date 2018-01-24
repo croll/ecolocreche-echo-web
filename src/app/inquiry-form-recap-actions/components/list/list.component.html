@@ -15,7 +15,7 @@
 </mat-form-field>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" [routerLink]="['/recap-actions', item.id_recap_actions]" *ngFor="let item of filteredList">
+  <mat-list-item class="echos-list-item" [routerLink]="['/recap-actions', item.id_inquiryform]" *ngFor="let item of filteredList">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
         <div>{{item.title}}</div>
