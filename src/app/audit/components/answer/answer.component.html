@@ -44,7 +44,7 @@
       </div>
       <div fxLayout="column" fxLayoutAlign="space-around center">
         <div class="echos-percent echos-percent-complete" title="complété">{{childItem.progress}} %</div>
-        <div class="echos-percent echos-percent-ignored" title="ignoré">{{childItem.progress_ignored}} %</div>
+        <div *ngIf="authService.isAgent()" class="echos-percent echos-percent-ignored" title="ignoré">{{childItem.progress_ignored}} %</div>
       </div>
       <button mat-button color="primary"><mat-icon>chevron_right</mat-icon></button>
     </div>
