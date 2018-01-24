@@ -1,0 +1,57 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
+  <div routerLink="/etablissement/liste" fxFlexAlign="start">Liste des formulaires "Recap actions"</div>
+  <div *ngIf="!id_inquiryform" fxFlexAlign="start">Ajouter un questionnaire</div>
+  <div *ngIf="id_inquiryform" fxFlexAlign="start">Modifier un modifier</div>
+</div>
+
+<h1 *ngIf="!id_inquiryform">Ajouter un questionnaire "Recap actions"</h1>
+<h1 *ngIf="id_inquiryform">Modifier un questionnaire "Recap actions"</h1>
+
+<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+<form (ngSubmit)="save()" [formGroup]="echosForm">
+  <div>
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Nom du questionnaire *">
+      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom est requis</mat-hint>
+      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom doit contenir 3 caractères minimum</mat-hint>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <textarea matInput formControlName="description" placeholder="Description"></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <p>Vous pouvez éditer ci-dessous le mail qui sera envoyé lors de la création d'un audit<br/>
+    Les champs suivant seront remplacé automatiquement</p>
+    <ul>
+      <li>{{ '{' }}establishment_name{{ '}' }} : Nom de l'établissement</li>
+      <li>{{ '{' }}establishment_mail{{ '}' }} : Adresse email de contact de l'établissement</li>
+      <li>{{ '{' }}audit_synthesis{{ '}' }} : Synthèse de l'audit</li>
+      <li>{{ '{' }}audit_url{{ '}' }} : Lien vers l'audit, accessible sans authentification</li>
+      <li>{{ '{' }}inquiryform_title{{ '}' }} : Titre du questionnaire</li>
+      <li>{{ '{' }}inquiryform_description{{ '}' }} : Description du questionnaire</li>
+      <li>{{ '{' }}inquiryform_comment{{ '}' }} : Commentaire du questionnaire</li>
+    </ul>
+    <br />
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput formControlName="mail_title" placeholder="Sujet du mail">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <textarea matInput formControlName="mail_body" placeholder="Contenu du mail"></textarea>
+    </mat-form-field>
+  </div>
+
+  <input *ngIf="id_inquiryform" type="hidden" formControlName="id_inquiryform">
+  <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <button *ngIf="id_inquiryform" (click)="delete()" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+  </div>
+</form>
