@@ -42,7 +42,10 @@
           <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
         </div>
       </div>
-      <div class="echos-percent">{{childItem.progress}} %</div>
+      <div fxLayout="column" fxLayoutAlign="space-around center">
+        <div class="echos-percent echos-percent-complete" title="complété">{{childItem.progress}} %</div>
+        <div class="echos-percent echos-percent-ignored" title="ignoré">{{childItem.progress_ignored}} %</div>
+      </div>
       <button mat-button color="primary"><mat-icon>chevron_right</mat-icon></button>
     </div>
   </mat-list-item>
