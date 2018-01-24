@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList('hist/recap_actions').subscribe(
+    this.restService.getList('hist/inquiryforms', {inquiry_type: InquiryForm.Inquiry_type.RecapAction}).subscribe(
       info => {
        this.list = info;
        this.filteredList = info;
