@@ -2,3 +2,7 @@
   width: 100%;
   min-height: 3em;
 }
+
+.answer-comment-container textarea[readonly] {
+  border: none;
+}

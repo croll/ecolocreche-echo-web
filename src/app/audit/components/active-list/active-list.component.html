@@ -20,7 +20,10 @@
         <div>{{item.establishment.name}}</div>
         <div>{{item.inquiryform?.title}} - {{item.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
       </div>
-      <div class="echos-percent">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
+      <div fxLayout="column" fxLayoutAlign="space-around center">
+        <div class="echos-percent echos-percent-complete" title="complété">{{item.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
+        <div class="echos-percent echos-percent-ignored" title="ignoré">{{item.cached_percent_ignored * 100 | number:'1.0-0' }} %</div>
+      </div>
       <mat-icon color="primary" fxFlexOffset="25px">chevron_right</mat-icon>
     </div>
   </mat-list-item>
