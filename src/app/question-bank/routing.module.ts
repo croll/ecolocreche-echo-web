@@ -1,10 +1,10 @@
 import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
-import { DetailComponent } from './components/detail/detail.component';
+import { ManageComponent } from './components/manage/manage.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { AuthGuard } from '../auth-guard.service';
-import { InquiryFormRecapActionsNodeResolver } from './inquiry-form-recap-actions-node.resolver';
+import { QuestionBankResolver } from './question-bank.resolver';
 
 const routes: Routes = [
   {
@@ -21,16 +21,16 @@ const routes: Routes = [
       },
       {
         path: ':id_theme',
-        component: DetailComponent,
+        component: ManageComponent,
         resolve: {
-          infos: InquiryFormRecapActionsNodeResolver
+          infos: QuestionBankResolver
         }
       },
       {
         path: ':id_theme/editer',
         component: EditComponent,
         resolve: {
-          infos: InquiryFormRecapActionsNodeResolver
+          infos: QuestionBankResolver
         }
       },
       {
@@ -43,16 +43,16 @@ const routes: Routes = [
       },
       {
         path: ':id_theme/rubrique/:id_category',
-        component: DetailComponent,
+        component: ManageComponent,
         resolve: {
-          infos: InquiryFormRecapActionsNodeResolver
+          infos: QuestionBankResolver
         }
       },
       {
         path: ':id_theme/rubrique/:id_category/editer',
         component: EditComponent,
         resolve: {
-          infos: InquiryFormRecapActionsNodeResolver
+          infos: QuestionBankResolver
         }
       }
     ]

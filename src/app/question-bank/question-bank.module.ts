@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
-import { DetailComponent } from './components/detail/detail.component';
+import { ManageComponent } from './components/manage/manage.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ColorPickerModule } from '../ext/ngx-color-picker';
-import { InquiryFormRecapActionsNodeResolver } from './inquiry-form-recap-actions-node.resolver'
+import { QuestionBankResolver } from './question-bank.resolver'
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
 
@@ -21,13 +21,13 @@ import { MaterialModule } from '../material.module';
     MaterialModule
   ],
   declarations: [
-    DetailComponent,
+    ManageComponent,
     EditComponent,
     ListComponent
   ],
   providers: [
-    InquiryFormRecapActionsNodeResolver
+    QuestionBankResolver
   ]
 })
 
-export class InquiryFormRecapActionsNodeModule { }
+export class QuestionBankModule { }

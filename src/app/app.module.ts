@@ -25,9 +25,8 @@ import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './question/answer.module'; // a remetre, test
 import { AuditModule } from './audit/audit.module';
 import { InquiryFormAuditModule } from './inquiry-form-audit/inquiry-form-audit.module';
-import { InquiryFormAuditNodeModule } from './inquiry-form-audit-node/inquiry-form-audit-node.module';
+import { QuestionBankModule } from './question-bank/question-bank.module';
 import { InquiryFormRecapActionsModule } from './inquiry-form-recap-actions/inquiry-form-recap-actions.module';
-import { InquiryFormRecapActionsNodeModule } from './inquiry-form-recap-actions-node/inquiry-form-recap-actions-node.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { RestService } from './rest.service';
@@ -57,10 +56,9 @@ registerLocaleData(localeFr, 'fr');
     EstablishmentModule,
     QuestionModule,
     AnswerModule,
-    InquiryFormAuditNodeModule,
+    QuestionBankModule,
     InquiryFormAuditModule,
     InquiryFormRecapActionsModule,
-    InquiryFormRecapActionsNodeModule,
     AuditModule,
     AppRoutingModule,
     ReactiveFormsModule,

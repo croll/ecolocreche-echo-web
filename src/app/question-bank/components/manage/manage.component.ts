@@ -6,10 +6,10 @@ import { Node } from '../../../common/models/node';
 import { AuthService } from '../../../auth.service';
 
 @Component({
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss'],
+  templateUrl: './manage.component.html',
+  styleUrls: ['./manage.component.scss'],
 })
-export class DetailComponent implements OnInit {
+export class ManageComponent implements OnInit {
 
   private id_node: number;
   item: Node;

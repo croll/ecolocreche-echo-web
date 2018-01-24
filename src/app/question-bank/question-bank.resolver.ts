@@ -10,7 +10,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/concatAll';
 
 @Injectable()
-export class InquiryFormRecapActionsNodeResolver implements Resolve<any> {
+export class QuestionBankResolver implements Resolve<any> {
 
   constructor(private restService: RestService, private http: Http) {
   }
