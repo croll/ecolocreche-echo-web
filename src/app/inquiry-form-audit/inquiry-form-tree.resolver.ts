@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Node } from '../models/node';
-import { RestService } from '../../rest.service';
+import { Node } from '../common/models/node';
+import { RestService } from '../rest.service';
 
 @Injectable()
 export class InquiryFormTreeResolver implements Resolve<Node[]> {

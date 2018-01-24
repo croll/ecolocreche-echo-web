@@ -7,7 +7,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { EditComponent } from './components/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { InquiryFormResolver } from '../common/resolvers/inquiry-form.resolver';
-import { InquiryFormTreeResolver } from '../common/resolvers/inquiry-form-tree.resolver';
+import { InquiryFormTreeResolver } from './inquiry-form-tree.resolver';
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
 
