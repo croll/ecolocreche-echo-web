@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../../common/models/inquiry-form';
+import { Node } from '../../../common/models/node';
 import { RestService } from '../../../rest.service';
 
 @Component({
@@ -18,8 +19,7 @@ export class EditThemeComponent implements OnInit {
   titleCtrl: FormControl;
   descriptionCtrl: FormControl;
   idThemeCtrl: FormControl;
-  mailTitleCtrl: FormControl;
-  mailBodyCtrl: FormControl;
+  themes: Node[];
 
   id_inquiryform: number;
   id_theme: number;
@@ -30,26 +30,17 @@ export class EditThemeComponent implements OnInit {
     this.current = new this.route.snapshot.data['inquiryForm'];
     this.current.inquiry_type = InquiryForm.Inquiry_type.RecapAction;
 
-    this.inquiryform = this.route.snapshot.data['inquiryForm'];
-
-    this.node = new Node();
-    this.node.childs = this.route.snapshot.data['inquiryFormTree']
-    this.filteredChildList = this.node.childs;
+    this.themes = this.route.snapshot.data['inquiryFormTree']
 
     this.idRecapActionsCtrl = fb.control(this.id_inquiryform);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
-    this.idThemeCtrl = fb.control(this.current.description);
-    this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_recapaction_mail_subject);
-    this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_recapaction_mail_body);
 
     this.echosForm = fb.group({
       id_inquiryform: this.idRecapActionsCtrl,
       title: this.titleCtrl,
       description: this.descriptionCtrl,
-      id_theme: this.idThemeCtrl,
-      mail_title: this.mailTitleCtrl,
-      mail_body: this.mailBodyCtrl,
+      id_theme: this.idThemeCtrl
     });
 
   }

@@ -45,7 +45,7 @@ export class EditComponent implements OnInit {
     this.idRecapActionsCtrl = fb.control(this.id_inquiryform);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
-    this.idThemeCtrl = fb.control(this.current.description);
+    this.idThemeCtrl = fb.control(this.current.id);
     this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_recapaction_mail_subject);
     this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_recapaction_mail_body);
 
