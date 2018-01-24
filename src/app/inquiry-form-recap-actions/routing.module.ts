@@ -3,9 +3,11 @@ import { RouterModule, Routes }  from '@angular/router';
 import { ListComponent } from './components/list/list.component';
 import { EditThemeComponent } from './components/edit-theme/edit-theme.component';
 import { EditComponent } from './components/edit/edit.component';
+import { ManageComponent } from './components/manage/manage.component';
 import { AuthGuard } from '../auth-guard.service';
 import { InquiryFormResolver } from '../common/resolvers/inquiry-form.resolver';
-import { InquiryFormTreeResolver } from '../common/resolvers/inquiry-form-tree.resolver';
+import { RecapActionsThemeResolver } from './recap-actions-theme.resolver';
+import { InquiryFormThemesResolver } from '../common/resolvers/inquiry-form-themes.resolver';
 
 const routes: Routes = [
   {
@@ -28,11 +30,25 @@ const routes: Routes = [
         }
       },
       {
-        path: ':id/edit-theme',
+        path: ':id/themes',
+        component: ManageComponent,
+        resolve: {
+          inquiryForm: InquiryFormResolver
+        }
+      },
+      {
+        path: ':id/themes/creer',
         component: EditThemeComponent,
         resolve: {
-          inquiryForm: InquiryFormTreeResolver,
-          inquiryTreeForm: InquiryFormTreeResolver
+          inquiryFormThemes: InquiryFormThemesResolver
+        }
+      },
+      {
+        path: ':id/themes/:id_theme/editer',
+        component: EditThemeComponent,
+        resolve: {
+          recapActionTheme: RecapActionsThemeResolver,
+          inquiryFormThemes: InquiryFormThemesResolver
         }
       }
     ]

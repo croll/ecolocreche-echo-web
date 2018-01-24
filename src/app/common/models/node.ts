@@ -12,8 +12,16 @@ export class Node {
   public childs: any[]
   public nodepath: string
   public linked_to_node_id: number
+  public inquiry_type: Node.Inquiry_type
 
   constructor() {
     this.childs = [];
+  }
+}
+
+export namespace Node {
+  export enum Inquiry_type {
+    Audit = "audit",
+    RecapAction = "recapaction",
   }
 }

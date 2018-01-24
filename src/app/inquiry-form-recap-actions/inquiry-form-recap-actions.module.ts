@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
+import { MatIconRegistry } from '@angular/material';
 import { ListComponent } from './components/list/list.component';
 import { EditThemeComponent } from './components/edit-theme/edit-theme.component';
 import { EditComponent } from './components/edit/edit.component';
+import { ManageComponent } from './components/manage/manage.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
 import { InquiryFormResolver } from '../common/resolvers/inquiry-form.resolver';
-import { InquiryFormTreeResolver } from '../common/resolvers/inquiry-form-tree.resolver';
+import { InquiryFormThemesResolver } from '../common/resolvers/inquiry-form-themes.resolver';
+import { RecapActionsThemeResolver } from './recap-actions-theme.resolver';
 
 @NgModule({
   imports: [
@@ -21,12 +23,14 @@ import { InquiryFormTreeResolver } from '../common/resolvers/inquiry-form-tree.r
   ],
   declarations: [
     ListComponent,
-    EditThemeComponent,
     EditComponent,
+    EditThemeComponent,
+    ManageComponent
   ],
   providers: [
     InquiryFormResolver,
-    InquiryFormTreeResolver
+    InquiryFormThemesResolver,
+    RecapActionsThemeResolver
   ]
 })
 
