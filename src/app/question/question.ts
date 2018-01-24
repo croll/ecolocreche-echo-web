@@ -17,4 +17,12 @@ export class Question {
 
   public choices: Choice[]
   public answer: Answer = new Answer()
+  public inquiry_type: Question.Inquiry_type
+}
+
+export namespace Question {
+  export enum Inquiry_type {
+    Audit = "audit",
+    RecapAction = "recapaction",
+  }
 }

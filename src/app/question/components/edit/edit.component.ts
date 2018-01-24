@@ -31,6 +31,7 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.current = new Question();
+    this.current.inquiry_type = Question.Inquiry_type.Audit;
 
     this.idCtrl = fb.control(this.id_node);
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
