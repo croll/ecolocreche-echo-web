@@ -75,21 +75,26 @@ export class AnswerComponent implements OnInit {
     var r = {
     question_count: 0,
     answer_count: 0,
+    ignored_count: 0,
     };
       dir.childs.forEach((row) => {
          if (row.type.startsWith('q_')) {
              r.question_count++;
              if (row.answer) {
                  r.answer_count++;
+                 if (row.answer.ignored)
+                     r.ignored_count++;
              }
           }
           else if (row.type == 'directory') {
               var _r = this._getProgress(row);
               r.question_count += _r.question_count;
               r.answer_count += _r.answer_count;
+              r.ignored_count += _r.ignored_count;
           }
       });
-    dir.progress = Math.round(r.answer_count * 100 / r.question_count);
+      dir.progress = Math.round(r.answer_count * 100 / r.question_count);
+      dir.progress_ignored = Math.round(r.ignored_count * 100 / r.question_count);
     return r;
 
   }
