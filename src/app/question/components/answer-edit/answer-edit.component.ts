@@ -94,6 +94,7 @@ export class AnswerEditComponent implements OnInit {
 
   ignore() {
       this.current.answer.ignored = true;
+      this.current.answer.comment = this.commentCtrl.value ? this.commentCtrl.value : "";
       this.echosForm.patchValue(this.current.answer);
       this.save();
   }
