@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material.module';
 import { InquiryFormResolver } from '../common/resolvers/inquiry-form.resolver';
 import { InquiryFormThemesResolver } from '../common/resolvers/inquiry-form-themes.resolver';
+import { RecapActionsThemesResolver } from './recap-actions-themes.resolver';
 import { RecapActionsThemeResolver } from './recap-actions-theme.resolver';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { RecapActionsThemeResolver } from './recap-actions-theme.resolver';
   providers: [
     InquiryFormResolver,
     InquiryFormThemesResolver,
+    RecapActionsThemesResolver,
     RecapActionsThemeResolver
   ]
 })

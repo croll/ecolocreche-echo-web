@@ -21,10 +21,10 @@
 
   <div style="margin: 20px 0 50px 0">
     <div>
-      <mat-checkbox (click)="unsetNodeLink()" #linkToATheme></mat-checkbox> Lier à un thème
+      <mat-checkbox (click)="unsetNodeLink()" #linkToATheme [checked]="echosForm.get('linked_to_node_id').value"></mat-checkbox> Lier à un thème
     </div>
 
-    <div *ngIf="linkToATheme.checked" style="margin-top: 15px">
+    <div style="margin-top: 15px" *ngIf="linkToATheme.checked">
       <mat-form-field>
         <mat-select placeholder="Choix du thème" formControlName="linked_to_node_id">
           <mat-option *ngFor="let theme of inquiryFormThemes" [value]="theme.id_node">

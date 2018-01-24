@@ -41,15 +41,15 @@ export class EditThemeComponent implements OnInit {
   ngOnInit() {
     this.item.id_node = this.route.snapshot.params['id_theme'] || null;
     this.inquiryFormThemes = this.route.snapshot.data['inquiryFormThemes']
-    if (this.route.snapshot.data['recapActionTheme']) {
-      this.item = this.route.snapshot.data['recapActionTheme'];
+    if (this.route.snapshot.data['recapActionsTheme']) {
+      this.item = this.route.snapshot.data['recapActionsTheme'];
       this.echosForm.patchValue(this.item);
     }
   }
 
   save() {
     this.restService.save(Object.assign(this.item, this.echosForm.value), 'hist/nodes', null, 'id_node').subscribe((RecapActions) => {
-      this.router.navigate(['/recap-actions', RecapActions.id_inquiryform, 'themes']);
+      this.goBack();
     }, (err) => {
       console.error(err);
     });

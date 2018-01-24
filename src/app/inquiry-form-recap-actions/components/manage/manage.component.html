@@ -1,7 +1,7 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
-  <div routerLink="/recap-actions/liste" fxFlexAlign="start">Liste des établissements</div>
-  <div fxFlexAlign="start">Fiche établissement</div>
+  <div routerLink="/recap-actions/liste" fxFlexAlign="start">Liste des récap actions</div>
+  <div fxFlexAlign="start">Dossier récap actions</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center">
@@ -27,10 +27,10 @@
   <button *ngIf="authService.isSuperAgent()" mat-raised-button [routerLink]="['/recap-actions', item.id, 'themes', 'creer']">Ajouter un thème<mat-icon>add</mat-icon></button>
 </div>
 
-<div *ngIf="!item.nodeslist || !item.nodeslist.length" class="echos-warning">Aucun thème trouvé.</div>
+<div *ngIf="!themesList || !themesList.length" class="echos-warning">Aucun thème trouvé.</div>
 
-<mat-list *ngIf="item.nodeslist && item.nodeslist.length">
-  <mat-list-item class="echos-list-item" *ngFor="let theme of item.nodeslist">
+<mat-list *ngIf="themesList && themesList.length">
+  <mat-list-item class="echos-list-item" *ngFor="let theme of themesList" [routerLink]="['/recap-actions', item.id, 'themes', theme.id_node, 'editer']">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs" fxFill>
         <div>
