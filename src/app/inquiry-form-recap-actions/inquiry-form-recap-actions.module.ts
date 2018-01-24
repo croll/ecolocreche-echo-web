@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
 import { ListComponent } from './components/list/list.component';
-import { DetailComponent } from './components/detail/detail.component';
+import { EditThemeComponent } from './components/edit-theme/edit-theme.component';
 import { EditComponent } from './components/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatIconRegistry } from '@angular/material';
@@ -21,7 +21,7 @@ import { InquiryFormTreeResolver } from '../common/resolvers/inquiry-form-tree.r
   ],
   declarations: [
     ListComponent,
-    DetailComponent,
+    EditThemeComponent,
     EditComponent,
   ],
   providers: [
