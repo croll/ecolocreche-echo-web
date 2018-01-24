@@ -11,6 +11,7 @@ export class Node {
   public color: string
   public childs: any[]
   public nodepath: string
+  public linked_to_node_id: number
 
   constructor() {
     this.childs = [];
