@@ -7,11 +7,17 @@
   <h1 fxFlex>
     Liste des audits en cours
   </h1>
+  <button mat-fab class='not-in-pdf' color="primary" (click)="exportCSV()" fxFlexOffset="8px"><mat-icon>grid_on</mat-icon></button>
 </div>
 
 <mat-form-field fxLayout>
-  <input matInput #search type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(search.value)">
+  <input matInput #filterString type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(filterString.value, filterCompleted.value)">
 </mat-form-field>
+
+<div fxLayout>
+  <mat-slide-toggle #filterCompleted fxFlex (change)="filterList(filterString.value, filterCompleted.checked)">Cacher les audits fait a 100%</mat-slide-toggle>
+</div>
+
 
 <mat-list>
   <mat-list-item class="echos-list-item" [routerLink]="['/audit', item.key]" *ngFor="let item of filteredList">
