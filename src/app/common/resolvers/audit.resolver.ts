@@ -18,13 +18,13 @@ export class AuditResolver implements Resolve<any> {
     let key = route.params['key'];
     let id = parseInt(route.params['id']);
     let id2 = parseInt(route.params['id2']);
-    if (!id2) {
-      return this._getAudit(id || key);
-    } else if (id){
-      return Observable.forkJoin(
-        this._getAudit(id),
-        this._getAudit(id2)
-      )
+    let id3 = parseInt(route.params['id3']);
+    let elems = [];
+    if (id) elems.push(this._getAudit(id));
+    if (id2) elems.push(this._getAudit(id2));
+    if (id3) elems.push(this._getAudit(id3));
+    if (id) {
+      return Observable.forkJoin(elems);
     } else {
       return null;
     }

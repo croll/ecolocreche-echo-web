@@ -52,7 +52,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'comparer/:id/:id2',
+        path: 'comparer/:id/:id2/:id3',
         resolve: {
           infos: AuditResolver,
         },

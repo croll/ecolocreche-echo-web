@@ -7,4 +7,5 @@ export class Audit {
   public key: string
   public date_start: string
   public date_end: string
+  public inquiry_type: string
 }
