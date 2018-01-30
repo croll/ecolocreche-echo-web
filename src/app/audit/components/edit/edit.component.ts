@@ -81,7 +81,7 @@ export class EditComponent implements OnInit {
   }
 
   private _getFormList() {
-      this.restService.getList('hist/inquiryforms').subscribe(forms => {
+      this.restService.getList('hist/inquiryforms', {inquiry_type: InquiryForm.Inquiry_type.Audit}).subscribe(forms => {
         this.inquiryFormList = forms;
       }, (err) => {
         console.error(err);
