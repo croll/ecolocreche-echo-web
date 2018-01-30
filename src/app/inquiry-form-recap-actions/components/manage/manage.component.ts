@@ -31,6 +31,8 @@ export class ManageComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, public authService: AuthService) {
     this.item = this.route.snapshot.data['inquiryForm'];
     this.themesList = this.route.snapshot.data['recapActionsThemes'];
+    console.log("ICI");
+    console.log(this.route.snapshot.data['recapActionsThemes']);
   }
 
   ngOnInit() {

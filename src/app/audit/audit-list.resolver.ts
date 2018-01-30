@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Node } from '../common/models/node';
+import { InquiryForm } from '../common/models/inquiry-form';
 import { RestService } from '../rest.service';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +13,7 @@ export class AuditListResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    return this.restService.getList('audits', {active: 1, sort: '-date_start'})
+    return this.restService.getList('audits', {active: 1, inquiry_type: InquiryForm.Inquiry_type.Audit, sort: '-date_start'})
       .flatMap(audits => {
         let done = 0;
          return Observable.create(observer => {

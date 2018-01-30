@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Location, DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Audit } from '../../audit';
+import { Audit } from '../../../common/models/audit';
 import { RestService} from '../../../rest.service';
 import { InquiryForm } from '../../../common/models/inquiry-form';
 import { Http, Response } from '@angular/http';

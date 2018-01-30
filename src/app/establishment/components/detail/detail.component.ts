@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
 import { RestService } from '../../../rest.service';
-import { Audit } from '../../../audit/audit';
+import { Audit } from '../../../common/models/audit';
 import { AuthService } from '../../../auth.service';
 
 @Component({
@@ -14,12 +14,12 @@ export class DetailComponent {
   private id: number;
   item: any;
   infos: any;
-  auditsToCompare: number[];
+  auditsToCompare: {audits: number[], recap_actions: number[]};
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService) {
     this.id = parseInt(this.route.snapshot.params['id']);
     this.item = Object.assign(new Establishment(), this.route.snapshot.data['infos']);
-    this.auditsToCompare = [];
+    this.auditsToCompare = {audits: [], recap_actions: [null]};
   }
 
   getStatusLabel() {
@@ -43,17 +43,17 @@ export class DetailComponent {
     return match;
   }
 
-  public toggleCompare(id) {
-    let pos = this.auditsToCompare.indexOf(id);
+  public toggleCompare(id, type) {
+    let pos = this.auditsToCompare[type].indexOf(id);
     if (pos != -1) {
-      this.auditsToCompare.splice(pos, 1);
+      this.auditsToCompare[type].splice(pos, 1);
     } else {
-      this.auditsToCompare.push(id);
+      this.auditsToCompare[type].push(id);
     }
   }
 
   public compare() {
-    this.router.navigate(['/audit/comparer', this.auditsToCompare[0], this.auditsToCompare[1]]);
+    this.router.navigate(['/audit/comparer', this.auditsToCompare.audits[0], this.auditsToCompare.audits[1], this.auditsToCompare.recap_actions[0]]);
   }
 
 }

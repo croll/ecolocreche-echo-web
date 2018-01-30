@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../../../rest.service';
-import { Audit } from '../../audit';
+import { Audit } from '../../../common/models/audit';
 import { saveAs } from 'file-saver';
 
 @Component({

@@ -9,6 +9,8 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
   constructor(private restService: RestService) {}
 
   resolve(route: ActivatedRouteSnapshot):any {
-    return (route.params['id']) ? this.restService.getList('hist/nodes', {inquiry_type: Node.Inquiry_type.RecapAction}) : null;
+    // return (route.params['id']) ? this.restService.getList('hist/nodes', {inquiry_type: Node.Inquiry_type.RecapAction}) : null;
+    
+    return this.restService.get(route.params['id'], 'hist/inquiryforms');
   }
 }
