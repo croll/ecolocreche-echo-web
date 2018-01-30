@@ -1,0 +1,42 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
+  <div routerLink="/etablissement/liste" fxFlexAlign="start">Fiche établissement</div>
+  <div *ngIf="!id" fxFlexAlign="start">Démarrer un "récap actions"</div>
+  <div *ngIf="id" fxFlexAlign="start">Modifier un "récap actions"</div>
+</div>
+
+<h1 *ngIf="!id">Créer un "récap actions"</h1>
+<h1 *ngIf="id">Modifier le "récap actions" de l'établissement "{{current.establishment?.name}}"</h1>
+
+<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+
+<form [formGroup]="echosForm">
+  <div>
+    <mat-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
+      <mat-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</mat-option>
+    </mat-select>
+    <div *ngIf="id" class="echos-error">Le type de "récap actions" n'est pas modifiable</div>
+  </div>
+  <div>
+    <mat-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
+      <mat-option [value]="1">En cours</mat-option>
+      <mat-option [value]="0">Terminé</mat-option>
+    </mat-select>
+  </div>
+  <div *ngIf="showCreationDateField">
+    <mat-form-field style="margin-top: 8px">
+      <input matInput type="text" formControlName="date_start" placeholder="Date de création">
+    </mat-form-field>
+    <div *ngIf="dateStartCtrl.hasError('frenchDate')" class="echos-error" style="margin: -14px 0 18px 0">Le format de date doit être de la forme jj/mm/aaaa hh:mm</div>
+  </div>
+  <input *ngIf="id" type="hidden" formControlName="id">
+  <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">
+  <input *ngIf="key" type="hidden" formControlName="key">
+  <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <button *ngIf="id" (click)="delete(id)" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="button" (click)="save($event)" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" fxFlexOffset="20px" mat-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)">Enregistrer et retourner à la fiche établissement</button>
+  </div>
+  <button *ngIf="id" (click)="sendmail(id)" mat-raised-button>Renvoyer le mail</button>
+</form>
