@@ -37,6 +37,7 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MatSnackBar, public authService: AuthService) {
 
     this.current = new Audit();
+    this.current.inquiry_type = InquiryForm.Inquiry_type.Audit;
 
     this.id = this.route.snapshot.params['id'];
     this.infos = this.route.snapshot.data['infos'];
@@ -81,7 +82,7 @@ export class EditComponent implements OnInit {
   }
 
   private _getFormList() {
-      this.restService.getList('hist/inquiryforms', {inquiry_type: InquiryForm.Inquiry_type.Audit}).subscribe(forms => {
+      this.restService.getList('hist/inquiryforms', {inquiry_type: this.current.inquiry_type}).subscribe(forms => {
         this.inquiryFormList = forms;
       }, (err) => {
         console.error(err);
@@ -108,7 +109,7 @@ export class EditComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.echosForm.value.date_start = this._dateStringToObj(this.echosForm.value.date_start);
-    this.restService.save(this.echosForm.value, 'audits').subscribe((audit) => {
+    this.restService.save(Object.assign(this.current, this.echosForm.value), 'audits').subscribe((audit) => {
       this.router.navigate(['/audit', audit.key]);
     }, (err) => {
       console.error(err);
@@ -143,7 +144,7 @@ export class EditComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.echosForm.value.date_start = this._dateStringToObj(this.echosForm.value.date_start);
-    this.restService.save(this.echosForm.value, 'audits').subscribe((audit) => {
+    this.restService.save(Object.assign(this.current, this.echosForm.value), 'audits').subscribe((audit) => {
       this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
     }, (err) => {
       console.error(err);
