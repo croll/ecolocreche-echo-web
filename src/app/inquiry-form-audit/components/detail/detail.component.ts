@@ -4,6 +4,7 @@ import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form
 import { Node } from '../../../common/models/node';
 import { RestService } from '../../../rest.service';
 import { AuthService } from '../../../auth.service';
+import { ServercsvexportService } from '../../../servercsvexport.service'
 import * as moment from 'moment'
 
 @Component({
@@ -25,7 +26,7 @@ export class DetailComponent implements OnInit {
   initialSelection: string;
   userSelection: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private exporter: ServercsvexportService, public authService: AuthService) {
     this.id_inquiryform = parseInt(this.route.snapshot.params['id']);
 
     this.inquiryform = this.route.snapshot.data['inquiryForm'];
@@ -170,6 +171,12 @@ export class DetailComponent implements OnInit {
       this.router.navigate(['/questionnaire/liste']);
     }, (err) => {
       console.error(err);
+    });
+  }
+
+  exportCSV() {
+    this.exporter.download('/rest/export/nodes', {
+      id_inquiryform: this.id_inquiryform,
     });
   }
 

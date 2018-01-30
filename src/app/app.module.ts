@@ -32,6 +32,7 @@ import { AuthService } from './auth.service';
 import { RestService } from './rest.service';
 import { WkHtmlToPdfService } from './wkhtmltopdf.service';
 import { PuppeteerPdfService } from './puppeteerpdf.service';
+import { ServercsvexportService } from './servercsvexport.service';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -71,7 +72,8 @@ registerLocaleData(localeFr, 'fr');
     AuthService,
     RestService,
     //WkHtmlToPdfService
-    PuppeteerPdfService
+    PuppeteerPdfService,
+    ServercsvexportService
   ],
   bootstrap: [AppComponent]
 })

@@ -8,6 +8,7 @@
   <h1 fxFlex>
     Fiche questionnaire<span class="titleItem">{{inquiryform.title}}</span>
   </h1>
+  <button *ngIf="authService.isAdmin()" mat-fab class='not-in-pdf' color="primary" (click)="exportCSV()" fxFlexOffset="8px"><mat-icon>grid_on</mat-icon></button>
   <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id_inquiryform, 'editer']"><mat-icon>edit</mat-icon></button>
 </div>
 
