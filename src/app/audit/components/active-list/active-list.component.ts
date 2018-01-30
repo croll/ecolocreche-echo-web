@@ -23,7 +23,6 @@ export class ActiveListComponent implements OnInit {
   }
 
   filterList(filterString, filterCompleted) {
-    console.log("filterCompleted : ", filterCompleted);
     let filteredList = this.list;
     if (filterString && filterString.length > 0)
       filteredList = filteredList.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filterString.toLocaleLowerCase()) != -1)
@@ -100,8 +99,6 @@ export class ActiveListComponent implements OnInit {
         {wch:6},
       ];
 
-
-      console.log("ws: ", ws);
 
       /* generate workbook and add the worksheet */
       const wb = XLSX.utils.book_new();
