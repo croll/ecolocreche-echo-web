@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Node } from '../common/models/node';
-import { InquiryForm } from '../common/models/inquiry-form';
-import { RestService } from '../rest.service';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Node } from '../models/node';
+import { InquiryForm } from '../models/inquiry-form';
+import { RestService } from '../../rest.service';
 
 @Injectable()
 export class AuditListResolver implements Resolve<any> {

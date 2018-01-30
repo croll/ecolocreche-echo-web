@@ -6,8 +6,8 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
 import { CompareComponent } from './components/compare/compare.component';
 import { AuthGuard } from '../auth-guard.service';
-import { AuditResolver } from './audit.resolver';
-import { AuditListResolver } from './audit-list.resolver';
+import { AuditResolver } from '../common/resolvers/audit.resolver';
+import { AuditListResolver } from '../common/resolvers/audit-list.resolver';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 
 const routes: Routes = [
