@@ -105,11 +105,11 @@ export class ActiveListComponent implements OnInit {
 
       /* generate workbook and add the worksheet */
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.utils.book_append_sheet(wb, ws, 'Audits');
 
       /* save to file */
       const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-      saveAs(new Blob([wbout]), 'SheetJS.xlsx');
+      saveAs(new Blob([wbout]), 'audits.xlsx');
 
     });
   }
