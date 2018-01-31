@@ -14,20 +14,17 @@ import { RestService } from '../../../rest.service';
 export class EditThemeComponent implements OnInit {
 
   echosForm: FormGroup;
-  idRecapActionsCtrl: FormControl;
-  idThemeCtrl: FormControl;
   titleCtrl: FormControl;
   linkedToNodeIdCtrl: FormControl;
-  id_inquiryform: number;
   item: Node;
-  inquiryFormThemes: InquiryForm[] = [];
+  inquiryFormThemes: Node[] = [];
+  inquiryform: InquiryForm;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
 
     this.item = new Node();
     this.item.inquiry_type = Node.Inquiry_type.RecapAction;
 
-    this.idRecapActionsCtrl = fb.control(this.id_inquiryform);
     this.titleCtrl = fb.control(this.item.title, [Validators.required, Validators.minLength(3)]);
     this.linkedToNodeIdCtrl = fb.control(this.item.linked_to_node_id);
 
@@ -41,6 +38,10 @@ export class EditThemeComponent implements OnInit {
   ngOnInit() {
     this.item.id_node = this.route.snapshot.params['id_theme'] || null;
     this.inquiryFormThemes = this.route.snapshot.data['inquiryFormThemes']
+    this.inquiryform = this.route.snapshot.data['inquiryForm']
+    if (!this.inquiryform.nodeslist) {
+      this.inquiryform.nodeslist = '[]';
+    }
     if (this.route.snapshot.data['recapActionsTheme']) {
       this.item = this.route.snapshot.data['recapActionsTheme'];
       this.echosForm.patchValue(this.item);
@@ -49,20 +50,45 @@ export class EditThemeComponent implements OnInit {
 
   save() {
     this.restService.save(Object.assign(this.item, this.echosForm.value), 'hist/nodes', null, 'id_node').subscribe((RecapActions) => {
-      this.goBack();
+      if (!this.item.id_node) {
+        this.updateNodeslist(RecapActions.id_node, 'add');
+      } else {
+        this.goBack();
+      }
     }, (err) => {
       console.error(err);
     });
   }
 
-  delete(id) {
-    if (confirm("Souhaitez vous vraiment supprimer ce dossier recap actions ?")) {
+  delete() {
+    if (confirm("Souhaitez vous vraiment supprimer ce thème ?")) {
       this.restService.delete(this.item.id_node, 'hist/nodes').subscribe((response) => {
-        this.router.navigate(['/recap-actions/liste']);
+        this.updateNodeslist(this.item.id_node, 'delete');
       }, (err) => {
         console.error(err);
       });
     }
+  }
+
+  updateNodeslist(id, action) {
+    if (!id) {
+      return false;
+    }
+    var nl = JSON.parse(this.inquiryform.nodeslist);
+    if (action == 'delete') {
+      let pos = nl.indexOf(id);
+      if (pos !== -1) {
+        nl.splice(pos, 1);
+      }
+    } else {
+      nl.push(id);
+    }
+    this.inquiryform.nodeslist = JSON.stringify(nl);
+    this.restService.save(this.inquiryform, 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
+      this.goBack();
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   unsetNodeLink() {

@@ -24,13 +24,13 @@
 
 <div class="echos-title" fxLayout="row" style="margin-top: 80px">
   <div fxFlex>Liste des thèmes "récap actions"</div>
-  <button *ngIf="authService.isSuperAgent()" mat-raised-button [routerLink]="['/recap-actions', item.id, 'themes', 'creer']">Ajouter un thème<mat-icon>add</mat-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-raised-button [routerLink]="['/recap-actions', item.id_inquiryform, 'themes', 'creer']">Ajouter un thème<mat-icon>add</mat-icon></button>
 </div>
 
 <div *ngIf="!themesList || !themesList.length" class="echos-warning">Aucun thème trouvé.</div>
 
 <mat-list *ngIf="themesList && themesList.length">
-  <mat-list-item class="echos-list-item" *ngFor="let theme of themesList" [routerLink]="['/recap-actions', item.id, 'themes', theme.id_node, 'editer']">
+  <mat-list-item class="echos-list-item" *ngFor="let theme of themesList" [routerLink]="['/recap-actions', item.id_inquiryform, 'themes', theme.id_node, 'editer']">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs" fxFill>
         <div>

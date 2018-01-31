@@ -41,6 +41,7 @@ export class AuditResolver implements Resolve<any> {
                     })
                     .flatMap(audit => {
                       obj.audit = audit[0];
+                      console.log(obj.audit);
                       return this.restService.get(obj.audit.id_inquiryform, 'hist/inquiryforms', {date: obj.audit.createdAt});
                     })
                     .flatMap(inquiryform => {
