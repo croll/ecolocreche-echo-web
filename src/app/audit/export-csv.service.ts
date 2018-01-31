@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuditTools } from './components/abstracts/audit-tools';
+import { saveAs } from 'file-saver';
 
 @Injectable()
 export class ExportCSVService {
@@ -10,13 +11,27 @@ export class ExportCSVService {
 
   getContent(cachedAudit1Datas, cachedAudit2Datas?) {
 
-    let outp = 'THEME;RUBRIQUE;QUESTION;';
+    let aoa: string[][] = [];
+
+    let header= ['THEME','RUBRIQUE','QUESTION'];
+    let cols=[
+      {wch:16},
+      {wch:32},
+      {wch:60},
+    ];
     if (cachedAudit2Datas) {
-      outp += 'REPONSE AUDIT1;IMPACT AUDIT1;REPONSE AUDIT2;IMPACT AUDIT2;'
+      header.push('REPONSE AUDIT1'); cols.push({wch:60});
+      header.push('IMPACT AUDIT1'); cols.push({wch:12});
+      header.push('REPONSE AUDIT2'); cols.push({wch:60});
+      header.push('IMPACT AUDIT2'); cols.push({wch:12});
     } else {
-      outp += 'REPONSE;IMPACT;'
+      header.push('REPONSE'); cols.push({wch:60});
+      header.push('IMPACT'); cols.push({wch:12});
     }
-    outp +=  "COMMENTAIRE\r\n";
+    header.push('COMMENTAIRE'); cols.push({wch:60});
+
+    aoa.push(header);
+
     let themeList = (cachedAudit2Datas) ? this.auditTools.merge(cachedAudit1Datas.chartDatas.themes, cachedAudit2Datas.chartDatas.themes) : this._asArray(cachedAudit1Datas.chartDatas.themes);
     let categoryList = (cachedAudit2Datas) ? Object.assign(cachedAudit1Datas.chartDatas.categories, cachedAudit2Datas.chartDatas.categories) : cachedAudit1Datas.chartDatas.categories;
     let mergedQuestionList = (cachedAudit2Datas) ? this.auditTools.merge(cachedAudit1Datas.questionList, cachedAudit2Datas.questionList) : this._asArray(cachedAudit1Datas.questionList);
@@ -31,30 +46,40 @@ export class ExportCSVService {
       // For each cached question
       mergedQuestionList.forEach(question => {
         let addQuestion = false;
-        let tmpOutp = '';
-        tmpOutp += '"'+theme.title.replace(/"/g, '`')+'";"'+categoryList[question.id_node_parent].title+'";"'+question.title.replace(/"/g, '`')+'";';
+        let tmpLine=[];
+
+        tmpLine.push(theme.title);
+        tmpLine.push(categoryList[question.id_node_parent].title);
+        tmpLine.push(question.title);
+
         let answer1 = null, answer2 = null;
         // If the question is of same theme
         if (cachedAudit1Datas.questionList[question.id_node] && cachedAudit1Datas.questionList[question.id_node].id_theme == theme.id_node) {
           addQuestion = true;
           answer1 = this.getAnswer(cachedAudit1Datas.questionList[question.id_node]);
-          tmpOutp += answer1.value+';'+answer1.impact+';'
+          tmpLine.push(answer1.value);
+          tmpLine.push(answer1.impact);
         } else {
           // If question does not exist in audit 1
-          tmpOutp += ';;';
+          tmpLine.push('');
+          tmpLine.push('');
         }
+
         // If we have 2 audits
         if (cachedAudit2Datas) {
           // If question does not exist in audit 2
           if (cachedAudit2Datas.questionList[question.id_node] && cachedAudit2Datas.questionList[question.id_node].id_theme == theme.id_node) {
             addQuestion = true;
             answer2 = this.getAnswer(cachedAudit2Datas.questionList[question.id_node]);
-            tmpOutp += answer2.value+';'+answer2.impact+';'
+            tmpLine.push(answer2.value);
+            tmpLine.push(answer2.impact);
           } else {
             // If question does not exist in audit 2
-            tmpOutp += ';;';
+            tmpLine.push('');
+            tmpLine.push('');
           }
         }
+
         // Question comment
         let comment = '';
         if (answer1 && answer1.comment) {
@@ -63,19 +88,61 @@ export class ExportCSVService {
         if (cachedAudit2Datas && answer2 && answer2.comment && answer1.comment != answer2.comment) {
           comment += answer2.comment;
         }
-        tmpOutp += comment+"\n";
+        tmpLine.push(comment);
         if (addQuestion) {
-          outp += tmpOutp;
+          aoa.push(tmpLine);
         }
       });
 
     });
 
-      // For each audit 1 question list
 
-    this.triggerDownload(outp);
+    this.exportCSV(aoa, cols);
 
   }
+
+  exportCSV(aoa: string[][], cols) {
+    import('xlsx').then(XLSX => {
+
+      /* generate worksheet */
+      const ws = XLSX.utils.aoa_to_sheet(aoa);
+
+      /*
+      // convert cellules
+      for (let k in ws) {
+
+        // convert dates
+        if (k!='H1' && k.startsWith('H')) {
+          ws[k].t='d';
+        }
+
+        // convert cached_percent_complete
+        if (k!='I1' && k.startsWith('I')) {
+          ws[k].z='0%';
+        }
+
+        // convert cached_percent_ignored
+        if (k!='J1' && k.startsWith('J')) {
+          ws[k].z='0%';
+        }
+
+      }
+      */
+
+      // set col width
+      ws['!cols'] = cols;
+
+      /* generate workbook and add the worksheet */
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Audits');
+
+      /* save to file */
+      const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      saveAs(new Blob([wbout]), 'export.xlsx');
+
+    });
+  }
+
 
   getAnswer(question):any {
     let obj = {value: '', impact: '', comment: ''};
@@ -88,20 +155,20 @@ export class ExportCSVService {
       return obj;
     }
     if (typeof(question.value) != 'object') {
-      obj.value = '"'+question.value.toString().replace(/"/g, '`')+'"';
+      obj.value = question.value.toString();
       return obj;
     } else {
       question.value.forEach(val => {
         if (question.type == 'q_checkbox' || question.type == 'q_radio') {
-          obj.value += val.title.replace(/"/g, '`')
+          obj.value += val.title;
         } else if (question.type == 'q_percents') {
           obj.value += ''+val.value+'%,';
         }
         if (val.comment) {
-          obj.comment += ''+val.comment.replace(/"/g, '`')+',';
+          obj.comment += ''+val.comment+',';
         }
         if (val.impact) {
-          obj.impact += ''+val.impact.label.replace(/"/g, '`')+',';
+          obj.impact += ''+val.impact.label+',';
         }
       });
       if (obj.value) {
@@ -115,39 +182,6 @@ export class ExportCSVService {
       }
     }
     return obj;
-  }
-
-  triggerDownload(content) {
-
-    let proposedFileName = 'export.csv';
-
-    var blob = new Blob([content], {type : 'text/csv'});
-
-    if (typeof window.navigator.msSaveBlob !== 'undefined'){
-      window.navigator.msSaveBlob(blob, proposedFileName);
-    } else {
-      var downloadUrl = URL.createObjectURL(blob);
-
-      // build and open link - use HTML5 a[download] attribute to specify filename
-      var a = document.createElement("a");
-
-      // safari doesn't support this yet
-      if (typeof a.download === 'undefined') {
-          window.open(downloadUrl);
-      }
-
-      var link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = proposedFileName;
-      document.body.appendChild(link);
-      var event = new MouseEvent('click', {
-        'view': window,
-        'bubbles': true,
-        'cancelable': true
-      });
-      link.dispatchEvent(event);
-      document.body.removeChild(link);
-    }
   }
 
   private _formatString(str) {

@@ -63,7 +63,7 @@ export class ActiveListComponent implements OnInit {
         "% ignoré",
       ]);
       this.filteredList.forEach(function(audit) {
-        console.log("audit: ", audit);
+        //console.log("audit: ", audit);
         data.push([
           audit.id,
           audit.key,
