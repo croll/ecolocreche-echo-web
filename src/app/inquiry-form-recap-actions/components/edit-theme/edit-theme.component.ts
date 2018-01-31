@@ -49,7 +49,7 @@ export class EditThemeComponent implements OnInit {
   }
 
   save() {
-    this.restService.save(Object.assign(this.item, this.echosForm.value), 'hist/nodes', null, 'id_node').subscribe((RecapActions) => {
+    this.restService.save(Object.assign(this.item, this.echosForm.value), 'hist/nodes', {id_inquiryform: this.inquiryform.id_inquiryform}, 'id_node').subscribe((RecapActions) => {
       if (!this.item.id_node) {
         this.updateNodeslist(RecapActions.id_node, 'add');
       } else {
