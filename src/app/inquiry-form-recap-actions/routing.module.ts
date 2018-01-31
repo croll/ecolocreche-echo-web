@@ -42,15 +42,17 @@ const routes: Routes = [
         path: ':id/themes/creer',
         component: EditThemeComponent,
         resolve: {
-          inquiryFormThemes: InquiryFormThemesResolver
+          inquiryForm: InquiryFormResolver,
+          inquiryFormThemes: InquiryFormThemesResolver,
         }
       },
       {
         path: ':id/themes/:id_theme/editer',
         component: EditThemeComponent,
         resolve: {
+          inquiryForm: InquiryFormResolver,
           recapActionsTheme: RecapActionsThemeResolver,
-          inquiryFormThemes: InquiryFormThemesResolver
+          inquiryFormThemes: InquiryFormThemesResolver,
         }
       }
     ]

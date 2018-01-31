@@ -36,7 +36,7 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id_inquiryform" (click)="delete()" mat-raised-button color="warn">Effacer</button>
+    <button *ngIf="item.id_node" (click)="delete()" mat-raised-button color="warn">Effacer</button>
     <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
     <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
