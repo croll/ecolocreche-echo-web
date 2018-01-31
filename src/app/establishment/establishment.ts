@@ -1,3 +1,5 @@
+import { Audit } from '../common/models/audit';
+
 export class Establishment {
 
   public id: number
@@ -30,4 +32,9 @@ export class Establishment {
       {id: 'mam', label: 'MAM'},
       {id: 'autre', label: 'Autre'},
     ];
+}
+
+export class EstablishmentExt extends Establishment {
+  public audits: Audit[] = [];
+  public recap_actions: Audit[] = [];
 }

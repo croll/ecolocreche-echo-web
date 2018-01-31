@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { Node } from '../common/models/node';
-import { RestService } from '../rest.service';
+import { Node } from '../models/node';
+import { RestService } from '../../rest.service';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -18,13 +18,14 @@ export class AuditResolver implements Resolve<any> {
     let key = route.params['key'];
     let id = parseInt(route.params['id']);
     let id2 = parseInt(route.params['id2']);
-    if (!id2) {
-      return this._getAudit(id || key);
-    } else if (id){
-      return Observable.forkJoin(
-        this._getAudit(id),
-        this._getAudit(id2)
-      )
+    let id3 = parseInt(route.params['id3']);
+    let idOrKey = (key) ? key : id;
+    let elems = [];
+    if (idOrKey) elems.push(this._getAudit(idOrKey));
+    if (id2) elems.push(this._getAudit(id2));
+    if (id3) elems.push(this._getAudit(id3));
+    if (idOrKey) {
+      return Observable.forkJoin(elems);
     } else {
       return null;
     }
@@ -33,6 +34,7 @@ export class AuditResolver implements Resolve<any> {
   private _getAudit(idOrKey) {
     let obj = {audit: null, nodes: null, inquiryform: null}
     let url = (typeof(idOrKey) == 'string') ? `rest/audits?key=${idOrKey}` : `rest/audits?id=${idOrKey}`;
+    console.log(url);
     return this.http.get(url)
                     .map((res: Response) => {
                       return res.json();

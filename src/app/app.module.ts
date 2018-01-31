@@ -24,6 +24,7 @@ import { EstablishmentModule } from './establishment/establishment.module';
 import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './question/answer.module'; // a remetre, test
 import { AuditModule } from './audit/audit.module';
+import { RecapActionsModule } from './recap_actions/recap_actions.module';
 import { InquiryFormAuditModule } from './inquiry-form-audit/inquiry-form-audit.module';
 import { QuestionBankModule } from './question-bank/question-bank.module';
 import { InquiryFormRecapActionsModule } from './inquiry-form-recap-actions/inquiry-form-recap-actions.module';
@@ -61,6 +62,7 @@ registerLocaleData(localeFr, 'fr');
     InquiryFormAuditModule,
     InquiryFormRecapActionsModule,
     AuditModule,
+    RecapActionsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     // NgxDatatableModule,

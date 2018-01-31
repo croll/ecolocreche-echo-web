@@ -9,6 +9,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/concatAll';
+import { EstablishmentExt } from './establishment';
+import { Audit } from '../common/models/audit';
 
 @Injectable()
 export class EstablishmentResolver implements Resolve<any> {
@@ -18,10 +20,10 @@ export class EstablishmentResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     let id = route.params['id'];
-    let establishment;
+    let establishment = new EstablishmentExt();
     return this.restService.get(id, 'establishments')
                     .flatMap(est => {
-                      establishment = est;
+                      Object.assign(establishment, est);
                       return this.restService.getList('audits', {id_establishment: establishment.id, sort:'-date_start'});
                     })
                     .flatMap(audits => {
@@ -38,8 +40,12 @@ export class EstablishmentResolver implements Resolve<any> {
                           this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').subscribe(iq => {
                             audit.inquiryform = iq;
                           })
+                          if (audit.inquiry_type == 'audit') {
+                            establishment.audits.push(audit);
+                          } else {
+                            establishment.recap_actions.push(audit);
+                          }
                           if (audits.length == done) {
-                            establishment.audits = audits;
                             observer.next(establishment);
                             observer.complete();
                           }

@@ -1,0 +1,47 @@
+.search-container {
+  margin: 18px 0;
+}
+
+.mat-toolbar-row, .mat-toolbar-row {
+  white-space: normal;
+}
+
+.echos-answer-breadcrumb {
+
+  margin: 30px 0 0 0;
+  font-size: 1.5em;
+
+  .rootNode {
+    cursor: pointer;
+    color: #000;
+  }
+
+  @media(max-width: 960px) {
+    font-size:1.2em;
+  }
+
+  .parentNode {
+    cursor: pointer;
+    &:before {
+      content: '/';
+      padding: 0 5px;
+    }
+    div {
+      color: #000;
+    }
+  }
+
+  .currentNode {
+    color: #777;
+    &:before {
+      content: '/';
+      padding: 0 5px;
+    }
+  }
+
+  .disabled {
+    pointer-events: none!important;
+    cursor: default!important;
+  }
+
+}

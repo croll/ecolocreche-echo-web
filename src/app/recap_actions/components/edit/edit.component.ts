@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MatSnackBar, public authService: AuthService) {
 
     this.current = new Audit();
-    this.current.inquiry_type = InquiryForm.Inquiry_type.Audit;
+    this.current.inquiry_type = InquiryForm.Inquiry_type.RecapAction;
 
     this.id = this.route.snapshot.params['id'];
     this.infos = this.route.snapshot.data['infos'];

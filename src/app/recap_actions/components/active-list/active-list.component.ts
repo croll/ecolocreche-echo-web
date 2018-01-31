@@ -13,37 +13,21 @@ export class ActiveListComponent implements OnInit {
   list: any[] = [];
   filteredList: any[] = [];
   errorMessage: string;
-  inquiryforms: any[] = [];
 
   constructor(private restService: RestService, private route: ActivatedRoute) {
     this.list = this.route.snapshot.data['infos'];
     this.filteredList = this.list;
-
-    let self=this;
-    let ids=[];
-    this.list.forEach(function(audit) {
-      let inquiryform = audit.inquiryform;
-      if (!(audit.inquiryform.id_inquiryform in ids)) {
-        ids.push(audit.inquiryform.id_inquiryform);
-        if (audit.inquiryform.deletedAt) {
-          audit.inquiryform.title+=" (supprimé)";
-        }
-        self.inquiryforms.push(audit.inquiryform);
-      }
-    });
   }
 
   ngOnInit() {
   }
 
-  filterList(filterString, filterCompleted, filterInquiryform) {
+  filterList(filterString, filterCompleted) {
     let filteredList = this.list;
     if (filterString && filterString.length > 0)
-      filteredList = filteredList.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filterString.toLocaleLowerCase()) != -1);
+      filteredList = filteredList.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filterString.toLocaleLowerCase()) != -1)
     if (filterCompleted)
-      filteredList = filteredList.filter(item => item.cached_percent_complete < 0.999);
-    if (filterInquiryform)
-      filteredList = filteredList.filter(item => item.id_inquiryform == filterInquiryform);
+      filteredList = filteredList.filter(item => item.cached_percent_complete < 0.999)
     this.filteredList = filteredList;
   }
 
@@ -52,29 +36,29 @@ export class ActiveListComponent implements OnInit {
       let data = [];
       data.push([
         "ID",
-        "clef d'audit",
+        "clef de recap action",
         "Etablissement",
         "Type",
         "Statut",
         "Code postal",
         "mail",
-        "date audit",
+        "date recap_action",
         "% fait",
         "% ignoré",
       ]);
-      this.filteredList.forEach(function(audit) {
-        console.log("audit: ", audit);
+      this.filteredList.forEach(function(recap_action) {
+        //console.log("recap_action: ", recap_action);
         data.push([
-          audit.id,
-          audit.key,
-          audit.establishment.name,
-          audit.establishment.type,
-          audit.establishment.status,
-          audit.establishment.postalcode,
-          audit.establishment.mail,
-          audit.date_start,
-          audit.cached_percent_complete,
-          audit.cached_percent_ignored,
+          recap_action.id,
+          recap_action.key,
+          recap_action.establishment.name,
+          recap_action.establishment.type,
+          recap_action.establishment.status,
+          recap_action.establishment.postalcode,
+          recap_action.establishment.mail,
+          recap_action.date_start,
+          recap_action.cached_percent_complete,
+          recap_action.cached_percent_ignored,
         ]);
       });
 
@@ -118,11 +102,11 @@ export class ActiveListComponent implements OnInit {
 
       /* generate workbook and add the worksheet */
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Audits');
+      XLSX.utils.book_append_sheet(wb, ws, 'RecapActions');
 
       /* save to file */
       const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-      saveAs(new Blob([wbout]), 'audits.xlsx');
+      saveAs(new Blob([wbout]), 'recap_actions.xlsx');
 
     });
   }
