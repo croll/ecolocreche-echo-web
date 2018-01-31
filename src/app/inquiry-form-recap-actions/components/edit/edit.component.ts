@@ -78,7 +78,7 @@ export class EditComponent implements OnInit {
 
   save() {
     this.restService.save(Object.assign(this.current, this.echosForm.value), 'hist/inquiryforms', null, 'id_inquiryform').subscribe((RecapActions) => {
-      this.router.navigate(['/recap-actions', RecapActions.id_inquiryform, 'themes']);
+      this.router.navigate(['/questionnaire_recap_actions', RecapActions.id_inquiryform, 'themes']);
     }, (err) => {
       console.error(err);
     });
@@ -87,7 +87,7 @@ export class EditComponent implements OnInit {
   delete(id) {
     if (confirm("Souhaitez vous vraiment supprimer ce dossier recap actions ?")) {
       this.restService.delete(this.id_inquiryform, 'hist/inquiryforms').subscribe((response) => {
-        this.router.navigate(['/recap-actions/liste']);
+        this.router.navigate(['/questionnaire_recap_actions/liste']);
       }, (err) => {
         console.error(err);
       });

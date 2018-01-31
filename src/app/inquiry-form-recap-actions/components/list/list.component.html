@@ -1,11 +1,11 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
-  <div fxFlexAlign="start">Liste des recap-actions</div>
+  <div fxFlexAlign="start">Liste des "recap actions"</div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    Liste des recap-actions
+    Liste des "recap actions"
   </h1>
   <button *ngIf="authService.isAdmin()" mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
 </div>
@@ -15,7 +15,7 @@
 </mat-form-field>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" [routerLink]="['/recap-actions', item.id_inquiryform, 'themes']" *ngFor="let item of filteredList">
+  <mat-list-item class="echos-list-item" [routerLink]="['/questionnaire_recap_actions', item.id_inquiryform, 'themes']" *ngFor="let item of filteredList">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs">
         <div>{{item.title}}</div>
@@ -26,4 +26,4 @@
   </mat-list-item>
 </mat-list>
 
-<div *ngIf="!filteredList.length">Aucun recap-actions n'a été trouvé.</div>
+<div *ngIf="!filteredList.length">Aucun "recap actions" n'a été trouvé.</div>

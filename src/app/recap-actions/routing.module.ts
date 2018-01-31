@@ -9,7 +9,7 @@ import { AuditListResolver } from '../common/resolvers/audit-list.resolver';
 
 const routes: Routes = [
   {
-    path: 'recap_action',
+    path: 'recap_actions',
     //canActivate: [AuthGuard],
     children: [
       {

@@ -12,7 +12,7 @@ import { InquiryFormThemesResolver } from '../common/resolvers/inquiry-form-them
 
 const routes: Routes = [
   {
-    path: 'recap-actions',
+    path: 'questionnaire_recap_actions',
     //canActivate: [AuthGuard],
     children: [
       {

@@ -109,8 +109,8 @@ export class EditComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.echosForm.value.date_start = this._dateStringToObj(this.echosForm.value.date_start);
-    this.restService.save(Object.assign(this.current, this.echosForm.value), 'audits').subscribe((audit) => {
-      this.router.navigate(['/audit', audit.key]);
+    this.restService.save(Object.assign(this.current, this.echosForm.value), 'audits').subscribe((recap_actions) => {
+      this.router.navigate(['/recap_actions', recap_actions.key]);
     }, (err) => {
       console.error(err);
     });

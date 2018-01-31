@@ -18,7 +18,6 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
           return Observable.of([]);
         }
         let nodeslist = JSON.parse(inquiryform.nodeslist);
-        console.log(nodeslist);
         nodeslist.forEach(id_node => {
           observable_nodes.push(this.restService.get(id_node, 'hist/nodes'));
         });

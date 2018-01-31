@@ -38,7 +38,7 @@
        <!-- <mat-divider></mat-divider> -->
        <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuHide($event)">Les questionnaires</mat-list-item>
        <!-- <mat-divider></mat-divider> -->
-       <mat-list-item *ngIf="isSuperAgent()" routerLink="/recap-actions/liste" routerLinkActive="active" (click)="menuHide($event)">Les recap actions</mat-list-item>
+       <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire_recap_actions/liste" routerLinkActive="active" (click)="menuHide($event)">Les recap actions</mat-list-item>
        <!-- <mat-divider></mat-divider> -->
        <mat-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)">Déconnexion</mat-list-item>
        <mat-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)">Connexion</mat-list-item>

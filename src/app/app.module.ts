@@ -28,6 +28,7 @@ import { RecapActionsModule } from './recap-actions/recap-actions.module';
 import { InquiryFormAuditModule } from './inquiry-form-audit/inquiry-form-audit.module';
 import { QuestionBankModule } from './question-bank/question-bank.module';
 import { InquiryFormRecapActionsModule } from './inquiry-form-recap-actions/inquiry-form-recap-actions.module';
+import { LabelingFileModule } from './labeling-file/labeling-file.module';
 import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { RestService } from './rest.service';
@@ -63,6 +64,7 @@ registerLocaleData(localeFr, 'fr');
     InquiryFormRecapActionsModule,
     AuditModule,
     RecapActionsModule,
+    LabelingFileModule,
     AppRoutingModule,
     ReactiveFormsModule,
     // NgxDatatableModule,

@@ -34,7 +34,6 @@ export class AuditResolver implements Resolve<any> {
   private _getAudit(idOrKey) {
     let obj = {audit: null, nodes: null, inquiryform: null}
     let url = (typeof(idOrKey) == 'string') ? `rest/audits?key=${idOrKey}` : `rest/audits?id=${idOrKey}`;
-    console.log(url);
     return this.http.get(url)
                     .map((res: Response) => {
                       return res.json();
@@ -51,6 +50,7 @@ export class AuditResolver implements Resolve<any> {
                     .flatMap(nodes => {
                        var node = new Node();
                        node.childs = nodes;
+                       console.log(JSON.parse(obj.inquiryform.nodeslist));
                        obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
                        return Observable.create(observer => {
                           observer.next(obj);
