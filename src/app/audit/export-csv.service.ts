@@ -189,7 +189,7 @@ export class ExportCSVService {
     if (str.substr(-1, 1) == ',') {
        str = str.substr(0, str.length-1);
      }
-    return '"'+str+'"';
+    return str;
   }
 
   private _asArray(obj) {
