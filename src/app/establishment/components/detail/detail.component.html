@@ -105,7 +105,7 @@
         <div class="echos-percent echos-percent-complete" title="complété">{{recap_action.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
         <div class="echos-percent echos-percent-ignored" title="ignoré">{{recap_action.cached_percent_ignored * 100 | number:'1.0-0' }} %</div>
       </div>
-      <button mat-button *ngIf="recap_action.active || authService.isSuperAgent()" [routerLink]="['/recap_action', recap_action.key]"><mat-icon color="primary">chevron_right</mat-icon></button>
+      <button mat-button *ngIf="recap_action.active || authService.isSuperAgent()" [routerLink]="['/recap_action', recap_action.id]"><mat-icon color="primary">chevron_right</mat-icon></button>
     </div>
   </mat-list-item>
 </mat-list>

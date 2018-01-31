@@ -21,7 +21,6 @@ export class EstablishmentResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     let id = route.params['id'];
     let establishment = new EstablishmentExt();
-    console.log(establishment);
     return this.restService.get(id, 'establishments')
                     .flatMap(est => {
                       Object.assign(establishment, est);
@@ -41,7 +40,6 @@ export class EstablishmentResolver implements Resolve<any> {
                           this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').subscribe(iq => {
                             audit.inquiryform = iq;
                           })
-                          console.log(audit);
                           if (audit.inquiry_type == 'audit') {
                             establishment.audits.push(audit);
                           } else {
