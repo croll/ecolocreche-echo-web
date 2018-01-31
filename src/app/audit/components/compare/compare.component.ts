@@ -6,7 +6,7 @@ import { RestService } from '../../../rest.service';
 import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 import { ExportCSVService } from '../../export-csv.service';
-import { WkHtmlToPdfService } from '../../../wkhtmltopdf.service';
+import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 
 import * as moment from 'moment';
 
@@ -47,7 +47,7 @@ export class CompareComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private wkService: WkHtmlToPdfService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService) {
     let tmp1 = this.route.snapshot.data['infos'][0];
     let tmp2 = this.route.snapshot.data['infos'][1];
     if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
@@ -109,7 +109,8 @@ export class CompareComponent implements OnInit {
   }
 
   pdf() {
-    this.wkService.print();
+    console.log("TODO: replace 0 by the id of compare");
+    this.puppeeterService.print('compare', 0);
   }
 
   exportCSV() {
