@@ -1,0 +1,16 @@
+<div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
+  <div [routerLink]="['/etablissement', infos.audit.establishment.id]" fxFlexAlign="start">{{infos.audit.establishment.name}}</div>
+  <div fxFlexAlign="start">Compléter un "récap actions"</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center">
+  <h1 fxFlex>
+    "Récap actions" de {{infos.audit.establishment.name}}
+  </h1>
+  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/recap_action', infos.audit.id, 'editer']"><mat-icon>edit</mat-icon></button>
+</div>
+
+<div *ngIf="showSaveButton" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <button mat-raised-button color="primary" (click)="save()">Enregistrer le questionnaire</button>
+</div>
