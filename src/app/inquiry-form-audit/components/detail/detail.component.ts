@@ -174,9 +174,10 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  exportCSV() {
+  exportCSV(format: string) {
     this.exporter.download('/rest/export/nodes', {
       id_inquiryform: this.id_inquiryform,
+      format: format,
     });
   }
 

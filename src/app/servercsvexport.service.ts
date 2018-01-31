@@ -20,7 +20,13 @@ export class ServercsvexportService {
       this.restService.decLoading();
 
       //saveAs(data.blob(), "export.xlsx");
-      saveAs(new Blob([data.blob()], { type: 'application/octet-stream' }), "export.xlsx");
+      if (params['format'] == 'csv') {
+        saveAs(new Blob([data.blob()], { type: 'text/csv' }), "export.csv");
+      } else if (params['format'] == 'xlsx') {
+        saveAs(new Blob([data.blob()], { type: 'application/octet-stream' }), "export.xlsx");
+      } else {
+        console.error("format inconnu");
+      }
 
       //this.triggerDownload(data.blob())
     });
