@@ -85,9 +85,9 @@ export class RestService {
     }
   }
 
-  delete(id: number, type: string, message: string = "Suppression : "): Observable<boolean> {
+  delete(id: number, type: string, params?: any, message: string = "Suppression : "): Observable<boolean> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({ headers: headers, search: this.setParams(params) });
 
     if (!id) {
       console.error("call delete without id ?");

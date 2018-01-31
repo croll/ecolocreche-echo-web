@@ -90,7 +90,7 @@ export class EditComponent implements OnInit {
 
   delete() {
     if (confirm("Souhaitez vous vraiment supprimer cette question ?")) {
-      this.restService.delete(this.id_node, 'hist/nodes', "Suppression de la question : ").subscribe((response) => {
+      this.restService.delete(this.id_node, 'hist/nodes', null, "Suppression de la question : ").subscribe((response) => {
         this.router.navigate(['/theme/'+this.current['nodepath'][0].id_node+'/rubrique/'+this.current['nodepath'][1].id_node]);
       }, (err) => {
         console.error(err);

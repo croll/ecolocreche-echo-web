@@ -27,7 +27,7 @@ export class RestService {
   }
 
   delete(id): Observable<boolean> {
-    return this.mainRestService.delete(id, 'users', "Suppression de l'utilisateur : ");
+    return this.mainRestService.delete(id, 'users', null, "Suppression de l'utilisateur : ");
   }
 
 
