@@ -6,8 +6,13 @@ import { Node } from '../models/node';
 import { InquiryForm } from '../models/inquiry-form';
 import { RestService } from '../../rest.service';
 
+export class AuditListResolved {
+  audits: any[];
+  plop: number;
+}
+
 @Injectable()
-export class AuditListResolver implements Resolve<any> {
+export class AuditListResolver implements Resolve<AuditListResolved> {
 
   constructor(private restService: RestService, private http: Http) {
   }
@@ -15,20 +20,15 @@ export class AuditListResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
     return this.restService.getList('audits', {active: 1, inquiry_type: InquiryForm.Inquiry_type.Audit, sort: '-date_start'})
       .flatMap(audits => {
-        let done = 0;
-         return Observable.create(observer => {
-          audits.forEach(audit => {
-            done++;
-            this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').subscribe(iq => {
-              audit.inquiryform = iq;
-            })
-            if (audits.length == done) {
-              observer.next(audits);
-              observer.complete();
-            }
-          });
+        let observable_audits: Observable<any>[] = [];
+        audits.forEach(audit => {
+          observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', { with_deleteds: 1 }).map(iq => {
+            audit.inquiryform = iq;
+          }));
+        });
+        return Observable.forkJoin(observable_audits, plop => {
+          return audits;
+        });
       });
-  });
-  }
-
+    }
 }

@@ -11,13 +11,21 @@
 </div>
 
 <mat-form-field fxLayout>
-  <input matInput #filterString type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(filterString.value, filterCompleted.value)">
+  <input matInput #filterString type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(filterString.value, filterCompleted.checked, filterInquiryform.value)">
+</mat-form-field>
+
+<mat-form-field fxLayout>
+  <mat-select #filterInquiryform placeholder="Limiter aux questionnaire : " (change)="filterList(filterString.value, filterCompleted.checked, filterInquiryform.value)">
+    <mat-option [value]="">Tous (ne pas limiter)</mat-option>
+    <mat-option *ngFor="let inquiryform of inquiryforms" [value]="inquiryform.id_inquiryform">
+      {{ inquiryform.title }}
+    </mat-option>
+  </mat-select>
 </mat-form-field>
 
 <div fxLayout>
-  <mat-slide-toggle #filterCompleted fxFlex (change)="filterList(filterString.value, filterCompleted.checked)">Cacher les audits fait a 100%</mat-slide-toggle>
+  <mat-slide-toggle #filterCompleted fxFlex (change)="filterList(filterString.value, filterCompleted.checked, filterInquiryform.value)">Cacher les audits fait a 100%</mat-slide-toggle>
 </div>
-
 
 <mat-list>
   <mat-list-item class="echos-list-item" [routerLink]="['/audit', item.key]" *ngFor="let item of filteredList">

@@ -13,21 +13,37 @@ export class ActiveListComponent implements OnInit {
   list: any[] = [];
   filteredList: any[] = [];
   errorMessage: string;
+  inquiryforms: any[] = [];
 
   constructor(private restService: RestService, private route: ActivatedRoute) {
     this.list = this.route.snapshot.data['infos'];
     this.filteredList = this.list;
+
+    let self=this;
+    let ids=[];
+    this.list.forEach(function(audit) {
+      let inquiryform = audit.inquiryform;
+      if (!(audit.inquiryform.id_inquiryform in ids)) {
+        ids.push(audit.inquiryform.id_inquiryform);
+        if (audit.inquiryform.deletedAt) {
+          audit.inquiryform.title+=" (supprimé)";
+        }
+        self.inquiryforms.push(audit.inquiryform);
+      }
+    });
   }
 
   ngOnInit() {
   }
 
-  filterList(filterString, filterCompleted) {
+  filterList(filterString, filterCompleted, filterInquiryform) {
     let filteredList = this.list;
     if (filterString && filterString.length > 0)
-      filteredList = filteredList.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filterString.toLocaleLowerCase()) != -1)
+      filteredList = filteredList.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filterString.toLocaleLowerCase()) != -1);
     if (filterCompleted)
-      filteredList = filteredList.filter(item => item.cached_percent_complete < 0.999)
+      filteredList = filteredList.filter(item => item.cached_percent_complete < 0.999);
+    if (filterInquiryform)
+      filteredList = filteredList.filter(item => item.id_inquiryform == filterInquiryform);
     this.filteredList = filteredList;
   }
 
@@ -47,7 +63,7 @@ export class ActiveListComponent implements OnInit {
         "% ignoré",
       ]);
       this.filteredList.forEach(function(audit) {
-        //console.log("audit: ", audit);
+        console.log("audit: ", audit);
         data.push([
           audit.id,
           audit.key,
