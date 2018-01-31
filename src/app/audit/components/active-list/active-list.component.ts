@@ -47,7 +47,7 @@ export class ActiveListComponent implements OnInit {
     this.filteredList = filteredList;
   }
 
-  exportCSV() {
+  exportCSV(format: string) {
     import('xlsx').then(XLSX => {
       let data = [];
       data.push([
@@ -121,8 +121,8 @@ export class ActiveListComponent implements OnInit {
       XLSX.utils.book_append_sheet(wb, ws, 'Audits');
 
       /* save to file */
-      const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-      saveAs(new Blob([wbout]), 'audits.xlsx');
+      const wbout: string = XLSX.write(wb, { bookType: format == 'csv' ? 'csv' : 'xlsx', type: 'array' });
+      saveAs(new Blob([wbout]), 'audits.'+format);
 
     });
   }

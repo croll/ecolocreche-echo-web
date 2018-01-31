@@ -62,8 +62,8 @@ export class ReportComponent implements OnInit {
     this.wkService.print("audit", this.infos.audit.id);
   }
 
-  exportCSV() {
-    this.csvService.getContent(this.cache);
+  exportCSV(format: string) {
+    this.csvService.getContent(format, this.cache);
   }
 
 }

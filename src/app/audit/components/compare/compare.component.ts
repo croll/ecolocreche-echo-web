@@ -113,8 +113,8 @@ export class CompareComponent implements OnInit {
     this.puppeeterService.print('compare', 0);
   }
 
-  exportCSV() {
-    this.csvService.getContent(this.audit1Cache, this.audit2Cache);
+  exportCSV(format: string) {
+    this.csvService.getContent(format, this.audit1Cache, this.audit2Cache);
   }
 
   changeLogo(e) {
