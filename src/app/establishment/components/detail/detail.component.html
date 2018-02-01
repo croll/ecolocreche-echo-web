@@ -110,6 +110,26 @@
   </mat-list-item>
 </mat-list>
 
+<div class="echos-title" fxLayout="row" style="margin-top: 80px">
+  <div fxFlex>Liste des "dossiers de labélisation"</div>
+</div>
+
+<mat-list>
+  <mat-list-item class="echos-list-item" *ngFor="let labeling_file of item.labeling_files">
+    <div mat-line fxLayout="row" fxLayoutAlign="start center">
+      <mat-checkbox [attr.disabled]="auditsToCompare.labeling_files.length == 2 && auditsToCompare.labeling_files.indexOf(labeling_file.id) == -1" (change)="toggleCompare(labeling_file.id, 'labeling_files')" fxFlex="50px"></mat-checkbox>
+      <div fxFlex class="have-childs" fxFill>
+        <div>
+          <div>{{labeling_file.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
+        </div>
+        <div *ngIf="!labeling_file.active">Terminé</div>
+        <div *ngIf="labeling_file.active" style="color: rgb(96, 190, 64)">En cours</div>
+      </div>
+      <button mat-button *ngIf="labeling_file.active || authService.isSuperAgent()" [routerLink]="['/labeling_file', labeling_file.id]"><mat-icon color="primary">chevron_right</mat-icon></button>
+    </div>
+  </mat-list-item>
+</mat-list>
+
 <mat-toolbar *ngIf="item.audits && item.audits.length" style="text-align: center">
   <button mat-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.audits.length != 2" color="primary">Générer le dossier de labellisation</button>
 </mat-toolbar>

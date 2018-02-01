@@ -73,7 +73,7 @@ export class EditComponent implements OnInit {
 
   delete(id) {
     if (confirm("Souhaitez vous vraiment supprimer cet établissement ?")) {
-      this.restService.delete(id, 'establishments', "Suppression de l'établissement : ").subscribe((response) => {
+      this.restService.delete(id, 'establishments', null, "Suppression de l'établissement : ").subscribe((response) => {
         this.router.navigate(['/etablissement/liste']);
       }, (err) => {
         console.error(err);
