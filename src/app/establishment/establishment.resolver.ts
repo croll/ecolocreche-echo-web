@@ -21,36 +21,42 @@ export class EstablishmentResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
     let id = route.params['id'];
+    let infos = {audits: null, labeling_files: null};
     return this.restService.get(id, 'establishments')
       .flatMap(establishmentInfos => {
-        let observable_infos: Observable<any>[] = [];
-        observable_infos.push(this.restService.getList('audits', {id_establishment: id, sort:'-date_start'}));
-        //observable_infos.push(this.restService.getList('labelingfiles', {id_establishment: establishment.id, sort:'-date_start'}));
-
-        return Observable.forkJoin(observable_infos,
-          infos => {
+        return Observable.forkJoin(
+          this.restService.getList('audits', {id_establishment: id, sort:'-date_start'}).map(res => infos.audits = res),
+          this.restService.getList('labelingfiles', {id_establishment: id, sort:'-createdAt'}).map(res => infos.labeling_files = res),
+          () => {
             let establishment = Object.assign(new EstablishmentExt(), establishmentInfos);
-            //return {establishment: establishment, inquiryforms: infos[0], labeling_files: infos[1]}
-            return {establishment: establishment, inquiryforms: infos}
+            return [establishment, infos];
           }
         );
       })
-      .flatMap(infos => {
-        let observable_inquiryforms: Observable<any>[] = [];
-        infos.inquiryforms.forEach(inquiryform => {
+      .flatMap(([establishment, infos]) => {
+        let observable_audits: Observable<any>[] = [];
+        let observable_labeling_files: Observable<any>[] = [];
 
-          observable_inquiryforms.push(this.restService.get(inquiryform.id_inquiryform, 'hist/inquiryforms').map(iq => {
-            inquiryform.inquiryform = iq;
-            if (inquiryform.inquiry_type == 'audit') {
-              infos.establishment.audits.push(inquiryform);
+        infos.audits.forEach(audit => {
+          observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').map(iq => {
+            audit.inquiryform = iq;
+            if (audit.inquiry_type == 'audit') {
+              establishment.audits.push(audit);
             } else {
-              infos.establishment.recap_actions.push(inquiryform);
+              establishment.recap_actions.push(audit);
             }
           }));
-
         });
-        return Observable.forkJoin(observable_inquiryforms, () => {
-          return infos.establishment;
+
+        infos.labeling_files.forEach(labeling_file => {
+          observable_labeling_files.push(this.restService.get(labeling_file.id, 'datalebelings').map(inf => {
+            // TODO
+            console.log(inf);
+          }));
+        });
+
+        return Observable.forkJoin(observable_audits, () => {
+          return establishment;
         });
     });
   }
