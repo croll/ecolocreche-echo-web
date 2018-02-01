@@ -26,7 +26,7 @@ export class AuditListResolver implements Resolve<AuditListResolved> {
             audit.inquiryform = iq;
           }));
         });
-        return Observable.forkJoin(observable_audits, plop => {
+        return Observable.forkJoin(observable_audits, () => {
           return audits;
         });
       });

@@ -1,4 +1,5 @@
 import { Audit } from '../common/models/audit';
+import { LabelingFile } from '../common/models/labeling-file';
 
 export class Establishment {
 
@@ -37,4 +38,5 @@ export class Establishment {
 export class EstablishmentExt extends Establishment {
   public audits: Audit[] = [];
   public recap_actions: Audit[] = [];
+  public labeling_files: LabelingFile[] = [];
 }

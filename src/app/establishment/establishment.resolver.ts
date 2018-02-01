@@ -20,31 +20,37 @@ export class EstablishmentResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     let id = route.params['id'];
-    let establishment = new EstablishmentExt();
     return this.restService.get(id, 'establishments')
-                    .flatMap(est => {
-                      Object.assign(establishment, est);
+                    .flatMap(establishmentInfos => {
                       let observable_infos: Observable<any>[] = [];
-                      observable_infos.push(this.restService.getList('audits', {id_establishment: establishment.id, sort:'-date_start'}));
+                      observable_infos.push(this.restService.getList('audits', {id_establishment: id, sort:'-date_start'}));
                       //observable_infos.push(this.restService.getList('labelingfiles', {id_establishment: establishment.id, sort:'-date_start'}));
-                      return Observable.forkJoin(observable_infos, establishment => { return est });
+                      return Observable.forkJoin(observable_infos,
+                        infos => {
+                          let establishment = Object.assign(new EstablishmentExt(), establishmentInfos);
+                          //return {establishment: establishment, inquiryforms: infos[0], labeling_files: infos[1]}
+                          return {establishment: establishment, inquiryforms: infos}
+                        }
+                      );
                     })
                     .map(infos => {
-                      let audits = infos[0];
-                      establishment.labelingfiles = infos[1];
                       let observable_inquiryforms: Observable<any>[] = [];
-                      audits.forEach(audit => {
-                        observable_inquiryforms.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').map(iq => {
-                          audit.inquiryform = iq;
-                          if (audit.inquiry_type == 'audit') {
-                            establishment.audits.push(audit);
+                      console.log("la");
+                      infos.inquiryforms.forEach(inquiryform => {
+                        console.log("ici0");
+                        observable_inquiryforms.push(this.restService.get(inquiryform.id_inquiryform, 'hist/inquiryforms').map(iq => {
+                          console.log("ici1");
+                          inquiryform.inquiryform = iq;
+                          if (inquiryform.inquiry_type == 'audit') {
+                            infos.establishment.audits.push(inquiryform);
                           } else {
-                            establishment.recap_actions.push(audit);
+                            infos.establishment.recap_actions.push(inquiryform);
                           }
                         }));
                       });
-                      Observable.forkJoin(observable_inquiryforms).map(establishment => {
-                        console.log(establishment);
+                      Observable.forkJoin(observable_inquiryforms, () => {
+                        console.log(infos);
+                        return infos.establishment;
                       });
                       /*
                        return Observable.create(observer => {
@@ -65,7 +71,7 @@ export class EstablishmentResolver implements Resolve<any> {
                           }
                         });
                       */
-                    });
+                    // });
                   });
   }
 
