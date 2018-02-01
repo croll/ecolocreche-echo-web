@@ -40,7 +40,7 @@ export class EditComponent implements OnInit {
     this.current.inquiry_type = InquiryForm.Inquiry_type.Audit;
 
     this.id = this.route.snapshot.params['id'];
-    this.infos = this.route.snapshot.data['infos'];
+    this.infos = this.route.snapshot.data['infos']['idOrKey'];
 
   }
 
