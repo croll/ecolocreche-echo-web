@@ -26,17 +26,7 @@ export class AuditResolver implements Resolve<any> {
     if (id2) elems.push(this._getAudit(id2).map(r => ret['id2']=r));
     if (id3) elems.push(this._getAudit(id3).map(r => ret['id3']=r));
     if (idOrKey) {
-      return Observable.forkJoin(elems, () => ret)
-        .flatMap(ret => {
-          if ('require_old_audits' in route.data) {
-            return this.restService.getList('audits', {
-              id_establishment: ret['idOrKey'].audit.id_establishment,
-            }).map(r => {
-              ret['old_audits']=r;
-              return Observable.of(ret);
-            });
-          } else return Observable.of(ret);
-        });
+      return Observable.forkJoin(elems, () => ret);
     } else {
       return null;
     }
@@ -88,7 +78,8 @@ export class AuditResolverPreviousAudits implements Resolve<any> {
   constructor(private restService: RestService, private http: Http) {
   }
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    return this.restService.get(parseInt(route.params['id']), 'hist/audits', {
+    return this.restService.getList('audits', {
+      id_establishment: route.params['id_establishment'],
     });
   }
 }

@@ -23,8 +23,10 @@ export class EditComponent implements OnInit {
   idInquiryFormCtrl: FormControl;
   synthesisCtrl: FormControl;
   activeCtrl: FormControl;
+  oldAuditCtrl: FormControl;
   keyCtrl: FormControl;
   infos: any;
+  old_audits: Audit[];
   dateStartCtrl: FormControl;
   showCreationDateField: boolean;
 
@@ -40,8 +42,13 @@ export class EditComponent implements OnInit {
     this.current.inquiry_type = InquiryForm.Inquiry_type.Audit;
 
     this.id = this.route.snapshot.params['id'];
-    this.infos = this.route.snapshot.data['infos']['idOrKey'];
+    if (this.id)
+      this.infos = this.route.snapshot.data['infos']['idOrKey'];
+    else
+      this.old_audits = this.route.snapshot.data['old_audits'];
 
+    console.log("data: ", this.route.snapshot.data);
+    console.log("old audits: ", this.old_audits);
   }
 
   ngOnInit() {
@@ -67,6 +74,7 @@ export class EditComponent implements OnInit {
     this.idInquiryFormCtrl = this.fb.control({value: this.current.id_inquiryform, disabled: this.id}, [Validators.required]);
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
     this.activeCtrl = this.fb.control({value: this.current.active, disabled: !this.authService.isSuperAgent()}, [Validators.required]);
+    this.oldAuditCtrl = this.fb.control({value: this.current.id_audit_src, disabled: !!this.id});
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
     this.dateStartCtrl = this.fb.control({value: this.current.date_start || new Date(), disabled: !this.authService.isAdmin()}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
 
@@ -76,6 +84,7 @@ export class EditComponent implements OnInit {
       id_inquiryform: this.idInquiryFormCtrl,
       synthesis: this.synthesisCtrl,
       active: this.activeCtrl,
+      id_audit_src: this.oldAuditCtrl,
       key: this.keyCtrl,
       date_start: this.dateStartCtrl
     });
