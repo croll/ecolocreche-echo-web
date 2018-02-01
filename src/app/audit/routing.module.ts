@@ -29,8 +29,11 @@ const routes: Routes = [
       {
         path: ':id/editer',
         component: EditComponent,
+        data: {
+          require_old_audits: true,
+        },
         resolve: {
-          infos: AuditResolver
+          infos: AuditResolver,
         }
       },
       {
