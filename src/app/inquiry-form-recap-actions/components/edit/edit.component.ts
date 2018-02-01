@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../../common/models/inquiry-form';
 import { RestService } from '../../../rest.service';
 
+const default_recapaction_mail_from = ``;
 const default_recapaction_mail_subject = `ECHO(S): Récap Action de {establishment_name}`;
 const default_recapaction_mail_body = `Bonjour,
 
@@ -30,6 +31,7 @@ export class EditComponent implements OnInit {
   titleCtrl: FormControl;
   descriptionCtrl: FormControl;
   idThemeCtrl: FormControl;
+  mailFromCtrl: FormControl;
   mailTitleCtrl: FormControl;
   mailBodyCtrl: FormControl;
 
@@ -46,6 +48,7 @@ export class EditComponent implements OnInit {
     this.titleCtrl = fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
     this.descriptionCtrl = fb.control(this.current.description);
     this.idThemeCtrl = fb.control(this.current.id);
+    this.mailFromCtrl = fb.control(this.current.mail_from ? this.current.mail_from : default_recapaction_mail_from);
     this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_recapaction_mail_subject);
     this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_recapaction_mail_body);
 
@@ -54,6 +57,7 @@ export class EditComponent implements OnInit {
       title: this.titleCtrl,
       description: this.descriptionCtrl,
       id_theme: this.idThemeCtrl,
+      mail_from: this.mailFromCtrl,
       mail_title: this.mailTitleCtrl,
       mail_body: this.mailBodyCtrl,
     });

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../../common/models/inquiry-form';
 import { RestService } from '../../../rest.service';
 
+const default_audit_mail_from = ``;
 const default_audit_mail_subject = `ECHO(S): Audit de {establishment_name}`;
 const default_audit_mail_body = `Bonjour,
 
@@ -31,6 +32,7 @@ export class EditComponent implements OnInit {
   descriptionCtrl: FormControl;
   commentCtrl: FormControl;
   positionCtrl: FormControl;
+  mailFromCtrl: FormControl;
   mailTitleCtrl: FormControl;
   mailBodyCtrl: FormControl;
   inquiryTypeCtrl: FormControl;
@@ -47,6 +49,7 @@ export class EditComponent implements OnInit {
     this.descriptionCtrl = fb.control(this.current.description);
     this.commentCtrl = fb.control(this.current.comment);
     this.positionCtrl = fb.control(this.current.position);
+    this.mailFromCtrl = fb.control(this.current.mail_from ? this.current.mail_from : default_audit_mail_from);
     this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_audit_mail_subject);
     this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_audit_mail_body);
 
@@ -56,6 +59,7 @@ export class EditComponent implements OnInit {
       description: this.descriptionCtrl,
       comment: this.commentCtrl,
       position: this.positionCtrl,
+      mail_from: this.mailFromCtrl,
       mail_title: this.mailTitleCtrl,
       mail_body: this.mailBodyCtrl,
     });

@@ -7,6 +7,7 @@ export class InquiryForm {
   public comment: string = ''
   public position: number = 0
   public nodeslist: string;
+  public mail_from: string;
   public mail_body: string;
   public mail_title: string;
 }
