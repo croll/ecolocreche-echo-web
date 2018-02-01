@@ -21,14 +21,24 @@ export class AuditListResolver implements Resolve<AuditListResolved> {
     return this.restService.getList('audits', {active: 1, inquiry_type: InquiryForm.Inquiry_type.Audit, sort: '-date_start'})
       .flatMap(audits => {
         let observable_audits: Observable<any>[] = [];
+        let ids: number[] = [];
         audits.forEach(audit => {
-          observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', { with_deleteds: 1 }).map(iq => {
-            audit.inquiryform = iq;
-          }));
+          if (ids.indexOf(audit.id_inquiryform) == -1) {
+            observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', { with_deleteds: 1 }).map(iq => {
+              audits.forEach(subaudit => {
+                if (iq.id_inquiryform == subaudit.id_inquiryform)
+                  subaudit.inquiryform = iq;
+              });
+            }));
+            ids.push(audit.id_inquiryform);
+          }
         });
-        return Observable.forkJoin(observable_audits, () => {
+
+
+        return Observable.forkJoin(observable_audits, plop => {
           return audits;
         });
       });
     }
+
 }
