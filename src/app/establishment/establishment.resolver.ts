@@ -55,9 +55,14 @@ export class EstablishmentResolver implements Resolve<any> {
           }));
         });
 
-        return Observable.forkJoin(observable_audits, () => {
-          return establishment;
-        });
+
+        if (observable_audits.length) {
+          return Observable.forkJoin(observable_audits, () => {
+            return establishment;
+          });
+        } else {
+          return Observable.of(establishment);
+        }
     });
   }
 
