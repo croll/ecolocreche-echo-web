@@ -12,7 +12,6 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
     return this.restService.get(route.params['id'], 'hist/inquiryforms')
       .flatMap(inquiryform => {
-        console.log(inquiryform);
         let observable_nodes: Observable<any>[] = [];
         if (!inquiryform.nodeslist) {
           return Observable.of([]);
@@ -21,11 +20,8 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
         nodeslist.forEach(id_node => {
           observable_nodes.push(this.restService.get(id_node, 'hist/nodes'));
         });
-        console.log(observable_nodes);
         return Observable.forkJoin(observable_nodes, (...nodes) => {
-          console.log(typeof nodes);
-          console.log(nodes);
-          return nodes;
+          return nodes.filter(n => n.type == 'directory');
         });
       });
     }
