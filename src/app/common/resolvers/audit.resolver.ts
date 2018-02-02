@@ -72,3 +72,14 @@ export class AuditResolver implements Resolve<any> {
   }
 
 }
+
+@Injectable()
+export class AuditResolverPreviousAudits implements Resolve<any> {
+  constructor(private restService: RestService, private http: Http) {
+  }
+  resolve(route: ActivatedRouteSnapshot):Observable<any> {
+    return this.restService.getList('audits', {
+      id_establishment: route.params['id_establishment'],
+    });
+  }
+}

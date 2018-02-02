@@ -8,7 +8,7 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
 import { CompareComponent } from './components/compare/compare.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AuditResolver } from '../common/resolvers/audit.resolver';
+import { AuditResolver, AuditResolverPreviousAudits } from '../common/resolvers/audit.resolver';
 import { AuditListResolver } from '../common/resolvers/audit-list.resolver';
 import { AnswerModule } from '../question/answer.module';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
@@ -39,6 +39,7 @@ import { MaterialModule } from '../material.module';
   ],
   providers: [
     AuditResolver,
+    AuditResolverPreviousAudits,
     AuditListResolver,
     ExportCSVService
   ]

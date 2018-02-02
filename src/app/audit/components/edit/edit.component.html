@@ -28,6 +28,14 @@
       <mat-option [value]="0">Terminé</mat-option>
     </mat-select>
   </div>
+
+  <div>
+    <mat-select *ngIf="!id" placeholder="Importer un précédent audit..." formControlName="id_audit_src" style="margin: 18px 0 18px 0">
+      <mat-option [value]="">Non</mat-option>
+      <mat-option *ngFor="let audit of old_audits" [value]="audit.id">Audit du {{audit.date_start | date:'EEEE, d MMMM y, hh:mm:ss':'':'fr'}}</mat-option>
+    </mat-select>
+  </div>
+
   <div *ngIf="showCreationDateField">
     <mat-form-field style="margin-top: 8px">
       <input matInput type="text" formControlName="date_start" placeholder="Date de création">

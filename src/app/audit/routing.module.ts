@@ -6,7 +6,7 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
 import { CompareComponent } from './components/compare/compare.component';
 import { AuthGuard } from '../auth-guard.service';
-import { AuditResolver } from '../common/resolvers/audit.resolver';
+import { AuditResolver, AuditResolverPreviousAudits } from '../common/resolvers/audit.resolver';
 import { AuditListResolver } from '../common/resolvers/audit-list.resolver';
 import { AuditOldPathRedirectComponent } from './audit.old-path-redirect.component';
 
@@ -24,13 +24,16 @@ const routes: Routes = [
       },
       {
         path: 'creer/:id_establishment',
-        component: EditComponent
+        component: EditComponent,
+        resolve: {
+          old_audits: AuditResolverPreviousAudits,
+        }
       },
       {
         path: ':id/editer',
         component: EditComponent,
         resolve: {
-          infos: AuditResolver
+          infos: AuditResolver,
         }
       },
       {
