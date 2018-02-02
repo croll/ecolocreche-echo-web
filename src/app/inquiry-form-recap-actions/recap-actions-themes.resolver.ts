@@ -22,7 +22,7 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
           observable_nodes.push(this.restService.get(id_node, 'hist/nodes'));
         });
         console.log(observable_nodes);
-        return Observable.forkJoin(observable_nodes, nodes => {
+        return Observable.forkJoin(observable_nodes, (...nodes) => {
           console.log(typeof nodes);
           console.log(nodes);
           return nodes;
