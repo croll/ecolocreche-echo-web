@@ -21,7 +21,8 @@ export class AnswerComponent {
 
 
   public config: QuillConfigInterface = {
-   theme: 'bubble',  modules: {
+   theme: 'bubble',  
+   modules: {
     toolbar: true
   },
   placeholder: 'Votre commentaire...'
