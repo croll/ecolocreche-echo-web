@@ -528,5 +528,19 @@ mat-list-item.echos-list-item {
   }
 }
 
-@media print  {
+medium-editor {
+  background-color: #000!important;
+}
+
+.medium-editor-element {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px 10px;
+  p {
+    margin: 0 0;
+  }
+}
+
+.medium-editor-placeholder:after {
+  color: #777;
 }

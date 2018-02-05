@@ -12,6 +12,7 @@ import { AnswerModule } from '../question/answer.module';
 import { FormsModule } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
+import { MediumEditorDirective } from '../medium-editor.directive';
 
 @NgModule({
   imports: [
@@ -21,12 +22,13 @@ import { MaterialModule } from '../material.module';
     AnswerModule,
     FlexLayoutModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
   ],
   declarations: [
     ActiveListComponent,
     EditComponent,
-    AnswerComponent
+    AnswerComponent,
+    MediumEditorDirective
   ],
   providers: [
     AuditResolver,
