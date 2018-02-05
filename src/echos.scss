@@ -528,11 +528,7 @@ mat-list-item.echos-list-item {
   }
 }
 
-medium-editor {
-  background-color: #000!important;
-}
-
-.medium-editor-element {
+.medium-editor-element, .ql-container {
   border: 1px solid #ccc;
   border-radius: 3px;
   padding: 10px 10px;
@@ -541,6 +537,6 @@ medium-editor {
   }
 }
 
-.medium-editor-placeholder:after {
-  color: #777;
+.ql-bubble * {
+  z-index: 50;
 }

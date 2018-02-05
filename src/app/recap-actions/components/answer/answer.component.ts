@@ -1,12 +1,14 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form';
 import { Node } from '../../../common/models/node';
 import { RestService } from '../../../rest.service';
 import { AuthService } from '../../../auth.service';
-import * as me from '../../../medium-editor.directive';
 import { Answer } from '../../../question/answer';
+import { QuillConfigInterface } from 'ngx-quill-wrapper';
+
+
 
 @Component({
   templateUrl: './answer.component.html',
@@ -16,6 +18,14 @@ export class AnswerComponent {
 
   infos: any;
   themes: any;
+
+
+  public config: QuillConfigInterface = {
+   theme: 'bubble',  modules: {
+    toolbar: true
+  },
+  placeholder: 'Votre commentaire...'
+ };
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location) {
     this.infos = this.route.snapshot.data['infos']['idOrKey'];

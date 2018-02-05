@@ -12,7 +12,8 @@ import { AnswerModule } from '../question/answer.module';
 import { FormsModule } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
-import { MediumEditorDirective } from '../medium-editor.directive';
+import { QuillModule, QuillConfigInterface, QUILL_CONFIG } from 'ngx-quill-wrapper';
+const DEFAULT_QUILL_CONFIG: QuillConfigInterface = {};
 
 @NgModule({
   imports: [
@@ -23,16 +24,20 @@ import { MediumEditorDirective } from '../medium-editor.directive';
     FlexLayoutModule,
     FormsModule,
     MaterialModule,
+    QuillModule
   ],
   declarations: [
     ActiveListComponent,
     EditComponent,
-    AnswerComponent,
-    MediumEditorDirective
+    AnswerComponent
   ],
   providers: [
     AuditResolver,
-    AuditListResolver
+    AuditListResolver,
+    {
+      provide: QUILL_CONFIG,
+      useValue: DEFAULT_QUILL_CONFIG
+    }
   ]
 })
 

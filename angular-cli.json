@@ -18,8 +18,6 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-		"../node_modules/medium-editor/dist/css/medium-editor.min.css",
-		"../node_modules/medium-editor/dist/css/themes/beagle.min.css",
         "echos.scss"
       ],
       "scripts": [

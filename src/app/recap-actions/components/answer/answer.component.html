@@ -27,10 +27,8 @@
   <div fxLayout="row" class="column" fxLayoutAlign="center start">
     <div class="row-title">{{theme.title}}</div>
     <div class="row-answer" *ngFor="let question of theme.childs" fxFlex="50%">
-      <medium-editor [(editorModel)]="question.answer.value" [editorOptions]="{paste: { cleanPastedHTML: true, forcePlainText: false}, toolbar: {'buttons': ['bold','italic','underline','strikethrough','subscript','superscript','anchor','image','quote','pre','orderedlist','unorderedlist','indent','outdent','justifyLeft','justifyCenter','justifyRight','justifyFull','h1','h2','h3','h4','h5','h6','removeFormat','html' ]}}" [editorPlaceholder]="question.title"></medium-editor>
-
-
-  </div>
+      <quill [config]="config" [(value)]="question.answer.value" [autoToolbar]="true"></quill>
+    </div>
 </div>
 </div>
 
