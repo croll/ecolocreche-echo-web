@@ -9,8 +9,6 @@ import { PageHomeComponent }   from './home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from './material.module';
-// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
 
 import 'hammerjs';
 import { AppComponent } from './app.component';
