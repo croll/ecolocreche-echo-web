@@ -3,34 +3,34 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
-    <!-- <div [hidden]="isAnswered">
+    <!-- <div [hidden]="current.answer.status=='saved'">
         <mat-checkbox formControlName="ignored" (change)="ignoreset(echosForm.controls.ignored.value)">Ignorer cette question</mat-checkbox>
     </div> -->
 
-    <div class="echos-question-ignored-label" [hidden]="!isAnswered || !current.answer.ignored">
+    <div class="echos-question-ignored-label" [hidden]="current.answer.status!='saved' || !current.answer.ignored">
         Question ignorée
     </div>
 
-    <div [ngClass]="{'echos-question-list-item-disabled': isAnswered}" *ngIf="!echosForm.controls.ignored.value">
-        <q-checkbox-answer-edit *ngIf="current.type == 'q_checkbox'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-checkbox-answer-edit>
-        <q-radio-answer-edit *ngIf="current.type == 'q_radio'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-radio-answer-edit>
-        <q-percents-answer-edit *ngIf="current.type == 'q_percents'" formControlName="value" [readonly]="isAnswered" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-percents-answer-edit>
-        <q-text-answer-edit *ngIf="current.type == 'q_text'" formControlName="value" [readonly]="isAnswered" [answer]="current.answer" [value]="current.answer.value"></q-text-answer-edit>
-        <q-numeric-answer-edit *ngIf="current.type == 'q_numeric'" formControlName="value" [readonly]="isAnswered" [answer]="current.answer" [value]="current.answer.value"></q-numeric-answer-edit>
+    <div [ngClass]="{'echos-question-list-item-disabled': current.answer.status=='saved'}" *ngIf="!echosForm.controls.ignored.value">
+        <q-checkbox-answer-edit *ngIf="current.type == 'q_checkbox'" formControlName="value" [readonly]="current.answer.status=='saved'" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-checkbox-answer-edit>
+        <q-radio-answer-edit *ngIf="current.type == 'q_radio'" formControlName="value" [readonly]="current.answer.status=='saved'" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-radio-answer-edit>
+        <q-percents-answer-edit *ngIf="current.type == 'q_percents'" formControlName="value" [readonly]="current.answer.status=='saved'" [choices]="choices" [answer]="current.answer" [value]="current.answer.value"></q-percents-answer-edit>
+        <q-text-answer-edit *ngIf="current.type == 'q_text'" formControlName="value" [readonly]="current.answer.status=='saved'" [answer]="current.answer" [value]="current.answer.value"></q-text-answer-edit>
+        <q-numeric-answer-edit *ngIf="current.type == 'q_numeric'" formControlName="value" [readonly]="current.answer.status=='saved'" [answer]="current.answer" [value]="current.answer.value"></q-numeric-answer-edit>
     </div>
 
     <!-- <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="!isAnswered" fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-      <button *ngIf="isAnswered" (click)="modify()" fxFlexOffset="20px" mat-raised-button color="warn">Modifier cette réponse</button>
+      <button *ngIf="current.answer.status!='saved'" fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="current.answer.status=='saved'" (click)="modify()" fxFlexOffset="20px" mat-raised-button color="warn">Modifier cette réponse</button>
     </div> -->
 
     <div fxLayout="row" fxLayoutAlign="start center" class="answer-comment-container">
-      <textarea *ngIf="!isAnswered || current.answer?.comment?.length>0" [readonly]="isAnswered" formControlName="comment" placeholder="Commentaire..."></textarea>
+      <textarea *ngIf="current.answer.status!='saved' || current.answer?.comment?.length>0" [readonly]="current.answer.status=='saved'" formControlName="comment" placeholder="Commentaire..."></textarea>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center" class="echos-buttons-container">
-      <button *ngIf="!isAnswered" fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
-      <button *ngIf="isAnswered || this.answer?.ignored" (click)="modify()" fxFlexOffset="20px" mat-raised-button>Modifier cette réponse</button>
-      <button *ngIf="!isAnswered" (click)="ignore()" fxFlexOffset="20px" mat-raised-button>Ignorer cette question</button>
+      <button *ngIf="current.answer.status!='saved'" fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
+      <button *ngIf="current.answer.status=='saved' || this.answer?.ignored" (click)="modify()" fxFlexOffset="20px" mat-raised-button>Modifier cette réponse</button>
+      <button *ngIf="current.answer.status!='saved'" (click)="ignore()" fxFlexOffset="20px" mat-raised-button>Ignorer cette question</button>
     </div>
 </form>

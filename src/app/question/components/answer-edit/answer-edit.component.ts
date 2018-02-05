@@ -22,8 +22,6 @@ export class AnswerEditComponent implements OnInit {
 
   qtypes = QTypes.getInstance();
 
-  isAnswered = false;
-
   echosForm: FormGroup;
   current: Question = new Question();
   choices : Choice[] = [];
@@ -42,7 +40,7 @@ export class AnswerEditComponent implements OnInit {
 
   ngOnInit() {
       this.idCtrl = this.fb.control(this.node['id_node']);
-      this.ignoredCtrl = this.fb.control(this.current.answer.ignored);
+      this.ignoredCtrl = this.fb.control(!!this.current.answer.ignored);
       this.valueCtrl = this.fb.control(this.current.answer.value);
       this.commentCtrl = this.fb.control(this.current.answer.comment);
 
@@ -60,7 +58,7 @@ export class AnswerEditComponent implements OnInit {
       // console.log("item: ", this.node);
 
       this.idCtrl.setValue(this.node.id_node);
-      this.ignoredCtrl.setValue(this.node.answer ? this.node.answer.ignored : false);
+      this.ignoredCtrl.setValue(this.node.answer ? !!this.node.answer.ignored : false);
       this.valueCtrl.setValue(this.node.answer ? this.node.answer.value : "");
       this.commentCtrl.setValue(this.node.answer ? this.node.answer.comment : "");
 
@@ -69,11 +67,10 @@ export class AnswerEditComponent implements OnInit {
         this.current.answer = new Answer();
         this.current.answer.ignored = false;
         this.current.answer.comment = "";
-        this.isAnswered = false;
-      } else {
-          this.isAnswered = true;
+        this.current.answer.status = "new";
       }
-      this.ignoreset(this.current.answer.ignored);
+
+      this.ignoreset(!!this.current.answer.ignored);
       this.choices = [];
       if ('choices' in this.node) {
         this.node.choices.forEach((jschoice) => {
@@ -111,13 +108,13 @@ export class AnswerEditComponent implements OnInit {
       this.current.answer.comment = this.commentCtrl.value ? this.commentCtrl.value : "";
       var res = Object.assign(this.current.answer, {
           audit_key: this.audit['key'],
+          status: 'saved',
       });
       this.restService.save(res, 'answers/'+this.audit['id']+'/'+this.node['id_node'], {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok").subscribe((res) => {
-          this.isAnswered = true;
-          this.ignoredCtrl.setValue(res.ignored);
+          this.ignoredCtrl.setValue(!!res.ignored);
           this.valueCtrl.setValue(res.value);
           this.commentCtrl.setValue(res.comment);
-          this.node.answer = res;
+          this.current.answer.status = res.status;
       });
       return false;
   }
@@ -126,7 +123,7 @@ export class AnswerEditComponent implements OnInit {
     // Proposition beve
     this.unignore();
     // Fin proposition beve
-    this.isAnswered = false;
+    this.current.answer.status = 'not-saved';
     return false;
   }
 

@@ -5,4 +5,5 @@ export class Answer {
   public ignored: boolean
   public value: string
   public comment: string
+  public status: string
 }
