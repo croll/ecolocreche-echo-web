@@ -519,15 +519,6 @@ mat-list-item.echos-list-item {
     }
 }
 
-@media print {
-  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
-    display: none !important;
-  }
-  .do-not-break {
-    page-break-inside: avoid;
-  }
-}
-
 /* WYSIWYG */
 
 .ql-container {
@@ -541,4 +532,28 @@ mat-list-item.echos-list-item {
 
 .ql-bubble * {
   z-index: 50;
+}
+
+
+@media print {
+  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
+    display: none !important;
+  }
+  .do-not-break {
+    page-break-inside: avoid;
+  }
+
+  // hide placeholder of wysiwyg
+  .ql-editor.ql-blank {
+    display: none;
+  }
+
+  .ql-container {
+    border: none !important;
+    padding: 0;
+  }
+  .ql-editor {
+    padding: 0 !important;
+  }
+
 }

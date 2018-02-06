@@ -26,3 +26,18 @@
   width: 300px;
   font-size: 1.1em;
 }
+
+@media print {
+  .row-theme {
+    padding: 5px 0;
+  }
+
+  .ql-container { // marche pas quand c'est ici, alors je l'ai mis dans echos.scss
+    border: none;
+    padding: 0;
+  }
+  .ql-editor { // marche pas quand c'est ici, alors je l'ai mis dans echos.scss
+    padding: 0;
+  }
+
+}
