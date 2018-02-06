@@ -27,6 +27,7 @@ export class ManageComponent implements OnInit {
 
   item: InquiryForm;
   themesList: InquiryForm[] = [];
+  showSaveButton: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, public authService: AuthService) {
     this.item = this.route.snapshot.data['inquiryForm'];
@@ -39,6 +40,28 @@ export class ManageComponent implements OnInit {
   goBack(): boolean {
     this.location.back();
     return false;
+  }
+
+  swap(event, num1, num2) {
+    event.stopPropagation();
+    let tmp = this.themesList[num2];
+    this.themesList[num2] = this.themesList[num1];
+    this.themesList[num1] = tmp;
+    this.showSaveButton = true;
+    return false;
+  }
+
+  save() {
+    console.log('save');
+    for (var i in this.themesList) {
+      let new_position = parseInt(i);
+      if (this.themesList[i].position != new_position) {
+        this.themesList[i].position = new_position;
+        console.log(this.themesList[i]);
+        this.restService.save(this.themesList[i], 'hist/nodes', {}, 'id_node', "Ordre : ").subscribe(() => {});
+      }
+    }
+    this.showSaveButton = false;
   }
 
 }

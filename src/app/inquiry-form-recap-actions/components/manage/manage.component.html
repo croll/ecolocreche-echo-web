@@ -27,16 +27,26 @@
   <button *ngIf="authService.isSuperAgent()" mat-raised-button [routerLink]="['/questionnaire_recap_actions', item.id_inquiryform, 'themes', 'creer']">Ajouter un thème<mat-icon>add</mat-icon></button>
 </div>
 
-<div *ngIf="!themesList || !themesList.length" class="echos-warning">Aucun thème trouvé.</div>
-
 <mat-list *ngIf="themesList && themesList.length">
-  <mat-list-item class="echos-list-item" *ngFor="let theme of themesList" [routerLink]="['/questionnaire_recap_actions', item.id_inquiryform, 'themes', theme.id_node, 'editer']">
+  <mat-list-item class="echos-list-item" *ngFor="let theme of themesList; let firstItem = first; let lastItem = last; let i = index" [routerLink]="['/questionnaire_recap_actions', item.id_inquiryform, 'themes', theme.id_node, 'editer']">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <div fxFlex class="have-childs" fxFill>
-        <div>
-          <div>{{theme.title}}</div>
-        </div>
+      <div fxLayout="column" *ngIf="authService.isAdmin()">
+        <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap($event, i, i-1)"><mat-icon>arrow_drop_up_circle</mat-icon></button>
+        <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap($event, i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
       </div>
-    </div>
+      <div fxFlex fxFlexOffset="20px" class="have-childs">
+        <div>{{theme.title}}</div>
+        <div *ngIf="theme.description">{{theme.description}}</div>
+      </div>
+      <div style="width: 50px"></div>
+        <button mat-button [routerLink]="['/theme', theme.id_node]"><mat-icon color="primary">chevron_right</mat-icon></button>
+      </div>
   </mat-list-item>
+
 </mat-list>
+
+<div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <button mat-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>
+</div>
+
+<div *ngIf="!themesList || !themesList.length" class="echos-warning">Aucun thème trouvé.</div>

@@ -10,19 +10,6 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
   constructor(private restService: RestService) {}
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    return this.restService.get(route.params['id'], 'hist/inquiryforms')
-      .flatMap(inquiryform => {
-        let observable_nodes: Observable<any>[] = [];
-        if (!inquiryform.nodeslist) {
-          return Observable.of([]);
-        }
-        let nodeslist = JSON.parse(inquiryform.nodeslist);
-        nodeslist.forEach(id_node => {
-          observable_nodes.push(this.restService.get(id_node, 'hist/nodes'));
-        });
-        return Observable.forkJoin(observable_nodes, (...nodes) => {
-          return nodes.filter(n => n.type == 'directory');
-        });
-      });
-    }
+    return (route.params['id']) ? this.restService.getList('hist/nodes', {id_inquiryform: route.params['id'], inquiry_type: Node.Inquiry_type.RecapAction, type: 'directory'}) : null;
+  }
 }
