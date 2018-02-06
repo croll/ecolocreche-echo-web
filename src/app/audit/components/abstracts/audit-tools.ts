@@ -160,6 +160,8 @@ export class AuditTools {
         dataset.data.push(datas[themeIdOrFam].impact[id_impact]);
       }
       params.options = {
+        responsive: true,
+        maintainAspectRatio: true,
         tooltips: {
           callbacks: {
             label: (tooltipItem, data) => {
@@ -224,6 +226,8 @@ export class AuditTools {
       let num = 0;
       params.labels.push('');
       params.options = {
+        responsive: true,
+        maintainAspectRatio: true,
         scaleSteps: 5,
         scales:{
           yAxes:[
@@ -256,6 +260,8 @@ export class AuditTools {
       var datasetLength = 0;
       // Graph options
       params.options = {
+        responsive: true,
+        maintainAspectRatio: true,
         scale: {
           ticks: {
             beginAtZero: true,

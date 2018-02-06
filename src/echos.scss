@@ -519,6 +519,14 @@ mat-list-item.echos-list-item {
     }
 }
 
+.echos-chart {
+  // width: auto!important;
+  // height: !important;
+  margin: 0 auto;
+  width: 100%!important;
+  max-width: 450px!important;
+}
+
 @media print {
   .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
     display: none !important;
