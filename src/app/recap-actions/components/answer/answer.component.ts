@@ -7,6 +7,7 @@ import { RestService } from '../../../rest.service';
 import { AuthService } from '../../../auth.service';
 import { Answer } from '../../../question/answer';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
+import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 
 
 
@@ -28,7 +29,7 @@ export class AnswerComponent {
   placeholder: 'Votre commentaire...'
  };
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService) {
     this.infos = this.route.snapshot.data['infos']['idOrKey'];
 
     // work on a copy
@@ -73,7 +74,7 @@ export class AnswerComponent {
   }
 
   pdf() {
-    alert('todo');
+    this.pdfService.print("recapaction", this.infos.audit.id);
   }
 
   duplicate() {
