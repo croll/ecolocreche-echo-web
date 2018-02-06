@@ -50,11 +50,7 @@ export class EditThemeComponent implements OnInit {
 
   save() {
     this.restService.save(Object.assign(this.item, this.echosForm.value), 'hist/nodes', {id_inquiryform: this.inquiryform.id_inquiryform}, 'id_node').subscribe((RecapActions) => {
-      if (!this.item.id_node) {
-        //this.updateNodeslist(RecapActions.id_node, 'add');
-      } else {
-        this.goBack();
-      }
+      this.goBack();
     }, (err) => {
       console.error(err);
     });
@@ -62,9 +58,7 @@ export class EditThemeComponent implements OnInit {
 
   delete() {
     if (confirm("Souhaitez vous vraiment supprimer ce thème ?")) {
-	  this.restService.delete(this.item.id_node, 'hist/nodes', {id_inquiryform: this.inquiryform.id}).subscribe((response) => {
-        // this.updateNodeslist(this.item.id_node, 'delete');
-      }, (err) => {
+	  this.restService.delete(this.item.id_node, 'hist/nodes', {id_inquiryform: this.inquiryform.id}).subscribe((response) => {}, (err) => {
         console.error(err);
       });
     }
