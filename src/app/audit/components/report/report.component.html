@@ -45,7 +45,7 @@
     </div>
 
     <mat-card class="pdf-center">
-      <canvas *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" id='canvas-chart-global-{{theme.id_node}}' baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
+      <canvas class="echos-chart" *ngIf="!hideChart && chartDatas.themes[theme.id_node].hasDatas" id='canvas-chart-global-{{theme.id_node}}' baseChart [datasets]="chartDatas.themes[theme.id_node].datasets" [colors]="chartDatas.themes[theme.id_node].colors" [labels]="chartDatas.themes[theme.id_node].labels" [chartType]="chartDatas.themes[theme.id_node].chartType" legend="true" [options]="chartDatas.themes[theme.id_node].options"></canvas>
     </mat-card>
 
     <mat-card *ngFor="let category of theme.childs" class="do-not-break">
@@ -100,19 +100,19 @@
   </div>
 
   <div fxLayout="row" *ngIf="chartDatas?.families.environnementales.hasDatas || chartDatas?.families.sociales.hasDatas" class="pdf-clear-both-after">
-    <mat-card class="pdf-float-left" *ngIf="chartDatas?.families.environnementales.hasDatas">
+    <mat-card class="pdf-float-left" *ngIf="chartDatas?.families.environnementales.hasDatas" fxFlex>
       <div>
         <div class="echos-report-graph-title">Impact environnemental</div>
         <canvas class="pdf-canvas echos-chart" *ngIf="!hideChart" id='canvas-environmental' baseChart [datasets]="chartDatas.families.environnementales.datasets" [colors]="chartDatas.families.environnementales.colors" [labels]="chartDatas.families.environnementales.labels" [chartType]="chartDatas.families.environnementales.chartType" legend="true" [options]="chartDatas.families.environnementales.options"></canvas>
       </div>
     </mat-card>
-    <mat-card class="pdf-float-left" *ngIf="chartDatas?.families.sociales.hasDatas" style="margin-left: 50px">
+    <mat-card class="pdf-float-left" *ngIf="chartDatas?.families.sociales.hasDatas" style="margin-left: 50px" fxFlex>
       <div>
         <div class="echos-report-graph-title">Impact social</div>
         <canvas class="pdf-canvas echos-chart" *ngIf="!hideChart" id='canvas-social-global' baseChart [datasets]="chartDatas.families.sociales.datasets" [colors]="chartDatas.families.sociales.colors" [labels]="chartDatas.families.sociales.labels" [chartType]="chartDatas.families.sociales.chartType" legend="true" [options]="chartDatas.families.sociales.options"></canvas>
       </div>
     </mat-card>
-    <mat-card class="pdf-canvas" *ngIf="chartDatas?.families.other.hasDatas">
+    <mat-card class="pdf-canvas" *ngIf="chartDatas?.families.other.hasDatas" fxFlex>
       <div>
         <div class="echos-report-graph-title">Non classé</div>
         <canvas *ngIf="!hideChart" class="echos-chart" id='canvas-environmental' baseChart [datasets]="chartDatas.families.other.datasets" [colors]="chartDatas.families.other.colors" [labels]="chartDatas.families.other.labels" [chartType]="chartDatas.families.other.chartType" legend="true" [options]="chartDatas.families.other.options"></canvas>
