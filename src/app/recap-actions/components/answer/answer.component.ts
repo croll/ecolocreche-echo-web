@@ -34,6 +34,15 @@ export class AnswerComponent {
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar) {
     this.infos = this.route.snapshot.data['infos']['idOrKey'];
 
+    this.route.queryParams.subscribe(params => {
+      if (params.new_copy) {
+        this.snackBar.open("Vous travaillez maintenant sur un nouveau dossier récap action (copié du précédent)", "", {
+          duration: 6000,
+        });
+
+      }
+    });
+
     // work on a copy
     this.themes = JSON.parse(JSON.stringify(this.infos.nodes.childs));
 
@@ -104,7 +113,11 @@ export class AnswerComponent {
     });
 
     this.restService.save(new_recap, 'audits').subscribe((audit) => {
-      this.router.navigate(['/recap_actions', audit.id]);
+      this.router.navigate(['/recap_actions', audit.id], {
+        queryParams: {
+          new_copy: 1,
+        }
+      });
     }, (err) => {
       console.error(err);
     });
