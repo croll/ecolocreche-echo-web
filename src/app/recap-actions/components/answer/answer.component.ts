@@ -4,9 +4,12 @@ import { Location } from '@angular/common';
 import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form';
 import { Node } from '../../../common/models/node';
 import { RestService } from '../../../rest.service';
+import { Http, Response } from '@angular/http';
+import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../../auth.service';
 import { Answer } from '../../../question/answer';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
+import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 
 
 
@@ -21,15 +24,24 @@ export class AnswerComponent {
 
 
   public config: QuillConfigInterface = {
-   theme: 'bubble',  
+   theme: 'bubble',
    modules: {
     toolbar: true
   },
   placeholder: 'Votre commentaire...'
  };
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar) {
     this.infos = this.route.snapshot.data['infos']['idOrKey'];
+
+    this.route.queryParams.subscribe(params => {
+      if (params.new_copy) {
+        this.snackBar.open("Vous travaillez maintenant sur un nouveau dossier récap action (copié du précédent)", "", {
+          duration: 6000,
+        });
+
+      }
+    });
 
     // work on a copy
     this.themes = JSON.parse(JSON.stringify(this.infos.nodes.childs));
@@ -72,16 +84,43 @@ export class AnswerComponent {
   delete() {
   }
 
-  help() {
-    alert('todo');
+  pdf() {
+    this.pdfService.print("recapaction", this.infos.audit.id);
   }
 
-  pdf() {
-    alert('todo');
+  sendLink() {
+    this.http.post('/rest/auditmail', {
+      id_audit: this.infos.audit.id,
+    }).subscribe(() => {
+      this.snackBar.open("Mail du récap action : ", "ENVOYÉ", {
+            duration: 3000,
+          });
+    })
+    return false;
   }
 
   duplicate() {
-    alert('todo');
+    let new_recap=Object.assign({}, this.infos.audit);
+    delete new_recap.id;
+    delete new_recap.createdAt;
+    delete new_recap.updatedAt;
+    new_recap=Object.assign(new_recap, {
+      id_audit_src: this.infos.audit.id,
+      date_start: new Date(),
+      date_end: null,
+      active: true,
+      key: '',
+    });
+
+    this.restService.save(new_recap, 'audits').subscribe((audit) => {
+      this.router.navigate(['/recap_actions', audit.id], {
+        queryParams: {
+          new_copy: 1,
+        }
+      });
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   goBack(): boolean {

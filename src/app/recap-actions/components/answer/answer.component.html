@@ -8,8 +8,8 @@
   <h1 fxFlex>
     "Récap actions" de {{infos.audit.establishment.name}}
   </h1>
-  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" (click)="help()"><mat-icon>help</mat-icon></button>
-    <button mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
+  <a class='not-in-pdf' *ngIf="authService.isAgent()" mat-fab color="primary" href='/assets/docs/eplucheuse-pomme-de-terre.pdf' target='_blank'><mat-icon>help</mat-icon></a>
+  <button mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
 </div>
 
 <div *ngFor="let theme of themes">
@@ -32,7 +32,7 @@
 </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+<div class="not-in-pdf" xLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
   <button fxFlexOffset="8px" mat-raised-button color="warn" (click)="delete()">Effacer</button>
   <button fxFlexOffset="8px" mat-raised-button (click)="sendLink()">Envoyer le lien à la crèche</button>
   <button fxFlexOffset="8px" mat-raised-button (click)="duplicate()">Créer un nouveau dossier à partir de celui là</button>

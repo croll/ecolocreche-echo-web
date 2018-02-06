@@ -37,3 +37,11 @@ mat-card h4:nth-child(2) {
 .echos-graph-button-container {
   margin: 0px 0px 20px 8px;
 }
+
+.echos-chart {
+  // width: auto!important;
+  // height: !important;
+  margin: 0 auto;
+  width: 100%!important;
+  max-width: 450px!important;
+}
