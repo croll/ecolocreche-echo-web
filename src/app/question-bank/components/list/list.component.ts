@@ -42,7 +42,8 @@ export class ListComponent implements OnInit {
     this.filteredList = filter ? this.list.filter(item => item.title.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) != -1) : this.list;
   }
 
-  swap(num1, num2) {
+  swap(event, num1, num2) {
+    event.stopPropagation();
     let tmp = this.list[num2];
     this.list[num2] = this.list[num1];
     this.list[num1] = tmp;

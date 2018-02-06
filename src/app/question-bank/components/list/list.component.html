@@ -22,11 +22,11 @@
 </div>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index">
+  <mat-list-item class="echos-list-item" *ngFor="let item of filteredList; let firstItem = first; let lastItem = last; let i = index" [routerLink]="['/theme', item.id_node]">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="column" *ngIf="authService.isAdmin()">
-        <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap(i, i-1)"><mat-icon>arrow_drop_up_circle</mat-icon></button>
-        <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap(i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
+        <button mat-button [ngClass]="{'arrow-disabled': firstItem}" (click)="swap($event, i, i-1)"><mat-icon>arrow_drop_up_circle</mat-icon></button>
+        <button mat-button [ngClass]="{'arrow-disabled': lastItem}" (click)="swap($event, i, i+1)"><mat-icon>arrow_drop_down</mat-icon></button>
       </div>
       <div class="echos-color" [ngStyle]="{'background-color': '#'+item.color}"></div>
       <div fxFlex fxFlexOffset="20px" class="have-childs">
@@ -39,8 +39,8 @@
         </div>
       </div>
       <div style="width: 50px"></div>
-      <button mat-button [routerLink]="['/theme', item.id_node]"><mat-icon color="primary">chevron_right</mat-icon></button>
-    </div>
+        <button mat-button><mat-icon color="primary">chevron_right</mat-icon></button>
+      </div>
   </mat-list-item>
 </mat-list>
 
