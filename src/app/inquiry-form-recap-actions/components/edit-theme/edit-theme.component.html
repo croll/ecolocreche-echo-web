@@ -21,7 +21,7 @@
 
   <div style="margin: 20px 0 50px 0">
     <div>
-      <mat-checkbox (click)="unsetNodeLink()" #linkToATheme [checked]="echosForm.get('linked_to_node_id').value"></mat-checkbox> Lier à un thème
+      <mat-checkbox (change)="unsetNodeLink(this.checked)" #linkToATheme [checked]="echosForm.get('linked_to_node_id').value"></mat-checkbox> Lier à un thème
     </div>
 
     <div style="margin-top: 15px" *ngIf="linkToATheme.checked">

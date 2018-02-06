@@ -23,7 +23,7 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
           }));
         }
       });
-      return (observable_nodes.length) ? Observable.forkJoin(observable_nodes, () => {return nodes}) : nodes;
+      return (observable_nodes.length) ? Observable.forkJoin(observable_nodes, () => {return nodes}) : Observable.of(nodes);
     });
   }
 }

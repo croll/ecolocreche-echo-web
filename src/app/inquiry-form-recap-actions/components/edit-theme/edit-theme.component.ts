@@ -86,7 +86,7 @@ export class EditThemeComponent implements OnInit {
     });
   }
 */
-*
+
   unsetNodeLink() {
     this.linkedToNodeIdCtrl.setValue(null);
   }
