@@ -41,7 +41,7 @@
       <div fxFlex fxFlexOffset="20px" class="have-childs">
         <div>{{theme.title}}</div>
         <div *ngIf="theme.linked_to_node">Relié au thème "<b>{{theme.linked_to_node.title}}</b>" de la banque de questions.</div>
-        <div *ngIf="!theme.linked_to_node">Non relié. Sera affichée à la fin du dossier de labelisation.</div>
+        <div *ngIf="!theme.linked_to_node">Non relié. Sera affiché à la fin du dossier de labelisation.</div>
       </div>
       <div style="width: 50px"></div>
         <button mat-button [routerLink]="['/theme', theme.id_node]"><mat-icon color="primary">chevron_right</mat-icon></button>
