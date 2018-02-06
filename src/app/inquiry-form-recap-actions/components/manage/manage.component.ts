@@ -52,7 +52,6 @@ export class ManageComponent implements OnInit {
   }
 
   save() {
-    console.log('save');
     for (var i in this.themesList) {
       let new_position = parseInt(i);
       if (this.themesList[i].position != new_position) {
