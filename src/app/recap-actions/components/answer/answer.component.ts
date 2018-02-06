@@ -21,7 +21,7 @@ export class AnswerComponent {
 
 
   public config: QuillConfigInterface = {
-   theme: 'bubble',  
+   theme: 'bubble',
    modules: {
     toolbar: true
   },
@@ -70,10 +70,6 @@ export class AnswerComponent {
   }
 
   delete() {
-  }
-
-  help() {
-    alert('todo');
   }
 
   pdf() {
