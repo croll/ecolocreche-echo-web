@@ -9,6 +9,7 @@ export class LabelingFile {
 
 export namespace LabelingFile {
   export class json {
+    public logo: string
     public custom_headers: customHeader[] = []
     public themes_commitments: themeCommitment[] = []
     public themes_comments: themeComment[] = []

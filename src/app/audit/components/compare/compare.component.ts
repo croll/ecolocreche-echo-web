@@ -41,6 +41,10 @@ export class CompareComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService) {
 
+  this.customisations.custom_headers.push(new LabelingFile.customHeader('toto', 'yo yo'));
+
+  console.log(JSON.stringify(this.customisations));
+
     let tmp1 = this.route.snapshot.data['infos']['idOrKey'];
     let tmp2 = this.route.snapshot.data['infos']['id2'];
     if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
