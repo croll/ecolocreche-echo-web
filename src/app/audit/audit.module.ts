@@ -27,7 +27,7 @@ import { MaterialModule } from '../material.module';
     FlexLayoutModule,
     ChartsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
   ],
   declarations: [
     ActiveListComponent,

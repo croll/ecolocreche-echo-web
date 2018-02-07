@@ -4,7 +4,7 @@ import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form
 import { Node } from '../../../common/models/node';
 import { RestService } from '../../../rest.service';
 import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
-import { AuditTools } from '../../components/abstracts/audit-tools';
+import { AuditTools } from '../../../common/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 import { ExportCSVService } from '../../export-csv.service';
 import * as moment from 'moment';

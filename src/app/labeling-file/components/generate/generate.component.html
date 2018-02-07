@@ -14,7 +14,11 @@
     <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;">
       <img [src]="logo"(click)="swapLogo()" style="width: 150px;height: 150px;">
     </div>
-    <button class='not-in-pdf' mat-fab color="primary" (click)="exportCSV()" fxFlexOffset="8px"><mat-icon>grid_on</mat-icon></button>
+    <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
+    <mat-menu #menucsv="matMenu">
+      <button mat-menu-item (click)="exportCSV('csv')">Format CSV</button>
+      <button mat-menu-item (click)="exportCSV('xlsx')">Format XLSX</button>
+    </mat-menu>
     <button class='not-in-pdf' mat-fab color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
   </div>
 
@@ -31,19 +35,19 @@
       <label class="pdf-float-left">Date du second audit:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
-    <div *ngFor="let cinfo of customInfoList" fxLayout="row" class="pdf-clear-both-after">
+    <div *ngFor="let cinfo of customisations.custom_headers" fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">{{cinfo.label}}:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{cinfo.value}}</div>
-      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="removeCustomInfo(cinfo.label)"><mat-icon>delete</mat-icon></button>
+      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="removeCustomHeader(cinfo.label)"><mat-icon>delete</mat-icon></button>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after not-in-pdf">
       <mat-form-field class="pdf-float-left">
-        <input matInput #customInfoLabel placeholder="Libellé">
+        <input matInput #custom_headerLabel placeholder="Libellé">
       </mat-form-field>
       <mat-form-field fxFlexOffset="8px" class="pdf-float-left">
-        <input matInput #customInfoValue placeholder="Valeur">
+        <input matInput #custom_headerValue placeholder="Valeur">
       </mat-form-field>
-      <button mat-raised-button (click)="addCustomInfo(customInfoLabel, customInfoValue)" fxFlexOffset="8px">Ajouter une ligne</button>
+      <button mat-raised-button (click)="addCustomHeader(custom_headerLabel, custom_headerValue)" fxFlexOffset="8px">Ajouter une ligne</button>
     </div>
   </div>
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
@@ -51,28 +55,17 @@
   <div class="table">
     <div *ngFor="let theme of themeList" fxLayout="row" class="pdf-clear-both-after" style="padding: 5px">
       <div class="not-in-pdf">
-        <!-- <input type="checkbox" class="checkbox-to-pdf" style="border:1px solid #c0c0c0; background: #fff" checked/>{{theme.title}} -->
         <mat-checkbox (click)="toggleTheme($event)" [checked]='true'></mat-checkbox>
       </div>
-      <div class="pdf-float-left" style="min-width: 300px">{{theme.title}}</div>
-      <div class="pdf-float-left">
-        <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 470px;max-width: 470px;min-height:30px;max-height: auto"></textarea>
+      <div class="pdf-float-left" fxFlexOffset="8px" style="min-width: 300px">{{theme.title}}</div>
+      <div class="pdf-float-left" fxFlex="1 1 100%">
+        <!-- <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0" fxFlex="1 1 100%"></textarea> -->
+        <quill [config]="config" [value]="getCommitment(theme.id)" (blur)="setCommitment(theme.id, value)"></quill>
       </div>
     </div>
-    <!-- <div *ngFor="let ctl of customThemeList" fxLayout="row">
-      <div>{{ctl}}</div>
-      <button  [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customThemeList.splice(customThemeList.indexOf(ctl))"><mat-icon>delete</mat-icon></button>
-    </div>
-    <div fxLayout="row" [ngClass]="{'not-in-pdf' : true}" class="pdf-clear-both-after">
-      <mat-form-field>
-        <input matInput #customTheme>
-      </mat-form-field>
-      <button mat-raised-button (click)="addCustomTheme(customTheme)" fxFlexOffset="8px" style="padding:5px 2px">Ajouter un thème</button>
-    </div> -->
   </div>
 
   <!-- Page du résumé du bilan environnemental -->
-
   <div class="echos-title" style="page-break-before:always">Bilan: Évolution de l'impact sur les questions environnementales</div>
 
   <div class="echos-infos">
@@ -86,40 +79,40 @@
     </div>
   </div>
 
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_balance_sheet_environmental_pie" (click)="hide_balance_sheet_environmental_pie = false">Afficher les graphiques de type "camembert"</button>
-    <button mat-raised-button *ngIf="!hide_balance_sheet_environmental_pie" (click)="hide_balance_sheet_environmental_pie = true">Masquer les graphiques de type "camembert"</button>
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_pie" (click)="customisations.hide_balance_sheet_environmental_pie = false">Afficher les graphiques de type "camembert"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_pie" (click)="customisations.hide_balance_sheet_environmental_pie = true">Masquer les graphiques de type "camembert"</button>
   </div>
 
-  <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!hide_balance_sheet_environmental_pie">
-    <mat-card style="max-width:300px!important" class="pdf-float-left">
-      <canvas baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
+  <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!customisations.hide_balance_sheet_environmental_pie">
+    <mat-card class="pdf-float-left" fxFlex="50%">
+      <canvas class="echos-chart" baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
       <h4>Audit de départ</h4>
     </mat-card>
-    <mat-card style="max-width:300px!important" class="pdf-float-left">
-      <canvas baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
+    <mat-card class="pdf-float-left" fxFlex="50%">
+      <canvas class="echos-chart" class="echos-chart" baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
       <h4>Audit intermédiaire</h4>
     </mat-card>
   </div>
 
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_balance_sheet_environmental_bar" (click)="hide_balance_sheet_environmental_bar = false">Afficher le graphique de type "baton"</button>
-    <button mat-raised-button *ngIf="!hide_balance_sheet_environmental_bar" (click)="hide_balance_sheet_environmental_bar = true">Masquer le graphiques de type "baton"</button>
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_bar" (click)="customisations.hide_balance_sheet_environmental_bar = false">Afficher le graphique de type "baton"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_bar" (click)="customisations.hide_balance_sheet_environmental_bar = true">Masquer le graphiques de type "baton"</button>
   </div>
 
-  <mat-card style="max-width:300px!important" *ngIf="!hide_balance_sheet_environmental_bar">
-    <canvas baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
+  <mat-card *ngIf="!customisations.hide_balance_sheet_environmental_bar">
+    <canvas class="echos-chart" baseChart [datasets]="charts.environment.global.datasets" [colors]="charts.environment.global.colors" [labels]="charts.environment.global.labels" [chartType]="charts.environment.global.chartType" [legend]="false" [options]="charts.environment.global.options"></canvas>
     <h4>Gauche: audit de départ</h4>
     <h4>Droite: audit intermédiaire</h4>
   </mat-card>
 
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_balance_sheet_environmental_radar" (click)="hide_balance_sheet_environmental_radar = false">Afficher le graphique de type "araignée"</button>
-    <button mat-raised-button *ngIf="!hide_balance_sheet_environmental_radar" (click)="hide_balance_sheet_environmental_radar = true">Masquer le graphique de type "araignée"</button>
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_radar" (click)="customisations.hide_balance_sheet_environmental_radar = false">Afficher le graphique de type "araignée"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_radar" (click)="customisations.hide_balance_sheet_environmental_radar = true">Masquer le graphique de type "araignée"</button>
   </div>
 
-  <mat-card style="max-width:400px!important" *ngIf="!hide_balance_sheet_environmental_radar">
-    <canvas baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
+  <mat-card *ngIf="!customisations.hide_balance_sheet_environmental_radar">
+    <canvas class="echos-chart" baseChart [datasets]="charts.environment.radar.datasets" [colors]="charts.environment.radar.colors" [labels]="charts.environment.radar.labels" [chartType]="charts.environment.radar.chartType" [legend]="false" [options]="charts.environment.radar.options"></canvas>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
       <div fxFlexOffset="8px" class="pdf-float-left">Audit de départ</div>
@@ -132,20 +125,20 @@
 
   <!-- Page des graphs des familles environnementales -->
 
-  <div style="margin: 50px 0 0 8px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
-    <button mat-raised-button color="primary" *ngIf="hide_environment_details" (click)="hide_environment_details = false">Afficher le détail des évolutions des impacts par thème</button>
-    <button mat-raised-button *ngIf="!hide_environment_details" (click)="hide_environment_details = true">Masquer le détail des évolutions des impacts par thème</button>
+  <div style="margin-top: 50px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_environment_details" (click)="customisations.hide_environment_details = false">Afficher le détail des évolutions des impacts par thème</button>
+    <button mat-raised-button *ngIf="!customisations.hide_environment_details" (click)="customisations.hide_environment_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
 
-  <div *ngIf="!hide_environment_details">
+  <div *ngIf="!customisations.hide_environment_details">
 
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
     <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes; let idx = index" style="page-break-inside:avoid!important;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
-      <mat-card style="max-width:350px!important" class="pdf-float-left">
+      <mat-card class="pdf-float-left" fxFlex>
         <h2>{{chart.title}}</h2>
-        <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
+        <canvas class="echos-chart" baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
@@ -170,42 +163,42 @@
     </div>
   </div>
 
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_balance_sheet_social_pie" (click)="hide_balance_sheet_social_pie = false">Afficher les graphiques de type "camembert"</button>
-    <button mat-raised-button *ngIf="!hide_balance_sheet_social_pie" (click)="hide_balance_sheet_social_pie = true">Masquer les graphiques de type "camembert"</button>
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_pie" (click)="customisations.hide_balance_sheet_social_pie = false">Afficher les graphiques de type "camembert"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_pie" (click)="customisations.hide_balance_sheet_social_pie = true">Masquer les graphiques de type "camembert"</button>
   </div>
 
-  <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!hide_balance_sheet_social_pie">
-    <mat-card style="max-width:300px!important" class="pdf-float-left">
-      <canvas baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
+  <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!customisations.hide_balance_sheet_social_pie">
+    <mat-card class="pdf-float-left" fxFlex="50%">
+      <canvas class="echos-chart" baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
       <h4>Audit de départ</h4>
     </mat-card>
-    <mat-card style="max-width:300px!important" class="pdf-float-left">
-      <canvas baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
+    <mat-card class="pdf-float-left" fxFlex="50%">
+      <canvas class="echos-chart" baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
       <h4>Audit intermédiaire</h4>
     </mat-card>
   </div>
 
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_balance_sheet_social_bar" (click)="hide_balance_sheet_social_bar = false">Afficher les graphiques de type "baton"</button>
-    <button mat-raised-button *ngIf="!hide_balance_sheet_social_bar" (click)="hide_balance_sheet_social_bar = true">Masquer les graphiques de type "baton"</button>
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_bar" (click)="customisations.hide_balance_sheet_social_bar = false">Afficher les graphiques de type "baton"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_bar" (click)="customisations.hide_balance_sheet_social_bar = true">Masquer les graphiques de type "baton"</button>
   </div>
 
-  <div *ngIf="!hide_balance_sheet_social_bar">
-    <mat-card style="max-width:300px!important">
-      <canvas baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
+  <div *ngIf="!customisations.hide_balance_sheet_social_bar">
+    <mat-card>
+      <canvas class="echos-chart" baseChart [datasets]="charts.social.global.datasets" [colors]="charts.social.global.colors" [labels]="charts.social.global.labels" [chartType]="charts.social.global.chartType" [legend]="false" [options]="charts.social.global.options"></canvas>
       <h4>Gauche: audit de départ</h4>
       <h4>Droite: audit intermédiaire</h4>
     </mat-card>
   </div>
 
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_balance_sheet_social_radar" (click)="hide_balance_sheet_social_radar = false">Afficher les graphiques de type "araignée"</button>
-    <button mat-raised-button *ngIf="!hide_balance_sheet_social_radar" (click)="hide_balance_sheet_social_radar = true">Masquer les graphiques de type "araignée"</button>
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_radar" (click)="customisations.hide_balance_sheet_social_radar = false">Afficher les graphiques de type "araignée"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_radar" (click)="customisations.hide_balance_sheet_social_radar = true">Masquer les graphiques de type "araignée"</button>
   </div>
 
-  <mat-card style="max-width:400px!important" *ngIf="!hide_balance_sheet_social_radar">
-    <canvas baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
+  <mat-card *ngIf="!customisations.hide_balance_sheet_social_radar">
+    <canvas class="echos-chart" baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
       <div fxFlexOffset="8px" class="pdf-float-left">Audit de départ</div>
@@ -218,19 +211,19 @@
 
   <!-- Page des graphs des familles sociales -->
 
-  <div style="margin: 50px 0 0 8px; cursor: pointer">
-  <div [ngClass]="{'not-in-pdf' : true, 'echos-graph-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="hide_social_details" (click)="hide_social_details = false">Afficher le détail des évolutions des impacts par thème</button>
-    <button mat-raised-button *ngIf="!hide_social_details" (click)="hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
+  <div style="margin-top: 50px; cursor: pointer">
+  <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_social_details" (click)="customisations.hide_social_details = false">Afficher le détail des évolutions des impacts par thème</button>
+    <button mat-raised-button *ngIf="!customisations.hide_social_details" (click)="customisations.hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
 
-  <div *ngIf="!hide_social_details">
+  <div *ngIf="!customisations.hide_social_details">
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
     <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes; let idx = index" style="page-break-inside:avoid;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
-      <mat-card style="max-width:300px!important" class="pdf-float-left">
+      <mat-card class="pdf-float-left">
         <h2>{{chart.title}}</h2>
-        <canvas baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
+        <canvas class="echos-chart" baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
@@ -243,15 +236,14 @@
 
   <!-- Page de commentaires -->
 
-  <div style="margin: 50px 0 0 8px; cursor: pointer" class="not-in-pdf">
-    <button mat-raised-button color="primary" *ngIf="hide_comments" (click)="hide_comments = false">Afficher les commentaires</button>
-    <button mat-raised-button *ngIf="!hide_comments" (click)="hide_comments = true">Masquer les commentaires</button>
+  <div style="margin-top: 50px; cursor: pointer" class="not-in-pdf">
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_comments" (click)="customisations.hide_comments = false">Afficher les commentaires</button>
+    <button mat-raised-button *ngIf="!customisations.hide_comments" (click)="customisations.hide_comments = true">Masquer les commentaires</button>
   </div>
 
-  <div *ngIf="!hide_comments">
+  <div *ngIf="!customisations.hide_comments" fxLayout="column">
     <div class="echos-title" style="page-break-before:always">Commentaires</div>
-
-    <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-width: 650px;max-width: 850px;min-height:500px"></textarea>
+    <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-height:500px" fxFlex="1 1 300px"></textarea>
   </div>
 
 </div>

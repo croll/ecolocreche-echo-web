@@ -58,13 +58,13 @@
 <div *ngIf="!item.audits || !item.audits.length" class="echos-warning">Aucun audit trouvé.</div>
 
 <mat-toolbar *ngIf="item.audits && item.audits.length" style="margin: 20px 0 0 0">
-  <button mat-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.audits.length != 2" color='primary'>Générer le dossier de labelisation</button>
+  <button mat-raised-button style="margin: 0 auto" (click)="createLabelingFile()" [disabled]="labelingFileToCreate.audits.length != 2" color='primary'>Générer le dossier de labelisation</button>
 </mat-toolbar>
 
 <mat-list>
   <mat-list-item class="echos-list-item" *ngFor="let audit of item.audits">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="auditsToCompare.audits.length == 2 && auditsToCompare.audits.indexOf(audit.id) == -1" (change)="toggleCompare(audit.id, 'audits')" fxFlex="50px"></mat-checkbox>
+      <mat-checkbox [attr.disabled]="labelingFileToCreate.audits.length == 2 && labelingFileToCreate.audits.indexOf(audit.id) == -1" (change)="toggleInLabelingFile(audit.id, 'audits')" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
@@ -91,7 +91,7 @@
 <mat-list>
   <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="auditsToCompare.recap_actions.length == 2 && auditsToCompare.recap_actions.indexOf(recap_action.id) == -1" (change)="toggleCompare(recap_action.id, 'recap_actions')" fxFlex="50px"></mat-checkbox>
+      <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && labelingFileToCreate.recap_actions.indexOf(recap_action.id) == -1" (change)="toggleInLabelingFile(recap_action.id, 'recap_actions')" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{recap_action.inquiryform?.title}} - {{recap_action.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
@@ -120,21 +120,20 @@
 <div *ngIf="!item.labeling_files || !item.labeling_files.length" class="echos-warning">Aucun dossier de labelisation trouvé.</div>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" *ngFor="let labeling_file of item.labeling_files">
+  <mat-list-item class="echos-list-item" *ngFor="let labeling_file of item.labeling_files" [routerLink]="['/dossier_de_labelisation', labeling_file.id]">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="auditsToCompare.labeling_files.length == 2 && auditsToCompare.labeling_files.indexOf(labeling_file.id) == -1" (change)="toggleCompare(labeling_file.id, 'labeling_files')" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>{{labeling_file.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>Dossier de labélisation crée le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!labeling_file.active">Terminé</div>
         <div *ngIf="labeling_file.active" style="color: rgb(96, 190, 64)">En cours</div>
       </div>
-      <button mat-button *ngIf="labeling_file.active || authService.isSuperAgent()" [routerLink]="['/labeling_file', labeling_file.id]"><mat-icon color="primary">chevron_right</mat-icon></button>
+      <button mat-button *ngIf="labeling_file.active || authService.isSuperAgent()"><mat-icon color="primary">chevron_right</mat-icon></button>
     </div>
   </mat-list-item>
 </mat-list>
 
-<mat-toolbar *ngIf="item.audits && item.audits.length" style="text-align: center">
-  <button mat-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="auditsToCompare.audits.length != 2" color="primary">Générer le dossier de labellisation</button>
+<mat-toolbar *ngIf="item.audits && item.audits.length" style="margin-top: 30px;text-align: center">
+  <button mat-raised-button style="margin: 0 auto" (click)="compare()" [disabled]="labelingFileToCreate.audits.length != 2" color="primary">Générer le dossier de labellisation</button>
 </mat-toolbar>

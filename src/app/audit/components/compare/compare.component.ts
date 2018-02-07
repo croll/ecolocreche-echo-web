@@ -3,12 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form';
 import { Node } from '../../../common/models/node';
 import { RestService } from '../../../rest.service';
-import { AuditTools } from '../../components/abstracts/audit-tools';
+import { AuditTools } from '../../../common/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 import { ExportCSVService } from '../../export-csv.service';
 import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 import { LabelingFile } from '../../../common/models/labeling-file';
-
 import * as moment from 'moment';
 
 @Component({
@@ -33,15 +32,13 @@ export class CompareComponent implements OnInit {
   charts: any = {};
   logo: string = '';
 
-  customisations = new LabelingFile.json();
+  customisations = new LabelingFile.Json();
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService) {
-
-  this.customisations.custom_headers.push(new LabelingFile.customHeader('toto', 'yo yo'));
 
   console.log(JSON.stringify(this.customisations));
 
@@ -141,6 +138,14 @@ export class CompareComponent implements OnInit {
   toggleTheme(e) {
     let parent = e.target.parentElement.parentElement.parentElement.parentElement;
     parent.classList.toggle('not-in-pdf');
+  }
+
+  getCommitment(id_theme) {
+    return 'yolo';
+  }
+
+  setCommitment(id_theme, value) {
+    console.log(id_theme, value);
   }
 
 }

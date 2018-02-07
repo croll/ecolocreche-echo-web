@@ -1,18 +1,23 @@
+import { Injectable } from '@angular/core';
+import { RestService } from '../../rest.service';
+
 export class LabelingFile {
+
   public id: number
   public id_establishment: number
   public id_labelingfile_src: number
-  public id_audit1: number
-  public id_audit2: number
+  public id_audit_1: number
+  public id_audit_2: number
   public id_audit_recap_actions: number
+
 }
 
 export namespace LabelingFile {
-  export class json {
+  export class Json {
     public logo: string
-    public custom_headers: customHeader[] = []
-    public themes_commitments: themeCommitment[] = []
-    public themes_comments: themeComment[] = []
+    public custom_headers: CustomHeader[] = []
+    public themes_commitments: ThemeCommitment[] = []
+    public themes_comments: ThemeComment[] = []
     public hide_comments: boolean = false
     public hide_social_details: boolean = false
     public hide_balance_sheet_social_radar: boolean = false
@@ -24,7 +29,7 @@ export namespace LabelingFile {
     public hide_balance_sheet_environmental_pie: boolean = false
   }
 
-  export class customHeader {
+  export class CustomHeader {
     label: string
     value: string
     constructor(l: string, v: string) {
@@ -33,7 +38,7 @@ export namespace LabelingFile {
     }
   }
 
-  export class themeCommitment {
+  export class ThemeCommitment {
     id_theme: number
     value: string
     constructor(idt: number , v: string) {
@@ -42,7 +47,7 @@ export namespace LabelingFile {
     }
   }
 
-  export class themeComment {
+  export class ThemeComment {
     id_theme: number
     past_action: string
     future_action: string

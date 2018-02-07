@@ -2,17 +2,17 @@ import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { GenerateComponent } from './components/generate/generate.component';
 import { AuthGuard } from '../auth-guard.service';
-import { AuditResolver } from '../common/resolvers/audit.resolver';
+import { LabelingFileResolver } from './labeling-file.resolver';
 
 const routes: Routes = [
   {
-    path: 'labelisation',
+    path: 'dossier_de_labelisation',
     //canActivate: [AuthGuard],
     children: [
       {
-        path: 'comparer/:id/:id2/:id3',
+        path: ':id',
         resolve: {
-          infos: AuditResolver,
+          infos: LabelingFileResolver,
         },
         component: GenerateComponent
       }

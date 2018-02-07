@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AuditTools } from './components/abstracts/audit-tools';
 import { saveAs } from 'file-saver';
+import { AuditTools } from '../common/abstracts/audit-tools';
 
 @Injectable()
 export class ExportCSVService {
@@ -9,7 +9,7 @@ export class ExportCSVService {
 
   auditTools = AuditTools.getInstance();
 
-  getContent(cachedAudit1Datas, cachedAudit2Datas?) {
+  getContent(format, cachedAudit1Datas, cachedAudit2Datas?) {
 
     let aoa: string[][] = [];
 
@@ -97,11 +97,11 @@ export class ExportCSVService {
     });
 
 
-    this.exportCSV(aoa, cols);
+    this.exportCSV(format, aoa, cols);
 
   }
 
-  exportCSV(aoa: string[][], cols) {
+  exportCSV(format, aoa: string[][], cols) {
     import('xlsx').then(XLSX => {
 
       /* generate worksheet */
@@ -137,8 +137,8 @@ export class ExportCSVService {
       XLSX.utils.book_append_sheet(wb, ws, 'Audits');
 
       /* save to file */
-      const wbout: string = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-      saveAs(new Blob([wbout]), 'export.xlsx');
+      const wbout: string = XLSX.write(wb, { bookType: format == 'csv' ? 'csv' : 'xlsx', type: 'array' });
+      saveAs(new Blob([wbout]), 'export.'+format);
 
     });
   }
@@ -189,7 +189,7 @@ export class ExportCSVService {
     if (str.substr(-1, 1) == ',') {
        str = str.substr(0, str.length-1);
      }
-    return '"'+str+'"';
+    return str;
   }
 
   private _asArray(obj) {

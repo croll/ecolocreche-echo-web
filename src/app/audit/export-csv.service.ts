@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuditTools } from './components/abstracts/audit-tools';
+import { AuditTools } from '../common/abstracts/audit-tools';
 import { saveAs } from 'file-saver';
 
 @Injectable()

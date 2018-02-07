@@ -5,12 +5,13 @@ import { RoutingModule } from './routing.module';
 import { GenerateComponent } from './components/generate/generate.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from '../common/resolvers/audit.resolver';
-import { AuditListResolver } from '../common/resolvers/audit-list.resolver';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { ExportCSVService } from './export-csv.service';
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
+import { QuillModule, QuillConfigInterface, QUILL_CONFIG } from 'ngx-quill-wrapper';
+const DEFAULT_QUILL_CONFIG: QuillConfigInterface = {};
 
 @NgModule({
   imports: [
@@ -20,15 +21,19 @@ import { MaterialModule } from '../material.module';
     FlexLayoutModule,
     ChartsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    QuillModule
   ],
   declarations: [
     GenerateComponent,
   ],
   providers: [
     AuditResolver,
-    AuditListResolver,
     ExportCSVService,
+    {
+      provide: QUILL_CONFIG,
+      useValue: DEFAULT_QUILL_CONFIG
+    }
   ]
 })
 
