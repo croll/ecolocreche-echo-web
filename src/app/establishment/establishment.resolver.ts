@@ -54,7 +54,6 @@ export class EstablishmentResolver implements Resolve<any> {
         } else {
           return Observable.of(establishment);
         }
-        return null;
     });
   }
 
