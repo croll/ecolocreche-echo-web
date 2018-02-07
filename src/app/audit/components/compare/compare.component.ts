@@ -7,6 +7,7 @@ import { AuditTools } from '../../components/abstracts/audit-tools';
 import { ChartsModule, BaseChartDirective } from 'ng2-charts';
 import { ExportCSVService } from '../../export-csv.service';
 import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
+import { LabelingFile } from '../../../common/models/labeling-file';
 
 import * as moment from 'moment';
 
@@ -31,23 +32,15 @@ export class CompareComponent implements OnInit {
   hideChart: boolean = false;
   charts: any = {};
   logo: string = '';
-  customThemeList: string[] = [];
-  customInfoList: any[] = [];
-  hide_comments = false;
-  hide_social_details = false;
-  hide_balance_sheet_social_radar = false;
-  hide_balance_sheet_social_bar = false;
-  hide_balance_sheet_social_pie = false;
-  hide_environment_details = false;
-  hide_balance_sheet_environmental_radar = false;
-  hide_balance_sheet_environmental_bar = false;
-  hide_balance_sheet_environmental_pie = false;
+
+  customisations = new LabelingFile.json();
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService) {
+
     let tmp1 = this.route.snapshot.data['infos']['idOrKey'];
     let tmp2 = this.route.snapshot.data['infos']['id2'];
     if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
@@ -124,26 +117,18 @@ export class CompareComponent implements OnInit {
     this.logo = window.location.protocol + '//' + window.location.host + '/assets/images/' + ((this.logo.indexOf('ecoaccueil') != -1) ? 'ecolocreche.png' : 'ecoaccueil.png');
   }
 
-  addCustomTheme(el) {
-    if (this.customThemeList.indexOf(el.value) != -1) {
-      return false;
-    }
-    this.customThemeList.push(el.value);
-    el.value = '';
-  }
-
-  addCustomInfo(label, value) {
+  addCustomHeader(label, value) {
     if (!label.value || !value.value) return;
-    this.customInfoList.push({label: label.value, value: value.value});
+    this.customisations.custom_headers.push({label: label.value, value: value.value});
     label.value = '';
     value.value = '';
   }
 
-  removeCustomInfo(label) {
+  removeCustomHeader(label) {
     let i = 0;
-    this.customInfoList.forEach(info => {
+    this.customisations.custom_headers.forEach(info => {
       if (info.label == label) {
-        this.customInfoList.splice(i, 1);
+        this.customisations.custom_headers.splice(i, 1);
         return;
       }
     })
