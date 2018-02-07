@@ -42,6 +42,14 @@ export class AuditResolver implements Resolve<any> {
                     .flatMap(audit => {
                       obj.audit = audit[0];
                       console.log(obj.audit);
+                      if (obj.audit.id_audit_src) {
+                        return this._getAudit(obj.audit.id_audit_src);
+                      } else return Observable.of(null);
+                    })
+                    .flatMap(audit_src => {
+                      if (audit_src) {
+                        obj.audit.audit_src = audit_src;
+                      }
                       return this.restService.get(obj.audit.id_inquiryform, 'hist/inquiryforms', {date: obj.audit.createdAt});
                     })
                     .flatMap(inquiryform => {
@@ -53,6 +61,7 @@ export class AuditResolver implements Resolve<any> {
                        node.childs = nodes;
                        obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
                        return Observable.create(observer => {
+                         console.log("audit: ", obj.audit);
                           observer.next(obj);
                           observer.complete();
                        });
