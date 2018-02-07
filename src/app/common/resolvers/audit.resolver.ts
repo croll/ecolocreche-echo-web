@@ -15,20 +15,31 @@ export class AuditResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
+
+    // If we have a simple id or key, we want to display a report for an unique audit
     let key = route.params['key'];
     let id = parseInt(route.params['id']);
-    let id2 = parseInt(route.params['id2']);
-    let id3 = parseInt(route.params['id3']);
     let idOrKey = (key) ? key : id;
+
+    // If we get and id_labeling_files first we get the corresponding audits and labeling_file ids
+    let id_labeling_files = parseInt(route.params['id_labeling_file']);
+
+    let observable:Observable<any>;
+
     let ret={};
-    let elems = [];
-    if (idOrKey) elems.push(this._getAudit(idOrKey).map(r => ret['idOrKey']=r));
-    if (id2) elems.push(this._getAudit(id2).map(r => ret['id2']=r));
-    if (id3) elems.push(this._getAudit(id3).map(r => ret['id3']=r));
+
     if (idOrKey) {
-      return Observable.forkJoin(elems, () => ret);
+      return this._getAudit(idOrKey).map(r => {ret['audit1']=r; return ret});
     } else {
-      return null;
+      let elems = [];
+      return this.restService.get(id_labeling_files, 'datalabelingfiles').flatMap(lf => {
+        if (lf.id_audit_1) elems.push(this._getAudit(lf.id_audit_1).map(r => ret['audit1']=r));
+        if (lf.id_audit_2) elems.push(this._getAudit(lf.id_audit_2).map(r => ret['audit2']=r));
+        if (lf.id_recap_actions) elems.push(this._getAudit(lf.id_recap_actions).map(r => ret['recap_actions']=r));
+        return Observable.forkJoin(elems, () => {
+          return ret;
+        })
+      });
     }
   }
 
@@ -41,7 +52,7 @@ export class AuditResolver implements Resolve<any> {
                     })
                     .flatMap(audit => {
                       obj.audit = audit[0];
-                      console.log(obj.audit);
+                      // console.log(obj.audit);
                       if (obj.audit.id_audit_src) {
                         return this._getAudit(obj.audit.id_audit_src);
                       } else return Observable.of(null);
@@ -61,7 +72,7 @@ export class AuditResolver implements Resolve<any> {
                        node.childs = nodes;
                        obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
                        return Observable.create(observer => {
-                         console.log("audit: ", obj.audit);
+                         // console.log("audit: ", obj.audit);
                           observer.next(obj);
                           observer.complete();
                        });

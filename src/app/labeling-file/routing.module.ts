@@ -2,7 +2,10 @@ import { NgModule }              from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { GenerateComponent } from './components/generate/generate.component';
 import { AuthGuard } from '../auth-guard.service';
+import { AuditResolver } from '../common/resolvers/audit.resolver';
 import { LabelingFileResolver } from './labeling-file.resolver';
+import { RestService } from '../rest.service';
+import { Observable } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -10,9 +13,10 @@ const routes: Routes = [
     //canActivate: [AuthGuard],
     children: [
       {
-        path: ':id',
+        path: ':id_labeling_file',
         resolve: {
-          infos: LabelingFileResolver,
+          audits: AuditResolver,
+          labeling_files: LabelingFileResolver
         },
         component: GenerateComponent
       }

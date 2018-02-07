@@ -42,8 +42,8 @@ export class CompareComponent implements OnInit {
 
   console.log(JSON.stringify(this.customisations));
 
-    let tmp1 = this.route.snapshot.data['infos']['idOrKey'];
-    let tmp2 = this.route.snapshot.data['infos']['id2'];
+    let tmp1 = this.route.snapshot.data['infos']['audit1'];
+    let tmp2 = this.route.snapshot.data['infos']['audit2'];
     if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
       this.audit1 = tmp1;
       this.audit2 = tmp2;

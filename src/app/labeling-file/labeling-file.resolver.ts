@@ -16,16 +16,8 @@ export class LabelingFileResolver implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    let id = parseInt(route.params['id']);
-    // if (id) elems.push(this._getAudit(idOrKey).map(r => ret['idOrKey']=r));
-    // if (id2) elems.push(this._getAudit(id2).map(r => ret['id2']=r));
-    // if (id3) elems.push(this._getAudit(id3).map(r => ret['id3']=r));
-    // if (idOrKey) {
-    //   return Observable.forkJoin(elems, () => ret);
-    // } else {
-    //   return null;
-    // }
-    return null
+    let id = parseInt(route.params['id_labeling_file']);
+    return this.restService.get(id, 'labelingfiles')
   }
 
 }

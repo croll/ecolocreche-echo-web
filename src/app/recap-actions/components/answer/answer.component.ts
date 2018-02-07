@@ -32,7 +32,7 @@ export class AnswerComponent {
  };
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar) {
-    this.infos = this.route.snapshot.data['infos']['idOrKey'];
+    this.infos = this.route.snapshot.data['infos']['audit1'];
 
     this.route.queryParams.subscribe(params => {
       if (params.new_copy) {

@@ -62,9 +62,8 @@ export class DetailComponent {
     if (this.labelingFileToCreate.recap_actions[0]) {
       lf.id_audit_recap_actions = this.labelingFileToCreate.recap_actions[0];
     }
-    console.log(lf);
     this.restService.save(lf, 'labelingfiles', {}, 'id', "Création : ").subscribe(res => {
-      console.log(res);
+      this.router.navigate(['/dossier_de_labelisation', res.id]);
     });
   }
 

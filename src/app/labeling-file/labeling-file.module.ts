@@ -5,6 +5,7 @@ import { RoutingModule } from './routing.module';
 import { GenerateComponent } from './components/generate/generate.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver } from '../common/resolvers/audit.resolver';
+import { LabelingFileResolver } from './labeling-file.resolver';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { ExportCSVService } from './export-csv.service';
@@ -29,6 +30,7 @@ const DEFAULT_QUILL_CONFIG: QuillConfigInterface = {};
   ],
   providers: [
     AuditResolver,
+    LabelingFileResolver,
     ExportCSVService,
     {
       provide: QUILL_CONFIG,

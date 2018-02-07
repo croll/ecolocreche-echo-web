@@ -31,7 +31,7 @@
       <label class="pdf-float-left">Date du premier audit:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row" class="pdf-clear-both-after">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngIf="audit2">
       <label class="pdf-float-left">Date du second audit:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
@@ -73,7 +73,7 @@
       <label class="pdf-float-left">Audit de départ:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row" class="pdf-clear-both-after">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngIf="audit2">
       <label class="pdf-float-left">Audit intermédiaire:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
@@ -89,7 +89,7 @@
       <canvas class="echos-chart" baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
       <h4>Audit de départ</h4>
     </mat-card>
-    <mat-card class="pdf-float-left" fxFlex="50%">
+    <mat-card class="pdf-float-left" fxFlex="50%" *ngIf="audit2">
       <canvas class="echos-chart" class="echos-chart" baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
       <h4>Audit intermédiaire</h4>
     </mat-card>
@@ -157,7 +157,7 @@
       <label class="pdf-float-left">Audit de départ:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
-    <div fxLayout="row" class="pdf-clear-both-after">
+    <div fxLayout="row" class="pdf-clear-both-after" *ngIf="audit2">
       <label class="pdf-float-left">Audit intermédiaire:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
@@ -173,7 +173,7 @@
       <canvas class="echos-chart" baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
       <h4>Audit de départ</h4>
     </mat-card>
-    <mat-card class="pdf-float-left" fxFlex="50%">
+    <mat-card class="pdf-float-left" fxFlex="50%" *ngIf="audit2">
       <canvas class="echos-chart" baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
       <h4>Audit intermédiaire</h4>
     </mat-card>

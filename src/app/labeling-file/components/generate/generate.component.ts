@@ -42,42 +42,69 @@ export class GenerateComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService) {
 
-  this.customisations.custom_headers.push(new LabelingFile.CustomHeader('toto', 'yo yo'));
+    // this.customisations.custom_headers.push(new LabelingFile.CustomHeader('toto', 'yo yo'));
 
-  console.log(JSON.stringify(this.customisations));
+    // console.log(this.route.snapshot.data['audits']);
+    // console.log(this.route.snapshot.data['labeling_files']);
 
-    let tmp1 = this.route.snapshot.data['infos']['idOrKey'];
-    let tmp2 = this.route.snapshot.data['infos']['id2'];
-    if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
-      this.audit1 = tmp1;
-      this.audit2 = tmp2;
+    let tmp1 = this.route.snapshot.data['audits']['audit1'];
+
+    if (this.route.snapshot.data['audits']['audit2']) {
+      let tmp2 = this.route.snapshot.data['audits']['audit2'];
+      if (new Date(tmp1.audit.date_start) < new Date(tmp2.audit.date_start)) {
+        this.audit1 = tmp1;
+        this.audit2 = tmp2;
+      } else {
+        this.audit1 = tmp2;
+        this.audit2 = tmp1;
+      }
     } else {
-      this.audit1 = tmp2;
-      this.audit2 = tmp1;
+      this.audit1 = tmp1;
     }
+
     this.audit1Cache  = this.auditTools.cacheDatas(this.audit1.nodes);
-    this.audit2Cache  = this.auditTools.cacheDatas(this.audit2.nodes);
-    this.themeList = this.auditTools.merge(this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes);
+    let chartDatasThemes = [this.audit1Cache.chartDatas.themes];
+    let chartDatasFamilies = [this.audit1Cache.chartDatas.families];
+
+    if (this.audit2) {
+      this.audit2Cache  = this.auditTools.cacheDatas(this.audit2.nodes);
+      this.themeList = this.auditTools.merge(this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes);
+      chartDatasThemes.push(this.audit2Cache.chartDatas.themes);
+      chartDatasFamilies.push(this.audit2Cache.chartDatas.families);
+    } else {
+      console.log(this.audit1Cache.chartDatas.themes);
+      this.themeList = [];
+      for (let id_node in this.audit1Cache.chartDatas.themes) {
+        this.themeList.push(this.audit1Cache.chartDatas.themes[id_node]);
+      }
+    }
 
     this.charts.environment = {
       audit1: this.auditTools.toChartDatas('pie', this.audit1Cache.chartDatas.families, 'environnementales'),
-      audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'environnementales'),
-      global: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.families, this.audit2Cache.chartDatas.families], 'environnementales'),
-      radar: this.auditTools.toChartDatas('radar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], 'environnementales'),
+      global: this.auditTools.toChartDatas('bar', chartDatasFamilies, 'environnementales'),
+      radar: this.auditTools.toChartDatas('radar', chartDatasThemes, 'environnementales'),
       themes: []
     };
 
     this.charts.social = {
       audit1: this.auditTools.toChartDatas('pie', this.audit1Cache.chartDatas.families, 'sociales'),
-      audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'sociales'),
-      global: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.families, this.audit2Cache.chartDatas.families], 'sociales'),
-      radar: this.auditTools.toChartDatas('radar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], 'sociales'),
+      global: this.auditTools.toChartDatas('bar', chartDatasFamilies, 'sociales'),
+      radar: this.auditTools.toChartDatas('radar', chartDatasThemes, 'sociales'),
       themes: []
     };
 
+    if (this.audit2) {
+      Object.assign(this.charts.environment, {
+        audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'environnementales'),
+      });
+      Object.assign(this.charts.social, {
+        audit2: this.auditTools.toChartDatas('pie', this.audit2Cache.chartDatas.families, 'sociales'),
+      });
+    }
+
     for (let theme_id in this.audit1Cache.chartDatas.themes) {
       let family = (this.audit1Cache.chartDatas.themes[theme_id].family == 'environnementales') ? 'environment' : 'social';
-      this.charts[family].themes.push({title: this.audit1Cache.chartDatas.themes[theme_id].title, chart: this.auditTools.toChartDatas('bar', [this.audit1Cache.chartDatas.themes, this.audit2Cache.chartDatas.themes], theme_id)});
+      this.charts[family].themes.push({title: this.audit1Cache.chartDatas.themes[theme_id].title, chart: this.auditTools.toChartDatas('bar', chartDatasThemes, theme_id)});
     }
 
   }
@@ -145,7 +172,7 @@ export class GenerateComponent implements OnInit {
   }
 
   getCommitment(id_theme) {
-    return 'yolo';
+    return '';
   }
 
   setCommitment(id_theme, value) {
