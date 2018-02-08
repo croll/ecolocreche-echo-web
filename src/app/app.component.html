@@ -27,19 +27,19 @@
   <div [ngClass]="{'echos-menu': true, 'echos-menu-hide': !menuVisibility}" (click)="menuHide($event)">
     <mat-list>
        <mat-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="menuHide($event)">Mon compte</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="menuHide($event)">Les établissements</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="menuHide($event)">Les audits en cours</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="menuHide($event)">Les utilisateurs</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="menuHide($event)">Banque de questions</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="menuHide($event)">Les questionnaires</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire_recap_actions/liste" routerLinkActive="active" (click)="menuHide($event)">Les recap actions</mat-list-item>
-       <!-- <mat-divider></mat-divider> -->
+       <mat-divider></mat-divider>
        <mat-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)">Déconnexion</mat-list-item>
        <mat-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)">Connexion</mat-list-item>
     </mat-list>
