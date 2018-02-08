@@ -9,6 +9,7 @@ import { ExportCSVService } from '../../export-csv.service';
 import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 import { LabelingFile } from '../../../common/models/labeling-file';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
+import { AuthService } from '../../../auth.service';
 
 import * as moment from 'moment';
 
@@ -33,6 +34,10 @@ export class GenerateComponent implements OnInit {
   hideChart: boolean = false;
   charts: any = {};
   logo: string = '';
+  editorConfig: QuillConfigInterface = {
+    theme: 'bubble',
+    placeholder: 'Votre commentaire...'
+  };
 
   customisations = new LabelingFile.Json();
 
@@ -40,7 +45,7 @@ export class GenerateComponent implements OnInit {
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, private authService: AuthService) {
 
     // this.customisations.custom_headers.push(new LabelingFile.CustomHeader('toto', 'yo yo'));
 
@@ -102,9 +107,9 @@ export class GenerateComponent implements OnInit {
       });
     }
 
-    for (let theme_id in this.audit1Cache.chartDatas.themes) {
-      let family = (this.audit1Cache.chartDatas.themes[theme_id].family == 'environnementales') ? 'environment' : 'social';
-      this.charts[family].themes.push({title: this.audit1Cache.chartDatas.themes[theme_id].title, chart: this.auditTools.toChartDatas('bar', chartDatasThemes, theme_id)});
+    for (let id_theme in this.audit1Cache.chartDatas.themes) {
+      let family = (this.audit1Cache.chartDatas.themes[id_theme].family == 'environnementales') ? 'environment' : 'social';
+      this.charts[family].themes.push({id_theme: parseInt(id_theme), title: this.audit1Cache.chartDatas.themes[id_theme].title, chart: this.auditTools.toChartDatas('bar', chartDatasThemes, id_theme)});
     }
 
   }
@@ -135,7 +140,7 @@ export class GenerateComponent implements OnInit {
 
   pdf() {
     console.log("TODO: replace 0 by the id of compare");
-    this.puppeeterService.print('compare', 0);
+    this.puppeeterService.print('compare', this.route.params['id']);
   }
 
   exportCSV(format: string) {
@@ -149,34 +154,14 @@ export class GenerateComponent implements OnInit {
     this.logo = window.location.protocol + '//' + window.location.host + '/assets/images/' + ((this.logo.indexOf('ecoaccueil') != -1) ? 'ecolocreche.png' : 'ecoaccueil.png');
   }
 
-  addCustomHeader(label, value) {
-    if (!label.value || !value.value) return;
-    this.customisations.custom_headers.push({label: label.value, value: value.value});
-    label.value = '';
-    value.value = '';
-  }
-
-  removeCustomHeader(label) {
-    let i = 0;
-    this.customisations.custom_headers.forEach(info => {
-      if (info.label == label) {
-        this.customisations.custom_headers.splice(i, 1);
-        return;
-      }
-    })
-  }
-
   toggleTheme(e) {
     let parent = e.target.parentElement.parentElement.parentElement.parentElement;
     parent.classList.toggle('not-in-pdf');
   }
 
-  getCommitment(id_theme) {
-    return '';
-  }
-
-  setCommitment(id_theme, value) {
-    console.log(id_theme, value);
+  save() {
+    let json = JSON.stringify(this.customisations);
+    console.log(json);
   }
 
 }

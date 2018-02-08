@@ -38,18 +38,23 @@
     <div *ngFor="let cinfo of customisations.custom_headers" fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">{{cinfo.label}}:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{cinfo.value}}</div>
-      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="removeCustomHeader(cinfo.label)"><mat-icon>delete</mat-icon></button>
+      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.delete(cinfo.id, 'custom_headers')" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
     </div>
-    <div fxLayout="row" class="pdf-clear-both-after not-in-pdf">
+    <div class="pdf-clear-both-after not-in-pdf">
       <mat-form-field class="pdf-float-left">
         <input matInput #custom_headerLabel placeholder="Libellé">
       </mat-form-field>
       <mat-form-field fxFlexOffset="8px" class="pdf-float-left">
         <input matInput #custom_headerValue placeholder="Valeur">
       </mat-form-field>
-      <button mat-raised-button (click)="addCustomHeader(custom_headerLabel, custom_headerValue)" fxFlexOffset="8px">Ajouter une ligne</button>
+      <button mat-raised-button style="max-height: 45px; margin-top: 10px;" (click)="customisations.addCustomHeader(custom_headerLabel.value, custom_headerValue.value); custom_headerLabel.value=''; custom_headerValue.value=''" fxFlexOffset="8px">Ajouter une ligne</button>
     </div>
   </div>
+
+  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!customisations.isDirty()">Enregistrer le dossier de labélisation</button>
+  </div>
+
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
 
   <div class="table">
@@ -58,9 +63,8 @@
         <mat-checkbox (click)="toggleTheme($event)" [checked]='true'></mat-checkbox>
       </div>
       <div class="pdf-float-left" fxFlexOffset="8px" style="min-width: 300px">{{theme.title}}</div>
-      <div class="pdf-float-left" fxFlex="1 1 100%">
-        <!-- <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0" fxFlex="1 1 100%"></textarea> -->
-        <quill [config]="config" [value]="getCommitment(theme.id)" (blur)="setCommitment(theme.id, value)"></quill>
+      <div class="pdf-float-left" fxFlex="1 1 100%" fxFlex>
+        <quill [config]="editorConfig" [value]="customisations.get(theme.id, 'themes_commitments')" (contentChange)="customisations.setThemeCommitment(theme.id, $event.html)"></quill>
       </div>
     </div>
   </div>
@@ -142,8 +146,8 @@
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left">
-        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 440px;max-width: 440px;min-height:365px;max-height: 365px;margin-left:10px"></textarea>
+      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
+        <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill>
       </div>
     </div>
 
@@ -227,8 +231,8 @@
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container pdf-float-left" fxFlex>
-        <textarea placeholder="Commentaire..." class="textarea-to-pdf-div" style="overflow: hidden!important;border: 1px solid #c0c0c0; margin-top: 0px;min-width: 440px;max-width: 440px;min-height:365px;max-height: 365px;margin-left:10px"></textarea>
+      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
+        <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill>
       </div>
     </div>
   </div>
@@ -242,8 +246,17 @@
   </div>
 
   <div *ngIf="!customisations.hide_comments" fxLayout="column">
+
     <div class="echos-title" style="page-break-before:always">Commentaires</div>
-    <textarea placeholder="" class="textarea-to-pdf-div" style="border: 1px solid #c0c0c0;min-height:500px" fxFlex="1 1 300px"></textarea>
+    <quill [config]="editorConfig" ([value])="customisations.comments1"></quill>
+
+    <div class="echos-title" style="page-break-before:always">Autres commentaires</div>
+    <quill [config]="editorConfig" ([value])="customisations.comments2"></quill>
+
+  </div>
+
+  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!customisations.isDirty()">Enregistrer le dossier de labélisation</button>
   </div>
 
 </div>
