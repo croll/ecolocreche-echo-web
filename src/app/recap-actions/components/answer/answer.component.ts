@@ -112,6 +112,15 @@ export class AnswerComponent {
   }
 
   delete() {
+    console.log("delete ?");
+    if (confirm("Souhaitez vous vraiment supprimer ce récap action ?")) {
+      this.restService.delete(this.infos.audit.id, 'audits').subscribe((response) => {
+        this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
+      }, (err) => {
+        console.error(err);
+      });
+    }
+    return false;
   }
 
   pdf() {
