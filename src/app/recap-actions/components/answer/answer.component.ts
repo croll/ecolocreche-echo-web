@@ -10,6 +10,7 @@ import { AuthService } from '../../../auth.service';
 import { Answer } from '../../../question/answer';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
 import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -31,8 +32,11 @@ export class AnswerComponent {
   placeholder: 'Votre commentaire...'
  };
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar) {
-    this.infos = this.route.snapshot.data['infos']['idOrKey'];
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar, private sanitizer: DomSanitizer) {
+  }
+
+  ngOnInit() {
+
 
     this.route.queryParams.subscribe(params => {
       if (params.new_copy) {
@@ -43,25 +47,51 @@ export class AnswerComponent {
       }
     });
 
-    // work on a copy
-    this.themes = JSON.parse(JSON.stringify(this.infos.nodes.childs));
+    this.route.data.subscribe(datas => {
+      this.infos = datas['infos']['idOrKey'];
 
-    // Init answers
-    this.themes.forEach(theme => {
-      theme.childs.forEach(question => {
-        if (!(question.answer)) {
-          // generate answer
-          question.answer = Object.assign(new Answer(), {id_audit: this.infos.audit.id, audit_key: this.infos.audit.key, id_node: question.id_node, ignored: false, value: "", comment: ""});
-        } else {
-          // clean answer
-          if (question.answer.value == '{}') {
-            question.answer.value = '';
+      // work on a copy
+      this.themes = JSON.parse(JSON.stringify(this.infos.nodes.childs));
+
+      // Init answers
+      this.themes.forEach(theme => {
+        theme.childs.forEach(question => {
+          if (!(question.answer)) {
+            // generate answer
+            question.answer = Object.assign(new Answer(), {id_audit: this.infos.audit.id, audit_key: this.infos.audit.key, id_node: question.id_node, ignored: false, value: "", comment: ""});
+          } else {
+            // clean answer
+            if (question.answer.value == '{}') {
+              question.answer.value = '';
+            }
           }
-        }
-        // cache responses to check if response if different when saving
-        question.answer.originalValue = question.answer.value;
+          // cache responses to check if response if different when saving
+          question.answer.originalValue = question.answer.value;
+        });
       });
     });
+
+  }
+
+
+  getAuditSrcAnswer(id_theme: number, id_question: number, position: number) {
+    if (this.infos.audit.audit_src
+      && this.infos.audit.audit_src.nodes
+      && this.infos.audit.audit_src.nodes.childs) {
+      // search the theme
+      for (let theme of this.infos.audit.audit_src.nodes.childs) {
+        if (theme.id_node == id_theme) { // we found the theme
+          // search the question
+          if (theme.childs) {
+            for (let question of theme.childs) {
+              if (question.answer && question.answer.value && question.position == position) {
+                return this.sanitizer.bypassSecurityTrustHtml(question.answer.value);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   save() {
@@ -115,7 +145,7 @@ export class AnswerComponent {
     this.restService.save(new_recap, 'audits').subscribe((audit) => {
       this.router.navigate(['/recap_actions', audit.id], {
         queryParams: {
-          new_copy: 1,
+          new_copy: audit.id_audit_src,
         }
       });
     }, (err) => {
