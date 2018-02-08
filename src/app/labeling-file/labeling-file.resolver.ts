@@ -17,7 +17,7 @@ export class LabelingFileResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
     let id = parseInt(route.params['id_labeling_file']);
-    return this.restService.get(id, 'labelingfiles')
+    return this.restService.get(id, 'datalabelingfiles')
   }
 
 }

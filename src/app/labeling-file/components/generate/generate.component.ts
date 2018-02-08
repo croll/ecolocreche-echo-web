@@ -20,7 +20,7 @@ import * as moment from 'moment';
 export class GenerateComponent implements OnInit {
 
   private id_inquiryform: number;
-  node: any;
+  current: LabelingFile;
   audit1: any;
   audit2: any;
   questionList: any;
@@ -38,19 +38,21 @@ export class GenerateComponent implements OnInit {
     theme: 'bubble',
     placeholder: 'Votre commentaire...'
   };
+  customisations: LabelingFile.Json = new LabelingFile.Json();
 
-  customisations = new LabelingFile.Json();
+  // Buffer objets to be watched, to avoid calling functions on each tick
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, private authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService) {
 
-    // this.customisations.custom_headers.push(new LabelingFile.CustomHeader('toto', 'yo yo'));
+    this.current = this.route.snapshot.data['labeling_file'];
 
-    // console.log(this.route.snapshot.data['audits']);
-    // console.log(this.route.snapshot.data['labeling_files']);
+    if (this.current.datajson) {
+      this.customisations = Object.assign(this.customisations, JSON.parse(this.current.datajson));
+    }
 
     let tmp1 = this.route.snapshot.data['audits']['audit1'];
 
@@ -115,31 +117,9 @@ export class GenerateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.swapLogo();
-  }
-
-  setChartType(chartType, id_theme) {
-    this.chartType = chartType.value;
-    // Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(this.chartType, this.cache.chartDatas[id_theme]));
-    // Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(this.chartType, this.cache.chartDatas[id_theme]));
-    setTimeout(() => {
-      this._chart.ngOnChanges({});
-    }, 150);
-  }
-
-  toggleChartType(chartType, id_theme) {
-    this.hideChart = true;
-    chartType = (chartType == 'bar') ? 'pie' : 'bar';
-    // Object.assign(this.chartDatas[id_theme], this.auditTools.toChartDatas(chartType, this.cache.chartDatas[id_theme]));
-    setTimeout(() => {
-      this.hideChart = false;
-      this._chart.ngOnChanges({});
-      // this._chart.refresh();
-    }, 0);
   }
 
   pdf() {
-    console.log("TODO: replace 0 by the id of compare");
     this.puppeeterService.print('compare', this.route.params['id']);
   }
 
@@ -147,21 +127,13 @@ export class GenerateComponent implements OnInit {
     this.csvService.getContent(format, this.audit1Cache, this.audit2Cache);
   }
 
-  changeLogo(e) {
-  }
-
-  swapLogo() {
-    this.logo = window.location.protocol + '//' + window.location.host + '/assets/images/' + ((this.logo.indexOf('ecoaccueil') != -1) ? 'ecolocreche.png' : 'ecoaccueil.png');
-  }
-
-  toggleTheme(e) {
-    let parent = e.target.parentElement.parentElement.parentElement.parentElement;
-    parent.classList.toggle('not-in-pdf');
-  }
-
   save() {
-    let json = JSON.stringify(this.customisations);
-    console.log(json);
+    this.restService.save(Object.assign(this.current, {datajson: JSON.stringify(this.customisations)}), 'datalabelingfiles').subscribe((res) => {
+      console.log(res);
+    }, (err) => {
+      console.error(err);
+    });
+    return false;
   }
 
 }
