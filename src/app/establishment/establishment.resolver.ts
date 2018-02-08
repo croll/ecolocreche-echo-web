@@ -21,23 +21,22 @@ export class EstablishmentResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
 
     let id = route.params['id'];
-    let infos = {audits: null, labeling_files: null};
     return this.restService.get(id, 'establishments')
       .flatMap(establishmentInfos => {
         return Observable.forkJoin(
-          this.restService.getList('audits', {id_establishment: id, sort:'-date_start'}).map(res => infos.audits = res),
-          this.restService.getList('labelingfiles', {id_establishment: id, sort:'-createdAt'}).map(res => infos.labeling_files = res),
-          () => {
+          this.restService.getList('audits', {id_establishment: id, sort:'-date_start'}),
+          this.restService.getList('labelingfiles', {id_establishment: id, sort:'-createdAt'}),
+          (audits, labeling_files) => {
             let establishment = Object.assign(new EstablishmentExt(), establishmentInfos);
-            return [establishment, infos];
+            establishment.labeling_files = labeling_files;
+            return [establishment, audits]
           }
         );
       })
-      .flatMap(([establishment, infos]) => {
-        let observable_audits: Observable<any>[] = [];
-        let observable_labeling_files: Observable<any>[] = [];
+      .flatMap(([establishment, audits]) => {
 
-        infos.audits.forEach(audit => {
+        let observable_audits: Observable<any>[] = [];
+        audits.forEach(audit => {
           observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms').map(iq => {
             audit.inquiryform = iq;
             if (audit.inquiry_type == 'audit') {
@@ -47,14 +46,6 @@ export class EstablishmentResolver implements Resolve<any> {
             }
           }));
         });
-
-        infos.labeling_files.forEach(labeling_file => {
-          observable_labeling_files.push(this.restService.get(labeling_file.id, 'datalebelings').map(inf => {
-            // TODO
-            console.log(inf);
-          }));
-        });
-
 
         if (observable_audits.length) {
           return Observable.forkJoin(observable_audits, () => {

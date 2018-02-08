@@ -48,7 +48,7 @@ export class AnswerComponent {
     });
 
     this.route.data.subscribe(datas => {
-      this.infos = datas['infos']['idOrKey'];
+      this.infos = datas['infos']['audit1'];
 
       // work on a copy
       this.themes = JSON.parse(JSON.stringify(this.infos.nodes.childs));

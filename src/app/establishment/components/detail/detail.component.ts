@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Establishment } from '../../establishment';
 import { RestService } from '../../../rest.service';
 import { Audit } from '../../../common/models/audit';
+import { LabelingFile } from '../../../common/models/labeling-file';
 import { AuthService } from '../../../auth.service';
 
 @Component({
@@ -14,11 +15,11 @@ export class DetailComponent {
   private id: number;
   item: any;
   infos: any;
-  auditsToCompare: {audits: number[], recap_actions: number[]};
+  labelingFileToCreate: {audits: number[], recap_actions: number[]};
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService) {
     this.item = Object.assign(new Establishment(), this.route.snapshot.data['infos']);
-    this.auditsToCompare = {audits: [], recap_actions: [0]};
+    this.labelingFileToCreate = {audits: [], recap_actions: [0]};
   }
 
   getStatusLabel() {
@@ -42,17 +43,28 @@ export class DetailComponent {
     return match;
   }
 
-  public toggleCompare(id, type) {
-    let pos = this.auditsToCompare[type].indexOf(id);
+  public toggleInLabelingFile(id, type) {
+    let pos = this.labelingFileToCreate[type].indexOf(id);
     if (pos != -1) {
-      this.auditsToCompare[type].splice(pos, 1);
+      this.labelingFileToCreate[type].splice(pos, 1);
     } else {
-      this.auditsToCompare[type].push(id);
+      this.labelingFileToCreate[type].push(id);
     }
   }
 
-  public compare() {
-    this.router.navigate(['/audit/comparer', this.auditsToCompare.audits[0], this.auditsToCompare.audits[1], this.auditsToCompare.recap_actions[0]]);
+  public createLabelingFile() {
+    var lf = new LabelingFile();
+    lf.id_establishment = this.item.id;
+    lf.id_audit_1 = this.labelingFileToCreate.audits[0];
+    if (this.labelingFileToCreate.audits[1]) {
+      lf.id_audit_2 = this.labelingFileToCreate.audits[1];
+    }
+    if (this.labelingFileToCreate.recap_actions[0]) {
+      lf.id_audit_recap_actions = this.labelingFileToCreate.recap_actions[0];
+    }
+    this.restService.save(lf, 'labelingfiles', {}, 'id', "Création : ").subscribe(res => {
+      this.router.navigate(['/dossier_de_labelisation', res.id]);
+    });
   }
 
 }
