@@ -6,7 +6,6 @@ import { ActiveListComponent } from './components/active-list/active-list.compon
 import { EditComponent } from './components/edit/edit.component';
 import { AnswerComponent } from './components/answer/answer.component';
 import { ReportComponent } from './components/report/report.component';
-import { CompareComponent } from './components/compare/compare.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuditResolver, AuditResolverPreviousAudits } from '../common/resolvers/audit.resolver';
 import { AuditListResolver } from '../common/resolvers/audit-list.resolver';
@@ -34,7 +33,6 @@ import { MaterialModule } from '../material.module';
     EditComponent,
     AnswerComponent,
     ReportComponent,
-    CompareComponent,
     AuditOldPathRedirectComponent,
   ],
   providers: [
