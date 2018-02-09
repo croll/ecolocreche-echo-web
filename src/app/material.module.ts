@@ -15,7 +15,8 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatCardModule
+  MatCardModule,
+  MatExpansionModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
   ],
   exports: [
     MatButtonModule,
@@ -56,7 +58,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
   ]
 })
 export class MaterialModule {}

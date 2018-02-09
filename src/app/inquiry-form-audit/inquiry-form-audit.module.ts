@@ -10,6 +10,8 @@ import { InquiryFormResolver } from '../common/resolvers/inquiry-form.resolver';
 import { InquiryFormTreeResolver } from './inquiry-form-tree.resolver';
 import { MatIconRegistry } from '@angular/material';
 import { MaterialModule } from '../material.module';
+import { QuillModule, QuillConfigInterface, QUILL_CONFIG } from 'ngx-quill-wrapper';
+const DEFAULT_QUILL_CONFIG: QuillConfigInterface = {};
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import { MaterialModule } from '../material.module';
     RoutingModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    QuillModule
   ],
   declarations: [
     ListComponent,
@@ -26,7 +29,11 @@ import { MaterialModule } from '../material.module';
   ],
   providers: [
     InquiryFormResolver,
-    InquiryFormTreeResolver
+    InquiryFormTreeResolver,
+    {
+      provide: QUILL_CONFIG,
+      useValue: DEFAULT_QUILL_CONFIG
+    },
   ]
 })
 

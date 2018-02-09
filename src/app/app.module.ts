@@ -67,7 +67,7 @@ registerLocaleData(localeFr, 'fr');
     ReactiveFormsModule,
     // NgxDatatableModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [
     AuthGuard,
@@ -75,7 +75,7 @@ registerLocaleData(localeFr, 'fr');
     RestService,
     //WkHtmlToPdfService
     PuppeteerPdfService,
-    ServercsvexportService
+    ServercsvexportService,
   ],
   bootstrap: [AppComponent]
 })

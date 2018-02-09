@@ -10,6 +10,7 @@ export class InquiryForm {
   public mail_from: string;
   public mail_body: string;
   public mail_title: string;
+  public audit_report_header: string;
 }
 
 export class InquiryFormExt extends InquiryForm {

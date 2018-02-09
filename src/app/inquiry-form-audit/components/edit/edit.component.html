@@ -11,54 +11,118 @@
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="title" placeholder="Nom du questionnaire *">
-      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du questionnaire est requis</mat-hint>
-      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du questionnaire doit contenir 3 caractères minimum</mat-hint>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <textarea matInput formControlName="description" placeholder="Description"></textarea>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <textarea matInput formControlName="comment" placeholder="Commentaire"></textarea>
-    </mat-form-field>
-  </div>
 
-  <div>
-    <p>Vous pouvez éditer ci-dessous le mail qui sera envoyé lors de la création d'un audit<br/>
-    Les champs suivant seront remplacé automatiquement</p>
-    <ul>
-      <li>{{ '{' }}establishment_name{{ '}' }} : Nom de l'établissement</li>
-      <li>{{ '{' }}establishment_mail{{ '}' }} : Adresse email de contact de l'établissement</li>
-      <li>{{ '{' }}audit_synthesis{{ '}' }} : Synthèse de l'audit</li>
-      <li>{{ '{' }}audit_url{{ '}' }} : Lien vers l'audit, accessible sans authentification</li>
-      <li>{{ '{' }}inquiryform_title{{ '}' }} : Titre du questionnaire</li>
-      <li>{{ '{' }}inquiryform_description{{ '}' }} : Description du questionnaire</li>
-      <li>{{ '{' }}inquiryform_comment{{ '}' }} : Commentaire du questionnaire</li>
-    </ul>
-    <br />
-  </div>
+  <mat-accordion>
 
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="mail_from" placeholder="Mail Expéditeur">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="mail_title" placeholder="Sujet du mail">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <textarea matInput formControlName="mail_body" placeholder="Contenu du mail"></textarea>
-    </mat-form-field>
-  </div>
+    <!-- GLOBAL SETTINGS -->
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Paramètres généraux
+        </mat-panel-title>
+        <mat-panel-description>
+          (Nom, description, ...)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="title" placeholder="Nom du questionnaire *">
+          <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du questionnaire est requis</mat-hint>
+          <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">Le nom du questionnaire doit contenir 3 caractères minimum</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <textarea matInput formControlName="description" placeholder="Description"></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <textarea matInput formControlName="comment" placeholder="Commentaire"></textarea>
+        </mat-form-field>
+      </div>
+
+    </mat-expansion-panel>
+
+    <!-- MAIL TEMPLATE -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Gabarit de mail
+        </mat-panel-title>
+        <mat-panel-description>
+          Permet de modifier le contenu du mail envoyé aux établissements
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        <p>Vous pouvez éditer ci-dessous le mail qui sera envoyé lors de la création d'un audit</p>
+
+        <p>Les champs suivant seront remplacé automatiquement :</p>
+        <ul>
+          <li>{{ '{' }}establishment_name{{ '}' }} : Nom de l'établissement</li>
+          <li>{{ '{' }}establishment_mail{{ '}' }} : Adresse email de contact de l'établissement</li>
+          <li>{{ '{' }}audit_synthesis{{ '}' }} : Synthèse de l'audit</li>
+          <li>{{ '{' }}audit_url{{ '}' }} : Lien vers l'audit, accessible sans authentification</li>
+          <li>{{ '{' }}inquiryform_title{{ '}' }} : Titre du questionnaire</li>
+          <li>{{ '{' }}inquiryform_description{{ '}' }} : Description du questionnaire</li>
+          <li>{{ '{' }}inquiryform_comment{{ '}' }} : Commentaire du questionnaire</li>
+        </ul>
+        <br />
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="mail_from" placeholder="Mail Expéditeur">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput formControlName="mail_title" placeholder="Sujet du mail">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <textarea matInput formControlName="mail_body" placeholder="Contenu du mail"></textarea>
+        </mat-form-field>
+      </div>
+
+    </mat-expansion-panel>
+
+
+
+    <!-- HEADER TEMPLATE -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Gabarit d'entête de rapport d'audit
+        </mat-panel-title>
+        <mat-panel-description>
+          Permet de modifier le gabarit
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div>
+        <p>Vous pouvez éditer ci-dessous le gabarit de l'entête de rapport d'audit.<br/>
+        Les champs suivant seront remplacé automatiquement</p>
+        <ul>
+          <li>{{ '{' }}establishment_name{{ '}' }} : Nom de l'établissement</li>
+          <li>{{ '{' }}establishment_mail{{ '}' }} : Adresse email de contact de l'établissement</li>
+          <li>{{ '{' }}audit_synthesis{{ '}' }} : Synthèse de l'audit</li>
+          <li>{{ '{' }}audit_url{{ '}' }} : Lien vers l'audit, accessible sans authentification</li>
+          <li>{{ '{' }}inquiryform_title{{ '}' }} : Titre du questionnaire</li>
+          <li>{{ '{' }}inquiryform_description{{ '}' }} : Description du questionnaire</li>
+          <li>{{ '{' }}inquiryform_comment{{ '}' }} : Commentaire du questionnaire</li>
+        </ul>
+        <br />
+      </div>
+
+      <quill [config]="quillconfig" [(value)]="audit_report_header" placeholder="Gabarit d'entête de rapport d'audit" [autoToolbar]="true"></quill>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
 
   <input *ngIf="id_inquiryform" type="hidden" formControlName="id_inquiryform">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">

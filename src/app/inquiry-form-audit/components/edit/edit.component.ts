@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm } from '../../../common/models/inquiry-form';
 import { RestService } from '../../../rest.service';
+import { QuillConfigInterface } from 'ngx-quill-wrapper';
 
 const default_audit_mail_from = ``;
 const default_audit_mail_subject = `ECHO(S): Audit de {establishment_name}`;
@@ -18,12 +19,28 @@ Cordialement,
 Echo(s)
 `;
 
+const default_audit_report_header = `<h1>Rapport de l'audit de {{audit_establishment_name}}</h1>
+
+<ul>
+<li>Date de création de l'audit : {{audit_date_start}}</li>
+<li>Finalisé le : {{audit_date_end}}</li>
+</ul>
+`;
+
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
 
 export class EditComponent implements OnInit {
+
+  quillconfig: QuillConfigInterface = {
+    theme: 'bubble',
+    modules: {
+      toolbar: true,
+    },
+    placeholder: "Gabarit d'entête",
+  };
 
   echosForm: FormGroup;
   current: InquiryForm;
@@ -36,11 +53,12 @@ export class EditComponent implements OnInit {
   mailTitleCtrl: FormControl;
   mailBodyCtrl: FormControl;
   inquiryTypeCtrl: FormControl;
+  auditReportHeaderCtrl: FormControl;
+  audit_report_header_value: string;
 
   id_inquiryform: number;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location) {
-
     this.current = new InquiryForm();
     this.current.inquiry_type = InquiryForm.Inquiry_type.Audit;
 
@@ -52,6 +70,7 @@ export class EditComponent implements OnInit {
     this.mailFromCtrl = fb.control(this.current.mail_from ? this.current.mail_from : default_audit_mail_from);
     this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_audit_mail_subject);
     this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_audit_mail_body);
+    this.auditReportHeaderCtrl = fb.control(this.current.audit_report_header && this.current.audit_report_header.length > 0 ? this.current.audit_report_header : default_audit_report_header);
 
     this.echosForm = fb.group({
       id_inquiryform: this.idInquiryFormCtrl,
@@ -62,6 +81,7 @@ export class EditComponent implements OnInit {
       mail_from: this.mailFromCtrl,
       mail_title: this.mailTitleCtrl,
       mail_body: this.mailBodyCtrl,
+      audit_report_header: this.auditReportHeaderCtrl,
     });
 
   }
@@ -73,10 +93,23 @@ export class EditComponent implements OnInit {
     }
   }
 
+  get audit_report_header() {
+    return this.auditReportHeaderCtrl.value;
+  }
+  set audit_report_header(val) {
+    if (val == null) val = "";
+    this.auditReportHeaderCtrl.setValue(val);
+  }
+
   get() {
       this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(item => {
+        item.current=item;
+        if (!item.current.mail_from) item.current.mail_from=default_audit_mail_from;
+        if (!item.current.mail_title) item.current.mail_title=default_audit_mail_subject;
+        if (!item.current.mail_body) item.current.mail_body=default_audit_mail_body;
+        if (!item.current.audit_report_header) item.current.audit_report_header=default_audit_report_header;
+        console.log("item: ", item);
         this.echosForm.patchValue(item);
-        this.current = item;
       }, (err) => {
         console.error(err);
       });
