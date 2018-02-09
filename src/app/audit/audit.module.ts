@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
 import { ActiveListComponent } from './components/active-list/active-list.component';
@@ -39,7 +39,8 @@ import { MaterialModule } from '../material.module';
     AuditResolver,
     AuditResolverPreviousAudits,
     AuditListResolver,
-    ExportCSVService
+    ExportCSVService,
+    DatePipe,
   ]
 })
 

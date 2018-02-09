@@ -9,7 +9,7 @@ export class InquiryForm {
   public nodeslist: string;
   public mail_from: string;
   public mail_body: string;
-  public mail_title: string;
+  public mail_subject: string;
   public audit_report_header: string;
 }
 

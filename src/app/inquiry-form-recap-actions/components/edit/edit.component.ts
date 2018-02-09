@@ -32,7 +32,7 @@ export class EditComponent implements OnInit {
   descriptionCtrl: FormControl;
   idThemeCtrl: FormControl;
   mailFromCtrl: FormControl;
-  mailTitleCtrl: FormControl;
+  mailSubjectCtrl: FormControl;
   mailBodyCtrl: FormControl;
 
   id_inquiryform: number;
@@ -49,7 +49,7 @@ export class EditComponent implements OnInit {
     this.descriptionCtrl = fb.control(this.current.description);
     this.idThemeCtrl = fb.control(this.current.id);
     this.mailFromCtrl = fb.control(this.current.mail_from ? this.current.mail_from : default_recapaction_mail_from);
-    this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_recapaction_mail_subject);
+    this.mailSubjectCtrl = fb.control(this.current.mail_subject ? this.current.mail_subject : default_recapaction_mail_subject);
     this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_recapaction_mail_body);
 
     this.echosForm = fb.group({
@@ -58,7 +58,7 @@ export class EditComponent implements OnInit {
       description: this.descriptionCtrl,
       id_theme: this.idThemeCtrl,
       mail_from: this.mailFromCtrl,
-      mail_title: this.mailTitleCtrl,
+      mail_subject: this.mailSubjectCtrl,
       mail_body: this.mailBodyCtrl,
     });
 

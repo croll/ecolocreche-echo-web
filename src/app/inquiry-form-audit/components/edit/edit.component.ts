@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
   commentCtrl: FormControl;
   positionCtrl: FormControl;
   mailFromCtrl: FormControl;
-  mailTitleCtrl: FormControl;
+  mailSubjectCtrl: FormControl;
   mailBodyCtrl: FormControl;
   inquiryTypeCtrl: FormControl;
   auditReportHeaderCtrl: FormControl;
@@ -68,7 +68,7 @@ export class EditComponent implements OnInit {
     this.commentCtrl = fb.control(this.current.comment);
     this.positionCtrl = fb.control(this.current.position);
     this.mailFromCtrl = fb.control(this.current.mail_from ? this.current.mail_from : default_audit_mail_from);
-    this.mailTitleCtrl = fb.control(this.current.mail_title ? this.current.mail_title : default_audit_mail_subject);
+    this.mailSubjectCtrl = fb.control(this.current.mail_subject ? this.current.mail_subject : default_audit_mail_subject);
     this.mailBodyCtrl = fb.control(this.current.mail_body ? this.current.mail_body : default_audit_mail_body);
     this.auditReportHeaderCtrl = fb.control(this.current.audit_report_header && this.current.audit_report_header.length > 0 ? this.current.audit_report_header : default_audit_report_header);
 
@@ -79,7 +79,7 @@ export class EditComponent implements OnInit {
       comment: this.commentCtrl,
       position: this.positionCtrl,
       mail_from: this.mailFromCtrl,
-      mail_title: this.mailTitleCtrl,
+      mail_subject: this.mailSubjectCtrl,
       mail_body: this.mailBodyCtrl,
       audit_report_header: this.auditReportHeaderCtrl,
     });
@@ -105,7 +105,7 @@ export class EditComponent implements OnInit {
       this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(item => {
         item.current=item;
         if (!item.current.mail_from) item.current.mail_from=default_audit_mail_from;
-        if (!item.current.mail_title) item.current.mail_title=default_audit_mail_subject;
+        if (!item.current.mail_subject) item.current.mail_subject=default_audit_mail_subject;
         if (!item.current.mail_body) item.current.mail_body=default_audit_mail_body;
         if (!item.current.audit_report_header) item.current.audit_report_header=default_audit_report_header;
         console.log("item: ", item);
