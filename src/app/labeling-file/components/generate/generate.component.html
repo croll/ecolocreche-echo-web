@@ -12,7 +12,7 @@
       Dossier de labellisation
     </h1>
     <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;">
-      <img [src]="logo"(click)="swapLogo()" style="width: 150px;height: 150px;">
+      <img [src]="customisations.logo"(click)="customisations.swapLogo()" style="width: 150px;height: 150px;">
     </div>
     <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
     <mat-menu #menucsv="matMenu">
@@ -38,7 +38,7 @@
     <div *ngFor="let cinfo of customisations.custom_headers" fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">{{cinfo.label}}:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{cinfo.value}}</div>
-      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.delete(cinfo.id, 'custom_headers')" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
+      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.deleteCustomHeader(cinfo.label)" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
     </div>
     <div class="pdf-clear-both-after not-in-pdf">
       <mat-form-field class="pdf-float-left">
@@ -52,7 +52,7 @@
   </div>
 
   <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-    <button mat-raised-button color="primary" (click)="save()" [disabled]="!customisations.isDirty()">Enregistrer le dossier de labélisation</button>
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer le dossier de labélisation</button>
   </div>
 
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
@@ -60,11 +60,12 @@
   <div class="table">
     <div *ngFor="let theme of themeList" fxLayout="row" class="pdf-clear-both-after" style="padding: 5px">
       <div class="not-in-pdf">
-        <mat-checkbox (click)="toggleTheme($event)" [checked]='true'></mat-checkbox>
+        <mat-checkbox (change)="customisations.themes_engaged[theme.id] = !customisations.themes_engaged[theme.id]" [checked]="customisations.themes_engaged[theme.id]"></mat-checkbox>
       </div>
       <div class="pdf-float-left" fxFlexOffset="8px" style="min-width: 300px">{{theme.title}}</div>
       <div class="pdf-float-left" fxFlex="1 1 100%" fxFlex>
-        <quill [config]="editorConfig" [value]="customisations.get(theme.id, 'themes_commitments')" (contentChange)="customisations.setThemeCommitment(theme.id, $event.html)"></quill>
+        <!-- <quill [config]="editorConfig" [value]="customisations.get(theme.id, 'themes_commitments')" (contentChange)="customisations.setThemeCommitment(theme.id, $event.html)"></quill> -->
+        <quill [config]="editorConfig" [(value)]="customisations.themes_commitments[theme.id]"></quill>
       </div>
     </div>
   </div>
@@ -147,7 +148,8 @@
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
       <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
-        <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill>
+        <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
+        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]"></quill>
       </div>
     </div>
 
@@ -232,7 +234,8 @@
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
       <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
-        <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill>
+        <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
+        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]"></quill>
       </div>
     </div>
   </div>
@@ -248,15 +251,15 @@
   <div *ngIf="!customisations.hide_comments" fxLayout="column">
 
     <div class="echos-title" style="page-break-before:always">Commentaires</div>
-    <quill [config]="editorConfig" ([value])="customisations.comments1"></quill>
+    <quill [config]="editorConfig" [(value)]="customisations.comments1"></quill>
 
-    <div class="echos-title" style="page-break-before:always">Autres commentaires</div>
-    <quill [config]="editorConfig" ([value])="customisations.comments2"></quill>
+    <div class="echos-title" style="page-break-before:always">Projets à venir</div>
+    <quill [config]="editorConfig" [(value)]="customisations.comments2"></quill>
 
   </div>
 
   <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-    <button mat-raised-button color="primary" (click)="save()" [disabled]="!customisations.isDirty()">Enregistrer le dossier de labélisation</button>
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer le dossier de labélisation</button>
   </div>
 
 </div>

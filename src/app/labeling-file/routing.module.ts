@@ -16,7 +16,7 @@ const routes: Routes = [
         path: ':id_labeling_file',
         resolve: {
           audits: AuditResolver,
-          labeling_files: LabelingFileResolver
+          labeling_file: LabelingFileResolver
         },
         component: GenerateComponent
       }
