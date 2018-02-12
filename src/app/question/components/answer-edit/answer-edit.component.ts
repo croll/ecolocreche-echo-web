@@ -41,8 +41,8 @@ export class AnswerEditComponent implements OnInit {
   ngOnInit() {
       this.idCtrl = this.fb.control(this.node['id_node']);
       this.ignoredCtrl = this.fb.control(false);
+      this.commentCtrl = this.fb.control("");
       this.valueCtrl = this.fb.control("");
-      this.commentCtrl = this.fb.control("new");
 
       this.echosForm = this.fb.group({
         id_node: this.idCtrl,
