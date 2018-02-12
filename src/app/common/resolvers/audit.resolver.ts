@@ -127,19 +127,4 @@ export class AuditResolverPreviousAudits implements Resolve<any> {
         });
       });
     }
-
-/*
-  resolve(route: ActivatedRouteSnapshot):Observable<any> {
-    return this.restService.getList('audits', {
-      id_establishment: route.params['id_establishment'],
-      "inquiry_type": 'audit',
-    }).flatMap((list: any[]) => {
-      let threads=[];
-      list.forEach((audit, i) => {
-        threads[i]=this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', {date: audit.createdAt});
-      });
-      return Observable.forkJoin(threads);
-    });
-  }
-  */
 }
