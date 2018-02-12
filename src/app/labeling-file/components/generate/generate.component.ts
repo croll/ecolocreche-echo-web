@@ -40,8 +40,6 @@ export class GenerateComponent implements OnInit {
   };
   customisations: LabelingFile.Json = new LabelingFile.Json();
 
-  // Buffer objets to be watched, to avoid calling functions on each tick
-
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
@@ -79,7 +77,6 @@ export class GenerateComponent implements OnInit {
       chartDatasThemes.push(this.audit2Cache.chartDatas.themes);
       chartDatasFamilies.push(this.audit2Cache.chartDatas.families);
     } else {
-      console.log(this.audit1Cache.chartDatas.themes);
       this.themeList = [];
       for (let id_node in this.audit1Cache.chartDatas.themes) {
         this.themeList.push(this.audit1Cache.chartDatas.themes[id_node]);

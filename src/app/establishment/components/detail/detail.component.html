@@ -64,7 +64,7 @@
 <mat-list>
   <mat-list-item class="echos-list-item" *ngFor="let audit of item.audits">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="labelingFileToCreate.audits.length == 2 && labelingFileToCreate.audits.indexOf(audit.id) == -1" (change)="toggleInLabelingFile(audit.id, 'audits')" fxFlex="50px"></mat-checkbox>
+      <mat-checkbox [attr.disabled]="labelingFileToCreate.audits.length == 2 && labelingFileToCreate.audits.indexOf(audit.id) == -1" (change)="toggleInLabelingFile(audit, 'audits')" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
@@ -91,7 +91,7 @@
 <mat-list>
   <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && labelingFileToCreate.recap_actions.indexOf(recap_action.id) == -1" (change)="toggleInLabelingFile(recap_action.id, 'recap_actions')" fxFlex="50px"></mat-checkbox>
+      <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && labelingFileToCreate.recap_actions.indexOf(recap_action.id) == -1" (change)="toggleInLabelingFile(recap_action, 'recap_actions')" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{recap_action.inquiryform?.title}} - {{recap_action.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
