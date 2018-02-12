@@ -136,13 +136,20 @@ export class EditComponent implements OnInit {
   }
 
   sendmail(id) {
+    this.restService.incLoading();
     this.http.post('/rest/auditmail', {
       id_audit: id,
     }).subscribe(() => {
+      this.restService.decLoading();
       this.snackBar.open("Mail de l'audit : ", "ENVOYÉ", {
             duration: 3000,
+      });
+    }, error => {
+      this.restService.decLoading();
+      this.snackBar.open("ERREUR !", error, {
+            duration: 3000,
           });
-    })
+    });
     return false;
   }
 

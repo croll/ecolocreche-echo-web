@@ -128,13 +128,20 @@ export class AnswerComponent {
   }
 
   sendLink() {
+    this.restService.incLoading();
     this.http.post('/rest/auditmail', {
       id_audit: this.infos.audit.id,
     }).subscribe(() => {
+      this.restService.decLoading();
       this.snackBar.open("Mail du récap action : ", "ENVOYÉ", {
             duration: 3000,
           });
-    })
+    }, error => {
+      this.restService.decLoading();
+      this.snackBar.open("ERREUR !", error, {
+            duration: 3000,
+          });
+    });
     return false;
   }
 
