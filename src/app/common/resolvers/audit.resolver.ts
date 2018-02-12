@@ -72,7 +72,7 @@ export class AuditResolver implements Resolve<any> {
                        node.childs = nodes;
                        obj.nodes = (obj.inquiryform.nodeslist) ? this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist)) : [];
                        return Observable.of(obj);
-                    })
+                    });
 
   }
 

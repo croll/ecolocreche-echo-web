@@ -5,7 +5,7 @@
 
 <div id='exportpdf'>
 
-  <div fxLayout="row" fxLayoutAlign="start center" class="pdf-clear-both-after">
+  <div fxLayout="row" fxLayoutAlign="start center" class="pdf-clear-both-after" style="width: 100%">
     <button mat-fab class='not-in-pdf' color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><mat-icon>edit</mat-icon></button>
     <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
     <mat-menu #menucsv="matMenu">
@@ -17,11 +17,12 @@
 
   <div class="report_header" [innerHTML]="audit_report_header"></div>
 
+<!--
   <div *ngIf="!infos.inquiryform.comment" class="presentation">
     <p>L'audit de votre établissement est désormais terminé. Cela nous permet à présent de vous envoyer ce rapport d’audit, composé de 8 thématiques environnementales (bâtiment, eau, énergies, déchets, alimentation, activités et jeux, entretien des locaux, hygiène) et 7 thématiques sociales (accueil, projet éducatif, respect des diversités, santé, gouvernance, formation, communication).</p>
     <p>Des diagrammes représentant l'impact environnemental et l’impact social de votre établissement sont visibles à la fin du document.</p>
   </div>
-
+-->
   <div *ngIf="infos.inquiryform.comment" class="presentation">
     {{infos.inquiryform.comment}}
   </div>
