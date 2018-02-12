@@ -80,7 +80,6 @@ export class AnswerComponent implements OnInit {
       dir.childs.forEach((row) => {
          if (row.type.startsWith('q_')) {
              r.question_count++;
-             console.log(row.answer);
              if (row.answer && row.answer.status == 'saved') {
                  r.answer_count++;
                  if (row.answer.ignored)
