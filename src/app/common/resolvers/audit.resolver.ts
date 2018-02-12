@@ -70,7 +70,8 @@ export class AuditResolver implements Resolve<any> {
                     .flatMap(nodes => {
                        var node = new Node();
                        node.childs = nodes;
-                       obj.nodes = this._filterSelectedNodes(node, JSON.parse(obj.inquiryform.nodeslist));
+                       var nodeslist = obj.inquiryform.nodeslist ? JSON.parse(obj.inquiryform.nodeslist) : [];
+                       obj.nodes = this._filterSelectedNodes(node, nodeslist);
                        return Observable.create(observer => {
                          // console.log("audit: ", obj.audit);
                           observer.next(obj);
