@@ -40,9 +40,9 @@ export class AnswerEditComponent implements OnInit {
 
   ngOnInit() {
       this.idCtrl = this.fb.control(this.node['id_node']);
-      this.ignoredCtrl = this.fb.control(!!this.current.answer.ignored);
-      this.valueCtrl = this.fb.control(this.current.answer.value);
-      this.commentCtrl = this.fb.control(this.current.answer.comment);
+      this.ignoredCtrl = this.fb.control(null);
+      this.valueCtrl = this.fb.control(null);
+      this.commentCtrl = this.fb.control(null);
 
       this.echosForm = this.fb.group({
         id_node: this.idCtrl,
@@ -56,21 +56,22 @@ export class AnswerEditComponent implements OnInit {
 
   get() {
       // console.log("item: ", this.node);
-
-      this.idCtrl.setValue(this.node.id_node);
-      this.ignoredCtrl.setValue(this.node.answer ? !!this.node.answer.ignored : false);
-      this.valueCtrl.setValue(this.node.answer ? this.node.answer.value : "");
-      this.commentCtrl.setValue(this.node.answer ? this.node.answer.comment : "");
-
-      this.current = Object.assign(this.current, this.node);
-      if (! this.current.answer) {
-        this.current.answer = new Answer();
-        this.current.answer.ignored = false;
-        this.current.answer.comment = "";
-        this.current.answer.status = "new";
+      if (!this.node.answer) {
+        this.node.answer = new Answer();
+        this.node.answer.ignored = false;
+        this.node.answer.comment = "";
+        this.node.answer.status = "new";
+      } else {
+        this.ignoredCtrl.setValue(this.node.answer.ignored);
+        this.valueCtrl.setValue(this.node.answer.value);
+        this.commentCtrl.setValue(this.node.answer.comment);
       }
 
+
+      this.current = Object.assign(this.current, this.node);
+
       this.ignoreset(!!this.current.answer.ignored);
+
       this.choices = [];
       if ('choices' in this.node) {
         this.node.choices.forEach((jschoice) => {
