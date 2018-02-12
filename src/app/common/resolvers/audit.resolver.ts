@@ -98,10 +98,48 @@ export class AuditResolver implements Resolve<any> {
 export class AuditResolverPreviousAudits implements Resolve<any> {
   constructor(private restService: RestService, private http: Http) {
   }
+
+  resolve(route: ActivatedRouteSnapshot):Observable<any> {
+    return this.restService.getList('audits', {
+      id_establishment: route.params['id_establishment'],
+      active: 1,
+      inquiry_type: 'audit',
+      sort: '-date_start'
+    })
+      .flatMap(audits => {
+        let observable_audits: Observable<any>[] = [];
+        let ids: number[] = [];
+        audits.forEach(audit => {
+          if (ids.indexOf(audit.id_inquiryform) == -1) {
+            observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', { with_deleteds: 1 }).map(iq => {
+              audits.forEach(subaudit => {
+                if (iq.id_inquiryform == subaudit.id_inquiryform)
+                  subaudit.inquiryform = iq;
+              });
+            }));
+            ids.push(audit.id_inquiryform);
+          }
+        });
+
+
+        return Observable.forkJoin(observable_audits, plop => {
+          return audits;
+        });
+      });
+    }
+
+/*
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
     return this.restService.getList('audits', {
       id_establishment: route.params['id_establishment'],
       "inquiry_type": 'audit',
+    }).flatMap((list: any[]) => {
+      let threads=[];
+      list.forEach((audit, i) => {
+        threads[i]=this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', {date: audit.createdAt});
+      });
+      return Observable.forkJoin(threads);
     });
   }
+  */
 }
