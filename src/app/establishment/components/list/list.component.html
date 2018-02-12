@@ -10,9 +10,11 @@
   <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
 </div>
 
-<mat-form-field fxLayout>
-  <input matInput #search type="search" placeholder="Chercher un établissement" fxFlex (keyup)="filterList(search.value)" style="color:#000!important">
-</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <mat-form-field fxFlex>
+    <input matInput #search type="search" placeholder="Chercher un établissement" fxFlex (keyup)="filterList(search.value)" style="color:#000!important">
+  </mat-form-field>
+</div>
 
 <mat-list>
   <mat-list-item class="echos-list-item" [routerLink]="['/etablissement', item.id]" *ngFor="let item of filteredList">

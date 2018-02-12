@@ -44,7 +44,8 @@ export class DetailComponent {
     return match;
   }
 
-  public toggleInLabelingFile(item, type) {
+  public toggleInLabelingFile(item, type, event) {
+    event.stopPropagation();
     let pos = this.labelingFileToCreate[type].indexOf(item.id);
     if (pos != -1) {
       this.labelingFileToCreate[type].splice(pos, 1);

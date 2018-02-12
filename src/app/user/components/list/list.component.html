@@ -10,9 +10,11 @@
   <button mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
 </div>
 
-<mat-form-field fxLayout>
-  <input matInput #search type="search" placeholder="Chercher un utilisateur..." fxFlex (keyup)="updateFilter(search.value)">
-</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <mat-form-field fxFlex>
+    <input matInput #search type="search" placeholder="Chercher un utilisateur..." fxFlex (keyup)="updateFilter(search.value)">
+  </mat-form-field>
+</div>
 
 <!-- version ngx-datatable -->
 <!--
