@@ -11,6 +11,7 @@ import { Answer } from '../../../question/answer';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
 import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 
 
@@ -96,23 +97,33 @@ export class AnswerComponent {
 
   save() {
 
+    let obs = [];
+
+    let changed = false;
+
     this.themes.forEach(theme => {
       theme.childs.forEach(question => {
         // Check if response is different to original value
         if (question.answer.value != question.answer.originalValue) {
           delete question.answer.originalValue;
-          this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok").subscribe(res => {
-            console.log(res);
-          });
+          obs.push(this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok"));
+          changed = true;
         }
       });
     });
+
+    if (changed) {
+      Observable.forkJoin(obs, () => {
+        this.goBack();
+      }).subscribe();
+    } else {
+      this.goBack();
+    }
 
     return false;
   }
 
   delete() {
-    console.log("delete ?");
     if (confirm("Souhaitez vous vraiment supprimer ce récap action ?")) {
       this.restService.delete(this.infos.audit.id, 'audits').subscribe((response) => {
         this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
