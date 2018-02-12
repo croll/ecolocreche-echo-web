@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { RestService } from '../../../rest.service';
 import { Node } from '../../../common/models/node';
 import { AuthService } from '../../../auth.service';
+import { InquiryForm } from '../../../common/models/inquiry-form';
 
 @Component({
   templateUrl: './list.component.html',
@@ -28,7 +29,7 @@ export class ListComponent implements OnInit {
   }
 
   getList() {
-    this.restService.getList('hist/nodes?recurse=1').subscribe(
+    this.restService.getList('hist/nodes?recurse=1', {inquiry_type: InquiryForm.Inquiry_type.Audit}).subscribe(
      nodes => {
        this.list = nodes;
        this.filteredList = this.list;
