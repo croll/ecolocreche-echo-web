@@ -25,7 +25,7 @@
     </div> -->
 
     <div fxLayout="row" fxLayoutAlign="start center" class="answer-comment-container">
-      <textarea *ngIf="current.answer.status!='saved' || current.answer?.comment?.length>0" [readonly]="current.answer.status=='saved'" formControlName="comment" placeholder="Commentaire..."></textarea>
+      <textarea *ngIf="current.answer.status!='saved' || current.answer?.comment?.length>0" [readonly]="current.answer.status=='saved'" formControlName="comment" placeholder="Commentaire..." matTextareaAutosize class="echos-textarea"></textarea>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center" class="echos-buttons-container">
