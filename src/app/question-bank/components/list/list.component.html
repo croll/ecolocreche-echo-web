@@ -13,9 +13,11 @@
   <button mat-fab color="primary" routerLink="../creer" *ngIf="authService.isAdmin()"><mat-icon>add</mat-icon></button>
 </div>
 
-<mat-form-field fxLayout>
-  <input matInput #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
-</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <mat-form-field fxFlex>
+    <input matInput #search type="search" placeholder="Chercher un thème" fxFlex (keyup)="filterList(search.value)">
+  </mat-form-field>
+</div>
 
 <div *ngIf="showSaveButton && authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
   <button mat-raised-button color="primary" (click)="save()">Enregistrer l'ordre</button>

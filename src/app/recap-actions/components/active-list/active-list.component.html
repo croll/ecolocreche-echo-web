@@ -14,8 +14,10 @@
   <input matInput #filterString type="search" placeholder="Chercher un audit" fxFlex (keyup)="filterList(filterString.value, filterCompleted.value)">
 </mat-form-field>
 
-<div fxLayout>
-  <mat-slide-toggle #filterCompleted fxFlex (change)="filterList(filterString.value, filterCompleted.checked)">Cacher les audits fait a 100%</mat-slide-toggle>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex>
+    <mat-slide-toggle #filterCompleted fxFlex (change)="filterList(filterString.value, filterCompleted.checked)">Cacher les audits fait a 100%</mat-slide-toggle>
+  </div>
 </div>
 
 
