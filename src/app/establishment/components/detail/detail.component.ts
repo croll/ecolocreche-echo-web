@@ -130,12 +130,8 @@ export class DetailComponent {
           }
         });
         lf.datajson = JSON.stringify(jsonObj);
-        console.log(lf.datajson);
       }
-      console.log(lf);
-      console.log('-------');
       this.restService.save(lf, 'labelingfiles', {}, 'id', "Création : ").subscribe(res => {
-        console.log("saved");
         this.router.navigate(['/dossier_de_labelisation', res.id]);
       });
     });
