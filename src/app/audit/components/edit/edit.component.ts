@@ -46,9 +46,6 @@ export class EditComponent implements OnInit {
       this.infos = this.route.snapshot.data['infos']['audit1'];
     else
       this.old_audits = this.route.snapshot.data['old_audits'];
-
-    console.log("data: ", this.route.snapshot.data);
-    console.log("old audits: ", this.old_audits);
   }
 
   ngOnInit() {
