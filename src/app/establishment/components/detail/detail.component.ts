@@ -93,13 +93,13 @@ export class DetailComponent {
 
           // For recap action theme NOT linked to a global theme
           if (!theme.linked_to_node_id) {
-            if (question1.answer.value) {
+            if (question1.answer && typeof(question1.answer) === 'object' && question1.answer.value) {
               if (!jsonObj.comments2) {
                 jsonObj.comments2 = '';
               }
               jsonObj.comments2 += '<h2>'+theme.title+'</h2>'+question1.answer.value;
             }
-            if (question2.answer.value) {
+            if (question2.answer && typeof(question2.answer) === 'object' && question2.answer.value) {
               if (!jsonObj.comments1) {
                 jsonObj.comments1 = '';
               }
@@ -108,14 +108,14 @@ export class DetailComponent {
             // For recap action theme linked to a global theme
           } else {
             // For all linked theme question, "to be done" goes to last comment section
-            if (question1.answer.value) {
+            if (question1.answer && typeof(question1.answer) === 'object' && question1.answer.value) {
               if (!jsonObj.comments2) {
                 jsonObj.comments2 = '';
               }
               jsonObj.comments2 += '<h2>'+theme.title+'</h2>'+question1.answer.value;
             }
 
-            if (question2.answer.value) {
+            if (question2.answer && typeof(question2.answer) === 'object' && question2.answer.value) {
               // Responses of environnemental theme
               if (theme.family == 'environnementales') {
                 jsonObj.themes_comments[parseInt(theme.linked_to_node_id)] = question2.answer.value;
@@ -128,10 +128,14 @@ export class DetailComponent {
               }
             }
           }
-          lf.datajson = JSON.stringify(jsonObj);
         });
+        lf.datajson = JSON.stringify(jsonObj);
+        console.log(lf.datajson);
       }
+      console.log(lf);
+      console.log('-------');
       this.restService.save(lf, 'labelingfiles', {}, 'id', "Création : ").subscribe(res => {
+        console.log("saved");
         this.router.navigate(['/dossier_de_labelisation', res.id]);
       });
     });
