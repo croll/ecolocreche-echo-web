@@ -12,7 +12,7 @@
       Dossier de labellisation
     </h1>
     <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;">
-      <img [src]="customisations.logo"(click)="customisations.swapLogo()" style="width: 150px;height: 150px;">
+      <img [src]="customisations.logo"(click)="customisations.swapLogo();enableSaveButton();" style="width: 150px;height: 150px;">
     </div>
     <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
     <mat-menu #menucsv="matMenu">
@@ -38,7 +38,7 @@
     <div *ngFor="let cinfo of customisations.custom_headers" fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">{{cinfo.label}}:</label>
       <div class="pdf-float-left" fxFlexOffset="10px">{{cinfo.value}}</div>
-      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.deleteCustomHeader(cinfo.label)" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
+      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.deleteCustomHeader(cinfo.label);enableSaveButton();" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
     </div>
     <div class="pdf-clear-both-after not-in-pdf">
       <mat-form-field class="pdf-float-left">
@@ -47,26 +47,26 @@
       <mat-form-field fxFlexOffset="8px" class="pdf-float-left">
         <input matInput #custom_headerValue placeholder="Valeur">
       </mat-form-field>
-      <button mat-raised-button style="max-height: 45px; margin-top: 10px;" (click)="customisations.addCustomHeader(custom_headerLabel.value, custom_headerValue.value); custom_headerLabel.value=''; custom_headerValue.value=''" fxFlexOffset="8px">Ajouter une ligne</button>
+      <button mat-raised-button style="max-height: 45px; margin-top: 10px;" (click)="customisations.addCustomHeader(custom_headerLabel.value, custom_headerValue.value); custom_headerLabel.value=''; custom_headerValue.value='';enableSaveButton();" fxFlexOffset="8px">Ajouter une ligne</button>
     </div>
   </div>
 
-  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
     <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labélisation</button>
-    <button mat-raised-button color="primary" (click)="save()">Enregistrer le dossier de labélisation</button>
+    <button mat-raised-button color="primary" (click)="save()" fxFlexOffset="8px" [disabled]="!saveButtonEnabled">Enregistrer le dossier de labélisation</button>
   </div>
 
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
 
   <div class="table">
-    <div *ngFor="let theme of themeList" fxLayout="row" class="pdf-clear-both-after" style="padding: 5px">
+    <div *ngFor="let theme of themeList" fxLayout="row" class="pdf-clear-both-after" style="padding: 10px 5px;border-bottom: 1px solid #d0d0d0;page-break-inside: avoid;">
       <div class="not-in-pdf">
-        <mat-checkbox (change)="customisations.themes_engaged[theme.id] = !customisations.themes_engaged[theme.id]" [checked]="customisations.themes_engaged[theme.id]"></mat-checkbox>
+        <mat-checkbox (change)="customisations.themes_engaged[theme.id] = !customisations.themes_engaged[theme.id];enableSaveButton()" [checked]="customisations.themes_engaged[theme.id]"></mat-checkbox>
       </div>
       <div class="pdf-float-left" fxFlexOffset="8px" style="min-width: 300px">{{theme.title}}</div>
-      <div class="pdf-float-left" fxFlex="1 1 100%" fxFlex>
+      <div class="pdf-float-left" fxFlex="1 1 100%" fxFlex *ngIf="customisations.themes_engaged[theme.id]">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(theme.id, 'themes_commitments')" (contentChange)="customisations.setThemeCommitment(theme.id, $event.html)"></quill> -->
-        <quill [config]="editorConfig" [(value)]="customisations.themes_commitments[theme.id]"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.themes_commitments[theme.id]" (contentChange)="enableSaveButton()"></quill>
       </div>
     </div>
   </div>
@@ -86,8 +86,8 @@
   </div>
 
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_pie" (click)="customisations.hide_balance_sheet_environmental_pie = false">Afficher les graphiques de type "camembert"</button>
-    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_pie" (click)="customisations.hide_balance_sheet_environmental_pie = true">Masquer les graphiques de type "camembert"</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_pie" (click)="enableSaveButton();customisations.hide_balance_sheet_environmental_pie = false">Afficher les graphiques de type "camembert"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_pie" (click)="enableSaveButton();customisations.hide_balance_sheet_environmental_pie = true">Masquer les graphiques de type "camembert"</button>
   </div>
 
   <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!customisations.hide_balance_sheet_environmental_pie">
@@ -102,8 +102,8 @@
   </div>
 
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_bar" (click)="customisations.hide_balance_sheet_environmental_bar = false">Afficher le graphique de type "baton"</button>
-    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_bar" (click)="customisations.hide_balance_sheet_environmental_bar = true">Masquer le graphiques de type "baton"</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_bar" (click)="enableSaveButton();customisations.hide_balance_sheet_environmental_bar = false">Afficher le graphique de type "baton"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_bar" (click)="enableSaveButton();customisations.hide_balance_sheet_environmental_bar = true">Masquer le graphiques de type "baton"</button>
   </div>
 
   <mat-card *ngIf="!customisations.hide_balance_sheet_environmental_bar">
@@ -113,8 +113,8 @@
   </mat-card>
 
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_radar" (click)="customisations.hide_balance_sheet_environmental_radar = false">Afficher le graphique de type "araignée"</button>
-    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_radar" (click)="customisations.hide_balance_sheet_environmental_radar = true">Masquer le graphique de type "araignée"</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_environmental_radar" (click)="enableSaveButton();customisations.hide_balance_sheet_environmental_radar = false">Afficher le graphique de type "araignée"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_environmental_radar" (click)="enableSaveButton();customisations.hide_balance_sheet_environmental_radar = true">Masquer le graphique de type "araignée"</button>
   </div>
 
   <mat-card *ngIf="!customisations.hide_balance_sheet_environmental_radar">
@@ -132,8 +132,8 @@
   <!-- Page des graphs des familles environnementales -->
 
   <div style="margin-top: 50px; cursor: pointer" [ngClass]="{'not-in-pdf' : true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_environment_details" (click)="customisations.hide_environment_details = false">Afficher le détail des évolutions des impacts par thème</button>
-    <button mat-raised-button *ngIf="!customisations.hide_environment_details" (click)="customisations.hide_environment_details = true">Masquer le détail des évolutions des impacts par thème</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_environment_details" (click)="enableSaveButton();customisations.hide_environment_details = false">Afficher le détail des évolutions des impacts par thème</button>
+    <button mat-raised-button *ngIf="!customisations.hide_environment_details" (click)="enableSaveButton();customisations.hide_environment_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
 
   <div *ngIf="!customisations.hide_environment_details">
@@ -149,8 +149,7 @@
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
       <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
-        <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
-        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
     </div>
 
@@ -171,8 +170,8 @@
   </div>
 
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_pie" (click)="customisations.hide_balance_sheet_social_pie = false">Afficher les graphiques de type "camembert"</button>
-    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_pie" (click)="customisations.hide_balance_sheet_social_pie = true">Masquer les graphiques de type "camembert"</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_pie" (click)="enableSaveButton();customisations.hide_balance_sheet_social_pie = false">Afficher les graphiques de type "camembert"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_pie" (click)="enableSaveButton();customisations.hide_balance_sheet_social_pie = true">Masquer les graphiques de type "camembert"</button>
   </div>
 
   <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!customisations.hide_balance_sheet_social_pie">
@@ -187,8 +186,8 @@
   </div>
 
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_bar" (click)="customisations.hide_balance_sheet_social_bar = false">Afficher les graphiques de type "baton"</button>
-    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_bar" (click)="customisations.hide_balance_sheet_social_bar = true">Masquer les graphiques de type "baton"</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_bar" (click)="enableSaveButton();customisations.hide_balance_sheet_social_bar = false">Afficher les graphiques de type "baton"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_bar" (click)="enableSaveButton();customisations.hide_balance_sheet_social_bar = true">Masquer les graphiques de type "baton"</button>
   </div>
 
   <div *ngIf="!customisations.hide_balance_sheet_social_bar">
@@ -200,8 +199,8 @@
   </div>
 
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_radar" (click)="customisations.hide_balance_sheet_social_radar = false">Afficher les graphiques de type "araignée"</button>
-    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_radar" (click)="customisations.hide_balance_sheet_social_radar = true">Masquer les graphiques de type "araignée"</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_balance_sheet_social_radar" (click)="enableSaveButton();customisations.hide_balance_sheet_social_radar = false">Afficher les graphiques de type "araignée"</button>
+    <button mat-raised-button *ngIf="!customisations.hide_balance_sheet_social_radar" (click)="enableSaveButton();customisations.hide_balance_sheet_social_radar = true">Masquer les graphiques de type "araignée"</button>
   </div>
 
   <mat-card *ngIf="!customisations.hide_balance_sheet_social_radar">
@@ -220,8 +219,8 @@
 
   <div style="margin-top: 50px; cursor: pointer">
   <div [ngClass]="{'not-in-pdf' : true, 'echos-chart-button-container': true}">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_social_details" (click)="customisations.hide_social_details = false">Afficher le détail des évolutions des impacts par thème</button>
-    <button mat-raised-button *ngIf="!customisations.hide_social_details" (click)="customisations.hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_social_details" (click)="enableSaveButton();customisations.hide_social_details = false">Afficher le détail des évolutions des impacts par thème</button>
+    <button mat-raised-button *ngIf="!customisations.hide_social_details" (click)="enableSaveButton();customisations.hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
 
   <div *ngIf="!customisations.hide_social_details">
@@ -236,7 +235,7 @@
       </mat-card>
       <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
-        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
     </div>
   </div>
@@ -245,23 +244,23 @@
   <!-- Page de commentaires -->
 
   <div style="margin-top: 50px; cursor: pointer" class="not-in-pdf">
-    <button mat-raised-button color="primary" *ngIf="customisations.hide_comments" (click)="customisations.hide_comments = false">Afficher les commentaires</button>
-    <button mat-raised-button *ngIf="!customisations.hide_comments" (click)="customisations.hide_comments = true">Masquer les commentaires</button>
+    <button mat-raised-button color="primary" *ngIf="customisations.hide_comments" (click)="enableSaveButton();customisations.hide_comments = false">Afficher les commentaires</button>
+    <button mat-raised-button *ngIf="!customisations.hide_comments" (click)="enableSaveButton();customisations.hide_comments = true;enableSaveButton()">Masquer les commentaires</button>
   </div>
 
   <div *ngIf="!customisations.hide_comments" fxLayout="column">
 
     <div class="echos-title" style="page-break-before:always">Commentaires</div>
-    <quill [config]="editorConfig" [(value)]="customisations.comments1"></quill>
+    <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()"></quill>
 
     <div class="echos-title" style="page-break-before:always">Projets à venir</div>
-    <quill [config]="editorConfig" [(value)]="customisations.comments2"></quill>
+    <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()"></quill>
 
   </div>
 
-  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
     <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labélisation</button>
-    <button mat-raised-button color="primary" (click)="save()" fxFlexOffset="8px">Enregistrer le dossier de labélisation</button>
+    <button mat-raised-button color="primary" (click)="save()" fxFlexOffset="8px" [disabled]="!saveButtonEnabled">Enregistrer le dossier de labélisation</button>
   </div>
 
 </div>

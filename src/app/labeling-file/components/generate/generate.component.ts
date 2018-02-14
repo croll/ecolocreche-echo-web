@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostBinding, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, ViewChild, AfterViewInit,  ChangeDetectorRef} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form';
 import { Node } from '../../../common/models/node';
@@ -39,12 +39,13 @@ export class GenerateComponent implements OnInit {
     placeholder: 'Votre commentaire...'
   };
   customisations: LabelingFile.Json = new LabelingFile.Json();
+  saveButtonEnabled = false;
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService, private cdRef: ChangeDetectorRef) {
 
     this.current = this.route.snapshot.data['labeling_file'];
 
@@ -151,6 +152,13 @@ export class GenerateComponent implements OnInit {
       });
     }
     return false;
+  }
+
+  enableSaveButton() {
+    if (!this.saveButtonEnabled) {
+      this.saveButtonEnabled = true;
+      this.cdRef.detectChanges();
+    }
   }
 
 }

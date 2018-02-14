@@ -261,6 +261,7 @@ export class AuditTools {
       params.options = {
         responsive: true,
         maintainAspectRatio: true,
+        animation: false,
         scaleSteps: 5,
         scales:{
           yAxes:[
@@ -295,6 +296,7 @@ export class AuditTools {
       params.options = {
         responsive: true,
         maintainAspectRatio: true,
+        animation: false,
         scale: {
           ticks: {
             beginAtZero: true,
