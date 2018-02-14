@@ -10,7 +10,6 @@ import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 import { LabelingFile } from '../../../common/models/labeling-file';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
 import { AuthService } from '../../../auth.service';
-import { MatSnackBar } from '@angular/material';
 
 import * as moment from 'moment';
 
@@ -42,12 +41,13 @@ export class GenerateComponent implements OnInit {
   customisations: LabelingFile.Json = new LabelingFile.Json();
   initialState: string;
   saveButtonEnabled = false;
+  doPrint = false;
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService, private cdRef: ChangeDetectorRef, private snackBar: MatSnackBar) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService, private cdRef: ChangeDetectorRef) {
 
     this.current = this.route.snapshot.data['labeling_file'];
 
@@ -131,10 +131,21 @@ export class GenerateComponent implements OnInit {
 
   pdf() {
     if (this.initialState != JSON.stringify(this.customisations)) {
-      this.snackBar.open('Des modifications ont été apportées, enregistrez-les si vous souhaitez qu\'elles soient prises en compte sur le pdf généré.', null, { duration: 5000 });
+      if (confirm("Pour que le PDF prenne en compte vos dernières modifications, celui-ci doit être sauvé avant. Souhaitez vous enregistrer vos dernières modifications ?")) {
+        this.doPrint = true;
+        this.save();
+      } else {
+        this.generatePdf();
+      }
+    } else {
+      this.generatePdf();
     }
-    this.puppeeterService.print('compare', this.route.snapshot.params['id_labeling_file']);
 
+
+  }
+
+  generatePdf() {
+    this.puppeeterService.print('compare', this.route.snapshot.params['id_labeling_file']);
   }
 
   exportCSV(format: string) {
@@ -144,11 +155,15 @@ export class GenerateComponent implements OnInit {
   save() {
     this.restService.save(Object.assign(this.current, {datajson: JSON.stringify(this.customisations)}), 'datalabelingfiles').subscribe((res) => {
       this.initialState = JSON.stringify(this.customisations);
+      if (this.doPrint) {
+        this.generatePdf();
+      }
     }, (err) => {
       console.error(err);
     });
     return false;
   }
+
 
   delete() {
     if (confirm("Souhaitez vous vraiment supprimer ce dossier de labélisation ?")) {
