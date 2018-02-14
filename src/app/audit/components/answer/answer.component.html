@@ -9,7 +9,7 @@
     Audit de {{infos.audit.establishment.name}}
   </h1>
   <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><mat-icon>edit</mat-icon></button>
-  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'rapport']" fxFlexOffset="35px"><mat-icon>assessment</mat-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/audit', infos.audit.id, 'rapport']" fxFlexOffset="8px"><mat-icon>assessment</mat-icon></button>
 </div>
 
 <div class="echos-answer-breadcrumb">

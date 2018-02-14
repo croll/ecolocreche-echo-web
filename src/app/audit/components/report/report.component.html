@@ -5,7 +5,7 @@
 
 <div id='exportpdf'>
 
-  <div fxLayout="row" fxLayoutAlign="start center" class="pdf-clear-both-after" style="width: 100%">
+  <div fxLayout="row" fxLayoutAlign="end center" class="pdf-clear-both-after">
     <button mat-fab class='not-in-pdf' color="primary" [routerLink]="['/audit', infos.audit.id, 'editer']"><mat-icon>edit</mat-icon></button>
     <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
     <mat-menu #menucsv="matMenu">

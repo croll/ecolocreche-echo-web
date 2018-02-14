@@ -52,6 +52,7 @@
   </div>
 
   <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
+    <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labélisation</button>
     <button mat-raised-button color="primary" (click)="save()">Enregistrer le dossier de labélisation</button>
   </div>
 
@@ -259,7 +260,8 @@
   </div>
 
   <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-    <button mat-raised-button color="primary" (click)="save()">Enregistrer le dossier de labélisation</button>
+    <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labélisation</button>
+    <button mat-raised-button color="primary" (click)="save()" fxFlexOffset="8px">Enregistrer le dossier de labélisation</button>
   </div>
 
 </div>
