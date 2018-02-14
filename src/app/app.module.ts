@@ -35,8 +35,8 @@ import { PuppeteerPdfService } from './puppeteerpdf.service';
 import { ServercsvexportService } from './servercsvexport.service';
 
 import { registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
-registerLocaleData(localeFr, 'fr');
+//import localeFr from '@angular/common/locales/fr';
+//registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
