@@ -59,7 +59,7 @@
   <div class="echos-title">Engagement sur les thèmes suivants: </div>
 
   <div class="table">
-    <div *ngFor="let theme of themeList" fxLayout="row" class="pdf-clear-both-after" style="padding: 10px 5px;border-bottom: 1px solid #d0d0d0;page-break-inside: avoid;">
+    <div *ngFor="let theme of themeList" fxLayout="row" [ngClass]="{'not-in-pdf' : !customisations.themes_engaged[theme.id], 'pdf-clear-both-after': true}" style="padding: 10px 5px;border-bottom: 1px solid #d0d0d0;page-break-inside: avoid;">
       <div class="not-in-pdf">
         <mat-checkbox (change)="customisations.themes_engaged[theme.id] = !customisations.themes_engaged[theme.id];enableSaveButton()" [checked]="customisations.themes_engaged[theme.id]"></mat-checkbox>
       </div>
