@@ -133,4 +133,15 @@ export class GenerateComponent implements OnInit {
     return false;
   }
 
+  delete() {
+    if (confirm("Souhaitez vous vraiment supprimer ce dossier de labélisation ?")) {
+      this.restService.delete(this.current.id, 'labelingfiles').subscribe((response) => {
+        this.router.navigate(['/etablissement', this.audit1.audit.establishment.id]);
+      }, (err) => {
+        console.error(err);
+      });
+    }
+    return false;
+  }
+
 }
