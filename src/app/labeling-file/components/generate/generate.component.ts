@@ -143,7 +143,7 @@ export class GenerateComponent implements OnInit {
 
   save() {
     this.restService.save(Object.assign(this.current, {datajson: JSON.stringify(this.customisations)}), 'datalabelingfiles').subscribe((res) => {
-      console.log(res);
+      this.initialState = JSON.stringify(this.customisations);
     }, (err) => {
       console.error(err);
     });
