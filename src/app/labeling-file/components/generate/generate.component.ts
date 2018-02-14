@@ -126,7 +126,7 @@ export class GenerateComponent implements OnInit {
   }
 
   pdf() {
-    this.puppeeterService.print('compare', this.route.params['id']);
+    this.puppeeterService.print('compare', this.route.snapshot.params['id_labeling_file']);
   }
 
   exportCSV(format: string) {
