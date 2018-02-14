@@ -10,6 +10,7 @@ import { PuppeteerPdfService } from '../../../puppeteerpdf.service';
 import { LabelingFile } from '../../../common/models/labeling-file';
 import { QuillConfigInterface } from 'ngx-quill-wrapper';
 import { AuthService } from '../../../auth.service';
+import { MatSnackBar } from '@angular/material';
 
 import * as moment from 'moment';
 
@@ -39,18 +40,20 @@ export class GenerateComponent implements OnInit {
     placeholder: 'Votre commentaire...'
   };
   customisations: LabelingFile.Json = new LabelingFile.Json();
+  initialState: string;
   saveButtonEnabled = false;
 
   auditTools = AuditTools.getInstance();
 
   @ViewChild( BaseChartDirective ) private _chart;
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService, private cdRef: ChangeDetectorRef) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, private csvService: ExportCSVService, private puppeeterService: PuppeteerPdfService, public authService: AuthService, private cdRef: ChangeDetectorRef, private snackBar: MatSnackBar) {
 
     this.current = this.route.snapshot.data['labeling_file'];
 
     if (this.current.datajson) {
       this.customisations = Object.assign(this.customisations, JSON.parse(this.current.datajson));
+      this.initialState = this.current.datajson;
     }
 
     let tmp1 = this.route.snapshot.data['audits']['audit1'];
@@ -127,7 +130,11 @@ export class GenerateComponent implements OnInit {
   }
 
   pdf() {
+    if (this.initialState != JSON.stringify(this.customisations)) {
+      this.snackBar.open('Des modifications ont été apportées, enregistrez-les si vous souhaitez qu\'elles soient prises en compte sur le pdf généré.', null, { duration: 5000 });
+    }
     this.puppeeterService.print('compare', this.route.snapshot.params['id_labeling_file']);
+
   }
 
   exportCSV(format: string) {
