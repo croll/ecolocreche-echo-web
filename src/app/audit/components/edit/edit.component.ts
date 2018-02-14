@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
 
   key: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MatSnackBar, public authService: AuthService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private restService: RestService, private location: Location, private http: Http, private snackBar: MatSnackBar, public authService: AuthService, private datePipe: DatePipe) {
 
     this.current = new Audit();
     this.current.inquiry_type = InquiryForm.Inquiry_type.Audit;
@@ -51,16 +51,16 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this._getFormList();
 
-    let datePipe = new DatePipe("fr-FR");
+    //let datePipe = new DatePipe("fr-FR");
 
     if (this.infos && this.infos.audit) {
       Object.assign(this.current, this.infos.audit)
-      this.current.date_start = datePipe.transform(this.current.date_start, 'dd/MM/yyyy H:mm');
+      this.current.date_start = this.datePipe.transform(this.current.date_start, 'dd/MM/yyyy H:mm');
       this.id_establishment = this.infos.audit.establishment.id;
       this.showCreationDateField = true;
     } else {
       this.current.active = 1;
-      this.current.date_start = datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
+      this.current.date_start = this.datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
       this.id_establishment = this.route.snapshot.params['id_establishment'];
       this.showCreationDateField = false;
     }
