@@ -156,6 +156,7 @@ export class GenerateComponent implements OnInit {
     this.restService.save(Object.assign(this.current, {datajson: JSON.stringify(this.customisations)}), 'datalabelingfiles').subscribe((res) => {
       this.initialState = JSON.stringify(this.customisations);
       if (this.doPrint) {
+        this.doPrint = false;
         this.generatePdf();
       }
     }, (err) => {
