@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild,  ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InquiryForm, InquiryFormExt } from '../../../common/models/inquiry-form';
@@ -23,6 +23,8 @@ export class AnswerComponent {
 
   infos: any;
   themes: any;
+  saveButtonEnabled = false;
+  doPrint = false;
 
 
   public config: QuillConfigInterface = {
@@ -33,7 +35,7 @@ export class AnswerComponent {
   placeholder: 'Votre commentaire...'
  };
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar, private sanitizer: DomSanitizer) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar, private sanitizer: DomSanitizer, private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -101,12 +103,15 @@ export class AnswerComponent {
 
     let changed = false;
 
+    this.saveButtonEnabled=false;
+
     this.themes.forEach(theme => {
       theme.childs.forEach(question => {
         // Check if response is different to original value
         if (question.answer.value != question.answer.originalValue) {
           delete question.answer.originalValue;
           obs.push(this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok"));
+          question.answer.originalValue = question.answer.value;
           changed = true;
         }
       });
@@ -114,10 +119,20 @@ export class AnswerComponent {
 
     if (changed) {
       Observable.forkJoin(obs, () => {
-        this.goBack();
+        if (!this.doPrint) {
+          this.goBack();
+        } else {
+          this.doPrint = false;
+          this.generatePdf();
+        }
       }).subscribe();
     } else {
-      this.goBack();
+      if (!this.doPrint) {
+        this.goBack();
+      } else {
+        this.doPrint = false;
+        this.generatePdf();
+      }
     }
 
     return false;
@@ -135,6 +150,28 @@ export class AnswerComponent {
   }
 
   pdf() {
+    let changed = false;
+    this.themes.forEach(theme => {
+      theme.childs.forEach(question => {
+        if (question.answer.value != question.answer.originalValue) {
+          changed = true;
+        }
+      });
+    });
+
+    if (changed) {
+      if (confirm("Pour que le PDF prenne en compte vos dernières modifications, celui-ci doit être sauvé avant. Souhaitez vous enregistrer vos dernières modifications ?")) {
+        this.doPrint = true;
+        this.save();
+      } else {
+        this.generatePdf();
+      }
+    } else {
+      this.generatePdf();
+    }
+  }
+
+  generatePdf() {
     this.pdfService.print("recapaction", this.infos.audit.id);
   }
 
@@ -183,6 +220,13 @@ export class AnswerComponent {
   goBack(): boolean {
     this.location.back();
     return false;
+  }
+
+  enableSaveButton() {
+    if (!this.saveButtonEnabled) {
+      this.saveButtonEnabled = true;
+      this.cdRef.detectChanges();
+    }
   }
 
 }
