@@ -9,6 +9,6 @@ export class InquiryFormTreeResolver implements Resolve<Node[]> {
   constructor(private restService: RestService) {}
 
   resolve(route: ActivatedRouteSnapshot):any {
-    return this.restService.getList('hist/nodes?recurse=1', {id_inquiryform: route.params['id']});
+    return this.restService.getList('hist/nodes?recurse=1', {});
   }
 }
