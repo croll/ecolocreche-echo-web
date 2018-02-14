@@ -1,4 +1,5 @@
 import { Impact } from '../../question/components/abstracts/impacts';
+import { Node } from '../../common/models/node';
 
 export class AuditTools {
 
@@ -12,6 +13,38 @@ export class AuditTools {
       AuditTools.impact = new Impact(null);
     }
     return AuditTools.instance;
+  }
+
+  find_node(audit: Node, id_node: number) {
+    if (!audit.childs) return null;
+    for (let node of audit.childs) {
+      if (node['id_node'] == id_node) return node;
+      else {
+        let found = this.find_node(node, id_node);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+
+  merge_nodes_of_audit2_in_audit1(audit1: Node, audit2: Node, childs2: Node[] = null) {
+    //console.log("audit2: ", audit2);
+    if (!childs2) childs2=audit2.childs;
+    for (let child2_node of childs2) {
+      let child1_node = this.find_node(audit1, child2_node.id_node);
+      if (!child1_node) { // this node from audit2 dost not exists in audit1
+        // add it in audit1 !
+        let node_parent1=this.find_node(audit1, child2_node.id_node_parent);
+        if (node_parent1) {
+          node_parent1['childs'].push(child2_node);
+          console.log("node2 added to audit1: ", child2_node);
+        } else {
+          console.log("can't add this node from audit2, because we don't find it's parent in audit1: ", child2_node);
+        }
+      }
+      if (child2_node.childs)
+        this.merge_nodes_of_audit2_in_audit1(audit1, audit2, child2_node.childs);
+    }
   }
 
   merge(list1, list2) {

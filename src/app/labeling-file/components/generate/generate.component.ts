@@ -67,7 +67,12 @@ export class GenerateComponent implements OnInit {
       this.audit1 = tmp1;
     }
 
+    //console.log("this.audit1.nodes : ", this.audit1.nodes);
+    //console.log("this.audit2.nodes : ", this.audit2.nodes);
+    this.auditTools.merge_nodes_of_audit2_in_audit1(this.audit1.nodes, this.audit2.nodes)
+
     this.audit1Cache  = this.auditTools.cacheDatas(this.audit1.nodes);
+
     let chartDatasThemes = [this.audit1Cache.chartDatas.themes];
     let chartDatasFamilies = [this.audit1Cache.chartDatas.families];
 
@@ -82,6 +87,10 @@ export class GenerateComponent implements OnInit {
         this.themeList.push(this.audit1Cache.chartDatas.themes[id_node]);
       }
     }
+
+    //console.log(this.audit1Cache.chartDatas.families);
+    //console.log(chartDatasFamilies);
+    //console.log(chartDatasThemes);
 
     this.charts.environment = {
       audit1: this.auditTools.toChartDatas('pie', this.audit1Cache.chartDatas.families, 'environnementales'),
