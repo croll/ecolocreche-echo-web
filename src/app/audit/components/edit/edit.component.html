@@ -11,30 +11,30 @@
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
 <form [formGroup]="echosForm">
-  <div>
+  <mat-form-field>
     <mat-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
       <mat-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</mat-option>
     </mat-select>
     <div *ngIf="id" class="echos-error">Le type d'audit n'est pas modifiable</div>
-  </div>
-  <div>
-    <mat-form-field style="margin-top: 18px">
-      <textarea matInput formControlName="synthesis" placeholder="Synthèse"></textarea>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="synthesis" placeholder="Synthèse"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Statut *" formControlName="active">
       <mat-option [value]="1">En cours</mat-option>
       <mat-option [value]="0">Terminé</mat-option>
     </mat-select>
-  </div>
+  </mat-form-field>
 
-  <div>
-    <mat-select *ngIf="!id" placeholder="Importer un précédent audit..." formControlName="id_audit_src" style="margin: 18px 0 18px 0">
+  <mat-form-field *ngIf="!id">
+    <mat-select placeholder="Importer un précédent audit..." formControlName="id_audit_src" style="margin: 18px 0 18px 0">
       <mat-option [value]="">Non</mat-option>
       <mat-option *ngFor="let audit of old_audits" [value]="audit.id">{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</mat-option>
     </mat-select>
-  </div>
+  </mat-form-field>
 
   <div *ngIf="showCreationDateField">
     <mat-form-field style="margin-top: 8px">

@@ -12,39 +12,31 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="name" placeholder="Nom de l'utilisateur *" [(ngModel)]="current.name">
-      <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'utilisateur est requis</mat-hint>
-      <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'utilisateur doit contenir 3 caractères minimum</mat-hint>
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Nom de l'utilisateur *" [(ngModel)]="current.name">
+    <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('required')">Le nom de l'utilisateur est requis</mat-hint>
+    <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'utilisateur doit contenir 3 caractères minimum</mat-hint>
+  </mat-form-field>
 
-  <div>
-    <mat-form-field>
-      <input matInput type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input matInput type="email" formControlName="email" placeholder="email" [(ngModel)]="current.email">
+  </mat-form-field>
 
-  <div>
-    <mat-form-field>
-      <input matInput type="password" formControlName="password" placeholder="Mot de passe">
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input matInput type="password" formControlName="password" placeholder="Mot de passe">
+  </mat-form-field>
 
-  <div *ngIf="authService.isAdmin()" style="padding: 8px 0 8px">
+  <mat-form-field *ngIf="authService.isAdmin()">
     <mat-select placeholder="Type de compte *" formControlName="account_type">
       <mat-option *ngFor="let s of typeList" [value]="s.id">{{s.label}}</mat-option>
-  </mat-select>
-  </div>
+    </mat-select>
+  </mat-form-field>
 
-  <div>
-    <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
-    <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="id" (click)="del(id)" mat-raised-button color="warn">Supprimer</button>
-      <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-      <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-    </div>
+  <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
+  <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
+    <button *ngIf="id" (click)="del(id)" mat-raised-button color="warn">Supprimer</button>
+    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
 
 </form>
