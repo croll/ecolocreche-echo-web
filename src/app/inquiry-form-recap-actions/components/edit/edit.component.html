@@ -8,7 +8,7 @@
 <h1 *ngIf="!id_inquiryform">Ajouter un questionnaire "Recap actions"</h1>
 <h1 *ngIf="id_inquiryform">Modifier un questionnaire "Recap actions"</h1>
 
-<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+<div class="echos-help-block" style="margin-bottom: 40px">Les champs obligatoires sont identifiés par un astérisque.</div>
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
   <div>

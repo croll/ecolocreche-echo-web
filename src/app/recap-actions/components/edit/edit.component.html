@@ -8,7 +8,7 @@
 <h1 *ngIf="!id">Créer un "récap actions"</h1>
 <h1 *ngIf="id">Modifier le "récap actions" de l'établissement "{{current.establishment?.name}}"</h1>
 
-<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+<div class="echos-help-block">Les champs obligatoires sont identifiés par un astérisque.</div>
 
 <form [formGroup]="echosForm">
   <div>
