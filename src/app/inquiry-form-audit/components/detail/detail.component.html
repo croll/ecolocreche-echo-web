@@ -13,7 +13,7 @@
     <button mat-menu-item (click)="exportCSV('csv')">Format CSV</button>
     <button mat-menu-item (click)="exportCSV('xlsx')">Format XLSX</button>
   </mat-menu>
-  <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id_inquiryform, 'editer']"><mat-icon>edit</mat-icon></button>
+  <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/questionnaire', inquiryform.id_inquiryform, 'editer']" fxFlexOffset="16px"><mat-icon>edit</mat-icon></button>
 </div>
 
 <div class="echos-title" *ngIf="inquiryform.description">Informations</div>

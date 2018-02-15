@@ -16,3 +16,14 @@ mat-form-field {
 textarea {
     min-height: 200px;
 }
+
+.echos-title {
+  font-size: 1.4em;
+  border-bottom: none;
+}
+
+mat-panel-description {
+  flex-direction: column;
+  padding-top: 18px;
+  align-items: flex-end;
+}
