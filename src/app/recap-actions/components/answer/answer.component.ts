@@ -24,6 +24,7 @@ export class AnswerComponent {
   infos: any;
   themes: any;
   saveButtonEnabled = false;
+  changed = false;
   doPrint = false;
 
   public config: QuillConfigInterface = {
@@ -138,18 +139,18 @@ export class AnswerComponent {
   }
 
   pdf() {
-    let changed = false;
     this.themes.forEach(theme => {
       theme.childs.forEach(question => {
         if (question.answer.value != question.answer.originalValue) {
-          changed = true;
+          this.changed = true;
         }
       });
     });
 
-    if (changed) {
+    if (this.changed) {
       if (confirm("Pour que le PDF prenne en compte vos dernières modifications, celui-ci doit être sauvé avant. Souhaitez vous enregistrer vos dernières modifications ?")) {
         this.doPrint = true;
+        this.changed = false;
         this.save();
       } else {
         this.generatePdf();
@@ -210,7 +211,10 @@ export class AnswerComponent {
     return false;
   }
 
-  enableSaveButton() {
+  enableSaveButton(reportChanges) {
+    if (reportChanges) {
+      this.changed = true;
+    }
     if (!this.saveButtonEnabled) {
       this.saveButtonEnabled = true;
       this.cdRef.detectChanges();

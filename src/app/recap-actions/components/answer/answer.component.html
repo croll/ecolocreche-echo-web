@@ -25,7 +25,7 @@
 
 <div style="margin: 20px 0">
   <h2>Votre commentaire</h2>
-  <quill [config]="config" [(value)]="infos.audit.synthesis" [autoToolbar]="true" (contentChange)="enableSaveButton()"></quill>
+  <quill [config]="config" [(value)]="infos.audit.synthesis" [autoToolbar]="true" (contentChange)="enableSaveButton(true)"></quill>
 </div>
 
 <mat-divider></mat-divider>
