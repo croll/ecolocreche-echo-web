@@ -18,16 +18,16 @@
       <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</mat-hint>
     </mat-form-field>
   </div>
-  <div style="padding: 8px 0 15px">
+  <mat-form-field>
     <mat-select placeholder="Type *" formControlName="type">
       <mat-option *ngFor="let t of current.typeList" [value]="t.id">{{t.label}}</mat-option>
     </mat-select>
-  </div>
-  <div style="padding: 8px 0 8px">
+  </mat-form-field>
+  <mat-form-field>
     <mat-select placeholder="Statut *" formControlName="status">
       <mat-option *ngFor="let s of current.statusList" [value]="s.id">{{s.label}}</mat-option>
     </mat-select>
-  </div>
+  </mat-form-field>
   <div>
     <mat-form-field>
       <input matInput formControlName="address" placeholder="Adresse">
