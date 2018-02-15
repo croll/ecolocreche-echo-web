@@ -23,6 +23,13 @@
   <div fxFlex="50%">Actions réalisées</div>
 </div>
 
+<div style="margin: 20px 0">
+  <h2>Votre commentaire</h2>
+  <quill [config]="config" [(value)]="infos.audit.synthesis" [autoToolbar]="true" (contentChange)="enableSaveButton()"></quill>
+</div>
+
+<mat-divider></mat-divider>
+
 <div *ngFor="let theme of themes" class="row-theme">
   <div fxLayout="row" class="column" fxLayoutAlign="center start">
     <div class="row-title">{{theme.title}}</div>

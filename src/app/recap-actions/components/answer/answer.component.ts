@@ -26,7 +26,6 @@ export class AnswerComponent {
   saveButtonEnabled = false;
   doPrint = false;
 
-
   public config: QuillConfigInterface = {
    theme: 'bubble',
    modules: {
@@ -99,9 +98,8 @@ export class AnswerComponent {
 
   save() {
 
-    let obs = [];
-
-    let changed = false;
+    // Save audit for the comments
+    let obs = [this.restService.save(this.infos.audit, 'audits')];
 
     this.saveButtonEnabled=false;
 
@@ -112,28 +110,18 @@ export class AnswerComponent {
           delete question.answer.originalValue;
           obs.push(this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok"));
           question.answer.originalValue = question.answer.value;
-          changed = true;
         }
       });
     });
 
-    if (changed) {
-      Observable.forkJoin(obs, () => {
-        if (!this.doPrint) {
-          this.goBack();
-        } else {
-          this.doPrint = false;
-          this.generatePdf();
-        }
-      }).subscribe();
-    } else {
+    Observable.forkJoin(obs, () => {
       if (!this.doPrint) {
         this.goBack();
       } else {
         this.doPrint = false;
         this.generatePdf();
       }
-    }
+    }).subscribe();
 
     return false;
   }
