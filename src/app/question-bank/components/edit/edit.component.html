@@ -11,7 +11,7 @@
   <h1 *ngIf="!id_node">Ajouter un thème</h1>
   <h1 *ngIf="id_node">Modifier un thème</h1>
 
-  <p>Les champs obligatoires sont identifiés par un astérisque.</p>
+  <div class="echos-help-block">Les champs obligatoires sont identifiés par un astérisque.</div>
 
   <form (ngSubmit)="save()" [formGroup]="echosForm">
     <mat-form-field>

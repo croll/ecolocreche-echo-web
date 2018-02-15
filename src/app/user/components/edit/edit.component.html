@@ -8,7 +8,7 @@
 <h1 *ngIf="!current.id">Ajouter un utilisateur</h1>
 <h1 *ngIf="current.id">Modifier un utilisateur</h1>
 
-<p>Les champs obligatoires sont identifiés par un astérisque.</p>
+<div class="echos-help-block">Les champs obligatoires sont identifiés par un astérisque.</div>
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
