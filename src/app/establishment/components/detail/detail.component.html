@@ -110,11 +110,11 @@
 
 
 <div class="help">
-  Pour générer un dossier de labélisation, cliquez sur le bouton "Générer le dossier de labelisation"
+  Pour générer un dossier de labellisation, cliquez sur le bouton "Générer le dossier de labelisation"
 </div>
 
 <div class="echos-title" fxLayout="row" style="margin-top: 80px">
-  <div fxFlex>Liste des "dossiers de labélisation"</div>
+  <div fxFlex>Liste des "dossiers de labellisation"</div>
 </div>
 
 <div *ngIf="!item.labeling_files || !item.labeling_files.length" class="echos-warning">Aucun dossier de labelisation trouvé.</div>
@@ -124,7 +124,7 @@
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>Dossier de labélisation crée le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>Dossier de labellisation crée le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!labeling_file.active">Terminé</div>
         <div *ngIf="labeling_file.active" style="color: rgb(96, 190, 64)">En cours</div>

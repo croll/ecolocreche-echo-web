@@ -168,7 +168,7 @@ export class GenerateComponent implements OnInit {
 
 
   delete() {
-    if (confirm("Souhaitez vous vraiment supprimer ce dossier de labélisation ?")) {
+    if (confirm("Souhaitez vous vraiment supprimer ce dossier de labellisation ?")) {
       this.restService.delete(this.current.id, 'labelingfiles').subscribe((response) => {
         this.router.navigate(['/etablissement', this.audit1.audit.establishment.id]);
       }, (err) => {
