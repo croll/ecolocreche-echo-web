@@ -24,8 +24,8 @@ export class AnswerComponent {
   infos: any;
   themes: any;
   saveButtonEnabled = false;
+  changed = false;
   doPrint = false;
-
 
   public config: QuillConfigInterface = {
    theme: 'bubble',
@@ -99,9 +99,8 @@ export class AnswerComponent {
 
   save() {
 
-    let obs = [];
-
-    let changed = false;
+    // Save audit for the comments
+    let obs = [this.restService.save(this.infos.audit, 'audits')];
 
     this.saveButtonEnabled=false;
 
@@ -112,28 +111,18 @@ export class AnswerComponent {
           delete question.answer.originalValue;
           obs.push(this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok"));
           question.answer.originalValue = question.answer.value;
-          changed = true;
         }
       });
     });
 
-    if (changed) {
-      Observable.forkJoin(obs, () => {
-        if (!this.doPrint) {
-          this.goBack();
-        } else {
-          this.doPrint = false;
-          this.generatePdf();
-        }
-      }).subscribe();
-    } else {
+    Observable.forkJoin(obs, () => {
       if (!this.doPrint) {
         this.goBack();
       } else {
         this.doPrint = false;
         this.generatePdf();
       }
-    }
+    }).subscribe();
 
     return false;
   }
@@ -150,18 +139,18 @@ export class AnswerComponent {
   }
 
   pdf() {
-    let changed = false;
     this.themes.forEach(theme => {
       theme.childs.forEach(question => {
         if (question.answer.value != question.answer.originalValue) {
-          changed = true;
+          this.changed = true;
         }
       });
     });
 
-    if (changed) {
+    if (this.changed) {
       if (confirm("Pour que le PDF prenne en compte vos dernières modifications, celui-ci doit être sauvé avant. Souhaitez vous enregistrer vos dernières modifications ?")) {
         this.doPrint = true;
+        this.changed = false;
         this.save();
       } else {
         this.generatePdf();
@@ -222,7 +211,10 @@ export class AnswerComponent {
     return false;
   }
 
-  enableSaveButton() {
+  enableSaveButton(reportChanges) {
+    if (reportChanges) {
+      this.changed = true;
+    }
     if (!this.saveButtonEnabled) {
       this.saveButtonEnabled = true;
       this.cdRef.detectChanges();
