@@ -103,7 +103,6 @@ export class AuditResolverPreviousAudits implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot):Observable<any> {
     return this.restService.getList('audits', {
       id_establishment: route.params['id_establishment'],
-      active: 1,
       inquiry_type: 'audit',
       sort: '-date_start'
     })
