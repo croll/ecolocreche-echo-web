@@ -37,9 +37,9 @@
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
       <div fxFlex fxFlexOffset="20px">
-        <div fxLayout="column" fxLayoutAlign="start center" class="have-childs">
-          <div fxFlex fxFlexAlign="start">{{childItem.title}}</div>
-          <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
+        <div class="have-childs">
+          <div>{{childItem.title}}</div>
+          <div *ngIf="childItem.description">{{childItem.description}}</div>
         </div>
       </div>
       <div fxLayout="column" fxLayoutAlign="space-around center">

@@ -1,8 +1,29 @@
 .answer-comment-container textarea {
   width: 100%;
   min-height: 3em;
+  margin-top: 10px;
 }
 
 .answer-comment-container textarea[readonly] {
   border: none;
+}
+
+.search-container {
+  margin-top: 18px;
+}
+
+form {
+  margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.mat-toolbar {
+  padding-left: 18px;
+}
+
+.echos-buttons-container {
+  button {
+    margin: 0;
+  }
 }

@@ -51,24 +51,20 @@
   <button fxFlexOffset="45px" *ngIf="parentNodes.length" mat-button (click)="goToParent()">Remonter d'un niveau</button>
 </mat-toolbar>
 
-<mat-list>
+<mat-list fxLayout="column">
   <mat-list-item class="echos-list-item" *ngFor="let childItem of filteredChildList" [ngClass]="{hide: !childItem.selected && hideUnselected}">
-    <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <mat-slide-toggle color="primary" (change)="toggleItem(childItem)" [checked]="childItem.selected"></mat-slide-toggle>
-      <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}"></div>
-      <div fxFlex fxFlexOffset="20px" (click)="toggleItem(childItem)">
-        <div fxLayout="column" fxLayoutAlign="start center" class="have-childs">
-          <div fxFlex fxFlexAlign="start">{{childItem.title}}<span *ngIf="childItem.privcomment"> [{{childItem.privcomment}}]</span></div>
-          <div fxFlexAlign="start" *ngIf="childItem.description">{{childItem.description}}</div>
-          <div fxFlexAlign="start" *ngIf="childItem.type == 'directory' && childItem.childs" fxLayout="row" fxLayoutAlign="start baseline" fxLayoutWrap="wrap" class="small-list">
-            <div *ngFor="let child of childItem.childs" style="white-space: nowrap">
-              {{child.title}}
-            </div>
+      <div *ngIf="childItem.color" class="echos-color" [ngStyle]="{'background-color': '#'+childItem.color}" fxFlexOffset="12px"></div>
+      <div fxLayoutAlign="center start" class="have-childs" fxLayout="column" fxFlexOffset="18px">
+        <div>{{childItem.title}}<span *ngIf="childItem.privcomment"> [{{childItem.privcomment}}]</span></div>
+        <div *ngIf="childItem.description">{{childItem.description}}</div>
+        <div *ngIf="childItem.type == 'directory' && childItem.childs" fxLayout="row" fxLayoutAlign="start baseline" fxLayoutWrap="wrap" class="small-list">
+          <div *ngFor="let child of childItem.childs">
+            {{child.title}}
           </div>
         </div>
       </div>
       <button mat-button *ngIf="childItem.selected && (!node || (node && !node.id_node_parent))" color="primary" (click)="goToChild(childItem.id_node)">Affiner le choix</button>
-    </div>
   </mat-list-item>
 </mat-list>
 
