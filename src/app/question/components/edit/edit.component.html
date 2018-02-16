@@ -15,31 +15,25 @@
 
 <form (ngSubmit)="save()" [formGroup]="echosForm">
 
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="title" placeholder="Intitulé *">
-      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">L'intitulé est requis</mat-hint>
-      <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">L'intitulé doit contenir 3 caractères minimum</mat-hint>
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input matInput formControlName="title" placeholder="Intitulé *">
+    <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">L'intitulé est requis</mat-hint>
+    <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('minlength')">L'intitulé doit contenir 3 caractères minimum</mat-hint>
+  </mat-form-field>
 
-  <div style="padding: 8px 0 15px">
+  <mat-form-field>
     <mat-select placeholder="Type de question *" formControlName="type" style="min-width: 200px">
       <mat-option *ngFor="let t of qtypes.typeList" [value]="t.id">{{t.label}}</mat-option>
     </mat-select>
-  </div>
+  </mat-form-field>
 
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="description" placeholder="Commentaire">
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input matInput formControlName="description" placeholder="Commentaire">
+  </mat-form-field>
 
-  <div>
-    <mat-form-field>
-      <input matInput formControlName="privcomment" placeholder="Commentaire privé">
-    </mat-form-field>
-  </div>
+  <mat-form-field>
+    <input matInput formControlName="privcomment" placeholder="Commentaire privé">
+  </mat-form-field>
 
   <input *ngIf="id_node" type="hidden" formControlName="id_node">
 
