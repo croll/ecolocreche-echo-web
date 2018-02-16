@@ -31,7 +31,7 @@
     <button *ngIf="authService.isAdmin()" mat-raised-button [routerLink]="['/theme', item.id_node, 'rubrique', 'creer']">Ajouter une rubrique<mat-icon>add</mat-icon></button>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center" class="search-container">
     <mat-form-field fxFlex>
       <input matInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
     </mat-form-field>
@@ -118,7 +118,7 @@
     <button *ngIf="authService.isAdmin()" mat-raised-button [routerLink]="['/question', 'creer', item.id_node]">Ajouter une question<mat-icon>add</mat-icon></button>
   </div>
 
-  <mat-form-field fxLayout>
+  <mat-form-field fxLayout class="search-container">
     <input matInput #search type="search" placeholder="Chercher une rubrique ou des questions" fxFlex (keyup)="filterList(search.value)">
   </mat-form-field>
 
