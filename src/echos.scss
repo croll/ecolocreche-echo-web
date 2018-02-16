@@ -82,6 +82,7 @@ a:hover {
   width: 24px;
   height: 24px;
   border: 1px solid #d0d0d0;
+  flex-shrink: 0;
 }
 
 .echos-help {
@@ -172,10 +173,16 @@ a:hover {
   box-shadow: 0 1px 2px rgba(0,0,0,0.2) inset, 0 -1px 0 rgba(0,0,0,0.05) inset;
 }
 
+
+mat-list {
+  padding: 0 8px;
+}
+
 mat-list-item.echos-list-item {
   cursor: pointer;
   border-bottom: 1px solid #a5a5a5;
-  padding: 8px 0;
+  display: flex!important;
+  flex-direction: column!important;
   &:last-child {
     border-bottom: 1px solid transparent;
   }
@@ -183,28 +190,24 @@ mat-list-item.echos-list-item {
     border-bottom: 1px solid mat-color($accent);
     background: #f0f0f0;
   }
-  .mat-line {
-    //white-space: normal!important;
-  }
-  .mat-list-item, .mat-list-item-content {
-    padding: 22px 0px;
-    height: auto!important;
+  .mat-list-item-content {
+    flex: 1 1 100%;
+    padding-left: 0!important;
   }
   & > div {
-    &:first-child {
-      padding: 8px!important;
-      min-height: 30px;
-    }
     .have-childs {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 100%;
+      min-height: 40px;
+      justify-content: center;
+      padding: 18px 0;
       & > div:first-child {
-        padding-top: 4px;
         font-size: 1.4em;
         color: #333;
-        min-height: 30px;
       }
       & > div:nth-child(2):not(.small-list) {
         color: $echos-light-grey;
-        padding: 8px 0 0 ;
         white-space: normal;
         div {
           padding-left: 5px;
@@ -220,25 +223,26 @@ mat-list-item.echos-list-item {
         }
       }
       .small-list {
-        padding-top: 8px;
         font-size: 0.8em;
         flex-wrap: wrap;
         color: $echos-dark-grey!important;
-        & > *:after {
-          padding-right: 3px;
-          content: ' / ';
-        }
-        & > *:last-child {
-          &:after {
-            padding-left: 0px;
-            content: '';
+        & > * {
+          white-space: nowrap;
+          &::after {
+            padding-right: 3px;
+            content: ' / ';
+          }
+          &:last-child::after {
+            content: '.';
+            color: #fff;
           }
         }
+      }
+    }
+
 		div {
 			white-space: normal!important;
 		}
-      }
-    }
   }
 }
 
@@ -418,11 +422,6 @@ mat-list-item.echos-list-item {
     border-bottom: 1px solid #a5a5a5;
   }
 
-  .mat-radio-label-content,
-  .mat-checkbox-label {
-
-  }
-
   .mat-slider-thumb {
     right: -15px;
     bottom: -15px;
@@ -467,7 +466,7 @@ mat-list-item.echos-list-item {
   }
 
   .echos-question-input-container {
-    padding: 15px 0 0 18px;
+    margin-top: 25px;
     width: 100%;
   }
 
@@ -546,12 +545,16 @@ mat-list-item.echos-list-item {
     .mat-list .mat-list-item .mat-list-text>*, .mat-nav-list .mat-list-item .mat-list-text>* {
         white-space: normal;
     }
+    .mat-toolbar {
+      padding: 0;
+    }
     .mat-toolbar .mat-toolbar-row {
-        white-space: normal;
+      white-space: normal;
     }
     .mat-list, .mat-list-item, .mat-list-item-content {
       height: auto!important;
       min-height: 48px;
+      padding-left: 0;
     }
 }
 .echos-chart {

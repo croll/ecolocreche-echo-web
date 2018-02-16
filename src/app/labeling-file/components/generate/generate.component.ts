@@ -73,7 +73,9 @@ export class GenerateComponent implements OnInit {
 
     //console.log("this.audit1.nodes : ", this.audit1.nodes);
     //console.log("this.audit2.nodes : ", this.audit2.nodes);
-    this.auditTools.merge_nodes_of_audit2_in_audit1(this.audit1.nodes, this.audit2.nodes)
+    if (this.audit2) {
+      this.auditTools.merge_nodes_of_audit2_in_audit1(this.audit1.nodes, this.audit2.nodes)
+    }
 
     this.audit1Cache  = this.auditTools.cacheDatas(this.audit1.nodes);
 
