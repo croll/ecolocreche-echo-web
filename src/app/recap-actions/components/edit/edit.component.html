@@ -11,18 +11,18 @@
 <div class="echos-help-block">Les champs obligatoires sont identifiés par un astérisque.</div>
 
 <form [formGroup]="echosForm">
-  <div>
+  <mat-form-field>
     <mat-select placeholder="Formulaire *" formControlName="id_inquiryform" style="min-width: 300px">
       <mat-option *ngFor="let ifl of inquiryFormList" [value]="ifl.id_inquiryform">{{ifl.title}}</mat-option>
     </mat-select>
     <div *ngIf="id" class="echos-error">Le type de "récap actions" n'est pas modifiable</div>
-  </div>
-  <div>
-    <mat-select placeholder="Statut *" formControlName="active" style="margin: 18px 0 18px 0">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Statut *" formControlName="active">
       <mat-option [value]="1">En cours</mat-option>
       <mat-option [value]="0">Terminé</mat-option>
     </mat-select>
-  </div>
+  </mat-form-field>
   <div *ngIf="showCreationDateField">
     <mat-form-field style="margin-top: 8px">
       <input matInput type="text" formControlName="date_start" placeholder="Date de création">
