@@ -1,8 +1,8 @@
 <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
   <button mat-button (click)="toggleMenu()" class="echos-menu-button" *ngIf="!isNotLogged()" [ngStyle]="{color: (!menuVisibility) ? '#009688' : '#ff9800'}"><mat-icon>menu</mat-icon></button>
   <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
-  <button mat-mini-fab *ngIf="!isNotLogged()" class="login-logout-button" color="secondary" routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)" style="color: #ff9800"><mat-icon>eject</mat-icon></button>
-  <button mat-mini-fab *ngIf="isNotLogged()" class="login-logout-button" color="secondary" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)" style="color: #009688"><mat-icon>person</mat-icon></button>
+  <button mat-mini-fab *ngIf="!isNotLogged()" class="login-logout-button" color="secondary" routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event, true)" style="color: #ff9800"><mat-icon>eject</mat-icon></button>
+  <button mat-mini-fab *ngIf="isNotLogged()" class="login-logout-button" color="secondary" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event, true)" style="color: #009688"><mat-icon>person</mat-icon></button>
 </div>
 <div class="echos-main-container" fxLayout="row">
   <div [ngClass]="{'echos-menu': true, 'echos-menu-hide': !menuVisibility}" (click)="menuHide($event)">

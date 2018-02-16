@@ -17,7 +17,7 @@ export class AppComponent{
 
   loggedUser: User = null;
 
-  menuVisibility: boolean = false;
+  menuVisibility: boolean = (window.innerWidth <= 960) ? false : true;
 
   constructor(private authService: AuthService, private userRestService: UserRestService) {
     this.userRestService.whoami().subscribe((user) => {
@@ -49,10 +49,12 @@ export class AppComponent{
     return this.loggedUser == null;
   }
 
-  menuHide(e) {
+  menuHide(e, force) {
     e.preventDefault();
     e.stopPropagation();
-    this.menuVisibility = false;
+    if (window.innerWidth <= 960 || force) {
+      this.menuVisibility = false;
+    }
   }
 
   toggleMenu() {
