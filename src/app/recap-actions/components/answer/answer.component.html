@@ -19,8 +19,8 @@
 
 <div class="header-title" fxLayout="row" fxLayoutAlign="center center">
   <div>Thèmes</div>
-  <div fxFlex="50%">Actions à réaliser</div>
-  <div fxFlex="50%">Actions réalisées</div>
+  <div fxFlex="35%">Actions à réaliser</div>
+  <div fxFlex="65%">Actions réalisées</div>
 </div>
 
 <div style="margin: 20px 0">
@@ -33,7 +33,7 @@
 <div *ngFor="let theme of themes" class="row-theme">
   <div fxLayout="row" class="column" fxLayoutAlign="center start">
     <div class="row-title">{{theme.title}}</div>
-    <div class="row-answer" *ngFor="let question of theme.childs" fxFlex="50%">
+    <div class="row-answer" *ngFor="let question of theme.childs; let i=index" fxFlex="{{ i == 0 ? '35%' : '65%' }}">
       <div class="previous-answer" *ngIf="infos.audit.id_audit_src > 0" [innerHTML]="getAuditSrcAnswer(theme.id_node, question.id_node, question.position)"></div>
       <quill [config]="config" [(value)]="question.answer.value" [autoToolbar]="true" (contentChange)="enableSaveButton()"></quill>
     </div>
