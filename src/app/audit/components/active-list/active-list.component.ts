@@ -41,7 +41,7 @@ export class ActiveListComponent implements OnInit {
     if (filterString && filterString.length > 0)
       filteredList = filteredList.filter(item => item.establishment.name.toLocaleLowerCase().indexOf(filterString.toLocaleLowerCase()) != -1);
     if (filterCompleted)
-      filteredList = filteredList.filter(item => item.cached_percent_complete < 0.999);
+      filteredList = filteredList.filter(item => item.cached_percent_complete > 0.995);
     if (filterInquiryform)
       filteredList = filteredList.filter(item => item.id_inquiryform == filterInquiryform);
     this.filteredList = filteredList;
