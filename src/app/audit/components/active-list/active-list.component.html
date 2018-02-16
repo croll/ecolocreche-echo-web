@@ -24,7 +24,7 @@
 <div fxLayout="row" fxLayoutAlign="start center">
   <mat-form-field fxFlex>
     <mat-select #filterInquiryform placeholder="Filtrer par type de questionnaire : " (change)="filterList(filterString.value, filterCompleted.checked, filterInquiryform.value)">
-      <mat-option [value]="">Tous (ne pas limiter)</mat-option>
+      <mat-option [value]="">Tous</mat-option>
       <mat-option *ngFor="let inquiryform of inquiryforms" [value]="inquiryform.id_inquiryform">
         {{ inquiryform.title }}
       </mat-option>
