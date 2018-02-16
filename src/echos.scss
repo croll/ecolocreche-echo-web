@@ -90,6 +90,10 @@ a:hover {
   font-size: 0.9rem;
 }
 
+.login-logout-button {
+  margin-right: 15px!important;
+}
+
 .echos-menu {
   mat-list-item {
     padding-left: 30px;
@@ -106,6 +110,7 @@ a:hover {
     }
   }
 }
+
 @media screen and (max-width: 959px) {
   .echos-menu {
     position: absolute;
@@ -115,10 +120,12 @@ a:hover {
     height: 100%;
     background: rgba(0, 0, 0, 0.9);
     z-index: 10000;
+    padding-left: 30px;
     mat-list-item {
       color: #fff!important;
       font-size: 2em!important;
       font-weight: bold!important;
+      padding: 8px 0;
       &:hover {
         background: none!important;
       }
@@ -131,7 +138,7 @@ a:hover {
 
 @media screen and (min-width: 960px) {
   .echos-menu-button {
-   display: none!important;
+   // display: none!important;
   }
   // .echos-menu {
   //   display: block!important;
@@ -144,11 +151,9 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 959px) {
     .echos-menu-hide {
       display: none!important;
     }
-}
 
 .echos-color-box {
   display:inline-block;

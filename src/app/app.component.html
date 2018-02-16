@@ -1,27 +1,8 @@
-  <!-- <div class="echos-sidenav">
-    <mat-list>
-     <mat-list-item *ngIf="isAgent()" routerLink="/utilisateur/moi" routerLinkActive="active" (click)="sidenav.close()">Mon compte</mat-list-item>
-     <mat-divider></mat-divider>
-     <mat-list-item *ngIf="isAgent()" routerLink="/etablissement/liste" routerLinkActive="active" (click)="sidenav.close()">Les établissements</mat-list-item>
-     <mat-divider></mat-divider>
-     <mat-list-item *ngIf="isAgent()" routerLink="/audit/liste/actifs" routerLinkActive="active" (click)="sidenav.close()">Les audits en cours</mat-list-item>
-     <mat-divider></mat-divider>
-     <mat-list-item *ngIf="isAdmin()" routerLink="/utilisateur/liste" routerLinkActive="active" (click)="sidenav.close()">Les utilisateurs</mat-list-item>
-     <mat-divider></mat-divider>
-     <mat-list-item *ngIf="isSuperAgent()" routerLink="/theme/liste" routerLinkActive="active" (click)="sidenav.close()">Banque de questions</mat-list-item>
-     <mat-divider></mat-divider>
-     <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire/liste" routerLinkActive="active" (click)="sidenav.close()">Les questionnaires</mat-list-item>
-     <mat-divider></mat-divider>
-     <mat-list-item *ngIf="!isNotLogged()" routerLink="/deconnexion" routerLinkActive="active" (click)="sidenav.close()">Déconnexion</mat-list-item>
-     <mat-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="sidenav.close()">Connexion</mat-list-item>
-  </mat-list>
-</div> -->
-
 <div fxLayout="row" fxLayoutWrap="none" class="echos-header">
-  <button mat-button (click)="toggleMenu()" class="echos-menu-button">
-    <mat-icon>menu</mat-icon>
-  </button>
+  <button mat-button (click)="toggleMenu()" class="echos-menu-button" *ngIf="!isNotLogged()" [ngStyle]="{color: (!menuVisibility) ? '#009688' : '#ff9800'}"><mat-icon>menu</mat-icon></button>
   <div fxFlex fxFlexOffset="0" fxFlexOffset.gt-sm="30px" class="echos-logo" routerLink="/"></div>
+  <button mat-mini-fab *ngIf="!isNotLogged()" class="login-logout-button" color="secondary" routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)" style="color: #ff9800"><mat-icon>eject</mat-icon></button>
+  <button mat-mini-fab *ngIf="isNotLogged()" class="login-logout-button" color="secondary" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)" style="color: #009688"><mat-icon>person</mat-icon></button>
 </div>
 <div class="echos-main-container" fxLayout="row">
   <div [ngClass]="{'echos-menu': true, 'echos-menu-hide': !menuVisibility}" (click)="menuHide($event)">
@@ -40,8 +21,6 @@
        <mat-divider></mat-divider>
        <mat-list-item *ngIf="isSuperAgent()" routerLink="/questionnaire_recap_actions/liste" routerLinkActive="active" (click)="menuHide($event)">Les recap actions</mat-list-item>
        <mat-divider></mat-divider>
-       <mat-list-item *ngIf="!isNotLogged()"  routerLink="/deconnexion" routerLinkActive="active" (click)="menuHide($event)">Déconnexion</mat-list-item>
-       <mat-list-item *ngIf="isNotLogged()" routerLink="/connexion" routerLinkActive="active" (click)="menuHide($event)">Connexion</mat-list-item>
     </mat-list>
   </div>
   <router-outlet></router-outlet>
