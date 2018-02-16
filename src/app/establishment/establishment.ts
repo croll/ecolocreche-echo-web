@@ -28,9 +28,10 @@ export class Establishment {
       {id: 'entreprise', label: 'Entreprise'},
       {id: 'publique', label: 'Publique'},
       {id: 'indetermine', label: 'Indéterminé'},
-      {id: 'domicile', label: 'Domicile'},
+      {id: 'domicile', label: 'À domicile'},
       {id: 'creche-familiale', label: 'Crèche familiale'},
       {id: 'mam', label: 'MAM'},
+      {id: 'ram', label: 'RAM'},
       {id: 'autre', label: 'Autre'},
     ];
 }
