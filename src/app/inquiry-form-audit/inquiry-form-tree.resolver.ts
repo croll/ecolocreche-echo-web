@@ -11,7 +11,7 @@ export class InquiryFormTreeResolver implements Resolve<Node[]> {
 
   resolve(route: ActivatedRouteSnapshot):any {
     return this.restService.getList('hist/nodes?recurse=1', {
-      inqinquiry_type: InquiryForm.Inquiry_type.Audit,
+      inquiry_type: InquiryForm.Inquiry_type.Audit,
     });
   }
 }
