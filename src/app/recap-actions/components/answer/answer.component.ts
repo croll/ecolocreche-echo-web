@@ -58,19 +58,22 @@ export class AnswerComponent {
 
       // Init answers
       this.themes.forEach(theme => {
-        theme.childs.forEach(question => {
-          if (!(question.answer)) {
-            // generate answer
-            question.answer = Object.assign(new Answer(), {id_audit: this.infos.audit.id, audit_key: this.infos.audit.key, id_node: question.id_node, ignored: false, value: "", comment: ""});
-          } else {
-            // clean answer
-            if (question.answer.value == '{}') {
-              question.answer.value = '';
+        if (theme.childs) {
+          console.log("theme: ", theme);
+          theme.childs.forEach(question => {
+            if (!(question.answer)) {
+              // generate answer
+              question.answer = Object.assign(new Answer(), {id_audit: this.infos.audit.id, audit_key: this.infos.audit.key, id_node: question.id_node, ignored: false, value: "", comment: ""});
+            } else {
+              // clean answer
+              if (question.answer.value == '{}') {
+                question.answer.value = '';
+              }
             }
-          }
-          // cache responses to check if response if different when saving
-          question.answer.originalValue = question.answer.value;
-        });
+            // cache responses to check if response if different when saving
+            question.answer.originalValue = question.answer.value;
+          });
+        }
       });
     });
 
@@ -219,6 +222,10 @@ export class AnswerComponent {
       this.saveButtonEnabled = true;
       this.cdRef.detectChanges();
     }
+  }
+
+  date() {
+    return new Date();
   }
 
 }

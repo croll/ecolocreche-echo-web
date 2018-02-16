@@ -6,7 +6,7 @@
 
 <div fxLayout="row" fxLayoutAlign="start center">
   <h1 fxFlex>
-    "Récap actions" de {{infos.audit.establishment.name}}
+    "Récap actions" de {{infos.audit.establishment.name}} le {{date() | date:'dd/MM/yyyy'}}
   </h1>
   <a class='not-in-pdf' *ngIf="authService.isAgent()" mat-fab color="primary" href='/assets/docs/eplucheuse-pomme-de-terre.pdf' target='_blank'><mat-icon>help</mat-icon></a>
   <button mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
@@ -33,7 +33,7 @@
 
 <div *ngFor="let theme of themes" class="row-theme">
   <div fxLayout="row" class="column" fxLayoutAlign="center start">
-    <div class="row-title">{{theme.title}}</div>
+    <div class="row-title" [ngStyle]="{'color': '#'+theme.linked_to_node?.color}" >{{theme.title}}</div>
     <div class="row-answer" *ngFor="let question of theme.childs; let i=index" fxFlex="{{ i == 0 ? '35%' : '65%' }}">
       <div class="previous-answer" *ngIf="infos.audit.id_audit_src > 0" [innerHTML]="getAuditSrcAnswer(theme.id_node, question.id_node, question.position)"></div>
       <quill [config]="config" [(value)]="question.answer.value" [autoToolbar]="true" (contentChange)="enableSaveButton()"></quill>
