@@ -18,6 +18,11 @@
       <mat-hint *ngIf="nameCtrl.dirty && nameCtrl.hasError('minlength')">Le nom de l'établissement doit contenir 3 caractères minimum</mat-hint>
     </mat-form-field>
   </div>
+  <div>
+    <mat-form-field>
+      <input matInput type="text" formControlName="labelcode" placeholder="Code de labélisation">
+    </mat-form-field>
+  </div>
   <mat-form-field>
     <mat-select placeholder="Type *" formControlName="type">
       <mat-option *ngFor="let t of current.typeList" [value]="t.id">{{t.label}}</mat-option>

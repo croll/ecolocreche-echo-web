@@ -20,6 +20,7 @@ export class EditComponent implements OnInit {
   cityCtrl: FormControl;
   phoneCtrl: FormControl;
   mailCtrl: FormControl;
+  labelcodeCtrl: FormControl;
   typeCtrl: FormControl;
   statusCtrl: FormControl;
 
@@ -44,6 +45,7 @@ export class EditComponent implements OnInit {
     this.cityCtrl = fb.control(this.current.city);
     this.phoneCtrl = fb.control(this.current.phone);
     this.mailCtrl = fb.control(this.current.mail);
+    this.labelcodeCtrl = fb.control(this.current.labelcode);
 
     this.echosForm = fb.group({
       id: this.idCtrl,
@@ -53,6 +55,7 @@ export class EditComponent implements OnInit {
       city: this.cityCtrl,
       phone: this.phoneCtrl,
       mail: this.mailCtrl,
+      labelcode: this.labelcodeCtrl,
       type: this.typeCtrl,
       status: this.statusCtrl
     });
