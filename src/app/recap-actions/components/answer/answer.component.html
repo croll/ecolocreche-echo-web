@@ -9,7 +9,7 @@
     "Récap actions" de {{infos.audit.establishment.name}} le {{date() | date:'dd/MM/yyyy'}}
   </h1>
   <a class='not-in-pdf' *ngIf="authService.isAgent()" mat-fab color="primary" href='/assets/docs/eplucheuse-pomme-de-terre.pdf' target='_blank'><mat-icon>help</mat-icon></a>
-  <button mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
 </div>
 
 <div style="margin: 20px 0">
@@ -42,9 +42,9 @@
 </div>
 
 <div class="not-in-pdf" xLayout="row" fxLayoutAlign="center center" style="margin-top: 30px">
-  <button fxFlexOffset="8px" mat-raised-button color="warn" (click)="delete()">Effacer</button>
-  <button fxFlexOffset="8px" mat-raised-button (click)="sendLink()">Renvoyer le lien à la crèche</button>
-  <button fxFlexOffset="8px" mat-raised-button (click)="duplicate()">Créer un nouveau dossier à partir de celui là</button>
-  <button fxFlexOffset="8px" mat-raised-button (click)="goBack()">Annuler</button>
+  <button *ngIf="authService.isSuperAgent()" fxFlexOffset="8px" mat-raised-button color="warn" (click)="delete()">Effacer</button>
+  <button *ngIf="authService.isSuperAgent()" fxFlexOffset="8px" mat-raised-button (click)="sendLink()">Renvoyer le lien à la crèche</button>
+  <button *ngIf="authService.isSuperAgent()" fxFlexOffset="8px" mat-raised-button (click)="duplicate()">Créer un nouveau dossier à partir de celui là</button>
+  <!--<button fxFlexOffset="8px" mat-raised-button (click)="goBack()">Annuler</button>-->
   <button fxFlexOffset="8px" mat-raised-button color="primary" (click)="save()" [disabled]="!saveButtonEnabled">Enregistrer le questionnaire</button>
 </div>
