@@ -38,9 +38,9 @@ export class ReportComponent implements OnInit {
 
 
   private audit_report_header_format() {
-    console.log("infos : ", this.infos);
+    // console.log("infos : ", this.infos);
     let audit_report_header = this.infos.inquiryform.audit_report_header;
-    console.log("audit_report_header : ", audit_report_header);
+    // console.log("audit_report_header : ", audit_report_header);
     function escapeHtml(unsafe) {
         return unsafe
              .replace(/&/g, "&amp;")

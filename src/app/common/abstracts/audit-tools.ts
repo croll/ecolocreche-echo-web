@@ -82,8 +82,9 @@ export class AuditTools {
         AuditTools.instance.cacheDatas(node, id_theme, questionsList, chartDatas);
         // If it'as a question
         if (node.type.substring(0, 2) == 'q_') {
-          let question = {id: node.id, id_node: node.id_node, id_node_parent: node.id_node_parent, id_theme: id_theme, title: node.title, description: node.description, type: node.type, ignored: false, choices: null, value: undefined};
+          let question = {id: node.id, id_node: node.id_node, id_node_parent: node.id_node_parent, id_theme: id_theme, title: node.title, description: node.description, type: node.type, ignored: false, choices: null, value: undefined, comment: null};
           if (node.answer && node.answer.status == 'saved') {
+            question.comment = node.answer.comment;
             if (!node.answer.ignored) {
               // checkbox of percentage
               if (node.type == 'q_checkbox' || node.type == 'q_percents') {
