@@ -49,7 +49,7 @@ export class AppComponent{
     return this.loggedUser == null;
   }
 
-  menuHide(e, force) {
+  menuHide(e, force = false) {
     e.preventDefault();
     e.stopPropagation();
     if (window.innerWidth <= 960 || force) {
