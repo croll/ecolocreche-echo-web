@@ -62,7 +62,9 @@ export class ReportComponent implements OnInit {
     };
     for (let before in replaces) {
       let after=replaces[before];
-      audit_report_header=audit_report_header.replace('{'+before+'}', after);
+      if (audit_report_header && before && after) {
+        audit_report_header=audit_report_header.replace('{'+before+'}', after);
+      }
     }
     this.audit_report_header = this.sanitizer.bypassSecurityTrustHtml(audit_report_header);
   }
