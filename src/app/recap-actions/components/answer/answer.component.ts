@@ -113,7 +113,7 @@ export class AnswerComponent {
   save() {
 
     // Save audit for the comments
-    let obs = [this.restService.save(this.infos.audit, 'audits')];
+    let obs = [this.restService.save(this.infos.audit, 'auditcomment', {}, "HACK TO MAKE A POST, NOT PUT")];
 
     this.saveButtonEnabled=false;
 
@@ -122,7 +122,9 @@ export class AnswerComponent {
         // Check if response is different to original value
         if (question.answer.value != question.answer.originalValue) {
           delete question.answer.originalValue;
-          obs.push(this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {}, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok"));
+          obs.push(this.restService.save(question.answer, 'answers/'+question.answer.id_audit+'/'+question.answer.id_node, {
+            audit_key: this.infos.audit.key,
+          }, "HACK TO ALWAYS DO A CREATE, NOT UPDATE", "Sauvegade de la réponse : ", "Ok"));
           question.answer.originalValue = question.answer.value;
         }
       });
@@ -130,7 +132,7 @@ export class AnswerComponent {
 
     Observable.forkJoin(obs, () => {
       if (!this.doPrint) {
-        this.goBack();
+        //this.goBack();
       } else {
         this.doPrint = false;
         this.generatePdf();
