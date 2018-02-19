@@ -19,7 +19,7 @@ Cordialement,
 Echo(s)
 `;
 
-const default_audit_report_header = `<h1>Rapport de l'audit de {audit_establishment_name}</h1>
+const default_audit_report_header = `<h1>Rapport de l'audit de {establishment_name}</h1>
 
 <ul>
 <li>Date de création de l'audit : {audit_date_start}</li>
