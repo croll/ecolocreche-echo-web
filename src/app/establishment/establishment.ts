@@ -10,6 +10,7 @@ export class Establishment {
   public city: string = '';
   public phone: string = '';
   public mail: string = '';
+  public labelcode: string = '';
   public type: number
   public status: number
 
