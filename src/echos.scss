@@ -615,9 +615,16 @@ mat-form-field {
   width: 100%;
 }
 
+.only-in-pdf {
+  display: none;
+}
+
 @media print {
   .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
     display: none !important;
+  }
+  .only-in-pdf {
+    display: inherit;
   }
   .do-not-break {
     page-break-inside: avoid;
