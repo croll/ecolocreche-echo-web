@@ -31,7 +31,7 @@ const routes: Routes = [
         }
       },
       {
-        path: ':id',
+        path: ':key',
         component: AnswerComponent,
         resolve: {
           infos: AuditResolver
