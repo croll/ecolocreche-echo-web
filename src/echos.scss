@@ -583,30 +583,6 @@ mat-list-item.echos-list-item {
   z-index: 50;
 }
 
-
-@media print {
-  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
-    display: none !important;
-  }
-  .do-not-break {
-    page-break-inside: avoid;
-  }
-
-  // hide placeholder of wysiwyg
-  .ql-editor.ql-blank {
-    display: none;
-  }
-
-  .ql-container {
-    border: none !important;
-    padding: 0;
-  }
-  .ql-editor {
-    padding: 0 !important;
-  }
-
-}
-
 .mat-form-field-infix {
     padding: 10px;
     border: 1px solid #c0c0c0;
@@ -637,4 +613,29 @@ mat-list-item.echos-list-item {
 
 mat-form-field {
   width: 100%;
+}
+
+@media print {
+  .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
+    display: none !important;
+  }
+  .do-not-break {
+    page-break-inside: avoid;
+  }
+
+  // hide placeholder of wysiwyg
+  .ql-editor.ql-blank {
+    display: none;
+  }
+
+  .ql-container, .echos-textarea, .mat-form-field-infix {
+    border: none !important;
+    padding: 0;
+    box-shadow: none !important;
+  }
+
+  .ql-editor {
+    padding: 0 !important;
+  }
+
 }
