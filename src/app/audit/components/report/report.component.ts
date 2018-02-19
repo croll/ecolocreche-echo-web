@@ -38,9 +38,11 @@ export class ReportComponent implements OnInit {
 
 
   private audit_report_header_format() {
-    console.log("infos : ", this.infos);
     let audit_report_header = this.infos.inquiryform.audit_report_header;
-    console.log("audit_report_header : ", audit_report_header);
+    if (!audit_report_header) {
+      audit_report_header="";
+      console.error("audit report header is empty !?");
+    }
     function escapeHtml(unsafe) {
         return unsafe
              .replace(/&/g, "&amp;")
@@ -62,9 +64,7 @@ export class ReportComponent implements OnInit {
     };
     for (let before in replaces) {
       let after=replaces[before];
-      if (audit_report_header && before && after) {
-        audit_report_header=audit_report_header.replace('{'+before+'}', after);
-      }
+      audit_report_header=audit_report_header.replace('{'+before+'}', after);
     }
     this.audit_report_header = this.sanitizer.bypassSecurityTrustHtml(audit_report_header);
   }
