@@ -174,12 +174,12 @@ export class ExportCSVService {
       if (obj.value) {
         obj.value = this._formatString(obj.value);
       }
-      if (obj.comment) {
-        obj.comment = this._formatString(obj.comment);
-      }
       if (obj.impact) {
         obj.impact = this._formatString(obj.impact);
       }
+    }
+    if (question.comment) {
+      obj.comment = this._formatString(question.comment);
     }
     return obj;
   }

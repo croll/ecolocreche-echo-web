@@ -41,7 +41,7 @@
       <div class="echos-report-category"> {{category.title}}</div>
       <div style='page-break-inside:avoid;' *ngFor="let question of category.childs">
         <div class="echos-report-question">{{questionList[question.id_node].title}}</div>
-        <div *ngIf="questionList[question.id_node].description" class="echos-report-question-comment">{{questionList[question.id_node].description}}</div>
+        <div *ngIf="questionList[question.id_node].description" class="echos-report-question-description">{{questionList[question.id_node].description}}</div>
         <!-- Check if question is answered or not -->
         <div *ngIf="!questionList[question.id_node].ignored && questionList[question.id_node].value === undefined" class="echos-report-no-answer">Aucune réponse</div>
         <div *ngIf="questionList[question.id_node].ignored">
@@ -77,6 +77,11 @@
             <div *ngIf="questionList[question.id_node].type == 'q_numeric' || questionList[question.id_node].type == 'q_text'" fxLayout="row" class="pdf-clear-both-after">
               <div style="color: #888; font-size: 0.8em; padding-top: 1px" class="pdf-float-left">Réponse:</div>
               <div class="echos-report-question-value pdf-float-left pdf-white-space-no-wrapgg">{{questionList[question.id_node].value}}</div>
+            </div>
+            <!-- Comment -->
+            <div *ngIf="questionList[question.id_node].comment" class="echos-report-question-comment" fxLayout="row">
+              <div>Commentaire:</div>
+              {{questionList[question.id_node].comment}}
             </div>
           </div>
         </div>

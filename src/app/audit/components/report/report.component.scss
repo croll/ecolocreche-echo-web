@@ -38,14 +38,18 @@
   padding-left: 5px;
 }
 
-.echos-report-question-comment {
-  margin: 0 0 12px 0;
-  color: #444;
+.echos-report-question-description {
+  margin: 12px 0 12px 0;
+  color: #777;
 }
 
-.echos-report-choice-comment {
-  margin: 10px 0 12px 0;
+.echos-report-question-comment {
+  margin: 15px 0 6px 0px;
   color: #444;
+  & > div {
+    color: #666;
+    margin-right: 5px;
+  }
 }
 
 .echos-report-graph-title {
