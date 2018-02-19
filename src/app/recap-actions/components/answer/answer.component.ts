@@ -100,6 +100,16 @@ export class AnswerComponent {
     }
   }
 
+  private _generateKey() {
+    let s4 = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+    };
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+
   save() {
 
     // Save audit for the comments
@@ -164,7 +174,7 @@ export class AnswerComponent {
   }
 
   generatePdf() {
-    this.pdfService.print("recapaction", this.infos.audit.id);
+    this.pdfService.print("recapaction", this.infos.audit.key);
   }
 
   sendLink() {
@@ -195,17 +205,17 @@ export class AnswerComponent {
       date_start: new Date(),
       date_end: null,
       active: true,
-      key: '',
+      key: this._generateKey(),
     });
 
     this.restService.save(new_recap, 'audits').subscribe((audit) => {
-      this.router.navigate(['/recap_actions', audit.id], {
+      this.router.navigate(['/recap_actions', audit.key], {
         queryParams: {
           new_copy: audit.id_audit_src,
         }
       });
     }, (err) => {
-      console.error(err);
+      console.error("error on nivigate: ", err);
     });
   }
 

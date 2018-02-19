@@ -14,7 +14,11 @@ export class RecapActionsThemesResolver implements Resolve<Node[]> {
     if (!route.params['id']) {
       return Observable.of(null);
     }
-    return this.restService.getList('hist/nodes', {id_inquiryform: route.params['id'], inquiry_type: Node.Inquiry_type.RecapAction, type: 'directory'}).flatMap(nodes => {
+    return this.restService.getList('hist/nodes', {
+      id_inquiryform: route.params['id'],
+      inquiry_type: Node.Inquiry_type.RecapAction,
+      type: 'directory',
+    }).flatMap(nodes => {
       var observable_nodes = [];
       nodes.forEach(node => {
         if (node.linked_to_node_id) {

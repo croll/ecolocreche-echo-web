@@ -89,7 +89,7 @@
 <div *ngIf="!item.recap_actions || !item.recap_actions.length" class="echos-warning">Aucun "recap actions" trouvé.</div>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions" [routerLink]="['/recap_actions', recap_action.id]">
+  <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions" [routerLink]="['/recap_actions', recap_action.key]">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && labelingFileToCreate.recap_actions.indexOf(recap_action.id) == -1" (click)="toggleInLabelingFile(recap_action, 'recap_actions', $event)" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
