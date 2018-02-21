@@ -10,7 +10,7 @@
   <h1 fxFlex>
     Question<span class="titleItem">{{item.title}}<span *ngIf="item.privcomment"> [{{item.privcomment}}]</span></span>
   </h1>
-  <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']"><mat-icon>edit</mat-icon></button>
+  <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/question/', item.id_node, 'editer']" matTooltip="Éditer" matTooltipPosition="below"><mat-icon>edit</mat-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>

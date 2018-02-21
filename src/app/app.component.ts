@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
 import { RestService as UserRestService} from './user/services/rest.service';
@@ -11,13 +11,13 @@ import 'intl/locale-data/jsonp/en';
   templateUrl: './app.component.html',
   providers: [ UserRestService ],
 })
-export class AppComponent{
+export class AppComponent implements OnInit {
 
   processProgressPercent = 0;
 
   loggedUser: User = null;
+  menuVisibility: boolean;
 
-  menuVisibility: boolean = (window.innerWidth <= 960) ? false : true;
 
   constructor(private authService: AuthService, private userRestService: UserRestService) {
     this.userRestService.whoami().subscribe((user) => {
@@ -26,6 +26,10 @@ export class AppComponent{
       this.loggedUser = user;
       console.log("actual user is: ", user);
     });
+  }
+
+  ngOnInit() {
+    this.menuVisibility = (window.innerWidth <= 960) ? false : true;
   }
 
   isAdmin() {

@@ -8,7 +8,7 @@
     Liste des audits en cours
   </h1>
 
-  <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
+  <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv" matTooltip="Exporter" matTooltipPosition="left"><mat-icon>grid_on</mat-icon></button>
   <mat-menu #menucsv="matMenu">
     <button mat-menu-item (click)="exportCSV('csv')">Format CSV</button>
     <button mat-menu-item (click)="exportCSV('xlsx')">Format XLSX</button>

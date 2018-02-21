@@ -18,7 +18,7 @@
     <h1 fxFlex>
       Thème<span class="titleItem">{{item.title}}</span>
     </h1>
-    <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']"><mat-icon>edit</mat-icon></button>
+    <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/theme', item.id_node, 'editer']" matTooltip="Éditer" matTooltipPosition="below"><mat-icon>edit</mat-icon></button>
   </div>
 
   <div *ngIf="item && item.description">
@@ -94,7 +94,7 @@
     <h1 fxFlex>
       Rubrique<span class="titleItem">{{item.title}}</span>
     </h1>
-    <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']"><mat-icon>edit</mat-icon></button>
+    <button *ngIf="authService.isAdmin()" mat-fab color="primary" [routerLink]="['/theme', item.id_node_parent, 'rubrique', item.id_node, 'editer']" matTooltip="Éditer" matTooltipPosition="below"><mat-icon>edit</mat-icon></button>
   </div>
 
   <div class="echos-title">Informations</div>

@@ -7,7 +7,7 @@
   <h1 fxFlex>
     Liste des "recap actions"
   </h1>
-  <button *ngIf="authService.isAdmin()" mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
+  <button *ngIf="authService.isAdmin()" mat-fab color="primary" routerLink="../creer" matTooltip="Créer un questionnaire" matTooltipPosition="left"><mat-icon>add</mat-icon></button>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center">

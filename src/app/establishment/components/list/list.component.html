@@ -7,7 +7,7 @@
   <h1 fxFlex>
     Liste des établissements
   </h1>
-  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" routerLink="../creer"><mat-icon>add</mat-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" routerLink="../creer" matTooltip="Ajouter un établissement" matTooltipPosition="below"><mat-icon>add</mat-icon></button>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start center">

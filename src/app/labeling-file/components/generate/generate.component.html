@@ -14,12 +14,12 @@
     <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;">
       <img [src]="customisations.logo"(click)="customisations.swapLogo();enableSaveButton();" style="width: 150px;height: 150px;">
     </div>
-    <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv"><mat-icon>grid_on</mat-icon></button>
+    <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv" matTooltip="Exporter" matTooltipPosition="below"><mat-icon>grid_on</mat-icon></button>
     <mat-menu #menucsv="matMenu">
       <button mat-menu-item (click)="exportCSV('csv')">Format CSV</button>
       <button mat-menu-item (click)="exportCSV('xlsx')">Format XLSX</button>
     </mat-menu>
-    <button class='not-in-pdf' mat-fab color="primary" (click)="pdf()" fxFlexOffset="8px"><mat-icon>picture_as_pdf</mat-icon></button>
+    <button class='not-in-pdf' mat-fab color="primary" (click)="pdf()" fxFlexOffset="8px" matTooltip="Générer un PDF" matTooltipPosition="below"><mat-icon>picture_as_pdf</mat-icon></button>
   </div>
 
   <div class="echos-infos">
