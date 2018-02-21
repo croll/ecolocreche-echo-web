@@ -12,9 +12,8 @@
   <button *ngIf="authService.isSuperAgent()" mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px" matTooltip="Enregistrer en PDF" matTooltipPosition="below"><mat-icon>picture_as_pdf</mat-icon></button>
 </div>
 
-<div style="margin: 20px 0">
-  <h2>Votre commentaire</h2>
-  <quill [config]="config" [(value)]="infos.audit.synthesis" [autoToolbar]="true" (contentChange)="enableSaveButton(true)"></quill>
+<div>
+  <quill [config]="config_comment" [(value)]="infos.audit.synthesis" [autoToolbar]="true" (contentChange)="enableSaveButton(true)"></quill>
 </div>
 
 

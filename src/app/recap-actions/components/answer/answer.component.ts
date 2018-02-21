@@ -35,6 +35,14 @@ export class AnswerComponent {
     placeholder: 'vos actions...',
   };
 
+  public config_comment: QuillConfigInterface = {
+    theme: 'bubble',
+    modules: {
+      toolbar: true,
+    },
+    placeholder: 'Commentaire...',
+  };
+
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar, private sanitizer: DomSanitizer, private cdRef: ChangeDetectorRef) {
   }
 
