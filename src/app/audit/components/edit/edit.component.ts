@@ -55,12 +55,12 @@ export class EditComponent implements OnInit {
 
     if (this.infos && this.infos.audit) {
       Object.assign(this.current, this.infos.audit)
-      this.current.date_start = this.datePipe.transform(this.current.date_start, 'dd/MM/yyyy H:mm');
+      this.current.date_start = this.datePipe.transform(this.current.date_start, 'dd/MM/yyyy HH:mm');
       this.id_establishment = this.infos.audit.establishment.id;
       this.showCreationDateField = true;
     } else {
       this.current.active = 1;
-      this.current.date_start = this.datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
+      this.current.date_start = this.datePipe.transform(Date.now(), 'dd/MM/yyyy HH:mm');
       this.id_establishment = this.route.snapshot.params['id_establishment'];
       this.showCreationDateField = false;
     }
