@@ -51,12 +51,12 @@ export class EditComponent implements OnInit {
 
     if (this.infos && this.infos.audit) {
       Object.assign(this.current, this.infos.audit)
-      this.current.date_start = this.datePipe.transform(this.current.date_start, 'dd/MM/yyyy H:mm');
+      this.current.date_start = this.datePipe.transform(this.current.date_start, 'dd/MM/yyyy HH:mm');
       this.id_establishment = this.infos.audit.establishment.id;
       this.showCreationDateField = true;
     } else {
       this.current.active = 1;
-      this.current.date_start = this.datePipe.transform(Date.now(), 'dd/MM/yyyy H:mm');
+      this.current.date_start = this.datePipe.transform(Date.now(), 'dd/MM/yyyy HH:mm');
       this.id_establishment = this.route.snapshot.params['id_establishment'];
       this.showCreationDateField = false;
     }
@@ -68,7 +68,7 @@ export class EditComponent implements OnInit {
     this.synthesisCtrl = this.fb.control(this.current.synthesis || '');
     this.activeCtrl = this.fb.control({value: this.current.active, disabled: !this.authService.isSuperAgent()}, [Validators.required]);
     this.keyCtrl = this.fb.control(this.current.key || this._generateKey(), [Validators.required]);
-    this.dateStartCtrl = this.fb.control({value: this.current.date_start || new Date(), disabled: !this.authService.isAdmin()}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
+    this.dateStartCtrl = this.fb.control({value: this.current.date_start || this.datePipe.transform(Date.now(), 'dd/MM/yyyy HH:mm'), disabled: this.authService.isAdmin()}, Validators.compose([Validators.required, CustomValidators.frenchDate]));
 
     this.echosForm = this.fb.group({
       id: this.idCtrl,
@@ -101,16 +101,20 @@ export class EditComponent implements OnInit {
 
   private _dateStringToObj(str) {
     if (!str) return null;
-    let m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{2}):(\d{2}$)/);
+    let m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}) (\d{1,2}):(\d{2}$)/);
     return new Date(m[3], parseInt(m[2])-1, m[1], m[4], m[5]);
   }
 
   save(event) {
     event.preventDefault();
-    event.stopPropagation();
-    this.echosForm.value.date_start = this._dateStringToObj(this.echosForm.value.date_start);
-    this.restService.save(Object.assign(this.current, this.echosForm.value), 'audits').subscribe((recap_actions) => {
-      this.router.navigate(['/recap_actions', recap_actions.id]);
+    event.stopPropagation()
+    let objtosave = Object.assign(this.current, this.echosForm.value);
+    objtosave =  Object.assign(objtosave, {
+      date_start: this.echosForm.value.date_start ? this._dateStringToObj(this.echosForm.value.date_start) : Date.now(),
+      active: 'active' in this.echosForm.value ? this.echosForm.value.active : true,
+    });
+    this.restService.save(objtosave, 'audits').subscribe((recap_actions) => {
+      this.router.navigate(['/recap_actions', recap_actions.key]);
     }, (err) => {
       console.error(err);
     });
@@ -143,8 +147,12 @@ export class EditComponent implements OnInit {
   saveAndGoToEstablishment(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.echosForm.value.date_start = this._dateStringToObj(this.echosForm.value.date_start);
-    this.restService.save(Object.assign(this.current, this.echosForm.value), 'audits').subscribe((audit) => {
+    let objtosave = Object.assign(this.current, this.echosForm.value);
+    objtosave =  Object.assign(objtosave, {
+      date_start: this.echosForm.value.date_start ? this._dateStringToObj(this.echosForm.value.date_start) : Date.now(),
+      active: 'active' in this.echosForm.value ? this.echosForm.value.active : true,
+    });
+    this.restService.save(objtosave, 'audits').subscribe((audit) => {
       this.router.navigate(['/etablissement', this.infos.audit.id_establishment]);
     }, (err) => {
       console.error(err);

@@ -53,7 +53,7 @@ export class AuditResolver implements Resolve<any> {
                     .flatMap(audit => {
                       obj.audit = audit[0];
                       // console.log(obj.audit);
-                      if (obj.audit.audit_src) {
+                      if (obj.audit && obj.audit.audit_src) {
                         return this._getAudit(obj.audit.audit_src.key);
                       } else return Observable.of(null);
                     })

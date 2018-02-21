@@ -28,12 +28,12 @@ export class AnswerComponent {
   doPrint = false;
 
   public config: QuillConfigInterface = {
-   theme: 'bubble',
-   modules: {
-    toolbar: true
-  },
-  placeholder: 'Votre commentaire...'
- };
+    theme: 'bubble',
+    modules: {
+      toolbar: true,
+    },
+    placeholder: 'vos actions...',
+  };
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private location: Location, private pdfService: PuppeteerPdfService, private http: Http, private snackBar: MatSnackBar, private sanitizer: DomSanitizer, private cdRef: ChangeDetectorRef) {
   }
