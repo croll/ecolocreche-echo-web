@@ -33,9 +33,10 @@
 
 .row-title {
   width: 300px;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: bold;
-  text-shadow: 1px 1px 1px #7f7f7f;
+  text-shadow: -1px 1px 0px #7f7f7f;
+  padding-right: 8px;
 }
 
 @media print {
