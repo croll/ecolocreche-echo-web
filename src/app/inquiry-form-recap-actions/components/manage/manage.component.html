@@ -8,7 +8,7 @@
   <h1 fxFlex>
     Dossier récap action<span class="titleItem">{{item.title}}</span>
   </h1>
-  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/questionnaire_recap_actions', item.id_inquiryform, 'editer']"><mat-icon>edit</mat-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/questionnaire_recap_actions', item.id_inquiryform, 'editer']" matTooltip="Éditer le questionnaire" matTooltipPosition="below"><mat-icon>edit</mat-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>

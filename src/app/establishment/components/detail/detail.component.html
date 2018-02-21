@@ -8,7 +8,7 @@
   <h1 fxFlex>
     Fiche établissement<span class="titleItem">{{item.name}}</span>
   </h1>
-  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']"><mat-icon>edit</mat-icon></button>
+  <button *ngIf="authService.isSuperAgent()" mat-fab color="primary" [routerLink]="['/etablissement', item.id, 'editer']" matTooltip="Éditer" matTooltipPosition="below"><mat-icon>edit</mat-icon></button>
 </div>
 
 <div class="echos-title">Informations</div>
