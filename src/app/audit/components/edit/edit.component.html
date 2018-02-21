@@ -30,7 +30,7 @@
   </mat-form-field>
 
   <mat-form-field *ngIf="!id">
-    <mat-select placeholder="Importer un précédent audit..." formControlName="id_audit_src" style="margin: 18px 0 18px 0">
+    <mat-select placeholder="Importer un précédent audit..." formControlName="id_audit_src">
       <mat-option [value]="">Non</mat-option>
       <mat-option *ngFor="let audit of old_audits" [value]="audit.id">{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</mat-option>
     </mat-select>
