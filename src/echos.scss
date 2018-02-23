@@ -62,7 +62,6 @@ a:hover {
   height: 83px;
   width: 200px;
   background-size: contain;
-  background-repeat: no-repeat;
   cursor: pointer;
 }
 
@@ -638,6 +637,15 @@ mat-form-field {
 
   .ql-container, .echos-textarea, .mat-form-field-infix {
     box-shadow: none !important;
+    border: none;
+    padding: 0!important;
+  }
+
+  .labeling-file-generate-component {
+    .tarace .ql-container {
+      border: 1px solid #c0c0c0!important;
+      padding: 10px !important;
+    }
   }
 
   .ql-editor {

@@ -6,7 +6,7 @@
 
 <!-- Premiere page -->
 
-<div id='exportpdf'>
+<div class="labeling-file-generate-component" id='exportpdf'>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="pdf-clear-both-after">
     <h1 fxFlex class="pdf-float-left">
@@ -145,7 +145,7 @@
 
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
 
-    <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.environment.themes; let idx = index" style="page-break-inside:avoid!important;margin-bottom:20px">
+    <div fxLayout="row" class="tarace pdf-clear-both-after" *ngFor="let chart of charts.environment.themes; let idx = index" style="page-break-inside:avoid!important;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
       <mat-card class="pdf-float-left" fxFlex>
         <h2>{{chart.title}}</h2>
@@ -153,7 +153,7 @@
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 70px 0 35px 0">
+      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 35px 0 35px 0">
         <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
     </div>
@@ -228,7 +228,7 @@
     <button mat-raised-button *ngIf="!customisations.hide_social_details" (click)="enableSaveButton();customisations.hide_social_details = true">Masquer le détail des évolutions des impacts par thème</button>
   </div>
 
-  <div *ngIf="!customisations.hide_social_details">
+  <div class="tarace" *ngIf="!customisations.hide_social_details">
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
     <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes; let idx = index" style="page-break-inside:avoid;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
@@ -238,7 +238,7 @@
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 70px 0 35px 0">
+      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 35px 0 35px 0">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
         <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
@@ -255,11 +255,15 @@
 
   <div *ngIf="!customisations.hide_comments" fxLayout="column">
 
-    <div class="echos-title" style="page-break-before:always">Commentaires</div>
-    <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()"></quill>
+    <div class="echos-title" style="page-break-before:always;">Commentaires</div>
+    <div style="page-break-inside: avoid">
+      <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()"></quill>
+    </div>
 
     <div class="echos-title" style="page-break-before:always">Projets à venir</div>
-    <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()"></quill>
+    <div style="page-break-inside: avoid">
+      <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()"></quill>
+    </div>
 
   </div>
 
