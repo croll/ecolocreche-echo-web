@@ -1,6 +1,6 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
-  <div routerLink="/etablissement/liste" fxFlexAlign="start">Fiche établissement</div>
+  <div [routerLink]="['/etablissement', id_establishment]" fxFlexAlign="start">Fiche établissement</div>
   <div *ngIf="!id" fxFlexAlign="start">Démarrer un "récap actions"</div>
   <div *ngIf="id" fxFlexAlign="start">Modifier un "récap actions"</div>
 </div>
