@@ -1,5 +1,6 @@
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
+  <div fxFlexAlign="start" routerLink="/etablissement/{{audit1.audit.establishment.id}}">{{audit1.audit.establishment.name}}</div>
   <div fxFlexAlign="start">Comparaison de deux audits</div>
 </div>
 
@@ -11,7 +12,7 @@
     <h1 fxFlex class="pdf-float-left">
       Dossier de labellisation
     </h1>
-    <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;">
+    <div class="report-logo pdf-float-right" style="width: 150px;height: 150px;" matTooltip="Cliquez pour changer de logo" matTooltipPosition="below">
       <img [src]="customisations.logo"(click)="customisations.swapLogo();enableSaveButton();" style="width: 150px;height: 150px;">
     </div>
     <button mat-fab class='not-in-pdf' color="primary" fxFlexOffset="8px" [matMenuTriggerFor]="menucsv" matTooltip="Exporter" matTooltipPosition="below"><mat-icon>grid_on</mat-icon></button>
@@ -51,7 +52,7 @@
       <mat-form-field fxFlexOffset="8px" class="pdf-float-left">
         <input matInput #custom_headerValue placeholder="Valeur">
       </mat-form-field>
-      <button mat-raised-button style="max-height: 45px; margin-top: 10px;" (click)="customisations.addCustomHeader(custom_headerLabel.value, custom_headerValue.value); custom_headerLabel.value=''; custom_headerValue.value='';enableSaveButton();" fxFlexOffset="8px">Ajouter une ligne</button>
+      <button mat-raised-button style="max-height: 45px" (click)="customisations.addCustomHeader(custom_headerLabel.value, custom_headerValue.value); custom_headerLabel.value=''; custom_headerValue.value='';enableSaveButton();" fxFlexOffset="8px">Ajouter une ligne</button>
     </div>
   </div>
 
@@ -152,7 +153,7 @@
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
+      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 70px 0 35px 0">
         <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
     </div>
@@ -237,7 +238,7 @@
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 28px 0">
+      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 70px 0 35px 0">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
         <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
