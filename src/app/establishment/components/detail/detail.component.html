@@ -124,7 +124,7 @@
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>Dossier de labellisation crée le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>Dossier de labellisation créé le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!labeling_file.active">Terminé</div>
         <div *ngIf="labeling_file.active" style="color: rgb(96, 190, 64)">En cours</div>
