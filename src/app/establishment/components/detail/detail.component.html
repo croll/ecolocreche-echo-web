@@ -82,7 +82,7 @@
 </mat-list>
 
 <div class="echos-title" fxLayout="row" style="margin-top: 80px">
-  <div fxFlex>Liste des "recap actions"</div>
+  <div fxFlex>Liste des "récap actions"</div>
   <button *ngIf="authService.isSuperAgent()" mat-raised-button [routerLink]="['/recap_actions/creer', item.id]">Démarrer un "récap actions"<mat-icon>add</mat-icon></button>
 </div>
 
@@ -124,7 +124,7 @@
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="have-childs" fxFill>
         <div>
-          <div>Dossier de labellisation crée le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
+          <div>Dossier de labellisation créé le {{labeling_file.createdAt | date:'dd/MM/yyyy à HH:mm'}}</div>
         </div>
         <div *ngIf="!labeling_file.active">Terminé</div>
         <div *ngIf="labeling_file.active" style="color: rgb(96, 190, 64)">En cours</div>

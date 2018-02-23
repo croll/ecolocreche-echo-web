@@ -123,7 +123,7 @@ export class EditComponent implements OnInit {
 
 
   delete(id) {
-    if (confirm("Souhaitez vous vraiment supprimer cet audit ?")) {
+    if (confirm("Souhaitez vous vraiment supprimer ce récap action ?")) {
       this.restService.delete(id, 'audits').subscribe((response) => {
         this.router.navigate(['/etablissement/liste']);
       }, (err) => {
