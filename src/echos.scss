@@ -58,7 +58,8 @@ a:hover {
 }
 
 .echos-logo {
-  background: url(assets/images/logo-echos.jpg) no-repeat;
+  background: url(assets/images/logo-echos.jpg);
+  background-repeat: no-repeat;
   height: 83px;
   width: 200px;
   background-size: contain;
