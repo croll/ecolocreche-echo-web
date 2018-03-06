@@ -622,7 +622,11 @@ mat-form-field {
 
 quill .ql-container {
   font-family: inherit;
+  .ql-editor {
+    padding: 0;
+  }
 }
+
 
 .wysiwyg-display p {
   margin: 0;
