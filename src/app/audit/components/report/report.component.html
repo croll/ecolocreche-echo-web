@@ -16,7 +16,7 @@
     <button mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px" matTooltip="Générer un PDF" matTooltipPosition="below"><mat-icon>picture_as_pdf</mat-icon></button>
   </div>
 
-  <div class="report_header" [innerHTML]="audit_report_header"></div>
+  <div class="report_header wysiwyg-display" [innerHTML]="audit_report_header"></div>
 
 <!--
   <div *ngIf="!infos.inquiryform.comment" class="presentation">
