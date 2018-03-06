@@ -620,6 +620,10 @@ mat-form-field {
   display: none;
 }
 
+quill .ql-container {
+  font-family: inherit;
+}
+
 .wysiwyg-display p {
   margin: 0;
 }
