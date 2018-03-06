@@ -265,6 +265,11 @@ export class AuditTools {
         animation: false,
         scaleSteps: 5,
         scales:{
+          xAxes: [
+            {
+              barThickness: 80
+            }
+          ],
           yAxes:[
             {
               ticks: { beginAtZero: true, min: 0, max: 100, stepSize: 10},
