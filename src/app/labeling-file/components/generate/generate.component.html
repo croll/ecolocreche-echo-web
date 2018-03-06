@@ -255,7 +255,7 @@
     <button mat-raised-button *ngIf="!customisations.hide_comments" (click)="enableSaveButton();customisations.hide_comments = true;enableSaveButton()">Masquer les commentaires</button>
   </div>
 
-  <div *ngIf="!customisations.hide_comments" fxLayout="column">
+  <div *ngIf="!customisations.hide_comments">
 
     <div class="echos-title" style="page-break-before:always;">Commentaires</div>
     <div style="page-break-inside: avoid">
