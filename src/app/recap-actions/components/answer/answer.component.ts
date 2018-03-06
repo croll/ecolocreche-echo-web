@@ -51,10 +51,11 @@ export class AnswerComponent {
 
     this.route.queryParams.subscribe(params => {
       if (params.new_copy) {
-        this.snackBar.open("Vous travaillez maintenant sur un nouveau dossier récap action (copié du précédent)", "", {
-          duration: 6000,
-        });
-
+        setTimeout(() => {
+          this.snackBar.open("Vous travaillez maintenant sur un nouveau dossier récap action (copié du précédent)", "", {
+            duration: 6000,
+          });
+        }, 50);
       }
     });
 
