@@ -38,6 +38,9 @@ mat-card {
       margin-top: 4px;
     }
   }
+  canvas {
+    max-width: 200px;
+  }
 }
 
 .echos-graph-button-container {
@@ -50,4 +53,11 @@ mat-card {
   margin: 0 auto;
   width: 100%!important;
   max-width: 450px!important;
+}
+
+.chosen-theme {
+  font-size:0.9em;
+  color: #333;
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
