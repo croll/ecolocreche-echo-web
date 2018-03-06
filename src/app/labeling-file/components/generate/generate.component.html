@@ -257,14 +257,18 @@
 
   <div *ngIf="!customisations.hide_comments">
 
-    <div class="echos-title" style="page-break-before:always;">Commentaires</div>
-    <div style="page-break-inside: avoid">
-      <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()"></quill>
+    <div style="page-break-inside:avoid;">
+      <div class="echos-title">Commentaires</div>
+      <div>
+        <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()"></quill>
+      </div>
     </div>
 
-    <div class="echos-title" style="page-break-before:always">Projets à venir</div>
-    <div style="page-break-inside: avoid">
-      <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()"></quill>
+    <div style="page-break-inside:avoid;">
+      <div class="echos-title">Projets à venir</div>
+      <div>
+        <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()"></quill>
+      </div>
     </div>
 
   </div>
