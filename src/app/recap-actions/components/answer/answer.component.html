@@ -34,7 +34,7 @@
   <div fxLayout="row" class="column" fxLayoutAlign="center start">
     <div class="row-title" [ngStyle]="{'color': '#'+theme.linked_to_node?.color}" >{{theme.title}}</div>
     <div class="row-answer" *ngFor="let question of theme.childs; let i=index" fxFlex="{{ i == 0 ? '35%' : '65%' }}">
-      <div class="previous-answer not-in-pdf" *ngIf="infos.audit.id_audit_src > 0" [innerHTML]="getAuditSrcAnswer(theme.id_node, question.id_node, question.position)"></div>
+      <div class="previous-answer not-in-pdf wysiwyg-display" *ngIf="infos.audit.id_audit_src > 0" [innerHTML]="getAuditSrcAnswer(theme.id_node, question.id_node, question.position)"></div>
       <quill [config]="config" [(value)]="question.answer.value" [autoToolbar]="true" (contentChange)="enableSaveButton()"></quill>
     </div>
 </div>

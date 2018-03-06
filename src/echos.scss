@@ -620,6 +620,10 @@ mat-form-field {
   display: none;
 }
 
+.wysiwyg-display p {
+  margin: 0;
+}
+
 @media print {
   .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
     display: none !important;
