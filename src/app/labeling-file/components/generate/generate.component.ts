@@ -42,6 +42,7 @@ export class GenerateComponent implements OnInit {
   initialState: string;
   saveButtonEnabled = false;
   doPrint = false;
+  disableQuill = true;
 
   auditTools = AuditTools.getInstance();
 
@@ -130,6 +131,13 @@ export class GenerateComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngAfterViewInit(){
+    setTimeout(() => {
+      this.disableQuill = false;
+    }, 50);
+  }
+
 
   pdf() {
     if (this.initialState != JSON.stringify(this.customisations)) {

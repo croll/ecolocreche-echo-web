@@ -1,8 +1,10 @@
+
 <div class="echos-breadcrumb" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
   <div routerLink="/" fxFlexAlign="start"><mat-icon>home</mat-icon></div>
   <div fxFlexAlign="start" routerLink="/etablissement/{{audit1.audit.establishment.id}}">{{audit1.audit.establishment.name}}</div>
   <div fxFlexAlign="start">Comparaison de deux audits</div>
 </div>
+
 
 <!-- Premiere page -->
 
@@ -71,7 +73,7 @@
       <div class="pdf-float-left" fxFlexOffset="8px" style="min-width: 300px">{{theme.title}}</div>
       <div class="pdf-float-left" fxFlex="1 1 100%" fxFlex *ngIf="customisations.themes_engaged[theme.id_node]">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(theme.id, 'themes_commitments')" (contentChange)="customisations.setThemeCommitment(theme.id, $event.html)"></quill> -->
-        <quill [config]="editorConfig" [(value)]="customisations.themes_commitments[theme.id]" (contentChange)="enableSaveButton()"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.themes_commitments[theme.id]" (contentChange)="enableSaveButton()" [disabled]="disableQuill"></quill>
       </div>
     </div>
   </div>
@@ -155,7 +157,7 @@
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
       <div class="comment-container" class="pdf-float-left" style="flex: 1 1 auto;padding: 35px 0 35px 0">
-        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()" [disabled]="disableQuill"></quill>
       </div>
     </div>
 
@@ -242,7 +244,7 @@
       </mat-card>
       <div class="comment-container" class="pdf-float-left" style="flex: 1 1 auto;padding: 35px 0 35px 0">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
-        <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
+        <quill [config]="editorConfig" [disabled]="disableQuill" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()" [disabled]="disableQuill"></quill>
       </div>
     </div>
   </div>
@@ -260,14 +262,14 @@
     <div style="page-break-inside:avoid;">
       <div class="echos-title">Commentaires</div>
       <div>
-        <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.comments1" (contentChange)="enableSaveButton()" [disabled]="disableQuill" [disabled]="disableQuill"></quill>
       </div>
     </div>
 
     <div style="page-break-inside:avoid;">
       <div class="echos-title">Projets à venir</div>
       <div>
-        <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()"></quill>
+        <quill [config]="editorConfig" [(value)]="customisations.comments2" (contentChange)="enableSaveButton()" [disabled]="disableQuill" [disabled]="disableQuill"></quill>
       </div>
     </div>
 
