@@ -635,12 +635,13 @@ quill .ql-container {
   min-width: 450px!important;
 }
 
-@media print {
-
+@media print and (orientation: portrait) {
   body {
     width: 910px!important;
   }
+}
 
+@media print {
   .echos-chart {
     width: 250px!important;
     &.echos-chart-pie {
