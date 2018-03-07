@@ -1,6 +1,5 @@
 @import '~@angular/material/theming';
-@include mat-core();
-$primary: mat-palette($mat-teal);
+@include mat-core(); $primary: mat-palette($mat-teal);
 $accent:  mat-palette($mat-orange);
 $warn:    mat-palette($mat-red);
 $ecolocreche-app-theme: mat-light-theme($primary, $accent, $warn);
@@ -632,7 +631,24 @@ quill .ql-container {
   margin: 0;
 }
 
+.echos-chart-pie {
+  min-width: 450px!important;
+}
+
 @media print {
+
+  body {
+    // width: 790px!important;
+  }
+
+  .echos-chart {
+    width: 250px!important;
+    &.echos-chart-pie {
+      width: 380px!important;
+    }
+  }
+
+
   .echos-header, .echos-menu, .echos-footer, .echos-breadcrumb, #mainprogress, .not-in-pdf {
     display: none !important;
   }

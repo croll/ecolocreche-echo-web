@@ -96,12 +96,12 @@
   </div>
 
   <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!customisations.hide_balance_sheet_environmental_pie">
-    <mat-card class="pdf-float-left" fxFlex="50%">
-      <canvas class="echos-chart" baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
+    <mat-card class="pdf-float-left">
+      <canvas class="echos-chart echos-chart-pie" baseChart [datasets]="charts.environment.audit1.datasets" [colors]="charts.environment.audit1.colors" [labels]="charts.environment.audit1.labels" [chartType]="charts.environment.audit1.chartType" legend="true" [options]="charts.environment.audit1.options"></canvas>
       <h4>Audit de départ</h4>
     </mat-card>
-    <mat-card class="pdf-float-left" fxFlex="50%" *ngIf="audit2">
-      <canvas class="echos-chart" class="echos-chart" baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
+    <mat-card class="pdf-float-left" *ngIf="audit2">
+      <canvas class="echos-chart echos-chart-pie" baseChart [datasets]="charts.environment.audit2.datasets" [colors]="charts.environment.audit2.colors" [labels]="charts.environment.audit2.labels" [chartType]="charts.environment.audit2.chartType" legend="true" [options]="charts.environment.audit2.options"></canvas>
       <h4>Audit intermédiaire</h4>
     </mat-card>
   </div>
@@ -147,14 +147,14 @@
 
     <div fxLayout="row" class="tarace pdf-clear-both-after" *ngFor="let chart of charts.environment.themes; let idx = index" style="page-break-inside:avoid!important;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
-      <mat-card class="pdf-float-left" fxFlex>
+      <mat-card class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <div *ngIf="customisations.themes_engaged[chart.id_theme]" class="chosen-theme">Thème choisi par la crèche</div>
         <canvas class="echos-chart" baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 35px 0 35px 0">
+      <div class="comment-container" class="pdf-float-left" style="flex: 1 1 auto;padding: 35px 0 35px 0">
         <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
     </div>
@@ -167,11 +167,11 @@
   <div class="echos-infos">
     <div fxLayout="row" class="pdf-clear-both-after">
       <label class="pdf-float-left">Audit de départ:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after" *ngIf="audit2">
       <label class="pdf-float-left">Audit intermédiaire:</label>
-      <div class="pdf-float-left" fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
+      <div class="pdf-float-left">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
   </div>
 
@@ -181,12 +181,12 @@
   </div>
 
   <div fxLayout="row" class="pdf-clear-both-after" *ngIf="!customisations.hide_balance_sheet_social_pie">
-    <mat-card class="pdf-float-left" fxFlex="50%">
-      <canvas class="echos-chart" baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
+    <mat-card class="pdf-float-left">
+      <canvas class="echos-chart echos-chart-pie" baseChart [datasets]="charts.social.audit1.datasets" [colors]="charts.social.audit1.colors" [labels]="charts.social.audit1.labels" [chartType]="charts.social.audit1.chartType" legend="true" [options]="charts.social.audit1.options"></canvas>
       <h4>Audit de départ</h4>
     </mat-card>
-    <mat-card class="pdf-float-left" fxFlex="50%" *ngIf="audit2">
-      <canvas class="echos-chart" baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
+    <mat-card class="pdf-float-left" *ngIf="audit2">
+      <canvas class="echos-chart echos-chart-pie" baseChart [datasets]="charts.social.audit2.datasets" [colors]="charts.social.audit2.colors" [labels]="charts.social.audit2.labels" [chartType]="charts.social.audit2.chartType" legend="true" [options]="charts.social.audit2.options"></canvas>
       <h4>Audit intermédiaire</h4>
     </mat-card>
   </div>
@@ -213,11 +213,11 @@
     <canvas class="echos-chart" baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
-      <div fxFlexOffset="8px" class="pdf-float-left">Audit de départ</div>
+      <div class="pdf-float-left">Audit de départ</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(63, 136, 38, 1)"></div>
-      <div fxFlexOffset="8px" class="pdf-float-left">Audit intermédiaire</div>
+      <div class="pdf-float-left">Audit intermédiaire</div>
     </div>
   </mat-card>
 
@@ -233,14 +233,14 @@
     <div class="echos-title" style="page-break-before:always">Détail: Évolution des impacts par thème</div>
     <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes; let idx = index" style="page-break-inside:avoid;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
-      <mat-card class="pdf-float-left" fxFlex>
+      <mat-card class="pdf-float-left">
         <h2>{{chart.title}}</h2>
         <div *ngIf="customisations.themes_engaged[chart.id_theme]" class="chosen-theme">Thème choisi par la crèche</div>
         <canvas class="echos-chart" baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
       </mat-card>
-      <div class="comment-container" fxFlex class="pdf-float-left" style="padding: 35px 0 35px 0">
+      <div class="comment-container" class="pdf-float-left" style="flex: 1 1 auto;padding: 35px 0 35px 0">
         <!-- <quill [config]="editorConfig" [value]="customisations.get(chart.id_theme, 'themes_comments')" (contentChange)="customisations.setThemeComment(chart.id_theme, $event.html)"></quill> -->
         <quill [config]="editorConfig" [(value)]="customisations.themes_comments[chart.id_theme]" (contentChange)="enableSaveButton()"></quill>
       </div>
@@ -275,7 +275,7 @@
 
   <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
     <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labellisation</button>
-    <button mat-raised-button color="primary" (click)="save()" fxFlexOffset="8px" [disabled]="!saveButtonEnabled">Enregistrer le dossier de labellisation</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!saveButtonEnabled">Enregistrer le dossier de labellisation</button>
   </div>
 
 </div>
