@@ -267,7 +267,7 @@ export class AuditTools {
         scales:{
           xAxes: [
             {
-              barThickness: 80
+              maxBarThickness: 70
             }
           ],
           yAxes:[
