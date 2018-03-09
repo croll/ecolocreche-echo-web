@@ -150,8 +150,7 @@
     <div fxLayout="row" class="tarace pdf-clear-both-after" *ngFor="let chart of charts.environment.themes; let idx = index" style="page-break-inside:avoid!important;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
       <mat-card class="pdf-float-left">
-        <h2>{{chart.title}}</h2>
-        <div *ngIf="customisations.themes_engaged[chart.id_theme]" class="chosen-theme">Thème choisi par la crèche</div>
+        <h2>{{chart.title}}<span class="aste" *ngIf="customisations.themes_engaged[chart.id_theme]">*<span class="chosen-theme">Thème choisi par la crèche</span></span></h2>
         <canvas class="echos-chart" baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>
@@ -236,8 +235,7 @@
     <div fxLayout="row" class="pdf-clear-both-after" *ngFor="let chart of charts.social.themes; let idx = index" style="page-break-inside:avoid;margin-bottom:20px">
       <div *ngIf="idx != 0 && idx % 3 == 0" style="page-break-before:always"></div>
       <mat-card class="pdf-float-left">
-        <h2>{{chart.title}}</h2>
-        <div *ngIf="customisations.themes_engaged[chart.id_theme]" class="chosen-theme">Thème choisi par la crèche</div>
+        <h2>{{chart.title}}<span class="aste" *ngIf="customisations.themes_engaged[chart.id_theme]">*<span class="chosen-theme">Thème choisi par la crèche</span></span></h2>
         <canvas class="echos-chart" baseChart [datasets]="chart.chart.datasets" [colors]="chart.chart.colors" [labels]="chart.chart.labels" [chartType]="chart.chart.chartType" [legend]="false" [options]="chart.chart.options"></canvas>
         <h4>Gauche: audit de départ</h4>
         <h4>Droite: audit intermédiaire</h4>

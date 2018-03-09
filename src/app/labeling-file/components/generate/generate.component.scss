@@ -61,3 +61,17 @@ mat-card {
   margin-top: -20px;
   margin-bottom: 20px;
 }
+
+h2 {
+  max-width: 290px;
+}
+.aste {
+  padding-left: 8px;
+  color: #001965;
+  & > span {
+    padding-left: 2px;
+    font-weight: normal;
+    font-size: 0.7rem;
+    color: #001965;
+  }
+}
