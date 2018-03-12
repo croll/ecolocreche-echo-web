@@ -57,7 +57,7 @@
 
 <div *ngIf="!item.audits || !item.audits.length" class="echos-warning">Aucun audit trouvé.</div>
 
-<mat-toolbar *ngIf="item.audits && item.audits.length" style="margin: 20px 0 0 0">
+<mat-toolbar *ngIf="authService.isSuperAgent() && item.audits && item.audits.length" style="margin: 20px 0 0 0">
   <button mat-raised-button style="margin: 0 auto" (click)="createLabelingFile()" [disabled]="labelingFileToCreate.audits.length < 1" color='primary'>Générer le dossier de labelisation</button>
 </mat-toolbar>
 
@@ -134,6 +134,6 @@
   </mat-list-item>
 </mat-list>
 
-<mat-toolbar *ngIf="item.audits && item.audits.length" style="margin-top: 30px;text-align: center">
+<mat-toolbar *ngIf="authService.isSuperAgent() && item.audits && item.audits.length" style="margin-top: 30px;text-align: center">
   <button mat-raised-button style="margin: 0 auto" (click)="createLabelingFile()" [disabled]="labelingFileToCreate.audits.length < 1" color="primary">Générer le dossier de labellisation</button>
 </mat-toolbar>
