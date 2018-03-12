@@ -58,8 +58,8 @@
     </div>
   </div>
 
-  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
-    <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labellisation</button>
+  <div *ngIf="authService.isSuperAgent()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
+    <button *ngIf="authService.isAdmin()" mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labellisation</button>
     <button mat-raised-button color="primary" (click)="save()" fxFlexOffset="8px" [disabled]="!saveButtonEnabled">Enregistrer le dossier de labellisation</button>
   </div>
 
@@ -273,8 +273,8 @@
 
   </div>
 
-  <div *ngIf="authService.isAdmin()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
-    <button mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labellisation</button>
+  <div *ngIf="authService.isSuperAgent()" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 30px" class="not-in-pdf">
+    <button *ngIf="authService.isAdmin()" mat-raised-button color="warn" (click)="delete()">Effacer le dossier de labellisation</button>
     <button mat-raised-button color="primary" (click)="save()" [disabled]="!saveButtonEnabled">Enregistrer le dossier de labellisation</button>
   </div>
 
