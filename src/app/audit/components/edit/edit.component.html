@@ -46,10 +46,10 @@
   <input *ngIf="id_establishment" type="hidden" formControlName="id_establishment">
   <input *ngIf="key" type="hidden" formControlName="key">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id" (click)="delete(id)" mat-raised-button color="warn">Effacer</button>
-    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" mat-raised-button type="button" (click)="save($event)" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
-    <button *ngIf="id" fxFlexOffset="20px" mat-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)">Enregistrer et retourner à la fiche établissement</button>
+    <button *ngIf="id" (click)="delete(id)" type="button" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" type="button" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button type="submit" (click)="save($event)" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" fxFlexOffset="20px" mat-raised-button [disabled]="!echosForm.valid" color="primary" (click)="saveAndGoToEstablishment($event)" type="button">Enregistrer et retourner à la fiche établissement</button>
   </div>
-  <button *ngIf="id" (click)="sendmail(id)" mat-raised-button>Renvoyer le mail</button>
+  <button *ngIf="id" (click)="sendmail(id)" type="button" mat-raised-button>Renvoyer le mail</button>
 </form>
