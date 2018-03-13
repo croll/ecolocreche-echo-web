@@ -58,7 +58,9 @@ export class EditThemeComponent implements OnInit {
 
   delete() {
     if (confirm("Souhaitez vous vraiment supprimer ce thème ?")) {
-	  this.restService.delete(this.item.id_node, 'hist/nodes', {id_inquiryform: this.inquiryform.id_inquiryform}).subscribe((response) => {}, (err) => {
+	  this.restService.delete(this.item.id_node, 'hist/nodes', {id_inquiryform: this.inquiryform.id_inquiryform}).subscribe((response) => {
+      this.goBack();
+    }, (err) => {
         console.error(err);
       });
     }
