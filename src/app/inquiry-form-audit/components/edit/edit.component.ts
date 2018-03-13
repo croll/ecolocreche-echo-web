@@ -116,6 +116,7 @@ export class EditComponent implements OnInit {
   }
 
   save() {
+    console.log("saving...");
     this.restService.save(Object.assign(this.current, this.echosForm.value), 'hist/inquiryforms', null, 'id_inquiryform').subscribe((InquiryForm) => {
       this.router.navigate(['/questionnaire', InquiryForm.id_inquiryform]);
     }, (err) => {
@@ -124,6 +125,7 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
+    event.stopPropagation();
     if (confirm("Souhaitez vous vraiment supprimer ce questionnaire ?")) {
       this.restService.delete(this.id_inquiryform, 'hist/inquiryforms').subscribe((response) => {
         this.router.navigate(['/questionnaire/liste']);

@@ -13,7 +13,7 @@
 
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
-<form (ngSubmit)="save()" [formGroup]="echosForm">
+<form [formGroup]="echosForm">
 
   <mat-form-field>
     <input matInput formControlName="title" placeholder="Intitulé *">
@@ -42,9 +42,9 @@
   <q-percents-edit *ngIf="echosForm.controls.type.value == 'q_percents'" [choices]="choices"></q-percents-edit>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id_node" (click)="delete()" mat-raised-button color="warn">Effacer</button>
-    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id_node" (click)="delete()" type="button" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" type="button" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" mat-raised-button (click)="save()" type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
 
 </form>

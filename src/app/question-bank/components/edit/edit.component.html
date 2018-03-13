@@ -13,7 +13,7 @@
 
   <div class="echos-help-block">Les champs obligatoires sont identifiés par un astérisque.</div>
 
-  <form (ngSubmit)="save()" [formGroup]="echosForm">
+  <form [formGroup]="echosForm">
     <mat-form-field>
       <input matInput formControlName="title" placeholder="Nom du thème *">
       <mat-hint *ngIf="titleCtrl.dirty && titleCtrl.hasError('required')">Le nom du thème est requis</mat-hint>
@@ -35,9 +35,9 @@
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="id_node" (click)="delete(id_node)" mat-raised-button color="warn">Effacer</button>
-      <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-      <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" type="button" mat-raised-button color="warn">Effacer</button>
+      <button mat-raised-button (click)="goBack()" type="button" fxFlexOffset="20px">Annuler</button>
+      <button fxFlexOffset="20px" mat-raised-button (click)="save()" type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </form>
 </div>
@@ -57,7 +57,7 @@
 
   <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
-  <form (ngSubmit)="save()" [formGroup]="echosForm">
+  <form [formGroup]="echosForm">
     <div>
       <mat-form-field>
         <input matInput formControlName="title" placeholder="Nom de la rubrique *">
@@ -72,9 +72,9 @@
     </div>
     <input *ngIf="id_node" type="hidden" formControlName="id_node">
     <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-      <button *ngIf="id_node" (click)="delete(id_node)" mat-raised-button color="warn">Effacer</button>
-      <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-      <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+      <button *ngIf="id_node" (click)="delete(id_node)" type="button" mat-raised-button color="warn">Effacer</button>
+      <button mat-raised-button (click)="goBack()" type="button" fxFlexOffset="20px">Annuler</button>
+      <button fxFlexOffset="20px" mat-raised-button (click)="save()" type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
     </div>
   </form>
 </div>

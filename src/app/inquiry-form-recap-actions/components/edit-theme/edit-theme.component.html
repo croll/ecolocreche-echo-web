@@ -10,7 +10,7 @@
 
 <p>Les champs obligatoires sont identifiés par un astérisque.</p>
 
-<form (ngSubmit)="save()" [formGroup]="echosForm">
+<form [formGroup]="echosForm">
   <div>
     <mat-form-field>
       <input matInput formControlName="title" placeholder="Titre *">
@@ -36,8 +36,8 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="item.id_node" (click)="delete()" mat-raised-button color="warn">Effacer</button>
-    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="item.id_node" (click)="delete()" type="button" mat-raised-button color="warn">Effacer</button>
+    <button mat-raised-button (click)="goBack()" type="button" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" (click)="save()" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
 </form>

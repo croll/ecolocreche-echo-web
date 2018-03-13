@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" fxFlex style="white-space: none">{{current.title}}</mat-toolbar>
 <div *ngIf="current.description" class="echos-description">{{current.description}}</div>
 
-<form (ngSubmit)="save()" [formGroup]="echosForm">
+<form [formGroup]="echosForm">
 
     <!-- <div [hidden]="current.answer.status=='saved'">
         <mat-checkbox formControlName="ignored" (change)="ignoreset(echosForm.controls.ignored.value)">Ignorer cette question</mat-checkbox>
@@ -29,8 +29,8 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center" class="echos-buttons-container">
-      <button *ngIf="current.answer.status!='saved'" mat-raised-button type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
-      <button *ngIf="current.answer.status=='saved' || this.answer?.ignored" (click)="modify()" mat-raised-button>Modifier cette réponse</button>
-      <button *ngIf="current.answer.status!='saved'" (click)="ignore()" fxFlexOffset="20px" mat-raised-button>Ignorer cette question</button>
+      <button *ngIf="current.answer.status!='saved'" mat-raised-button (click)="save()" type="submit" [disabled]="!echosForm.valid || current.answer?.ignored" color="primary">Enregistrer</button>
+      <button *ngIf="current.answer.status=='saved' || this.answer?.ignored" (click)="modify()" type="button" mat-raised-button>Modifier cette réponse</button>
+      <button *ngIf="current.answer.status!='saved'" (click)="ignore()" type="button" fxFlexOffset="20px" mat-raised-button>Ignorer cette question</button>
     </div>
 </form>

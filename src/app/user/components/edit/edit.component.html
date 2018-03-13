@@ -10,7 +10,7 @@
 
 <div class="echos-help-block">Les champs obligatoires sont identifiés par un astérisque.</div>
 
-<form (ngSubmit)="save()" [formGroup]="echosForm">
+<form [formGroup]="echosForm">
 
   <mat-form-field>
     <input matInput formControlName="name" placeholder="Nom de l'utilisateur *" [(ngModel)]="current.name">
@@ -34,9 +34,9 @@
 
   <input *ngIf="id" type="hidden" formControlName="id" [(ngModel)]="id">
   <div fxLayout="row" fxLayoutAlign="start center" class="buttons-container">
-    <button *ngIf="id" (click)="del(id)" mat-raised-button color="warn">Supprimer</button>
-    <button mat-raised-button (click)="goBack()" fxFlexOffset="20px">Annuler</button>
-    <button fxFlexOffset="20px" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
+    <button *ngIf="id" (click)="del(id)"  type="button" mat-raised-button color="warn">Supprimer</button>
+    <button mat-raised-button (click)="goBack()" type="button" fxFlexOffset="20px">Annuler</button>
+    <button fxFlexOffset="20px" (click)="save()" mat-raised-button type="submit" [disabled]="!echosForm.valid" color="primary">Enregistrer</button>
   </div>
 
 </form>
