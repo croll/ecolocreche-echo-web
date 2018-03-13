@@ -194,7 +194,7 @@ export class AuditTools {
         dataset.data.push(datas[themeIdOrFam].impact[id_impact]);
       }
       params.options = {
-        responsive: true,
+        responsive: false,
         maintainAspectRatio: true,
         tooltips: {
           callbacks: {
@@ -260,7 +260,7 @@ export class AuditTools {
       let num = 0;
       params.labels.push('');
       params.options = {
-        responsive: true,
+        responsive: false,
         maintainAspectRatio: true,
         animation: false,
         scaleSteps: 5,
@@ -300,7 +300,7 @@ export class AuditTools {
       var datasetLength = 0;
       // Graph options
       params.options = {
-        responsive: true,
+        responsive: false,
         maintainAspectRatio: true,
         animation: false,
         scale: {
@@ -309,6 +309,9 @@ export class AuditTools {
             min: 0,
             max: 100,
             stepSize: 10
+          },
+          pointLabels: {
+            fontSize: 16 
           }
         }
       };

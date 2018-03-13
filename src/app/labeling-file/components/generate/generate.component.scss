@@ -38,9 +38,6 @@ mat-card {
       margin-top: 4px;
     }
   }
-  canvas {
-    max-width: 200px;
-  }
 }
 
 .echos-graph-button-container {
@@ -48,11 +45,7 @@ mat-card {
 }
 
 .echos-chart {
-  // width: auto!important;
-  // height: !important;
-  margin: 0 auto;
-  width: 100%!important;
-  max-width: 450px!important;
+  // margin: 0 auto;
 }
 
 .chosen-theme {

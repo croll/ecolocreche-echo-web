@@ -563,14 +563,6 @@ mat-list-item.echos-list-item {
       padding-left: 0;
     }
 }
-.echos-chart {
-  // width: auto!important;
-  // height: !important;
-  margin: 0 auto;
-  width: 100%!important;
-  max-width: 450px!important;
-  min-width: 300px!important;
-}
 /* WYSIWYG */
 
 .ql-container {
@@ -632,8 +624,20 @@ quill .ql-container {
   margin: 0;
 }
 
+.echos-chart {
+  // width: auto!important;
+  // height: !important;
+  margin: 0 auto;
+  width: 400px!important;
+  height: auto!important;
+}
+
 .echos-chart-pie {
-  min-width: 450px!important;
+  width: 450px!important;
+}
+
+.echos-chart-radar {
+  width: 550px!important;
 }
 
 @media print and (orientation: portrait) {
