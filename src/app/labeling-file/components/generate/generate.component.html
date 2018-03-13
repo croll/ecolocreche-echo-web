@@ -211,7 +211,7 @@
   </div>
 
   <mat-card *ngIf="!customisations.hide_balance_sheet_social_radar">
-    <canvas class="echos-chart" baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
+    <canvas class="echos-chart echos-chart-radar" baseChart [datasets]="charts.social.radar.datasets" [colors]="charts.social.radar.colors" [labels]="charts.social.radar.labels" [chartType]="charts.social.radar.chartType" [legend]="false" [options]="charts.social.radar.options"></canvas>
     <div fxLayout="row" class="pdf-clear-both-after" fxLayoutAlign="start center">
       <div class="echos-color pdf-float-left" style="background-color: rgba(173, 174, 186, 1)"></div>
       <div class="pdf-float-left">Audit de départ</div>
