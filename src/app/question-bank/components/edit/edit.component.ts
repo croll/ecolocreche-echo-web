@@ -87,11 +87,13 @@ export class EditComponent implements OnInit {
   }
 
   delete(id) {
-    this.restService.delete(id, 'hist/nodes').subscribe((response) => {
-       this.router.navigate(['theme/liste']);
-    }, (err) => {
-      console.error(err);
-    });
+    if (confirm("Souhaitez vous vraiment le supprimer ?")) {
+      this.restService.delete(id, 'hist/nodes').subscribe((response) => {
+         this.router.navigate(['theme/liste']);
+      }, (err) => {
+        console.error(err);
+      });
+    }
     return false;
   }
 
