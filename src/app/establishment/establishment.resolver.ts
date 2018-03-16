@@ -38,7 +38,8 @@ export class EstablishmentResolver implements Resolve<any> {
         let observable_audits: Observable<any>[] = [];
         audits.forEach(audit => {
           observable_audits.push(this.restService.get(audit.id_inquiryform, 'hist/inquiryforms', {
-            with_deleteds: true,
+            //with_deleteds: true,
+            date: audit.createdAt,
           }).map(iq => {
             audit.inquiryform = iq;
             if (audit.inquiry_type == 'audit') {
