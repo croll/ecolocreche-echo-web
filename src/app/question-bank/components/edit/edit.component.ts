@@ -54,10 +54,11 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("yes");
     this.idNodeCtrl = this.fb.control(this.id_node);
     this.typeCtrl = this.fb.control('directory');
     this.titleCtrl = this.fb.control(this.current.title, [Validators.required, Validators.minLength(3)]);
-    this.descriptionCtrl = this.fb.control(this.current.description);
+    this.descriptionCtrl = this.fb.control(this.current.description ? this.current.description : "");
     this.positionCtrl = this.fb.control(this.current.position || 0);
     this.colorCtrl = this.fb.control(this.current.color);
 
