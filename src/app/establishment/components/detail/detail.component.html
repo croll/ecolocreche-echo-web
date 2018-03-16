@@ -62,7 +62,7 @@
 </mat-toolbar>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" *ngFor="let audit of item.audits" [routerLink]="['/audit', audit.key]">
+  <mat-list-item class="echos-list-item" *ngFor="let audit of item.audits">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <mat-checkbox [attr.disabled]="labelingFileToCreate.audits.length == 2 && labelingFileToCreate.audits.indexOf(audit.id) == -1" (click)="toggleInLabelingFile(audit, 'audits', $event)" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
@@ -76,7 +76,7 @@
         <div class="echos-percent echos-percent-complete" title="complété">{{audit.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
         <div class="echos-percent echos-percent-ignored" title="ignoré">{{audit.cached_percent_ignored * 100 | number:'1.0-0' }} %</div>
       </div>
-      <button mat-button *ngIf="audit.active || authService.isSuperAgent()"><mat-icon color="primary">chevron_right</mat-icon></button>
+      <button mat-button *ngIf="audit.active || authService.isSuperAgent()" [routerLink]="['/audit', audit.key]"><mat-icon color="primary">chevron_right</mat-icon></button>
     </div>
   </mat-list-item>
 </mat-list>
@@ -89,7 +89,7 @@
 <div *ngIf="!item.recap_actions || !item.recap_actions.length" class="echos-warning">Aucun "recap actions" trouvé.</div>
 
 <mat-list>
-  <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions" [routerLink]="['/recap_actions', recap_action.key]">
+  <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
       <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && labelingFileToCreate.recap_actions.indexOf(recap_action.id) == -1" (click)="toggleInLabelingFile(recap_action, 'recap_actions', $event)" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
@@ -103,7 +103,7 @@
         <div class="echos-percent echos-percent-complete" title="complété">{{recap_action.cached_percent_complete * 100 | number:'1.0-0' }} %</div>
         <div class="echos-percent echos-percent-ignored" title="ignoré">{{recap_action.cached_percent_ignored * 100 | number:'1.0-0' }} %</div>
       </div>
-      <button mat-button *ngIf="recap_action.active || authService.isSuperAgent()"><mat-icon color="primary">chevron_right</mat-icon></button>
+      <button mat-button *ngIf="recap_action.active || authService.isSuperAgent()" [routerLink]="['/recap_actions', recap_action.key]"><mat-icon color="primary">chevron_right</mat-icon></button>
     </div>
   </mat-list-item>
 </mat-list>
