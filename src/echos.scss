@@ -647,6 +647,9 @@ quill .ql-container {
 }
 
 @media print {
+  @page {
+    margin: 1cm;
+  }
   .echos-chart {
     width: 250px!important;
     &.echos-chart-pie {
