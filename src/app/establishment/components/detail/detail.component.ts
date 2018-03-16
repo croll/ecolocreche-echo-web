@@ -56,11 +56,22 @@ export class DetailComponent {
 
   public createLabelingFile() {
     let lf = new LabelingFile();
+    let jsonObj = new LabelingFile.Json();
     let obs;
     lf.id_establishment = this.item.id;
     lf.id_audit_1 = this.labelingFileToCreate.audits[0].id;
+    // Custom headers
+    console.log(this.labelingFileToCreate.audits[0]);
+    if (this.labelingFileToCreate.audits[0].date_end) {
+      let d = new Date(this.labelingFileToCreate.audits[0].date_end);
+      jsonObj.addCustomHeader('Date du premier audit', d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+    }
     if (this.labelingFileToCreate.audits[1]) {
       lf.id_audit_2 = this.labelingFileToCreate.audits[1].id;
+      if (this.labelingFileToCreate.audits[1].date_end) {
+        let d = new Date(this.labelingFileToCreate.audits[1].date_end);
+        jsonObj.addCustomHeader('Date du second audit', d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+      }
     }
     if (this.labelingFileToCreate.recap_actions[0]) {
       lf.id_audit_recap_actions = this.labelingFileToCreate.recap_actions[0].id;
@@ -87,7 +98,7 @@ export class DetailComponent {
 
     obs.subscribe(themes => {
       if (themes && themes[0]) {
-        let jsonObj = new LabelingFile.Json();
+        // let jsonObj = new LabelingFile.Json();
         themes[0].forEach(theme => {
           let question1 = theme.childs[0];
           let question2 = theme.childs[1];
@@ -130,8 +141,8 @@ export class DetailComponent {
             }
           }
         });
-        lf.datajson = JSON.stringify(jsonObj);
       }
+      lf.datajson = JSON.stringify(jsonObj);
       this.restService.save(lf, 'labelingfiles', {}, 'id', "Création : ").subscribe(res => {
         this.router.navigate(['/dossier_de_labelisation', res.id]);
       });

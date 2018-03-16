@@ -30,18 +30,18 @@
       <label>Nom de la crèche:</label>
       <div fxFlexOffset="10px">{{audit1.audit.establishment.name}}</div>
     </div>
-    <div fxLayout="row" class="pdf-clear-both-after">
+    <div *ngIf="audit1.audit.establishment.labelcode" fxLayout="row" class="pdf-clear-both-after">
       <label>Code de labellisation:</label>
       <div fxFlexOffset="10px">{{audit1.audit.establishment.labelcode}}</div>
     </div>
-    <div fxLayout="row" class="pdf-clear-both-after">
+    <!-- <div fxLayout="row" class="pdf-clear-both-after">
       <label>Date du premier audit:</label>
       <div fxFlexOffset="10px">{{audit1.audit.date_start | date:'dd/MM/y'}}</div>
     </div>
     <div fxLayout="row" class="pdf-clear-both-after" *ngIf="audit2">
       <label>Date du second audit:</label>
       <div fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
-    </div>
+    </div> -->
     <div *ngFor="let cinfo of customisations.custom_headers" fxLayout="row" class="pdf-clear-both-after">
       <label>{{cinfo.label}}:</label>
       <div fxFlexOffset="10px">{{cinfo.value}}</div>

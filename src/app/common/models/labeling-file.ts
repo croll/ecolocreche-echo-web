@@ -54,7 +54,10 @@ export namespace LabelingFile {
     // }
 
     addCustomHeader(label: string, value: string): void {
-      if (!label || !value) return;
+      if (!label || !value) {
+        console.warn('No label or value provided to addCustomHeader()');
+        return;
+      }
       this.custom_headers.push(new LabelingFile.CustomHeader(label, value));
     }
 
