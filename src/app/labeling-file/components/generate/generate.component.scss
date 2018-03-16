@@ -48,23 +48,24 @@ mat-card {
   // margin: 0 auto;
 }
 
-.chosen-theme {
-  font-size:0.9em;
-  color: #333;
-  margin-top: -20px;
-  margin-bottom: 20px;
-}
-
 h2 {
   max-width: 290px;
 }
 .aste {
   padding-left: 8px;
   color: #001965;
-  & > span {
-    padding-left: 2px;
-    font-weight: normal;
-    font-size: 0.7rem;
-    color: #001965;
+}
+
+.chosen-theme {
+  font-size:0.8em;
+  color: #001965;
+  font-weight: normal;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
+@media print {
+  h2 {
+    max-width: 250px!important;
   }
 }
