@@ -61,7 +61,7 @@ export class DetailComponent {
     lf.id_establishment = this.item.id;
     lf.id_audit_1 = this.labelingFileToCreate.audits[0].id;
     // Custom headers
-    console.log(this.labelingFileToCreate.audits[0]);
+    //console.log(this.labelingFileToCreate.audits[0]);
     if (this.labelingFileToCreate.audits[0].date_start) {
       let d = new Date(this.labelingFileToCreate.audits[0].date_start);
       jsonObj.addCustomHeader('Date du premier audit', d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
