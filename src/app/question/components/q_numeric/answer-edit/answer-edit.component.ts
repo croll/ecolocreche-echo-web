@@ -32,15 +32,17 @@ export class AnswerEditComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.value=this._value;
+    setTimeout(() => {
+      this.value = this.sanitizeNumber(this._value);
+    }, 150);
   }
 
   get value() {
-      return this._value != undefined ? this._value.replace(".",",") : "";
+      return this._value != undefined ? this.sanitizeNumber(this._value).replace(/\./g,",") : "";
   }
 
   set value(val) {
-      this._value=(""+(val != undefined ? val : "")).replace(",",".");
+      this._value=this.sanitizeNumber((""+(val != undefined ? val : ""))).replace(/,/g,".");
       this.propagateChange(this._value);
   }
 
@@ -51,6 +53,10 @@ export class AnswerEditComponent implements OnInit {
       this.propagateChange(this.counterValue);
     }
     */
+  }
+
+  sanitizeNumber(num) {
+    return num.trim().replace(/ /g,"");
   }
 
   writeValue(value) {
@@ -71,7 +77,6 @@ export class AnswerEditComponent implements OnInit {
               given: c.value,
           }
       };
-
 
       if (c.value) {
           var valid = (c.value.match(/^-?\d*([.,]\d+)?$/));
