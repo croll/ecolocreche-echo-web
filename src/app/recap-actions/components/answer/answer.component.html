@@ -8,7 +8,7 @@
   <h1 fxFlex>
     "Récap actions" de {{infos.audit.establishment.name}} le {{date() | date:'dd/MM/yyyy'}}
   </h1>
-  <a class='not-in-pdf' *ngIf="authService.isAgent()" mat-fab color="primary" href='/assets/docs/eplucheuse-pomme-de-terre.pdf' target='_blank' matTooltip="Télécharger l'aide en PDF" matTooltipPosition="below"><mat-icon>help</mat-icon></a>
+  <a class='not-in-pdf' *ngIf="authService.isAgent()" mat-fab color="primary" href='/assets/docs/aide remplissage récap actions.pdf' target='_blank' matTooltip="Télécharger l'aide en PDF" matTooltipPosition="below"><mat-icon>help</mat-icon></a>
   <button *ngIf="authService.isSuperAgent()" mat-fab class='not-in-pdf' color="primary" (click)="pdf()" fxFlexOffset="8px" matTooltip="Enregistrer en PDF" matTooltipPosition="below"><mat-icon>picture_as_pdf</mat-icon></button>
 </div>
 
