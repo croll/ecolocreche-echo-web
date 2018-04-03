@@ -103,15 +103,12 @@ export class EditComponent implements OnInit {
 
   get() {
       this.restService.get(this.id_inquiryform, 'hist/inquiryforms').subscribe(item => {
-        item.current=item;
-        if (!item.current.mail_from) item.current.mail_from=default_audit_mail_from;
-        if (!item.current.mail_subject) item.current.mail_subject=default_audit_mail_subject;
-        if (!item.current.mail_body) item.current.mail_body=default_audit_mail_body;
-        if (!item.current.audit_report_header) item.current.audit_report_header=default_audit_report_header;
-        console.log("item: ", item);
-        this.echosForm.patchValue(item);
-        // Set nodeslist to current objet to save it when editing
-        this.current.nodeslist = item.nodeslist;
+        this.current = item;
+        if (!this.current.mail_from) this.current.mail_from=default_audit_mail_from;
+        if (!this.current.mail_subject) this.current.mail_subject=default_audit_mail_subject;
+        if (!this.current.mail_body) this.current.mail_body=default_audit_mail_body;
+        if (!this.current.audit_report_header) this.current.audit_report_header=default_audit_report_header;
+        this.echosForm.patchValue(this.current);
       }, (err) => {
         console.error(err);
       });
