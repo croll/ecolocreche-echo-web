@@ -110,6 +110,8 @@ export class EditComponent implements OnInit {
         if (!item.current.audit_report_header) item.current.audit_report_header=default_audit_report_header;
         console.log("item: ", item);
         this.echosForm.patchValue(item);
+        // Set nodeslist to current objet to save it when editing
+        this.current.nodeslist = item.nodeslist;
       }, (err) => {
         console.error(err);
       });
