@@ -43,19 +43,28 @@ export class AuditResolver implements Resolve<any> {
     }
   }
 
-  private _getAudit(idOrKey) {
+  private __getAudit(idOrKey, audit=null) {
+      if (audit) {
+          return Observable.of([audit]);
+      } else {
+          let url = (typeof(idOrKey) == 'string') ? `rest/audits?key=${idOrKey}` : `rest/audits?id=${idOrKey}`;
+          return this.http.get(url).map((res: Response) => {
+              return res.json();
+          });
+      }
+  }
+
+  private _getAudit(idOrKey, audit=null) {
     let obj = {audit: null, nodes: null, inquiryform: null}
     let url = (typeof(idOrKey) == 'string') ? `rest/audits?key=${idOrKey}` : `rest/audits?id=${idOrKey}`;
-    return this.http.get(url)
-                    .map((res: Response) => {
-                      return res.json();
-                    })
+    return this.__getAudit(idOrKey, audit)
                     .flatMap(audit => {
+                        console.log("audit: ", audit);
                       obj.audit = audit[0];
                       // console.log(obj.audit);
                       if (obj.audit && obj.audit.audit_src) {
-                        return this._getAudit(obj.audit.audit_src.key);
-                      } else return Observable.of(null);
+                        return this._getAudit(obj.audit.audit_src.key, obj.audit.audit_src);
+                    } else return Observable.of(null);
                     })
                     .flatMap(audit_src => {
                       if (audit_src) {
