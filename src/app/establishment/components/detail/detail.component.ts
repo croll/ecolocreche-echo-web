@@ -52,6 +52,17 @@ export class DetailComponent {
     } else {
       this.labelingFileToCreate[type].push(item);
     }
+    
+    // sort by date
+    this.labelingFileToCreate[type] =
+        this.labelingFileToCreate[type].sort((a,b) => {
+            return new Date(a.date_start).getTime() - new Date(b.date_start).getTime();
+        });
+    
+    let nums = [];
+    for(item of this.labelingFileToCreate[type]) {
+        nums.push(item.id);
+    }
     return false;
   }
   
