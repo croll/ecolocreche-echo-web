@@ -61,16 +61,8 @@ export namespace LabelingFile {
       this.custom_headers.push(new LabelingFile.CustomHeader(label, value));
     }
 
-    deleteCustomHeader(label): boolean {
-      let i = 0;
-      this.custom_headers.forEach(obj => {
-        if (label == obj.label) {
-          this.custom_headers.splice(i, 1);
-          return true;
-        }
-        i++;
-      })
-      return false;
+    deleteCustomHeader(index): void {
+        this.custom_headers.splice(index, 1);
     }
 
     set(id, what, val) {

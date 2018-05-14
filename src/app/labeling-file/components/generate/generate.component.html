@@ -42,10 +42,10 @@
       <label>Date du second audit:</label>
       <div fxFlexOffset="10px">{{audit2.audit.date_start | date:'dd/MM/y'}}</div>
     </div> -->
-    <div *ngFor="let cinfo of customisations.custom_headers" fxLayout="row" class="pdf-clear-both-after">
+    <div *ngFor="let cinfo of customisations.custom_headers; let cinfo_index = index" fxLayout="row" class="pdf-clear-both-after">
       <label>{{cinfo.label}}:</label>
       <div fxFlexOffset="10px">{{cinfo.value}}</div>
-      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.deleteCustomHeader(cinfo.label);enableSaveButton();" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
+      <button [ngClass]="{'not-in-pdf' : true}" mat-raised-button color="warn" (click)="customisations.deleteCustomHeader(cinfo_index);enableSaveButton();" fxFlexOffset="10px"><mat-icon>delete</mat-icon></button>
     </div>
     <div class="pdf-clear-both-after not-in-pdf">
       <mat-form-field>
