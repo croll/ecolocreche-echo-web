@@ -23,7 +23,7 @@ export class ActiveListComponent implements OnInit {
     let ids=[];
     this.list.forEach(function(audit) {
       let inquiryform = audit.inquiryform;
-      if (!(audit.inquiryform.id_inquiryform in ids)) {
+      if (!ids.includes(audit.inquiryform.id_inquiryform)) {
         ids.push(audit.inquiryform.id_inquiryform);
         if (audit.inquiryform.deletedAt) {
           audit.inquiryform.title+=" (supprimé)";
