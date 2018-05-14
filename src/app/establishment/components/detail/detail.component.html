@@ -64,7 +64,7 @@
 <mat-list>
   <mat-list-item class="echos-list-item" *ngFor="let audit of item.audits">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="labelingFileToCreate.audits.length == 2 && labelingFileToCreate.audits.indexOf(audit.id) == -1" (click)="toggleInLabelingFile(audit, 'audits', $event)" fxFlex="50px"></mat-checkbox>
+      <mat-checkbox [attr.disabled]="labelingFileToCreate.audits.length == 2 && findItemIndexInLabelingFile(audit, 'audits') == -1" [checked]="findItemIndexInLabelingFile(audit, 'audits') != -1" (click)="toggleInLabelingFile(audit, 'audits', $event)" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{audit.inquiryform?.title}} - {{audit.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>

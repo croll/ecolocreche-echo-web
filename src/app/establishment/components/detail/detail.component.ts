@@ -46,12 +46,17 @@ export class DetailComponent {
 
   public toggleInLabelingFile(item, type, event) {
     event.stopPropagation();
-    let pos = this.labelingFileToCreate[type].indexOf(item.id);
+    let pos = this.findItemIndexInLabelingFile(item, type);
     if (pos != -1) {
       this.labelingFileToCreate[type].splice(pos, 1);
     } else {
       this.labelingFileToCreate[type].push(item);
     }
+    return false;
+  }
+  
+  public findItemIndexInLabelingFile(item, type) : number {
+      return this.labelingFileToCreate[type].findIndex((elem) => { return item.id == elem.id } );
   }
 
   public createLabelingFile() {
