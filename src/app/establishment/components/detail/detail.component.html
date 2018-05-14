@@ -91,7 +91,7 @@
 <mat-list>
   <mat-list-item class="echos-list-item" *ngFor="let recap_action of item.recap_actions">
     <div mat-line fxLayout="row" fxLayoutAlign="start center">
-      <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && labelingFileToCreate.recap_actions.indexOf(recap_action.id) == -1" (click)="toggleInLabelingFile(recap_action, 'recap_actions', $event)" fxFlex="50px"></mat-checkbox>
+      <mat-checkbox [attr.disabled]="labelingFileToCreate.recap_actions.length == 2 && findItemIndexInLabelingFile(recap_action, 'recap_actions') == -1" [checked]="findItemIndexInLabelingFile(recap_action, 'recap_actions') != -1" (click)="toggleInLabelingFile(recap_action, 'recap_actions', $event)" fxFlex="50px"></mat-checkbox>
       <div fxFlex class="have-childs" fxFill>
         <div>
           <div>{{recap_action.inquiryform?.title}} - {{recap_action.date_start | date:'dd/MM/yyyy à HH:mm'}}</div>
