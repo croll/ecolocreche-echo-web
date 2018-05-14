@@ -6,6 +6,7 @@ import { Audit } from '../../../common/models/audit';
 import { LabelingFile } from '../../../common/models/labeling-file';
 import { AuthService } from '../../../auth.service';
 import { Observable } from 'rxjs'
+import { DatePipe } from '@angular/common';
 
 @Component({
   templateUrl: './detail.component.html',
@@ -18,7 +19,7 @@ export class DetailComponent {
   infos: any;
   labelingFileToCreate: {audits: Audit[], recap_actions: Audit[]};
 
-  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService) {
+  constructor(private router: Router, private route: ActivatedRoute, private restService: RestService, public authService: AuthService, private datePipe: DatePipe) {
     this.item = Object.assign(new Establishment(), this.route.snapshot.data['infos']);
     this.labelingFileToCreate = {audits: [], recap_actions: []};
   }
@@ -80,13 +81,13 @@ export class DetailComponent {
     //console.log(this.labelingFileToCreate.audits[0]);
     if (this.labelingFileToCreate.audits[0].date_start) {
       let d = new Date(this.labelingFileToCreate.audits[0].date_start);
-      jsonObj.addCustomHeader('Date du premier audit', d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+      jsonObj.addCustomHeader('Date du premier audit', this.datePipe.transform(d, 'dd/MM/yyyy'));
     }
     if (this.labelingFileToCreate.audits[1]) {
       lf.id_audit_2 = this.labelingFileToCreate.audits[1].id;
       if (this.labelingFileToCreate.audits[1].date_start) {
         let d = new Date(this.labelingFileToCreate.audits[1].date_start);
-        jsonObj.addCustomHeader('Date du second audit', d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear());
+        jsonObj.addCustomHeader('Date du second audit', this.datePipe.transform(d, 'dd/MM/yyyy'));
       }
     }
     if (this.labelingFileToCreate.recap_actions[0]) {
