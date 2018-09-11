@@ -88,7 +88,12 @@ export class AuditTools {
             if (!node.answer.ignored) {
               // checkbox of percentage
               if (node.type == 'q_checkbox' || node.type == 'q_percents') {
-                let value = JSON.parse(node.answer.value);
+                let value=[];
+                try {
+                  value = JSON.parse(node.answer.value);
+                } catch (e) {
+                  console.warn("json.parse failed ! on : ", node.answer.value, node, question);
+                }
                 question.value = [];
                 for(let id_choice in value) {
                   node.choices.forEach(c => {
@@ -121,7 +126,12 @@ export class AuditTools {
                 }
                 // radio
               } else if (node.type == 'q_radio'){
-                let value = JSON.parse(node.answer.value);
+                let value=0;
+                try {
+                  value = JSON.parse(node.answer.value);
+                } catch (e) {
+                  console.warn("json.parse failed ! on : ", node.answer.value, node, question);
+                }
                 question.value = [];
                 node.choices.forEach(c => {
                   if (value == c.id_choice) {
@@ -281,6 +291,10 @@ export class AuditTools {
       };
 
       datas.forEach(d => {
+        if (!d[themeIdOrFam]) {
+          console.log("introuvable: ", themeIdOrFam, d);
+          return;
+        }
         for (let id_impact in d[themeIdOrFam].impact) {
           let impact = AuditTools.impact.getImpact(id_impact)
           let val = Math.round(d[themeIdOrFam].impact[id_impact] * 100 / d[themeIdOrFam].totalAnswersWithImpact);
@@ -311,7 +325,7 @@ export class AuditTools {
             stepSize: 10
           },
           pointLabels: {
-            fontSize: 16 
+            fontSize: 16
           }
         }
       };
