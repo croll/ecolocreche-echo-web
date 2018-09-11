@@ -126,7 +126,7 @@ export class AuditTools {
                 }
                 // radio
               } else if (node.type == 'q_radio'){
-                let value=0;
+                let value=[];
                 try {
                   value = JSON.parse(node.answer.value);
                 } catch (e) {
